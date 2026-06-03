@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L12 · 生产部署 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L12 · 生产部署 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css">
+<script>
+window.__I18N_PAGE_TITLE = {
+  zh: 'L12 · 生产部署 — LangGraph DeepForge',
+  en: 'L12 · Production Deployment — LangGraph DeepForge'
+};
+</script></head>
 <body>
 <nav class="nav-bar"><div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
 <div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div><a href="L11-parallel-send.html">L11</a><a href="L12-production.html" class="active">L12</a></nav>
@@ -110,10 +116,10 @@ langgraph deploy    <span class="cmt"># 部署到 LangGraph Cloud</span></code><
 <div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
 <div class="i18n-en" hidden><h4>🏗 Your Challenge</h4></div>
 <ol><div class="i18n-zh"><li>把 L04 的 ReAct Agent 按推荐结构重组</li></div>
-<div class="i18n-en" hidden><li>把 L04 的 ReAct Agent Reorganize by recommended structure</li></div>
+<div class="i18n-en" hidden><li>Reorganize L04's ReAct Agent by recommended structure</li></div>
 <li>运行 <code>langgraph dev</code> 启动本地服务器</li>
 <div class="i18n-zh"><li>设置 LangSmith，运行一次完整对话，查看 trace</li></div>
-<div class="i18n-en" hidden><li>Setup LangSmith，Run a full conversation, inspect trace</li></div>
+<div class="i18n-en" hidden><li>Set up LangSmith, run a full conversation, inspect trace</li></div>
 </ol>
 </div>
 
@@ -150,7 +156,7 @@ langgraph up       <span class="cmt"># 启动生产  </span></code></pre>
   <details class="notes-panel">
     <summary>📝 学习笔记</summary>
 
-    <textarea id="lesson-notes" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
+    <textarea id="lesson-notes" data-i18n-placeholder="notes.placeholder" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
     <div class="notes-actions">
       <button onclick="_exportNotes()">💾 保存到文件</button>
       <button onclick="_importNotes()">📂 加载文件</button>

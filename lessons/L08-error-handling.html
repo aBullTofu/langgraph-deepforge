@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L08 · 容错与重试 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L08 · 容错与重试 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css">
+<script>
+window.__I18N_PAGE_TITLE = {
+  zh: 'L08 · 容错与重试 — LangGraph DeepForge',
+  en: 'L08 · Fault Tolerance & Retry — LangGraph DeepForge'
+};
+</script></head>
 <body>
 <nav class="nav-bar"><div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
 <div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div><a href="L07-streaming.html">L07</a><a href="L08-error-handling.html" class="active">L08</a><a href="L09-subgraphs.html">L09</a></nav>
@@ -47,10 +53,10 @@
 </div>
 </div>
 
-<div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><h3>⚔️ 实战编码 <span class="timer"><span class="clock">⏱</span> 25 分钟</span></h3>
+<div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><h3>⚔️ 实战编码 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">25 分钟</span><span class="i18n-en" hidden>25 min</span></span></h3>
 
 <div class="i18n-zh"><h4>第 1 层：RetryPolicy</h4></div>
-<div class="i18n-en" hidden><h4>第 1 Layer: RetryPolicy</h4></div>
+<div class="i18n-en" hidden><h4>Layer 1: RetryPolicy</h4></div>
 
 <pre><code><span class="kw">from</span> langgraph.types <span class="kw">import</span> RetryPolicy
 builder.add_node(<span class="str">"api_call"</span>, call_external_api, retry_policy=RetryPolicy(
@@ -58,20 +64,20 @@ builder.add_node(<span class="str">"api_call"</span>, call_external_api, retry_p
 ))  <span class="cmt"># 重试间隔: 1s → 2s → 4s</span></code></pre>
 
 <div class="i18n-zh"><h4>第 2 层：LLM 感知错误（手动 act() 中）</h4></div>
-<div class="i18n-en" hidden><h4>第 2 Layer: LLM Perceive error (manual act() inside)</h4></div>
+<div class="i18n-en" hidden><h4>Layer 2: LLM Perceives error (manual act() inside)</h4></div>
 
 <pre><code><span class="kw">try</span>: result = tool.invoke(args)
 <span class="kw">except</span> Exception <span class="kw">as</span> e:
     result = <span class="str">f"错误：{e}。请调整参数或换种方式重试。"</span>  <span class="cmt"># LLM 看到后自行调整</span></code></pre>
 
 <div class="i18n-zh"><h4>第 3+4 层：组合使用</h4></div>
-<div class="i18n-en" hidden><h4>第 3+4 Layer: Combined usage</h4></div>
+<div class="i18n-en" hidden><h4>Layer 3+4: Combined usage</h4></div>
 
 <pre><code><span class="cmt"># RetryPolicy 自动重试 3 次 → 还失败 → interrupt 人工决定 → 降级</span>
 builder.add_node(<span class="str">"critical_action"</span>, critical_action, retry_policy=RetryPolicy(max_attempts=3))</code></pre>
 
 <div class="alert alert-warn"><div class="i18n-zh"><strong>⚠️ 避坑：</strong></div>
-<div class="i18n-en" hidden><strong>⚠️ Pitfall：</strong></div>RetryPolicy 只对瞬时故障（网络超时）有效。如果 API 返回"参数错误"，重试 100 次也没用——应该走第 2 层（错误传给 LLM 让它改参数）。</div>
+<div class="i18n-en" hidden><strong>⚠️ Pitfall:</strong></div>RetryPolicy 只对瞬时故障（网络超时）有效。如果 API 返回"参数错误"，重试 100 次也没用——应该走第 2 层（错误传给 LLM 让它改参数）。</div>
 </div>
 
 <div class="phase" data-phase="forge"><span class="phase-num">Phase 3 · Forge</span><div class="i18n-zh"><h3>🔨 知识淬炼</h3></div>
@@ -80,15 +86,15 @@ builder.add_node(<span class="str">"critical_action"</span>, critical_action, re
 <div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
 <div class="i18n-en" hidden><h4>🏗 Your Challenge</h4></div>
 <ol><div class="i18n-zh"><li>给 L05 的 Agent 的 LLM 节点加上 RetryPolicy</li></div>
-<div class="i18n-en" hidden><li>给 L05 的 Agent 的 LLM Add to node RetryPolicy</li></div>
+<div class="i18n-en" hidden><li>Add RetryPolicy to L05 Agent's LLM node</li></div>
 <div class="i18n-zh"><li>让 act() 区分"可重试错误"（网络）和"不可重试错误"（参数格式不对）</li></div>
-<div class="i18n-en" hidden><li>让 act() Distinguish"retryable errors"（network) and"non-retryable errors"（wrong parameter format)</li></div>
+<div class="i18n-en" hidden><li>Let act() distinguish "retryable errors" (network) and "non-retryable errors" (wrong parameter format)</li></div>
 </ol>
 </div>
 
 <div class="review-321"><div class="box"><div class="num">3</div>
 <div class="i18n-zh"><p style="font-size:0.8em">① RetryPolicy 给机器用  ② 错误字符串给 LLM 用  ③ interrupt 给人用</p></div>
-<div class="i18n-en" hidden><p style="font-size:0.8em">① RetryPolicy For machine use  ② Error string to LLM 用  ③ interrupt For human use</p></div>
+<div class="i18n-en" hidden><p style="font-size:0.8em">① RetryPolicy for machine use  ② Error string for LLM use  ③ interrupt for human use</p></div>
 </div>
 </div>
 </div>
@@ -110,7 +116,7 @@ ToolMessage(<span class="str">f"错误：{e}。请调整重试。"</span>)</code
   <details class="notes-panel">
     <summary>📝 学习笔记</summary>
 
-    <textarea id="lesson-notes" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
+    <textarea id="lesson-notes" data-i18n-placeholder="notes.placeholder" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
     <div class="notes-actions">
       <button onclick="_exportNotes()">💾 保存到文件</button>
       <button onclick="_importNotes()">📂 加载文件</button>

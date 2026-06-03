@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>L01 · State / Node / Edge 深度解析 — LangGraph DeepForge</title>
 <link rel="stylesheet" href="../css/style.css">
+<script>
+window.__I18N_PAGE_TITLE = {
+  zh: 'L01 · State / Node / Edge 深度解析 — LangGraph DeepForge',
+  en: 'L01 · State / Node / Edge Deep Dive — LangGraph DeepForge'
+};
+</script>
 </head>
 
 <body>
@@ -24,7 +30,7 @@
 <!-- ════════════════ IGNITION ════════════════ -->
 <div class="phase" data-phase="ignition">
   <span class="phase-num">Phase 0 · Ignition</span>
-  <h3>⚡ 认知点火 <span class="timer"><span class="clock">⏱</span> 2 分钟</span></h3>
+  <h3>⚡ 认知点火 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">2 分钟</span><span class="i18n-en" hidden>2 min</span></span></h3>
 
   <p>打开 <code>hello_graph.py</code>。你写完了一个简单的 A→B 图。现在试着回答：</p>
 
@@ -45,7 +51,7 @@
 <!-- ════════════════ GOD VIEW ════════════════ -->
 <div class="phase" data-phase="godview">
   <span class="phase-num">Phase 1 · God View</span>
-  <h3>🗺 上帝视角 <span class="timer"><span class="clock">⏱</span> 10 分钟</span></h3>
+  <h3>🗺 上帝视角 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">10 分钟</span><span class="i18n-en" hidden>10 min</span></span></h3>
 
 
   <div class="card accent-left">
@@ -168,7 +174,7 @@
 <!-- ════════════════ COMBAT ════════════════ -->
 <div class="phase" data-phase="combat">
   <span class="phase-num">Phase 2 · Combat</span>
-  <h3>⚔️ 实战编码 <span class="timer"><span class="clock">⏱</span> 30 分钟</span></h3>
+  <h3>⚔️ 实战编码 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">30 分钟</span><span class="i18n-en" hidden>30 min</span></span></h3>
 
 
   <p>创建 <code>l01_pipeline.py</code>，跟着写：</p>
@@ -330,7 +336,7 @@ graph = builder.compile()</code></pre>
 <!-- ════════════════ FORGE ════════════════ -->
 <div class="phase" data-phase="forge">
   <span class="phase-num">Phase 3 · Forge</span>
-  <h3>🔨 知识淬炼 <span class="timer"><span class="clock">⏱</span> 8 分钟</span></h3>
+  <h3>🔨 知识淬炼 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">8 分钟</span><span class="i18n-en" hidden>8 min</span></span></h3>
 
 
   <div class="i18n-zh"><h4>🔧 你的挑战</h4></div>
@@ -450,7 +456,7 @@ END    <span class="cmt"># 出口</span>
 <!-- ════════════════ ECHO ════════════════ -->
 <div class="phase">
   <span class="phase-num">Phase 4 · Echo</span>
-  <h3>🔄 间隔回响 <span class="timer"><span class="clock">⏱</span> 下次课开头 2 分钟</span></h3>
+  <h3>🔄 间隔回响 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">下次课开头 2 分钟</span><span class="i18n-en" hidden>2 min at start of next lesson</span></span></h3>
 
   <p>下次课（L02）开始时：</p>
 
@@ -477,7 +483,7 @@ END    <span class="cmt"># 出口</span>
   <details class="notes-panel">
     <summary>📝 学习笔记</summary>
 
-    <textarea id="lesson-notes" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- Reducer 的合并语义我原来理解错了...&#10;- 条件边返回未映射的值会导致 ValueError&#10;- 我用 StateGraph 类比了工作流引擎..."></textarea>
+    <textarea id="lesson-notes" data-i18n-placeholder="notes.placeholder" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- Reducer 的合并语义我原来理解错了...&#10;- 条件边返回未映射的值会导致 ValueError&#10;- 我用 StateGraph 类比了工作流引擎..."></textarea>
     <div class="notes-actions">
       <button onclick="_exportNotes()">💾 保存到文件</button>
       <button onclick="_importNotes()">📂 加载文件</button>

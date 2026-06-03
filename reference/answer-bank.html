@@ -150,7 +150,7 @@ def scaled_dot_product_attention(Q, K, V, mask=None):
   <h3><span class="i18n-zh">面试要点</span><span class="i18n-en" hidden>Interview Key Points</span></h3>
   <ul>
     <li><span class="i18n-zh">必须做</span><span class="i18n-en" hidden>Must use</span> <code>scores - scores_max</code> <span class="i18n-zh">保证数值稳定性，直接用</span><span class="i18n-en" hidden>to ensure numerical stability; directly using</span> <code>np.exp(scores)</code> <span class="i18n-zh">会在 scores 较大时溢出</span><span class="i18n-en" hidden>will overflow when scores are large</span></li>
-    <li><span class="i18n-zh">mask 中 padding 位置填</span><span class="i18n-en" hidden>In the mask, fill padding positions with</span> <code>-1e9</code><span class="i18n-zh"> 而非 </span><span class="i18n-en" hidden> 而非 </span><code>-np.inf</code><span class="i18n-zh">，因为 softmax 遇到 NaN 会传播</span><span class="i18n-en" hidden>, because softmax propagates NaN</span></li>
+    <li><span class="i18n-zh">mask 中 padding 位置填</span><span class="i18n-en" hidden>In the mask, fill padding positions with</span> <code>-1e9</code><span class="i18n-zh"> 而非 </span><span class="i18n-en" hidden> rather than </span><code>-np.inf</code><span class="i18n-zh">，因为 softmax 遇到 NaN 会传播</span><span class="i18n-en" hidden>, because softmax propagates NaN</span></li>
     <li><span class="i18n-zh">能讨论 batch matrix multiplication 的维度变换是加分项</span><span class="i18n-en" hidden>Being able to discuss dimension transformations in batch matrix multiplication is a bonus</span></li>
   </ul>
 
@@ -372,10 +372,10 @@ PE(pos, 2i+1) = cos(pos / 10000^(2i/d_model))</code></pre>
 
   <h3><span class="i18n-zh">中文 Tokenization 为什么更难？</span><span class="i18n-en" hidden>Why is Chinese Tokenization Harder?</span></h3>
   <ol>
-    <li><strong><span class="i18n-zh">无天然分隔符</span><span class="i18n-en" hidden>No Natural Delimiters</span></strong><span class="i18n-zh">：英文有空格分词，中文是连续字符串，需要先分词</span><span class="i18n-en" hidden>：英文有空格分词，中文是连续字符串，需要先分词</span></li>
-    <li><strong><span class="i18n-zh">字符集巨大</span><span class="i18n-en" hidden>Massive Character Set</span></strong><span class="i18n-zh">：常用汉字 6000+，总数数万，远大于英文字母的 26 个</span><span class="i18n-en" hidden>：常用汉字 6000+，总数数万，远大于英文字母的 26 个</span></li>
-    <li><strong><span class="i18n-zh">粒度问题</span><span class="i18n-en" hidden>Granularity Issues</span></strong><span class="i18n-zh">：一个中文词可以由 1-N 个字组成，subword 切分边界不直观</span><span class="i18n-en" hidden>：一个中文词可以由 1-N 个字组成，subword 切分边界不直观</span></li>
-    <li><strong><span class="i18n-zh">Token 效率低</span><span class="i18n-en" hidden>Low Token Efficiency</span></strong><span class="i18n-zh">：同样的语义内容，中文所需 token 数通常少于英文（因为一个字密度更高），但更容易出现 OOV</span><span class="i18n-en" hidden>：同样的语义内容，中文所需 token 数通常少于英文（因为一个字密度更高），但更容易出现 OOV</span></li>
+    <li><strong><span class="i18n-zh">无天然分隔符</span><span class="i18n-en" hidden>No Natural Delimiters</span></strong><span class="i18n-zh">：英文有空格分词，中文是连续字符串，需要先分词</span><span class="i18n-en" hidden>: English has spaces for word segmentation, while Chinese is a continuous string that requires tokenization first.</span></li>
+    <li><strong><span class="i18n-zh">字符集巨大</span><span class="i18n-en" hidden>Massive Character Set</span></strong><span class="i18n-zh">：常用汉字 6000+，总数数万，远大于英文字母的 26 个</span><span class="i18n-en" hidden>: There are 6000+ commonly used Chinese characters, with tens of thousands in total, far exceeding the 26 letters of the English alphabet.</span></li>
+    <li><strong><span class="i18n-zh">粒度问题</span><span class="i18n-en" hidden>Granularity Issues</span></strong><span class="i18n-zh">：一个中文词可以由 1-N 个字组成，subword 切分边界不直观</span><span class="i18n-en" hidden>: A Chinese word can consist of 1-N characters, making subword segmentation boundaries unintuitive.</span></li>
+    <li><strong><span class="i18n-zh">Token 效率低</span><span class="i18n-en" hidden>Low Token Efficiency</span></strong><span class="i18n-zh">：同样的语义内容，中文所需 token 数通常少于英文（因为一个字密度更高），但更容易出现 OOV</span><span class="i18n-en" hidden>: For the same semantic content, Chinese typically requires fewer tokens than English (because each character is denser), but is more prone to OOV.</span></li>
   </ol>
 </div>
 
@@ -384,12 +384,12 @@ PE(pos, 2i+1) = cos(pos / 10000^(2i/d_model))</code></pre>
 
   <h3><span class="i18n-zh">诊断框架（从最常见到最罕见）</span><span class="i18n-en" hidden>Diagnostic Framework (Most Common to Rarest)</span></h3>
   <ol>
-    <li><strong><span class="i18n-zh">max_tokens 设置太小</span><span class="i18n-en" hidden>max_tokens Set Too Small</span></strong><span class="i18n-zh">：最直接的原因。检查 API 调用的 max_tokens/max_output_tokens 参数</span><span class="i18n-en" hidden>：最直接的原因。检查 API 调用的 max_tokens/max_output_tokens 参数</span></li>
-    <li><strong><span class="i18n-zh">Context Window 超限</span><span class="i18n-en" hidden>Context Window Exceeded</span></strong><span class="i18n-zh">：输入+输出超出模型的 context window，输出空间被压缩。统计输入 token 数</span><span class="i18n-en" hidden>：输入+输出超出模型的 context window，输出空间被压缩。统计输入 token 数</span></li>
-    <li><strong>finish_reason = "length"</strong><span class="i18n-zh">：检查 API 返回的 finish_reason，确认是因为 token 限制而非自然结束</span><span class="i18n-en" hidden>：检查 API 返回的 finish_reason，确认是因为 token 限制而非自然结束</span></li>
-    <li><strong><span class="i18n-zh">Output Parser 截断</span><span class="i18n-en" hidden>Output Parser Truncation</span></strong><span class="i18n-zh">：如果用了自定义 Parser，检查是否在输出未完成时就终止了</span><span class="i18n-en" hidden>：如果用了自定义 Parser，检查是否在输出未完成时就终止了</span></li>
-    <li><strong><span class="i18n-zh">前端截断</span><span class="i18n-en" hidden>Frontend Truncation</span></strong><span class="i18n-zh">：模型实际输出了完整内容，但前端/UI 做了截断显示</span><span class="i18n-en" hidden>：模型实际输出了完整内容，但前端/UI 做了截断显示</span></li>
-    <li><strong><span class="i18n-zh">Streaming 中断</span><span class="i18n-en" hidden>Streaming Interruption</span></strong><span class="i18n-zh">：流式传输中连接断开或超时，只展示了部分内容</span><span class="i18n-en" hidden>：流式传输中连接断开或超时，只展示了部分内容</span></li>
+    <li><strong><span class="i18n-zh">max_tokens 设置太小</span><span class="i18n-en" hidden>max_tokens Set Too Small</span></strong><span class="i18n-zh">：最直接的原因。检查 API 调用的 max_tokens/max_output_tokens 参数</span><span class="i18n-en" hidden>: The most direct reason. Check the max_tokens/max_output_tokens parameter of the API call.</span></li>
+    <li><strong><span class="i18n-zh">Context Window 超限</span><span class="i18n-en" hidden>Context Window Exceeded</span></strong><span class="i18n-zh">：输入+输出超出模型的 context window，输出空间被压缩。统计输入 token 数</span><span class="i18n-en" hidden>: Input + output exceeds the model's context window, compressing the output space. Count the input tokens.</span></li>
+    <li><strong>finish_reason = "length"</strong><span class="i18n-zh">：检查 API 返回的 finish_reason，确认是因为 token 限制而非自然结束</span><span class="i18n-en" hidden>: Check the finish_reason returned by the API to confirm it's due to token limits, not a natural end.</span></li>
+    <li><strong><span class="i18n-zh">Output Parser 截断</span><span class="i18n-en" hidden>Output Parser Truncation</span></strong><span class="i18n-zh">：如果用了自定义 Parser，检查是否在输出未完成时就终止了</span><span class="i18n-en" hidden>: If using a custom Parser, check if it terminated before the output was complete.</span></li>
+    <li><strong><span class="i18n-zh">前端截断</span><span class="i18n-en" hidden>Frontend Truncation</span></strong><span class="i18n-zh">：模型实际输出了完整内容，但前端/UI 做了截断显示</span><span class="i18n-en" hidden>: The model actually output the full content, but the frontend/UI truncated the display.</span></li>
+    <li><strong><span class="i18n-zh">Streaming 中断</span><span class="i18n-en" hidden>Streaming Interruption</span></strong><span class="i18n-zh">：流式传输中连接断开或超时，只展示了部分内容</span><span class="i18n-en" hidden>: In streaming, the connection was interrupted or timed out, showing only partial content.</span></li>
   </ol>
 
   <h3><span class="i18n-zh">解决方案</span><span class="i18n-en" hidden>Solutions</span></h3>
@@ -407,7 +407,7 @@ PE(pos, 2i+1) = cos(pos / 10000^(2i/d_model))</code></pre>
   <h3><span class="i18n-zh">四维度对比</span><span class="i18n-en" hidden>Four-Dimension Comparison</span></h3>
   <table style="width:100%; border-collapse:collapse;">
     <tr style="background:var(--surface-2);">
-      <th style="padding:8px;"><span class="i18n-zh">维度</span><span class="i18n-en" hidden>Dimension</span></th><th style="padding:8px;">API (OpenAI/Anthropic)</th><th style="padding:8px;"><span class="i18n-zh">开源 (LLaMA/Qwen/DeepSeek)</span><span class="i18n-en" hidden>开源 (LLaMA/Qwen/DeepSeek)</span></th>
+      <th style="padding:8px;"><span class="i18n-zh">维度</span><span class="i18n-en" hidden>Dimension</span></th><th style="padding:8px;">API (OpenAI/Anthropic)</th><th style="padding:8px;"><span class="i18n-zh">开源 (LLaMA/Qwen/DeepSeek)</span><span class="i18n-en" hidden>Open Source (LLaMA/Qwen/DeepSeek)</span></th>
     </tr>
     <tr>
       <td style="padding:8px;"><strong><span class="i18n-zh">成本</span><span class="i18n-en" hidden>Cost</span></strong></td>
@@ -479,27 +479,27 @@ else:
     </tr>
   </table>
 
-  <p><strong><span class="i18n-zh">推荐策略</span><span class="i18n-en" hidden>Recommended Strategy</span></strong><span class="i18n-zh">：优先使用 API 的 Structured Output / Function Calling（如有），配合 Retry + 修正作为 fallback。</span><span class="i18n-en" hidden>：优先使用 API 的 Structured Output / Function Calling（如有），配合 Retry + 修正作为 fallback。</span></p>
+  <p><strong><span class="i18n-zh">推荐策略</span><span class="i18n-en" hidden>Recommended Strategy</span></strong><span class="i18n-zh">：优先使用 API 的 Structured Output / Function Calling（如有），配合 Retry + 修正作为 fallback。</span><span class="i18n-en" hidden>: Prioritize using the API's Structured Output / Function Calling (if available), with Retry + Correction as a fallback.</span></p>
 </div>
 
 <div class="answer-card" id="A13">
   <h2><span class="i18n-zh">A13 · Embedding 基础</span><span class="i18n-en" hidden>A13 · Embedding Fundamentals</span></h2>
 
   <h3><span class="i18n-zh">核心答案</span><span class="i18n-en" hidden>Core Answer</span></h3>
-  <p><strong>Embedding</strong><span class="i18n-zh"> 是将文本映射到高维向量空间（通常 768-4096 维），使得语义相似的文本在向量空间中距离接近。</span><span class="i18n-en" hidden> 是将文本映射到高维向量空间（通常 768-4096 维），使得语义相似的文本在向量空间中距离接近。</span></p>
+  <p><strong>Embedding</strong><span class="i18n-zh"> 是将文本映射到高维向量空间（通常 768-4096 维），使得语义相似的文本在向量空间中距离接近。</span><span class="i18n-en" hidden>: Maps text to a high-dimensional vector space (usually 768-4096 dimensions), so that semantically similar texts are close in the vector space.</span></p>
 
-  <p><strong><span class="i18n-zh">语义空间的特性：</span><span class="i18n-en" hidden>语义空间的特性：</span></strong></p>
+  <p><strong><span class="i18n-zh">语义空间的特性：</span><span class="i18n-en" hidden>Characteristics of Semantic Space:</span></strong></p>
   <ul>
-    <li><strong><span class="i18n-zh">语义聚集</span><span class="i18n-en" hidden>Semantic Clustering</span></strong><span class="i18n-zh">：相似含义的文本向量彼此靠近</span><span class="i18n-en" hidden>：相似含义的文本向量彼此靠近</span></li>
-    <li><strong><span class="i18n-zh">方向编码</span><span class="i18n-en" hidden>Directional Encoding</span></strong><span class="i18n-zh">：向量方向编码语义特征（如 &quot;king - man + woman ≈ queen&quot;）</span><span class="i18n-en" hidden>：向量方向编码语义特征（如 &quot;king - man + woman ≈ queen&quot;）</span></li>
-    <li><strong><span class="i18n-zh">线性结构</span><span class="i18n-en" hidden>Linear Structure</span></strong><span class="i18n-zh">：向量运算在一定程度上对应语义运算</span><span class="i18n-en" hidden>：向量运算在一定程度上对应语义运算</span></li>
+    <li><strong><span class="i18n-zh">语义聚集</span><span class="i18n-en" hidden>Semantic Clustering</span></strong><span class="i18n-zh">：相似含义的文本向量彼此靠近</span><span class="i18n-en" hidden>: Vectors of texts with similar meanings are close to each other.</span></li>
+    <li><strong><span class="i18n-zh">方向编码</span><span class="i18n-en" hidden>Directional Encoding</span></strong><span class="i18n-zh">：向量方向编码语义特征（如 &quot;king - man + woman ≈ queen&quot;）</span><span class="i18n-en" hidden>: Vector direction encodes semantic features (e.g., &quot;king - man + woman ≈ queen&quot;).</span></li>
+    <li><strong><span class="i18n-zh">线性结构</span><span class="i18n-en" hidden>Linear Structure</span></strong><span class="i18n-zh">：向量运算在一定程度上对应语义运算</span><span class="i18n-en" hidden>: Vector operations correspond to semantic operations to some extent.</span></li>
   </ul>
 
   <p><strong><span class="i18n-zh">为什么 Cosine Similarity 更常用？</span><span class="i18n-en" hidden>Why is Cosine Similarity More Commonly Used?</span></strong></p>
   <ul>
-    <li><strong><span class="i18n-zh">方向敏感，长度不敏感</span><span class="i18n-en" hidden>方向敏感，长度不敏感</span></strong><span class="i18n-zh">：两个文本的语义相似性更多取决于方向而非向量长度。长文档和短文档如果语义相同，cosine 相似度很高</span><span class="i18n-en" hidden>：两个文本的语义相似性更多取决于方向而非向量长度。长文档和短文档如果语义相同，cosine 相似度很高</span></li>
-    <li><strong><span class="i18n-zh">归一化友好</span><span class="i18n-en" hidden>归一化友好</span></strong><span class="i18n-zh">：cosine 相似度范围在 [-1, 1]，容易设定阈值</span><span class="i18n-en" hidden>：cosine 相似度范围在 [-1, 1]，容易设定阈值</span></li>
-    <li><strong><span class="i18n-zh">训练目标对齐</span><span class="i18n-en" hidden>训练目标对齐</span></strong><span class="i18n-zh">：许多 embedding 模型在训练时使用了 cosine similarity 作为损失函数</span><span class="i18n-en" hidden>：许多 embedding 模型在训练时使用了 cosine similarity 作为损失函数</span></li>
+    <li><strong><span class="i18n-zh">方向敏感，长度不敏感</span><span class="i18n-en" hidden>Direction-sensitive, length-insensitive</span></strong><span class="i18n-zh">：两个文本的语义相似性更多取决于方向而非向量长度。长文档和短文档如果语义相同，cosine 相似度很高</span><span class="i18n-en" hidden>: The semantic similarity of two texts depends more on direction than vector length. A long document and a short document with the same semantics have high cosine similarity.</span></li>
+    <li><strong><span class="i18n-zh">归一化友好</span><span class="i18n-en" hidden>Normalization-friendly</span></strong><span class="i18n-zh">：cosine 相似度范围在 [-1, 1]，容易设定阈值</span><span class="i18n-en" hidden>: Cosine similarity ranges in [-1, 1], making it easy to set thresholds.</span></li>
+    <li><strong><span class="i18n-zh">训练目标对齐</span><span class="i18n-en" hidden>Training objective alignment</span></strong><span class="i18n-zh">：许多 embedding 模型在训练时使用了 cosine similarity 作为损失函数</span><span class="i18n-en" hidden>: Many embedding models use cosine similarity as the loss function during training.</span></li>
   </ul>
 </div>
 
@@ -510,42 +510,42 @@ else:
 
   <p><strong><span class="i18n-zh">原因：</span><span class="i18n-en" hidden>Reasons:</span></strong></p>
   <ol>
-    <li><strong><span class="i18n-zh">成本</span><span class="i18n-en" hidden>Cost</span></strong><span class="i18n-zh">：128K token 的推理成本是 4K 的 32 倍，且输入 token 通常比输出 token 更贵</span><span class="i18n-en" hidden>：128K token 的推理成本是 4K 的 32 倍，且输入 token 通常比输出 token 更贵</span></li>
-    <li><strong><span class="i18n-zh">延迟</span><span class="i18n-en" hidden>Latency</span></strong><span class="i18n-zh">：处理 128K token 的 Attention 计算量是 O(n²)，延迟显著增加</span><span class="i18n-en" hidden>：处理 128K token 的 Attention 计算量是 O(n²)，延迟显著增加</span></li>
-    <li><strong>Lost in the Middle</strong><span class="i18n-zh">：研究表明 LLM 对输入中间部分的信息利用效率远低于开头和结尾。长上下文中，中间的内容几乎被&quot;忽略&quot;</span><span class="i18n-en" hidden>：研究表明 LLM 对输入中间部分的信息利用效率远低于开头和结尾。长上下文中，中间的内容几乎被&quot;忽略&quot;</span></li>
-    <li><strong><span class="i18n-zh">注意力稀释</span><span class="i18n-en" hidden>Attention Dilution</span></strong><span class="i18n-zh">：无关内容越多，模型越难聚焦到真正相关的信息</span><span class="i18n-en" hidden>：无关内容越多，模型越难聚焦到真正相关的信息</span></li>
-    <li><strong><span class="i18n-zh">幻觉风险</span><span class="i18n-en" hidden>Hallucination Risk</span></strong><span class="i18n-zh">：大量上下文增加了模型混淆不同来源信息的风险</span><span class="i18n-en" hidden>：大量上下文增加了模型混淆不同来源信息的风险</span></li>
+    <li><strong><span class="i18n-zh">成本</span><span class="i18n-en" hidden>Cost</span></strong><span class="i18n-zh">：128K token 的推理成本是 4K 的 32 倍，且输入 token 通常比输出 token 更贵</span><span class="i18n-en" hidden>: The inference cost for 128K tokens is 32 times that of 4K tokens, and input tokens are usually more expensive than output tokens.</span></li>
+    <li><strong><span class="i18n-zh">延迟</span><span class="i18n-en" hidden>Latency</span></strong><span class="i18n-zh">：处理 128K token 的 Attention 计算量是 O(n²)，延迟显著增加</span><span class="i18n-en" hidden>: Processing 128K tokens involves O(n²) Attention computation, significantly increasing latency.</span></li>
+    <li><strong>Lost in the Middle</strong><span class="i18n-zh">：研究表明 LLM 对输入中间部分的信息利用效率远低于开头和结尾。长上下文中，中间的内容几乎被&quot;忽略&quot;</span><span class="i18n-en" hidden>: Research shows that LLMs utilize information in the middle of the input far less efficiently than at the beginning and end. In long contexts, the middle content is almost &quot;ignored&quot;.</span></li>
+    <li><strong><span class="i18n-zh">注意力稀释</span><span class="i18n-en" hidden>Attention Dilution</span></strong><span class="i18n-zh">：无关内容越多，模型越难聚焦到真正相关的信息</span><span class="i18n-en" hidden>: The more irrelevant content there is, the harder it is for the model to focus on truly relevant information.</span></li>
+    <li><strong><span class="i18n-zh">幻觉风险</span><span class="i18n-en" hidden>Hallucination Risk</span></strong><span class="i18n-zh">：大量上下文增加了模型混淆不同来源信息的风险</span><span class="i18n-en" hidden>: A large amount of context increases the risk of the model confusing information from different sources.</span></li>
   </ol>
 
-  <p><strong><span class="i18n-zh">正确的策略</span><span class="i18n-en" hidden>Correct Strategy</span></strong><span class="i18n-zh">：RAG + 适度上下文长度。用 RAG 精确检索相关内容（几百到几千 token），用 LLM 的上下文窗口（8K-32K 足够）处理检索到的内容。</span><span class="i18n-en" hidden>：RAG + 适度上下文长度。用 RAG 精确检索相关内容（几百到几千 token），用 LLM 的上下文窗口（8K-32K 足够）处理检索到的内容。</span></p>
+  <p><strong><span class="i18n-zh">正确的策略</span><span class="i18n-en" hidden>Correct Strategy</span></strong><span class="i18n-zh">：RAG + 适度上下文长度。用 RAG 精确检索相关内容（几百到几千 token），用 LLM 的上下文窗口（8K-32K 足够）处理检索到的内容。</span><span class="i18n-en" hidden>: RAG + moderate context length. Use RAG to precisely retrieve relevant content (a few hundred to a few thousand tokens), and use the LLM's context window (8K-32K is sufficient) to process the retrieved content.</span></p>
 </div>
 
 <div class="answer-card" id="A15">
   <h2>A15 · Prompt Caching</h2>
 
   <h3><span class="i18n-zh">核心答案</span><span class="i18n-en" hidden>Core Answer</span></h3>
-  <p><strong>Prompt Caching</strong><span class="i18n-zh"> 是 LLM API 提供的一种优化机制：当多个请求共享相同的前缀（如 system prompt、few-shot examples、工具定义）时，API 提供方会缓存这些前缀的 KV cache，后续请求无需重新计算。</span><span class="i18n-en" hidden> 是 LLM API 提供的一种优化机制：当多个请求共享相同的前缀（如 system prompt、few-shot examples、工具定义）时，API 提供方会缓存这些前缀的 KV cache，后续请求无需重新计算。</span></p>
+  <p><strong>Prompt Caching</strong><span class="i18n-zh"> 是 LLM API 提供的一种优化机制：当多个请求共享相同的前缀（如 system prompt、few-shot examples、工具定义）时，API 提供方会缓存这些前缀的 KV cache，后续请求无需重新计算。</span><span class="i18n-en" hidden>: Is an optimization mechanism provided by LLM APIs: when multiple requests share the same prefix (e.g., system prompt, few-shot examples, tool definitions), the API provider caches the KV cache of these prefixes, so subsequent requests don't need to recompute.</span></p>
 
   <h3><span class="i18n-zh">工作原理</span><span class="i18n-en" hidden>How It Works</span></h3>
   <ol>
-    <li><span class="i18n-zh">第一个请求处理完整 prompt，API 缓存前缀部分的 KV cache</span><span class="i18n-en" hidden>第一个请求处理完整 prompt，API 缓存前缀部分的 KV cache</span></li>
+    <li><span class="i18n-zh">第一个请求处理完整 prompt，API 缓存前缀部分的 KV cache</span><span class="i18n-en" hidden>: The first request processes the full prompt, and the API caches the KV cache of the prefix part.</span></li>
     <li><span class="i18n-zh">后续相同前缀的请求直接从缓存读取 KV cache，只计算差异部分</span><span class="i18n-en" hidden>Subsequent requests with the same prefix read KV cache directly, only computing the delta</span></li>
-    <li><span class="i18n-zh">缓存命中时，这部分 token 的计费大幅降低（如 Anthropic 打 90% 折扣）</span><span class="i18n-en" hidden>缓存命中时，这部分 token 的计费大幅降低（如 Anthropic 打 90% 折扣）</span></li>
-    <li><span class="i18n-zh">缓存通常在几分钟到几小时内有效</span><span class="i18n-en" hidden>缓存通常在几分钟到几小时内有效</span></li>
+    <li><span class="i18n-zh">缓存命中时，这部分 token 的计费大幅降低（如 Anthropic 打 90% 折扣）</span><span class="i18n-en" hidden>: When the cache is hit, billing for these tokens is significantly reduced (e.g., Anthropic offers a 90% discount).</span></li>
+    <li><span class="i18n-zh">缓存通常在几分钟到几小时内有效</span><span class="i18n-en" hidden>: The cache is typically valid for a few minutes to a few hours.</span></li>
   </ol>
 
   <h3><span class="i18n-zh">最有效的场景</span><span class="i18n-en" hidden>Most Effective Scenarios</span></h3>
   <ul>
-    <li><span class="i18n-zh">长的 System Prompt + 短的用户问题（客服、教育、代码助手）</span><span class="i18n-en" hidden>长的 System Prompt + 短的用户问题（客服、教育、代码助手）</span></li>
+    <li><span class="i18n-zh">长的 System Prompt + 短的用户问题（客服、教育、代码助手）</span><span class="i18n-en" hidden>: Long System Prompt + short user questions (customer service, education, code assistant).</span></li>
     <li><span class="i18n-zh">大量 Few-shot examples 放在 prompt 前缀</span><span class="i18n-en" hidden>Place many few-shot examples in the prompt prefix</span></li>
-    <li><span class="i18n-zh">工具定义（function schemas）放在 system prompt 中</span><span class="i18n-en" hidden>工具定义（function schemas）放在 system prompt 中</span></li>
-    <li><span class="i18n-zh">静态的 RAG 检索上下文（知识库很少变化）</span><span class="i18n-en" hidden>静态的 RAG 检索上下文（知识库很少变化）</span></li>
+    <li><span class="i18n-zh">工具定义（function schemas）放在 system prompt 中</span><span class="i18n-en" hidden>: Place tool definitions (function schemas) in the system prompt.</span></li>
+    <li><span class="i18n-zh">静态的 RAG 检索上下文（知识库很少变化）</span><span class="i18n-en" hidden>: Static RAG retrieval context (knowledge base rarely changes).</span></li>
   </ul>
 
   <h3><span class="i18n-zh">设计建议</span><span class="i18n-en" hidden>Design Recommendations</span></h3>
   <ul>
-    <li><span class="i18n-zh">把静态内容放在 prompt 前面（system prompt + tools）</span><span class="i18n-en" hidden>把静态内容放在 prompt 前面（system prompt + tools）</span></li>
-    <li><span class="i18n-zh">把动态内容放在 prompt 后面（user message, search results）</span><span class="i18n-en" hidden>把动态内容放在 prompt 后面（user message, search results）</span></li>
+    <li><span class="i18n-zh">把静态内容放在 prompt 前面（system prompt + tools）</span><span class="i18n-en" hidden>: Place static content at the front of the prompt (system prompt + tools).</span></li>
+    <li><span class="i18n-zh">把动态内容放在 prompt 后面（user message, search results）</span><span class="i18n-en" hidden>: Place dynamic content at the end of the prompt (user message, search results).</span></li>
     <li><span class="i18n-zh">使用固定的 breakpoint 标记缓存边界</span><span class="i18n-en" hidden>Use fixed breakpoints to mark cache boundaries</span></li>
   </ul>
 </div>
@@ -555,15 +555,15 @@ else:
   <h2><span class="i18n-zh">A16 · LangChain 是什么？Chain vs Agent</span><span class="i18n-en" hidden>A16 · What is LangChain? Chain vs Agent</span></h2>
 
   <h3><span class="i18n-zh">核心答案</span><span class="i18n-en" hidden>Core Answer</span></h3>
-  <p><strong>LangChain</strong><span class="i18n-zh"> 是一个用于构建 LLM 应用的开源框架，提供了标准化的组件和抽象来简化 LLM 应用的开发。</span><span class="i18n-en" hidden> 是一个用于构建 LLM 应用的开源框架，提供了标准化的组件和抽象来简化 LLM 应用的开发。</span></p>
+  <p><strong>LangChain</strong><span class="i18n-zh"> 是一个用于构建 LLM 应用的开源框架，提供了标准化的组件和抽象来简化 LLM 应用的开发。</span><span class="i18n-en" hidden>: Is an open-source framework for building LLM applications, providing standardized components and abstractions to simplify LLM application development.</span></p>
 
   <p><strong><span class="i18n-zh">五大核心模块：</span><span class="i18n-en" hidden>Five Core Modules:</span></strong></p>
   <ol>
-    <li><strong>Model I/O</strong><span class="i18n-zh">：统一的 LLM/Chat Model 接口、Prompt Template、Output Parser</span><span class="i18n-en" hidden>：统一的 LLM/Chat Model 接口、Prompt Template、Output Parser</span></li>
+    <li><strong>Model I/O</strong><span class="i18n-zh">：统一的 LLM/Chat Model 接口、Prompt Template、Output Parser</span><span class="i18n-en" hidden>: Unified LLM/Chat Model interface, Prompt Template, Output Parser.</span></li>
     <li><strong>Retrieval</strong>：Document Loader、Text Splitter、Embeddings、Vector Store、Retriever</li>
-    <li><strong>Chains</strong><span class="i18n-zh">：将多个组件串联成流水线（LCEL - LangChain Expression Language）</span><span class="i18n-en" hidden>：将多个组件串联成流水线（LCEL - LangChain Expression Language）</span></li>
-    <li><strong>Agents</strong><span class="i18n-zh">：LLM 动态决策调用哪些工具、以什么顺序调用</span><span class="i18n-en" hidden>：LLM 动态决策调用哪些工具、以什么顺序调用</span></li>
-    <li><strong>Memory</strong><span class="i18n-zh">：在多次交互间保持状态</span><span class="i18n-en" hidden>：在多次交互间保持状态</span></li>
+    <li><strong>Chains</strong><span class="i18n-zh">：将多个组件串联成流水线（LCEL - LangChain Expression Language）</span><span class="i18n-en" hidden>: Chains multiple components into a pipeline (LCEL - LangChain Expression Language).</span></li>
+    <li><strong>Agents</strong><span class="i18n-zh">：LLM 动态决策调用哪些工具、以什么顺序调用</span><span class="i18n-en" hidden>: LLM dynamically decides which tools to call and in what order.</span></li>
+    <li><strong>Memory</strong><span class="i18n-zh">：在多次交互间保持状态</span><span class="i18n-en" hidden>: Maintains state across multiple interactions.</span></li>
   </ol>
 
   <p><strong><span class="i18n-zh">Chain vs Agent 的核心区别：</span><span class="i18n-en" hidden>Core Differences between Chain vs Agent:</span></strong></p>
@@ -571,11 +571,11 @@ else:
     <tr style="background:var(--surface-2);">
       <th style="padding:8px;">Chain</th><th style="padding:8px;">Agent</th>
     </tr>
-    <tr><td style="padding:8px;"><span class="i18n-zh">预定义的固定步骤</span><span class="i18n-en" hidden>预定义的固定步骤</span></td><td style="padding:8px;"><span class="i18n-zh">LLM 动态决定步骤</span><span class="i18n-en" hidden>LLM dynamically decides steps</span></td></tr>
-    <tr><td style="padding:8px;"><span class="i18n-zh">确定性执行路径</span><span class="i18n-en" hidden>确定性执行路径</span></td><td style="padding:8px;"><span class="i18n-zh">非确定性，基于推理</span><span class="i18n-en" hidden>非确定性，基于推理</span></td></tr>
-    <tr><td style="padding:8px;"><span class="i18n-zh">适合已知、重复任务</span><span class="i18n-en" hidden>适合已知、重复任务</span></td><td style="padding:8px;"><span class="i18n-zh">适合开放、探索性任务</span><span class="i18n-en" hidden>Suited for open, exploratory tasks</span></td></tr>
-    <tr><td style="padding:8px;"><span class="i18n-zh">低延迟、可预测</span><span class="i18n-en" hidden>Low latency, predictable</span></td><td style="padding:8px;"><span class="i18n-zh">高延迟、需要监控</span><span class="i18n-en" hidden>高延迟、需要监控</span></td></tr>
-    <tr><td style="padding:8px;"><span class="i18n-zh">示例：RAG 问答流水线</span><span class="i18n-en" hidden>示例：RAG 问答流水线</span></td><td style="padding:8px;"><span class="i18n-zh">示例：研究助手、客服 Agent</span><span class="i18n-en" hidden>示例：研究助手、客服 Agent</span></td></tr>
+    <tr><td style="padding:8px;"><span class="i18n-zh">预定义的固定步骤</span><span class="i18n-en" hidden>Predefined fixed steps</span></td><td style="padding:8px;"><span class="i18n-zh">LLM 动态决定步骤</span><span class="i18n-en" hidden>LLM dynamically decides steps</span></td></tr>
+    <tr><td style="padding:8px;"><span class="i18n-zh">确定性执行路径</span><span class="i18n-en" hidden>Deterministic execution path</span></td><td style="padding:8px;"><span class="i18n-zh">非确定性，基于推理</span><span class="i18n-en" hidden>Non-deterministic, reasoning-based</span></td></tr>
+    <tr><td style="padding:8px;"><span class="i18n-zh">适合已知、重复任务</span><span class="i18n-en" hidden>Suitable for known, repetitive tasks</span></td><td style="padding:8px;"><span class="i18n-zh">适合开放、探索性任务</span><span class="i18n-en" hidden>Suited for open, exploratory tasks</span></td></tr>
+    <tr><td style="padding:8px;"><span class="i18n-zh">低延迟、可预测</span><span class="i18n-en" hidden>Low latency, predictable</span></td><td style="padding:8px;"><span class="i18n-zh">高延迟、需要监控</span><span class="i18n-en" hidden>High latency, requires monitoring</span></td></tr>
+    <tr><td style="padding:8px;"><span class="i18n-zh">示例：RAG 问答流水线</span><span class="i18n-en" hidden>Example: RAG Q&A pipeline</span></td><td style="padding:8px;"><span class="i18n-zh">示例：研究助手、客服 Agent</span><span class="i18n-en" hidden>Examples: Research Assistant, Customer Service Agent</span></td></tr>
   </table>
 </div>
 
@@ -600,11 +600,11 @@ Retrieval + Generation (在线):
 
   <h3><span class="i18n-zh">各阶段关键设计决策</span><span class="i18n-en" hidden>Key Design Decisions Per Stage</span></h3>
   <ul>
-    <li><strong>Document Loader</strong><span class="i18n-zh">：选型取决于文档格式（PDF, HTML, Markdown, DB...）</span><span class="i18n-en" hidden>：选型取决于文档格式（PDF, HTML, Markdown, DB...）</span></li>
-    <li><strong>Chunking</strong><span class="i18n-zh">：决定检索粒度的最关键环节。考虑 chunk_size 和 overlap</span><span class="i18n-en" hidden>：决定检索粒度的最关键环节。考虑 chunk_size 和 overlap</span></li>
-    <li><strong>Embedding Model</strong><span class="i18n-zh">：通用场景用 text-embedding-3-large，中文优先考虑 BGE/M3E</span><span class="i18n-en" hidden>：通用场景用 text-embedding-3-large，中文优先考虑 BGE/M3E</span></li>
-    <li><strong>Vector Store</strong><span class="i18n-zh">：开发用 Chroma/FAISS，生产考虑 Pinecone/Weaviate/Milvus</span><span class="i18n-en" hidden>：开发用 Chroma/FAISS，生产考虑 Pinecone/Weaviate/Milvus</span></li>
-    <li><strong>Re-Ranker</strong><span class="i18n-zh">：Cross-Encoder 模型（如 Cohere Rerank, BGE-Reranker）提升检索精度</span><span class="i18n-en" hidden>：Cross-Encoder 模型（如 Cohere Rerank, BGE-Reranker）提升检索精度</span></li>
+    <li><strong>Document Loader</strong><span class="i18n-zh">：选型取决于文档格式（PDF, HTML, Markdown, DB...）</span><span class="i18n-en" hidden>: Selection depends on document format (PDF, HTML, Markdown, DB...)</span></li>
+    <li><strong>Chunking</strong><span class="i18n-zh">：决定检索粒度的最关键环节。考虑 chunk_size 和 overlap</span><span class="i18n-en" hidden>: The most critical step in determining retrieval granularity. Consider chunk_size and overlap</span></li>
+    <li><strong>Embedding Model</strong><span class="i18n-zh">：通用场景用 text-embedding-3-large，中文优先考虑 BGE/M3E</span><span class="i18n-en" hidden>: For general scenarios, use text-embedding-3-large; for Chinese, prioritize BGE/M3E</span></li>
+    <li><strong>Vector Store</strong><span class="i18n-zh">：开发用 Chroma/FAISS，生产考虑 Pinecone/Weaviate/Milvus</span><span class="i18n-en" hidden>: Use Chroma/FAISS for development, consider Pinecone/Weaviate/Milvus for production</span></li>
+    <li><strong>Re-Ranker</strong><span class="i18n-zh">：Cross-Encoder 模型（如 Cohere Rerank, BGE-Reranker）提升检索精度</span><span class="i18n-en" hidden>: Cross-Encoder models (e.g., Cohere Rerank, BGE-Reranker) improve retrieval accuracy</span></li>
   </ul>
 </div>
 
@@ -617,7 +617,7 @@ Retrieval + Generation (在线):
     </tr>
     <tr>
       <td style="padding:8px;"><strong>Naive RAG</strong></td>
-      <td style="padding:8px;"><span class="i18n-zh">检索→拼接→生成。没有质量控制</span><span class="i18n-en" hidden>检索→拼接→生成。没有质量控制</span></td>
+      <td style="padding:8px;"><span class="i18n-zh">检索→拼接→生成。没有质量控制</span><span class="i18n-en" hidden>Retrieve → Concatenate → Generate. No quality control.</span></td>
       <td style="padding:8px;"><span class="i18n-zh">简单 QA，对质量要求不高的场景</span><span class="i18n-en" hidden>Simple QA, low quality requirements</span></td>
     </tr>
     <tr>
@@ -632,7 +632,7 @@ Retrieval + Generation (在线):
     </tr>
   </table>
 
-  <p><strong><span class="i18n-zh">关键升级点</span><span class="i18n-en" hidden>Key Upgrade Point</span></strong><span class="i18n-zh">：Agentic RAG 不只是&quot;检索+生成&quot;，而是把 RAG 作为一个工具交给 Agent 使用。Agent 可以：判断是否需要检索、选择检索策略、评估检索质量、决定是否重新检索、综合多次检索结果。</span><span class="i18n-en" hidden>：Agentic RAG 不只是&quot;检索+生成&quot;，而是把 RAG 作为一个工具交给 Agent 使用。Agent 可以：判断是否需要检索、选择检索策略、评估检索质量、决定是否重新检索、综合多次检索结果。</span></p>
+  <p><strong><span class="i18n-zh">关键升级点</span><span class="i18n-en" hidden>Key Upgrade Point</span></strong><span class="i18n-zh">：Agentic RAG 不只是&quot;检索+生成&quot;，而是把 RAG 作为一个工具交给 Agent 使用。Agent 可以：判断是否需要检索、选择检索策略、评估检索质量、决定是否重新检索、综合多次检索结果。</span><span class="i18n-en" hidden>: Agentic RAG is not just "retrieve + generate"; it treats RAG as a tool for the Agent. The Agent can: decide whether retrieval is needed, choose retrieval strategies, evaluate retrieval quality, decide whether to re-retrieve, and synthesize results from multiple retrievals.</span></p>
 </div>
 
 <div class="answer-card" id="A19">
@@ -640,13 +640,13 @@ Retrieval + Generation (在线):
 
   <h3><span class="i18n-zh">排查清单（按概率排序）</span><span class="i18n-en" hidden>Troubleshooting Checklist (By Probability)</span></h3>
   <ol>
-    <li><strong><span class="i18n-zh">Chunk Size 不当</span><span class="i18n-en" hidden>Inappropriate Chunk Size</span></strong><span class="i18n-zh">：太小（失去上下文）或太大（噪音多）。调整 chunk_size 和 overlap</span><span class="i18n-en" hidden>：太小（失去上下文）或太大（噪音多）。调整 chunk_size 和 overlap</span></li>
-    <li><strong><span class="i18n-zh">Embedding Model 不匹配</span><span class="i18n-en" hidden>Embedding Model Mismatch</span></strong><span class="i18n-zh">：通用 embedding 在专业领域表现差。换领域 fine-tune 的 embedding</span><span class="i18n-en" hidden>：通用 embedding 在专业领域表现差。换领域 fine-tune 的 embedding</span></li>
-    <li><strong>Query-Document Gap</strong><span class="i18n-zh">：用户的查询用词和文档中的用词不同。添加 Query Rewriting（用 LLM 改写/扩展查询）</span><span class="i18n-en" hidden>：用户的查询用词和文档中的用词不同。添加 Query Rewriting（用 LLM 改写/扩展查询）</span></li>
-    <li><strong><span class="i18n-zh">检索方式单一</span><span class="i18n-en" hidden>Single Retrieval Method</span></strong><span class="i18n-zh">：纯向量检索漏掉精确匹配。引入 Hybrid Search（向量+BM25 关键词）</span><span class="i18n-en" hidden>：纯向量检索漏掉精确匹配。引入 Hybrid Search（向量+BM25 关键词）</span></li>
-    <li><strong><span class="i18n-zh">缺少 Re-Ranker</span><span class="i18n-en" hidden>Missing Re-Ranker</span></strong><span class="i18n-zh">：Top-K 检索召回了一些不太相关的文档。加 Re-Ranker 精细排序</span><span class="i18n-en" hidden>：Top-K 检索召回了一些不太相关的文档。加 Re-Ranker 精细排序</span></li>
-    <li><strong><span class="i18n-zh">文档预处理差</span><span class="i18n-en" hidden>Poor Document Preprocessing</span></strong><span class="i18n-zh">：PDF 解析乱码、表格被破坏。改进文档解析管道</span><span class="i18n-en" hidden>：PDF 解析乱码、表格被破坏。改进文档解析管道</span></li>
-    <li><strong><span class="i18n-zh">Metadata 过滤缺失</span><span class="i18n-en" hidden>Missing Metadata Filtering</span></strong><span class="i18n-zh">：没有利用文档元数据（时间、来源、类别）做预过滤</span><span class="i18n-en" hidden>：没有利用文档元数据（时间、来源、类别）做预过滤</span></li>
+    <li><strong><span class="i18n-zh">Chunk Size 不当</span><span class="i18n-en" hidden>Inappropriate Chunk Size</span></strong><span class="i18n-zh">：太小（失去上下文）或太大（噪音多）。调整 chunk_size 和 overlap</span><span class="i18n-en" hidden>: Too small (loses context) or too large (introduces noise). Adjust chunk_size and overlap</span></li>
+    <li><strong><span class="i18n-zh">Embedding Model 不匹配</span><span class="i18n-en" hidden>Embedding Model Mismatch</span></strong><span class="i18n-zh">：通用 embedding 在专业领域表现差。换领域 fine-tune 的 embedding</span><span class="i18n-en" hidden>: General embeddings perform poorly in specialized domains. Switch to domain fine-tuned embeddings</span></li>
+    <li><strong>Query-Document Gap</strong><span class="i18n-zh">：用户的查询用词和文档中的用词不同。添加 Query Rewriting（用 LLM 改写/扩展查询）</span><span class="i18n-en" hidden>: The user's query wording differs from the document wording. Add Query Rewriting (use LLM to rewrite/expand queries)</span></li>
+    <li><strong><span class="i18n-zh">检索方式单一</span><span class="i18n-en" hidden>Single Retrieval Method</span></strong><span class="i18n-zh">：纯向量检索漏掉精确匹配。引入 Hybrid Search（向量+BM25 关键词）</span><span class="i18n-en" hidden>: Pure vector retrieval misses exact matches. Introduce Hybrid Search (vector + BM25 keywords)</span></li>
+    <li><strong><span class="i18n-zh">缺少 Re-Ranker</span><span class="i18n-en" hidden>Missing Re-Ranker</span></strong><span class="i18n-zh">：Top-K 检索召回了一些不太相关的文档。加 Re-Ranker 精细排序</span><span class="i18n-en" hidden>: Top-K retrieval recalls some irrelevant documents. Add a Re-Ranker for fine-grained sorting</span></li>
+    <li><strong><span class="i18n-zh">文档预处理差</span><span class="i18n-en" hidden>Poor Document Preprocessing</span></strong><span class="i18n-zh">：PDF 解析乱码、表格被破坏。改进文档解析管道</span><span class="i18n-en" hidden>: PDF parsing produces garbled text or broken tables. Improve the document parsing pipeline</span></li>
+    <li><strong><span class="i18n-zh">Metadata 过滤缺失</span><span class="i18n-en" hidden>Missing Metadata Filtering</span></strong><span class="i18n-zh">：没有利用文档元数据（时间、来源、类别）做预过滤</span><span class="i18n-en" hidden>: Document metadata (time, source, category) is not used for pre-filtering</span></li>
   </ol>
 
   <h3><span class="i18n-zh">调试策略</span><span class="i18n-en" hidden>Debugging Strategy</span></h3>
@@ -669,9 +669,9 @@ print(f"Similarity scores: {cosine_similarities}")
 
   <h3><span class="i18n-zh">Chunk Size 的影响</span><span class="i18n-en" hidden>Impact of Chunk Size</span></h3>
   <ul>
-    <li><strong><span class="i18n-zh">太小（如 100 字符）</span><span class="i18n-en" hidden>Too small (e.g., 100 chars)</span></strong><span class="i18n-zh">：语义不完整，&quot;主轴故障&quot;和&quot;更换方法&quot;被分到不同 chunk，检索时只拿到一半信息</span><span class="i18n-en" hidden>：语义不完整，&quot;主轴故障&quot;和&quot;更换方法&quot;被分到不同 chunk，检索时只拿到一半信息</span></li>
-    <li><strong><span class="i18n-zh">太大（如 2000 字符）</span><span class="i18n-en" hidden>Too large (e.g., 2000 chars)</span></strong><span class="i18n-zh">：包含过多噪音，干扰 LLM 注意力（Lost in the Middle），且容易超出 context window</span><span class="i18n-en" hidden>：包含过多噪音，干扰 LLM 注意力（Lost in the Middle），且容易超出 context window</span></li>
-    <li><strong><span class="i18n-zh">最佳实践</span><span class="i18n-en" hidden>Best Practice</span></strong><span class="i18n-zh">：通常 500-1000 字符，overlap 100-200 字符。具体取决于文档类型</span><span class="i18n-en" hidden>：通常 500-1000 字符，overlap 100-200 字符。具体取决于文档类型</span></li>
+    <li><strong><span class="i18n-zh">太小（如 100 字符）</span><span class="i18n-en" hidden>Too small (e.g., 100 chars)</span></strong><span class="i18n-zh">：语义不完整，&quot;主轴故障&quot;和&quot;更换方法&quot;被分到不同 chunk，检索时只拿到一半信息</span><span class="i18n-en" hidden>: Semantically incomplete; "spindle fault" and "replacement method" are split into different chunks, and retrieval only gets half the information</span></li>
+    <li><strong><span class="i18n-zh">太大（如 2000 字符）</span><span class="i18n-en" hidden>Too large (e.g., 2000 chars)</span></strong><span class="i18n-zh">：包含过多噪音，干扰 LLM 注意力（Lost in the Middle），且容易超出 context window</span><span class="i18n-en" hidden>: Contains too much noise, distracting the LLM's attention (Lost in the Middle), and easily exceeds the context window</span></li>
+    <li><strong><span class="i18n-zh">最佳实践</span><span class="i18n-en" hidden>Best Practice</span></strong><span class="i18n-zh">：通常 500-1000 字符，overlap 100-200 字符。具体取决于文档类型</span><span class="i18n-en" hidden>: Typically 500-1000 characters, with an overlap of 100-200 characters. Depends on the document type</span></li>
   </ul>
 
   <h3>Semantic Chunking</h3>
@@ -685,9 +685,9 @@ print(f"Similarity scores: {cosine_similarities}")
 
   <h3><span class="i18n-zh">其他 Chunking 策略</span><span class="i18n-en" hidden>Other Chunking Strategies</span></h3>
   <ul>
-    <li><strong>Recursive Character Splitting</strong><span class="i18n-zh">：按段落→句子→词的优先级递归切分（LangChain 默认）</span><span class="i18n-en" hidden>：按段落→句子→词的优先级递归切分（LangChain 默认）</span></li>
-    <li><strong>Document-based Splitting</strong><span class="i18n-zh">：按文档的自然结构（Markdown 标题、HTML 标签）切分</span><span class="i18n-en" hidden>：按文档的自然结构（Markdown 标题、HTML 标签）切分</span></li>
-    <li><strong>Agentic Chunking</strong><span class="i18n-zh">：用 LLM 决定最佳切分点</span><span class="i18n-en" hidden>：用 LLM 决定最佳切分点</span></li>
+    <li><strong>Recursive Character Splitting</strong><span class="i18n-zh">：按段落→句子→词的优先级递归切分（LangChain 默认）</span><span class="i18n-en" hidden>: Recursively split by priority: paragraph → sentence → word (LangChain default)</span></li>
+    <li><strong>Document-based Splitting</strong><span class="i18n-zh">：按文档的自然结构（Markdown 标题、HTML 标签）切分</span><span class="i18n-en" hidden>: Split according to the document's natural structure (Markdown headings, HTML tags)</span></li>
+    <li><strong>Agentic Chunking</strong><span class="i18n-zh">：用 LLM 决定最佳切分点</span><span class="i18n-en" hidden>: Use LLM to determine the optimal split point</span></li>
   </ul>
 </div>
 
@@ -701,22 +701,22 @@ print(f"Similarity scores: {cosine_similarities}")
     <tr>
       <td style="padding:8px;"><strong>FAISS</strong></td>
       <td style="padding:8px;"><span class="i18n-zh">Meta 开源，纯本地，极高性能，C++ 实现</span><span class="i18n-en" hidden>Meta open-source, pure local, extremely high performance, C++ implementation</span></td>
-      <td style="padding:8px;"><span class="i18n-zh">百万级向量的本地搜索，研究/原型</span><span class="i18n-en" hidden>百万级向量的本地搜索，研究/原型</span></td>
+      <td style="padding:8px;"><span class="i18n-zh">百万级向量的本地搜索，研究/原型</span><span class="i18n-en" hidden>Local search for millions of vectors, research/prototyping</span></td>
     </tr>
     <tr>
       <td style="padding:8px;"><strong>Chroma</strong></td>
-      <td style="padding:8px;"><span class="i18n-zh">轻量级，Python 原生，API 简洁</span><span class="i18n-en" hidden>轻量级，Python 原生，API 简洁</span></td>
-      <td style="padding:8px;"><span class="i18n-zh">开发阶段，小规模应用</span><span class="i18n-en" hidden>开发阶段，小规模应用</span></td>
+      <td style="padding:8px;"><span class="i18n-zh">轻量级，Python 原生，API 简洁</span><span class="i18n-en" hidden>Lightweight, Python-native, simple API</span></td>
+      <td style="padding:8px;"><span class="i18n-zh">开发阶段，小规模应用</span><span class="i18n-en" hidden>Development phase, small-scale applications</span></td>
     </tr>
     <tr>
       <td style="padding:8px;"><strong>Pinecone</strong></td>
       <td style="padding:8px;"><span class="i18n-zh">全托管，自动扩展，企业级 SLA</span><span class="i18n-en" hidden>Fully managed, auto-scaling, enterprise-grade SLA</span></td>
-      <td style="padding:8px;"><span class="i18n-zh">生产环境，不想管理基础设施</span><span class="i18n-en" hidden>生产环境，不想管理基础设施</span></td>
+      <td style="padding:8px;"><span class="i18n-zh">生产环境，不想管理基础设施</span><span class="i18n-en" hidden>Production environment, no desire to manage infrastructure</span></td>
     </tr>
     <tr>
       <td style="padding:8px;"><strong>Weaviate</strong></td>
-      <td style="padding:8px;"><span class="i18n-zh">自带向量化+混合搜索，GraphQL API</span><span class="i18n-en" hidden>自带向量化+混合搜索，GraphQL API</span></td>
-      <td style="padding:8px;"><span class="i18n-zh">需要 Hybrid Search 的企业应用</span><span class="i18n-en" hidden>需要 Hybrid Search 的企业应用</span></td>
+      <td style="padding:8px;"><span class="i18n-zh">自带向量化+混合搜索，GraphQL API</span><span class="i18n-en" hidden>Built-in vectorization + hybrid search, GraphQL API</span></td>
+      <td style="padding:8px;"><span class="i18n-zh">需要 Hybrid Search 的企业应用</span><span class="i18n-en" hidden>Enterprise applications requiring Hybrid Search</span></td>
     </tr>
     <tr>
       <td style="padding:8px;"><strong>Milvus</strong></td>
@@ -726,7 +726,7 @@ print(f"Similarity scores: {cosine_similarities}")
     <tr>
       <td style="padding:8px;"><strong>pgvector</strong></td>
       <td style="padding:8px;"><span class="i18n-zh">PostgreSQL 扩展，向量+关系数据共存</span><span class="i18n-en" hidden>PostgreSQL extension, vector + relational data coexistence</span></td>
-      <td style="padding:8px;"><span class="i18n-zh">已有 Postgres 基础设施的团队</span><span class="i18n-en" hidden>已有 Postgres 基础设施的团队</span></td>
+      <td style="padding:8px;"><span class="i18n-zh">已有 Postgres 基础设施的团队</span><span class="i18n-en" hidden>Teams with existing Postgres infrastructure</span></td>
     </tr>
   </table>
 </div>
@@ -738,13 +738,13 @@ print(f"Similarity scores: {cosine_similarities}")
     <tr style="background:var(--surface-2);">
       <th style="padding:8px;"><span class="i18n-zh">维度</span><span class="i18n-en" hidden>Dimension</span></th><th style="padding:8px;"><span class="i18n-zh">语义搜索 (Dense)</span><span class="i18n-en" hidden>Semantic Search (Dense)</span></th><th style="padding:8px;"><span class="i18n-zh">关键词搜索 (Sparse/BM25)</span><span class="i18n-en" hidden>Keyword Search (Sparse/BM25)</span></th>
     </tr>
-    <tr><td style="padding:8px;"><span class="i18n-zh">原理</span><span class="i18n-en" hidden>Principle</span></td><td style="padding:8px;"><span class="i18n-zh">向量 embedding 的语义相似度</span><span class="i18n-en" hidden>Semantic similarity of vector embeddings</span></td><td style="padding:8px;"><span class="i18n-zh">词频-逆文档频率统计匹配</span><span class="i18n-en" hidden>词频-逆文档频率统计匹配</span></td></tr>
-    <tr><td style="padding:8px;"><span class="i18n-zh">优势</span><span class="i18n-en" hidden>Advantage</span></td><td style="padding:8px;"><span class="i18n-zh">理解同义词/近义表达</span><span class="i18n-en" hidden>理解同义词/近义表达</span></td><td style="padding:8px;"><span class="i18n-zh">精确匹配型号、代码、专有名词</span><span class="i18n-en" hidden>精确匹配型号、代码、专有名词</span></td></tr>
-    <tr><td style="padding:8px;"><span class="i18n-zh">劣势</span><span class="i18n-en" hidden>Disadvantage</span></td><td style="padding:8px;"><span class="i18n-zh">对专有名词和精确匹配不敏感</span><span class="i18n-en" hidden>对专有名词和精确匹配不敏感</span></td><td style="padding:8px;"><span class="i18n-zh">无法理解语义变化</span><span class="i18n-en" hidden>无法理解语义变化</span></td></tr>
-    <tr><td style="padding:8px;"><span class="i18n-zh">示例</span><span class="i18n-en" hidden>Example</span></td><td style="padding:8px;"><span class="i18n-zh">&quot;机器坏了&quot;能搜到&quot;设备故障&quot;</span><span class="i18n-en" hidden>&quot;Machine broken&quot; can find &quot;Equipment malfunction&quot;</span></td><td style="padding:8px;"><span class="i18n-zh">搜&quot;A860-T301&quot;精确找到该型号</span><span class="i18n-en" hidden>搜&quot;A860-T301&quot;精确找到该型号</span></td></tr>
+    <tr><td style="padding:8px;"><span class="i18n-zh">原理</span><span class="i18n-en" hidden>Principle</span></td><td style="padding:8px;"><span class="i18n-zh">向量 embedding 的语义相似度</span><span class="i18n-en" hidden>Semantic similarity of vector embeddings</span></td><td style="padding:8px;"><span class="i18n-zh">词频-逆文档频率统计匹配</span><span class="i18n-en" hidden>Term frequency-inverse document frequency statistical matching</span></td></tr>
+    <tr><td style="padding:8px;"><span class="i18n-zh">优势</span><span class="i18n-en" hidden>Advantage</span></td><td style="padding:8px;"><span class="i18n-zh">理解同义词/近义表达</span><span class="i18n-en" hidden>Understands synonyms/paraphrases</span></td><td style="padding:8px;"><span class="i18n-zh">精确匹配型号、代码、专有名词</span><span class="i18n-en" hidden>Exact matching of models, codes, proper nouns</span></td></tr>
+    <tr><td style="padding:8px;"><span class="i18n-zh">劣势</span><span class="i18n-en" hidden>Disadvantage</span></td><td style="padding:8px;"><span class="i18n-zh">对专有名词和精确匹配不敏感</span><span class="i18n-en" hidden>Insensitive to proper nouns and exact matches</span></td><td style="padding:8px;"><span class="i18n-zh">无法理解语义变化</span><span class="i18n-en" hidden>Cannot understand semantic changes</span></td></tr>
+    <tr><td style="padding:8px;"><span class="i18n-zh">示例</span><span class="i18n-en" hidden>Example</span></td><td style="padding:8px;"><span class="i18n-zh">&quot;机器坏了&quot;能搜到&quot;设备故障&quot;</span><span class="i18n-en" hidden>&quot;Machine broken&quot; can find &quot;Equipment malfunction&quot;</span></td><td style="padding:8px;"><span class="i18n-zh">搜&quot;A860-T301&quot;精确找到该型号</span><span class="i18n-en" hidden>Searching "A860-T301" finds that exact model</span></td></tr>
   </table>
 
-  <p><strong><span class="i18n-zh">Hybrid Search 的实现</span><span class="i18n-en" hidden>Hybrid Search Implementation</span></strong><span class="i18n-zh">：同时执行语义搜索和关键词搜索，将两者的结果通过 RRF (Reciprocal Rank Fusion) 合并：</span><span class="i18n-en" hidden>：同时执行语义搜索和关键词搜索，将两者的结果通过 RRF (Reciprocal Rank Fusion) 合并：</span><code>score = α × dense_score + (1-α) × sparse_score</code>。</p>
+  <p><strong><span class="i18n-zh">Hybrid Search 的实现</span><span class="i18n-en" hidden>Hybrid Search Implementation</span></strong><span class="i18n-zh">：同时执行语义搜索和关键词搜索，将两者的结果通过 RRF (Reciprocal Rank Fusion) 合并：</span><span class="i18n-en" hidden>: Execute semantic search and keyword search simultaneously, merging results via RRF (Reciprocal Rank Fusion):</span><code>score = α × dense_score + (1-α) × sparse_score</code>。</p>
 </div>
 
 <div class="answer-card" id="A23">
@@ -809,13 +809,13 @@ for i, doc in enumerate(result["context"]):
     <tr style="background:var(--surface-2);">
       <th style="padding:8px;"><span class="i18n-zh">维度</span><span class="i18n-en" hidden>Dimension</span></th><th style="padding:8px;">Prompt Engineering</th><th style="padding:8px;">RAG</th><th style="padding:8px;">Fine-tuning</th>
     </tr>
-    <tr><td style="padding:8px;"><span class="i18n-zh">做什么</span><span class="i18n-en" hidden>Purpose</span></td><td style="padding:8px;"><span class="i18n-zh">优化指令格式</span><span class="i18n-en" hidden>Optimize Instruction Format</span></td><td style="padding:8px;"><span class="i18n-zh">注入外部知识</span><span class="i18n-en" hidden>注入外部知识</span></td><td style="padding:8px;"><span class="i18n-zh">内化行为/风格</span><span class="i18n-en" hidden>Internalize Behavior/Style</span></td></tr>
-    <tr><td style="padding:8px;"><span class="i18n-zh">成本</span><span class="i18n-en" hidden>Cost</span></td><td style="padding:8px;"><span class="i18n-zh">几乎为零</span><span class="i18n-en" hidden>Near Zero</span></td><td style="padding:8px;"><span class="i18n-zh">中等（检索基础设施）</span><span class="i18n-en" hidden>Medium (Retrieval Infrastructure)</span></td><td style="padding:8px;"><span class="i18n-zh">高（GPU + 数据标注）</span><span class="i18n-en" hidden>高（GPU + 数据标注）</span></td></tr>
-    <tr><td style="padding:8px;"><span class="i18n-zh">迭代速度</span><span class="i18n-en" hidden>迭代速度</span></td><td style="padding:8px;"><span class="i18n-zh">分钟级</span><span class="i18n-en" hidden>Minutes</span></td><td style="padding:8px;"><span class="i18n-zh">小时级</span><span class="i18n-en" hidden>小时级</span></td><td style="padding:8px;"><span class="i18n-zh">天/周级</span><span class="i18n-en" hidden>Days/Weeks</span></td></tr>
-    <tr><td style="padding:8px;"><span class="i18n-zh">知识更新</span><span class="i18n-en" hidden>知识更新</span></td><td style="padding:8px;">N/A</td><td style="padding:8px;"><span class="i18n-zh">实时（更新向量库）</span><span class="i18n-en" hidden>实时（更新向量库）</span></td><td style="padding:8px;"><span class="i18n-zh">需重新训练</span><span class="i18n-en" hidden>需重新训练</span></td></tr>
+    <tr><td style="padding:8px;"><span class="i18n-zh">做什么</span><span class="i18n-en" hidden>Purpose</span></td><td style="padding:8px;"><span class="i18n-zh">优化指令格式</span><span class="i18n-en" hidden>Optimize Instruction Format</span></td><td style="padding:8px;"><span class="i18n-zh">注入外部知识</span><span class="i18n-en" hidden>Inject external knowledge</span></td><td style="padding:8px;"><span class="i18n-zh">内化行为/风格</span><span class="i18n-en" hidden>Internalize Behavior/Style</span></td></tr>
+    <tr><td style="padding:8px;"><span class="i18n-zh">成本</span><span class="i18n-en" hidden>Cost</span></td><td style="padding:8px;"><span class="i18n-zh">几乎为零</span><span class="i18n-en" hidden>Near Zero</span></td><td style="padding:8px;"><span class="i18n-zh">中等（检索基础设施）</span><span class="i18n-en" hidden>Medium (Retrieval Infrastructure)</span></td><td style="padding:8px;"><span class="i18n-zh">高（GPU + 数据标注）</span><span class="i18n-en" hidden>High (GPU + data annotation)</span></td></tr>
+    <tr><td style="padding:8px;"><span class="i18n-zh">迭代速度</span><span class="i18n-en" hidden>Iteration speed</span></td><td style="padding:8px;"><span class="i18n-zh">分钟级</span><span class="i18n-en" hidden>Minutes</span></td><td style="padding:8px;"><span class="i18n-zh">小时级</span><span class="i18n-en" hidden>Hours-level</span></td><td style="padding:8px;"><span class="i18n-zh">天/周级</span><span class="i18n-en" hidden>Days/Weeks</span></td></tr>
+    <tr><td style="padding:8px;"><span class="i18n-zh">知识更新</span><span class="i18n-en" hidden>Knowledge updates</span></td><td style="padding:8px;">N/A</td><td style="padding:8px;"><span class="i18n-zh">实时（更新向量库）</span><span class="i18n-en" hidden>Real-time (update vector database)</span></td><td style="padding:8px;"><span class="i18n-zh">需重新训练</span><span class="i18n-en" hidden>Requires retraining</span></td></tr>
   </table>
 
-  <p><strong><span class="i18n-zh">决策原则</span><span class="i18n-en" hidden>Decision Principle</span></strong><span class="i18n-zh">：Prompt Engineering → RAG → Fine-tuning 是递进关系。先试 PE，不够再加 RAG，实在不行才 Fine-tune。Fine-tune 的典型场景：需要特定输出格式（如 JSON Schema）、领域术语风格固化、cost per token 需要大幅降低（用小模型 fine-tune 替代大模型）。</span><span class="i18n-en" hidden>：Prompt Engineering → RAG → Fine-tuning 是递进关系。先试 PE，不够再加 RAG，实在不行才 Fine-tune。Fine-tune 的典型场景：需要特定输出格式（如 JSON Schema）、领域术语风格固化、cost per token 需要大幅降低（用小模型 fine-tune 替代大模型）。</span></p>
+  <p><strong><span class="i18n-zh">决策原则</span><span class="i18n-en" hidden>Decision Principle</span></strong><span class="i18n-zh">：Prompt Engineering → RAG → Fine-tuning 是递进关系。先试 PE，不够再加 RAG，实在不行才 Fine-tune。Fine-tune 的典型场景：需要特定输出格式（如 JSON Schema）、领域术语风格固化、cost per token 需要大幅降低（用小模型 fine-tune 替代大模型）。</span><span class="i18n-en" hidden>: Prompt Engineering → RAG → Fine-tuning is a progressive relationship. Try PE first, add RAG if insufficient, and only Fine-tune as a last resort. Typical scenarios for Fine-tuning: need for specific output formats (e.g., JSON Schema), domain-specific terminology style, or significantly reducing cost per token (replace large models with fine-tuned small models).</span></p>
 </div>
 
 <div class="answer-card" id="A25">
@@ -823,14 +823,14 @@ for i, doc in enumerate(result["context"]):
 
   <p><strong><span class="i18n-zh">主要 Memory 类型：</span><span class="i18n-en" hidden>Main Memory Types:</span></strong></p>
   <ul>
-    <li><strong>ConversationBufferMemory</strong><span class="i18n-zh">：存储完整对话历史。简单但 token 消耗随对话增长</span><span class="i18n-en" hidden>：存储完整对话历史。简单但 token 消耗随对话增长</span></li>
-    <li><strong>ConversationBufferWindowMemory</strong><span class="i18n-zh">：只保留最近 K 轮对话。滑动窗口策略</span><span class="i18n-en" hidden>：只保留最近 K 轮对话。滑动窗口策略</span></li>
-    <li><strong>ConversationSummaryMemory</strong><span class="i18n-zh">：用 LLM 对历史对话做摘要。省 token 但可能丢失细节</span><span class="i18n-en" hidden>：用 LLM 对历史对话做摘要。省 token 但可能丢失细节</span></li>
-    <li><strong>ConversationSummaryBufferMemory</strong><span class="i18n-zh">：混合策略——保留最近 K 轮完整对话，更早的做摘要</span><span class="i18n-en" hidden>：混合策略——保留最近 K 轮完整对话，更早的做摘要</span></li>
-    <li><strong>ConversationTokenBufferMemory</strong><span class="i18n-zh">：按 token 数量限制，而非轮数</span><span class="i18n-en" hidden>：按 token 数量限制，而非轮数</span></li>
+    <li><strong>ConversationBufferMemory</strong><span class="i18n-zh">：存储完整对话历史。简单但 token 消耗随对话增长</span><span class="i18n-en" hidden>: Store the complete conversation history. Simple but token consumption grows with the conversation</span></li>
+    <li><strong>ConversationBufferWindowMemory</strong><span class="i18n-zh">：只保留最近 K 轮对话。滑动窗口策略</span><span class="i18n-en" hidden>: Keep only the last K rounds of conversation. Sliding window strategy</span></li>
+    <li><strong>ConversationSummaryMemory</strong><span class="i18n-zh">：用 LLM 对历史对话做摘要。省 token 但可能丢失细节</span><span class="i18n-en" hidden>: Use LLM to summarize historical conversations. Saves tokens but may lose details</span></li>
+    <li><strong>ConversationSummaryBufferMemory</strong><span class="i18n-zh">：混合策略——保留最近 K 轮完整对话，更早的做摘要</span><span class="i18n-en" hidden>: Hybrid strategy—keep the last K rounds of complete conversation, summarize earlier ones</span></li>
+    <li><strong>ConversationTokenBufferMemory</strong><span class="i18n-zh">：按 token 数量限制，而非轮数</span><span class="i18n-en" hidden>: Limit by token count, not number of rounds</span></li>
   </ul>
 
-  <p><strong><span class="i18n-zh">LangGraph 的替代方案</span><span class="i18n-en" hidden>LangGraph Alternative</span></strong><span class="i18n-zh">：在生产中，LangChain 的 Memory 组件逐渐被 LangGraph 的 Checkpointing 替代。Checkpoint 在每个 super-step 自动保存 State，支持更精细的状态管理、时间旅行、持久化。LangGraph 还提供 Store API 处理长期跨会话记忆。</span><span class="i18n-en" hidden>：在生产中，LangChain 的 Memory 组件逐渐被 LangGraph 的 Checkpointing 替代。Checkpoint 在每个 super-step 自动保存 State，支持更精细的状态管理、时间旅行、持久化。LangGraph 还提供 Store API 处理长期跨会话记忆。</span></p>
+  <p><strong><span class="i18n-zh">LangGraph 的替代方案</span><span class="i18n-en" hidden>LangGraph Alternative</span></strong><span class="i18n-zh">：在生产中，LangChain 的 Memory 组件逐渐被 LangGraph 的 Checkpointing 替代。Checkpoint 在每个 super-step 自动保存 State，支持更精细的状态管理、时间旅行、持久化。LangGraph 还提供 Store API 处理长期跨会话记忆。</span><span class="i18n-en" hidden>: In production, LangChain's Memory component is gradually being replaced by LangGraph's Checkpointing. Checkpoints automatically save State at each super-step, supporting finer state management, time travel, and persistence. LangGraph also provides a Store API for handling long-term cross-session memory.</span></p>
 </div>
 
 <div class="locked-content" data-require-stage="professional">
@@ -858,9 +858,9 @@ if not relevant_docs:
 
   <p><strong><span class="i18n-zh">关键设计点</span><span class="i18n-en" hidden>Key Design Points</span></strong>：</p>
   <ol>
-    <li><strong><span class="i18n-zh">阈值分级</span><span class="i18n-en" hidden>Tiered Thresholds</span></strong><span class="i18n-zh">：高置信度直接回答、中置信度标注&quot;以下信息可能不完整&quot;、低置信度触发&quot;不知道&quot;流程</span><span class="i18n-en" hidden>：高置信度直接回答、中置信度标注&quot;以下信息可能不完整&quot;、低置信度触发&quot;不知道&quot;流程</span></li>
-    <li><strong><span class="i18n-zh">有用的拒绝</span><span class="i18n-en" hidden>Helpful Refusal</span></strong><span class="i18n-zh">：不只说&quot;不知道&quot;，给出替代建议</span><span class="i18n-en" hidden>：不只说&quot;不知道&quot;，给出替代建议</span></li>
-    <li><strong><span class="i18n-zh">升级路径</span><span class="i18n-en" hidden>Escalation Path</span></strong><span class="i18n-zh">：人工客服、联网搜索、建议换个问法</span><span class="i18n-en" hidden>：人工客服、联网搜索、建议换个问法</span></li>
+    <li><strong><span class="i18n-zh">阈值分级</span><span class="i18n-en" hidden>Tiered Thresholds</span></strong><span class="i18n-zh">：高置信度直接回答、中置信度标注&quot;以下信息可能不完整&quot;、低置信度触发&quot;不知道&quot;流程</span><span class="i18n-en" hidden>: High confidence: answer directly; medium confidence: mark "the following information may be incomplete"; low confidence: trigger the "don't know" flow</span></li>
+    <li><strong><span class="i18n-zh">有用的拒绝</span><span class="i18n-en" hidden>Helpful Refusal</span></strong><span class="i18n-zh">：不只说&quot;不知道&quot;，给出替代建议</span><span class="i18n-en" hidden>: Not just saying "I don't know," but offering alternative suggestions</span></li>
+    <li><strong><span class="i18n-zh">升级路径</span><span class="i18n-en" hidden>Escalation Path</span></strong><span class="i18n-zh">：人工客服、联网搜索、建议换个问法</span><span class="i18n-en" hidden>: Human customer service, web search, suggest rephrasing the question</span></li>
   </ol>
 </div>
 
@@ -868,16 +868,16 @@ if not relevant_docs:
   <h2>A27 · Re-Ranking</h2>
 
   <h3><span class="i18n-zh">核心答案</span><span class="i18n-en" hidden>Core Answer</span></h3>
-  <p><strong>Re-Ranking</strong><span class="i18n-zh">：在向量检索返回 Top-K 候选文档后，使用更精确（但更慢）的模型对候选文档重新排序。</span><span class="i18n-en" hidden>：在向量检索返回 Top-K 候选文档后，使用更精确（但更慢）的模型对候选文档重新排序。</span></p>
+  <p><strong>Re-Ranking</strong><span class="i18n-zh">：在向量检索返回 Top-K 候选文档后，使用更精确（但更慢）的模型对候选文档重新排序。</span><span class="i18n-en" hidden>: After retrieving the Top-K candidate documents via vector search, use a more accurate (but slower) model to re-rank the candidate documents.</span></p>
 
   <p><strong><span class="i18n-zh">为什么需要？</span><span class="i18n-en" hidden>Why is it needed?</span></strong><span class="i18n-zh">向量检索用的 Bi-Encoder（query 和 document 分别编码）速度快但精度有限。Re-Ranker 用 Cross-Encoder（query 和 document 一起输入）计算相关性分数，精度更高但速度慢。两者组合：Bi-Encoder 粗筛（从百万中召回 Top-50），Cross-Encoder 精排（从 50 中选出 Top-5）。</span><span class="i18n-en" hidden>The Bi-Encoder used for vector retrieval (encodes query and document separately) is fast but limited in precision. Re-Ranker uses Cross-Encoder (query and document input together) for relevance scoring, more precise but slower. Combined: Bi-Encoder coarse screening (recall Top-50 from millions), Cross-Encoder fine ranking (select Top-5 from 50).</span></p>
 
-  <p><strong><span class="i18n-zh">常用 Re-Ranker：</span><span class="i18n-en" hidden>常用 Re-Ranker：</span></strong></p>
+  <p><strong><span class="i18n-zh">常用 Re-Ranker：</span><span class="i18n-en" hidden>Common Re-Rankers:</span></strong></p>
   <ul>
-    <li><strong>Cohere Rerank</strong><span class="i18n-zh">：商业 API，效果好，支持多语言</span><span class="i18n-en" hidden>：商业 API，效果好，支持多语言</span></li>
-    <li><strong>BGE-Reranker (BAAI)</strong><span class="i18n-zh">：开源，中文友好</span><span class="i18n-en" hidden>：开源，中文友好</span></li>
-    <li><strong>Cross-Encoder (SBERT)</strong><span class="i18n-zh">：通用方案，可自定义训练</span><span class="i18n-en" hidden>：通用方案，可自定义训练</span></li>
-    <li><strong>ColBERT</strong><span class="i18n-zh">：Late-interaction，在精度和速度间取平衡</span><span class="i18n-en" hidden>：Late-interaction，在精度和速度间取平衡</span></li>
+    <li><strong>Cohere Rerank</strong><span class="i18n-zh">：商业 API，效果好，支持多语言</span><span class="i18n-en" hidden>: Commercial API, good performance, supports multiple languages</span></li>
+    <li><strong>BGE-Reranker (BAAI)</strong><span class="i18n-zh">：开源，中文友好</span><span class="i18n-en" hidden>: Open source, Chinese-friendly</span></li>
+    <li><strong>Cross-Encoder (SBERT)</strong><span class="i18n-zh">：通用方案，可自定义训练</span><span class="i18n-en" hidden>: General-purpose solution, customizable training</span></li>
+    <li><strong>ColBERT</strong><span class="i18n-zh">：Late-interaction，在精度和速度间取平衡</span><span class="i18n-en" hidden>: Late-interaction, balancing precision and speed</span></li>
   </ul>
 </div>
 
@@ -907,12 +907,12 @@ if not relevant_docs:
     </tr>
   </table>
 
-  <p><strong><span class="i18n-zh">推荐工具</span><span class="i18n-en" hidden>推荐工具</span></strong>：<a href="https://docs.ragas.io/">Ragas</a><span class="i18n-zh"> — RAG 专用评估框架，一行代码计算上述所有指标。</span><span class="i18n-en" hidden>— RAG-specific evaluation framework; one line of code calculates all the above metrics.</span></p>
+  <p><strong><span class="i18n-zh">推荐工具</span><span class="i18n-en" hidden>Recommended Tools</span></strong>：<a href="https://docs.ragas.io/">Ragas</a><span class="i18n-zh"> — RAG 专用评估框架，一行代码计算上述所有指标。</span><span class="i18n-en" hidden>— RAG-specific evaluation framework; one line of code calculates all the above metrics.</span></p>
 </div>
 
 <div class="answer-card" id="A29">
   <h2><span class="i18n-zh">A29 · LangChain create_agent 工具调用 Agent (v1.0+)</span><span class="i18n-en" hidden>A29 · LangChain create_agent Tool-Calling Agent (v1.0+)</span></h2>
-  <p><strong><span class="i18n-zh">⚠️ API 更新：</span><span class="i18n-en" hidden>⚠️ API Update:</span></strong><code>create_react_agent</code><span class="i18n-zh">（langgraph.prebuilt）已废弃，LangChain v1.0 起统一使用 </span><span class="i18n-en" hidden>（langgraph.prebuilt）已废弃，LangChain v1.0 起统一使用 </span><code>create_agent</code>（langchain.agents）。</p>
+  <p><strong><span class="i18n-zh">⚠️ API 更新：</span><span class="i18n-en" hidden>⚠️ API Update:</span></strong><code>create_react_agent</code><span class="i18n-zh">（langgraph.prebuilt）已废弃，LangChain v1.0 起统一使用 </span><span class="i18n-en" hidden>(langgraph.prebuilt) is deprecated, unified use since LangChain v1.0 </span><code>create_agent</code>（langchain.agents）。</p>
 
   <pre><code>from langchain.agents import create_agent
 from langchain_community.tools import DuckDuckGoSearchRun
@@ -957,17 +957,17 @@ print(result["messages"][-1].content)</code></pre>
 
   <table style="width:100%; border-collapse:collapse;">
     <tr style="background:var(--surface-2);">
-      <th style="padding:8px;"><span class="i18n-zh">框架</span><span class="i18n-en" hidden>Framework</span></th><th style="padding:8px;"><span class="i18n-zh">定位</span><span class="i18n-en" hidden>Positioning</span></th><th style="padding:8px;"><span class="i18n-zh">最适合</span><span class="i18n-en" hidden>最适合</span></th>
+      <th style="padding:8px;"><span class="i18n-zh">框架</span><span class="i18n-en" hidden>Framework</span></th><th style="padding:8px;"><span class="i18n-zh">定位</span><span class="i18n-en" hidden>Positioning</span></th><th style="padding:8px;"><span class="i18n-zh">最适合</span><span class="i18n-en" hidden>Best for</span></th>
     </tr>
     <tr><td style="padding:8px;"><strong>LangChain</strong></td><td style="padding:8px;"><span class="i18n-zh">通用 LLM 应用框架</span><span class="i18n-en" hidden>General LLM Application Framework</span></td><td style="padding:8px;"><span class="i18n-zh">需要与多种工具/模型集成的应用</span><span class="i18n-en" hidden>Applications needing multi-tool/model integration</span></td></tr>
     <tr><td style="padding:8px;"><strong>LangGraph</strong></td><td style="padding:8px;"><span class="i18n-zh">图结构工作流/Agent 编排</span><span class="i18n-en" hidden>Graph-structured workflow/Agent orchestration</span></td><td style="padding:8px;"><span class="i18n-zh">复杂多步骤 Agent、Multi-Agent 系统</span><span class="i18n-en" hidden>Complex multi-step Agents, Multi-Agent systems</span></td></tr>
     <tr><td style="padding:8px;"><strong>LlamaIndex</strong></td><td style="padding:8px;"><span class="i18n-zh">数据索引和检索框架</span><span class="i18n-en" hidden>Data Indexing and Retrieval Framework</span></td><td style="padding:8px;"><span class="i18n-zh">以 RAG 为核心的数据密集型应用</span><span class="i18n-en" hidden>Data-intensive applications centered on RAG</span></td></tr>
     <tr><td style="padding:8px;"><strong>Haystack</strong></td><td style="padding:8px;"><span class="i18n-zh">NLP Pipeline 框架</span><span class="i18n-en" hidden>NLP Pipeline Framework</span></td><td style="padding:8px;"><span class="i18n-zh">传统 NLP + LLM 混合流水线</span><span class="i18n-en" hidden>Traditional NLP + LLM Hybrid Pipeline</span></td></tr>
-    <tr><td style="padding:8px;"><strong>DSPy</strong></td><td style="padding:8px;"><span class="i18n-zh">编程式 Prompt 优化</span><span class="i18n-en" hidden>编程式 Prompt 优化</span></td><td style="padding:8px;"><span class="i18n-zh">自动优化 prompt 和 few-shot 示例</span><span class="i18n-en" hidden>自动优化 prompt 和 few-shot 示例</span></td></tr>
-    <tr><td style="padding:8px;"><strong>CrewAI</strong></td><td style="padding:8px;"><span class="i18n-zh">角色驱动的 Multi-Agent</span><span class="i18n-en" hidden>角色驱动的 Multi-Agent</span></td><td style="padding:8px;"><span class="i18n-zh">快速搭建多角色协作 Agent</span><span class="i18n-en" hidden>快速搭建多角色协作 Agent</span></td></tr>
+    <tr><td style="padding:8px;"><strong>DSPy</strong></td><td style="padding:8px;"><span class="i18n-zh">编程式 Prompt 优化</span><span class="i18n-en" hidden>Programmatic Prompt Optimization</span></td><td style="padding:8px;"><span class="i18n-zh">自动优化 prompt 和 few-shot 示例</span><span class="i18n-en" hidden>Automatically optimize prompts and few-shot examples</span></td></tr>
+    <tr><td style="padding:8px;"><strong>CrewAI</strong></td><td style="padding:8px;"><span class="i18n-zh">角色驱动的 Multi-Agent</span><span class="i18n-en" hidden>Role-driven Multi-Agent</span></td><td style="padding:8px;"><span class="i18n-zh">快速搭建多角色协作 Agent</span><span class="i18n-en" hidden>Quickly build multi-role collaborative Agents</span></td></tr>
   </table>
 
-  <p><strong><span class="i18n-zh">选型建议</span><span class="i18n-en" hidden>选型建议</span></strong><span class="i18n-zh">：新项目默认从 </span><span class="i18n-en" hidden>：新项目默认从 </span><strong>LangChain + LangGraph</strong><span class="i18n-zh"> 组合开始（生态最完善）。数据密集型 RAG 考虑 </span><span class="i18n-en" hidden> 组合开始（生态最完善）。数据密集型 RAG 考虑 </span><strong>LlamaIndex</strong><span class="i18n-zh">。需要自动优化 prompt 时引入 </span><span class="i18n-en" hidden>. Introduce when automatic prompt optimization is needed.</span><strong>DSPy</strong>。</p>
+  <p><strong><span class="i18n-zh">选型建议</span><span class="i18n-en" hidden>Selection Recommendations</span></strong><span class="i18n-zh">：新项目默认从 </span><span class="i18n-en" hidden>: For new projects, start with </span><strong>LangChain + LangGraph</strong><span class="i18n-zh"> 组合开始（生态最完善）。数据密集型 RAG 考虑 </span><span class="i18n-en" hidden> combination (most mature ecosystem). For data-intensive RAG, consider </span><strong>LlamaIndex</strong><span class="i18n-zh">。需要自动优化 prompt 时引入 </span><span class="i18n-en" hidden>. Introduce when automatic prompt optimization is needed.</span><strong>DSPy</strong>。</p>
 </div>
 
 <div class="answer-card" id="A31">
@@ -1013,30 +1013,30 @@ llm = primary_llm.with_fallbacks([fallback_llm])</code></pre>
 
   <h3><span class="i18n-zh">核心答案</span><span class="i18n-en" hidden>Core Answer</span></h3>
 
-  <p><strong>MCP</strong><span class="i18n-zh"> 是由 Anthropic 提出的开放协议，标准化了 LLM 应用与外部工具/数据源之间的通信接口。它定义了三个原语：</span><span class="i18n-en" hidden> 是由 Anthropic 提出的开放协议，标准化了 LLM 应用与外部工具/数据源之间的通信接口。它定义了三个原语：</span></p>
+  <p><strong>MCP</strong><span class="i18n-zh"> 是由 Anthropic 提出的开放协议，标准化了 LLM 应用与外部工具/数据源之间的通信接口。它定义了三个原语：</span><span class="i18n-en" hidden> is an open protocol proposed by Anthropic that standardizes the communication interface between LLM applications and external tools/data sources. It defines three primitives:</span></p>
   <ul>
-    <li><strong>Tools</strong><span class="i18n-zh">：LLM 可调用的函数（类似 Function Calling，但接口标准化）</span><span class="i18n-en" hidden>：LLM 可调用的函数（类似 Function Calling，但接口标准化）</span></li>
-    <li><strong>Resources</strong><span class="i18n-zh">：LLM 可读取的数据（文件、数据库记录、API 响应）</span><span class="i18n-en" hidden>：LLM 可读取的数据（文件、数据库记录、API 响应）</span></li>
+    <li><strong>Tools</strong><span class="i18n-zh">：LLM 可调用的函数（类似 Function Calling，但接口标准化）</span><span class="i18n-en" hidden>: Functions callable by the LLM (similar to Function Calling, but with standardized interfaces)</span></li>
+    <li><strong>Resources</strong><span class="i18n-zh">：LLM 可读取的数据（文件、数据库记录、API 响应）</span><span class="i18n-en" hidden>: Data readable by the LLM (files, database records, API responses)</span></li>
     <li><strong>Prompts</strong><span class="i18n-zh">：预定义的 prompt 模板</span><span class="i18n-en" hidden>: predefined prompt templates</span></li>
   </ul>
 
   <p><strong><span class="i18n-zh">与 Function Calling 的关键区别：</span><span class="i18n-en" hidden>Key Differences from Function Calling:</span></strong></p>
   <ul>
-    <li><strong>Function Calling</strong><span class="i18n-zh">：每个 LLM 提供商有自己的 tool schema 格式（OpenAI vs Anthropic 不兼容）</span><span class="i18n-en" hidden>：每个 LLM 提供商有自己的 tool schema 格式（OpenAI vs Anthropic 不兼容）</span></li>
-    <li><strong>MCP</strong><span class="i18n-zh">：统一的协议标准，一次定义工具，所有支持 MCP 的 LLM 都可使用</span><span class="i18n-en" hidden>：统一的协议标准，一次定义工具，所有支持 MCP 的 LLM 都可使用</span></li>
-    <li><strong><span class="i18n-zh">MCP 是 Client-Server 架构</span><span class="i18n-en" hidden>MCP uses Client-Server Architecture</span></strong><span class="i18n-zh">：MCP Server 暴露工具/资源，MCP Client（LangChain/LangGraph Agent）调用它们</span><span class="i18n-en" hidden>：MCP Server 暴露工具/资源，MCP Client（LangChain/LangGraph Agent）调用它们</span></li>
-    <li><strong><span class="i18n-zh">解耦</span><span class="i18n-en" hidden>解耦</span></strong><span class="i18n-zh">：工具开发者不需要知道最终使用哪个 LLM，LLM 开发者不需要适配每个工具的接口</span><span class="i18n-en" hidden>：工具开发者不需要知道最终使用哪个 LLM，LLM 开发者不需要适配每个工具的接口</span></li>
+    <li><strong>Function Calling</strong><span class="i18n-zh">：每个 LLM 提供商有自己的 tool schema 格式（OpenAI vs Anthropic 不兼容）</span><span class="i18n-en" hidden>: Each LLM provider has its own tool schema format (OpenAI vs Anthropic are incompatible)</span></li>
+    <li><strong>MCP</strong><span class="i18n-zh">：统一的协议标准，一次定义工具，所有支持 MCP 的 LLM 都可使用</span><span class="i18n-en" hidden>: Unified protocol standard — define tools once, usable by all LLMs supporting MCP</span></li>
+    <li><strong><span class="i18n-zh">MCP 是 Client-Server 架构</span><span class="i18n-en" hidden>MCP uses Client-Server Architecture</span></strong><span class="i18n-zh">：MCP Server 暴露工具/资源，MCP Client（LangChain/LangGraph Agent）调用它们</span><span class="i18n-en" hidden>: MCP Server exposes tools/resources, MCP Client (LangChain/LangGraph Agent) calls them</span></li>
+    <li><strong><span class="i18n-zh">解耦</span><span class="i18n-en" hidden>Decoupling</span></strong><span class="i18n-zh">：工具开发者不需要知道最终使用哪个 LLM，LLM 开发者不需要适配每个工具的接口</span><span class="i18n-en" hidden>: Tool developers don't need to know which LLM will ultimately be used; LLM developers don't need to adapt to each tool's interface</span></li>
   </ul>
 </div>
 
 <div class="answer-card" id="A33">
   <h2><span class="i18n-zh">A33 · LangChain 缓存策略</span><span class="i18n-en" hidden>A33 · LangChain Caching Strategy</span></h2>
 
-  <h3><span class="i18n-zh">缓存层级</span><span class="i18n-en" hidden>缓存层级</span></h3>
+  <h3><span class="i18n-zh">缓存层级</span><span class="i18n-en" hidden>Cache Levels</span></h3>
   <ol>
-    <li><strong><span class="i18n-zh">LLM 调用缓存</span><span class="i18n-en" hidden>LLM Call Caching</span></strong><span class="i18n-zh">：相同 prompt → 相同结果。LangChain 内置 InMemoryCache / SQLiteCache</span><span class="i18n-en" hidden>：相同 prompt → 相同结果。LangChain 内置 InMemoryCache / SQLiteCache</span></li>
-    <li><strong><span class="i18n-zh">Embedding 缓存</span><span class="i18n-en" hidden>Embedding Caching</span></strong><span class="i18n-zh">：相同文本 → 相同向量。对静态知识库极其有效</span><span class="i18n-en" hidden>：相同文本 → 相同向量。对静态知识库极其有效</span></li>
-    <li><strong><span class="i18n-zh">检索结果缓存</span><span class="i18n-en" hidden>Retrieval Result Caching</span></strong><span class="i18n-zh">：相同 query → 相同检索结果</span><span class="i18n-en" hidden>：相同 query → 相同检索结果</span></li>
+    <li><strong><span class="i18n-zh">LLM 调用缓存</span><span class="i18n-en" hidden>LLM Call Caching</span></strong><span class="i18n-zh">：相同 prompt → 相同结果。LangChain 内置 InMemoryCache / SQLiteCache</span><span class="i18n-en" hidden>: Same prompt → same result. LangChain has built-in InMemoryCache / SQLiteCache</span></li>
+    <li><strong><span class="i18n-zh">Embedding 缓存</span><span class="i18n-en" hidden>Embedding Caching</span></strong><span class="i18n-zh">：相同文本 → 相同向量。对静态知识库极其有效</span><span class="i18n-en" hidden>: Same text → same vector. Extremely effective for static knowledge bases</span></li>
+    <li><strong><span class="i18n-zh">检索结果缓存</span><span class="i18n-en" hidden>Retrieval Result Caching</span></strong><span class="i18n-zh">：相同 query → 相同检索结果</span><span class="i18n-en" hidden>: Same query → same retrieval result</span></li>
   </ol>
 
   <pre><code>from langchain.globals import set_llm_cache
@@ -1044,29 +1044,29 @@ from langchain.cache import SQLiteCache
 
 set_llm_cache(SQLiteCache(database_path=".langchain.db"))</code></pre>
 
-  <p><strong><span class="i18n-zh">不适合缓存的场景</span><span class="i18n-en" hidden>Scenarios Unsuitable for Caching</span></strong><span class="i18n-zh">：需要实时性（股票价格）、需要随机性（创意生成）、用户个性化内容、包含时间敏感信息的查询。</span><span class="i18n-en" hidden>：需要实时性（股票价格）、需要随机性（创意生成）、用户个性化内容、包含时间敏感信息的查询。</span></p>
+  <p><strong><span class="i18n-zh">不适合缓存的场景</span><span class="i18n-en" hidden>Scenarios Unsuitable for Caching</span></strong><span class="i18n-zh">：需要实时性（股票价格）、需要随机性（创意生成）、用户个性化内容、包含时间敏感信息的查询。</span><span class="i18n-en" hidden>: Requires real-time data (stock prices), requires randomness (creative generation), user personalized content, queries containing time-sensitive information.</span></p>
 </div>
 
 <div class="answer-card" id="A34">
   <h2>A34 · Output Parser</h2>
 
-  <h3><span class="i18n-zh">常见 Parser</span><span class="i18n-en" hidden>常见 Parser</span></h3>
+  <h3><span class="i18n-zh">常见 Parser</span><span class="i18n-en" hidden>Common Parsers</span></h3>
   <ul>
-    <li><strong>StrOutputParser</strong><span class="i18n-zh">：直接返回字符串</span><span class="i18n-en" hidden>：直接返回字符串</span></li>
-    <li><strong>JsonOutputParser</strong><span class="i18n-zh">：解析 JSON。配合 Pydantic schema 使用</span><span class="i18n-en" hidden>：解析 JSON。配合 Pydantic schema 使用</span></li>
-    <li><strong>PydanticOutputParser</strong><span class="i18n-zh">：解析为 Pydantic 模型实例</span><span class="i18n-en" hidden>：解析为 Pydantic 模型实例</span></li>
-    <li><strong>CommaSeparatedListOutputParser</strong><span class="i18n-zh">：解析逗号分隔列表</span><span class="i18n-en" hidden>：解析逗号分隔列表</span></li>
-    <li><strong>StructuredOutputParser</strong><span class="i18n-zh">：解析为结构化字典</span><span class="i18n-en" hidden>：解析为结构化字典</span></li>
+    <li><strong>StrOutputParser</strong><span class="i18n-zh">：直接返回字符串</span><span class="i18n-en" hidden>: Returns a string directly</span></li>
+    <li><strong>JsonOutputParser</strong><span class="i18n-zh">：解析 JSON。配合 Pydantic schema 使用</span><span class="i18n-en" hidden>: Parses JSON. Used with Pydantic schema</span></li>
+    <li><strong>PydanticOutputParser</strong><span class="i18n-zh">：解析为 Pydantic 模型实例</span><span class="i18n-en" hidden>: Parses into a Pydantic model instance</span></li>
+    <li><strong>CommaSeparatedListOutputParser</strong><span class="i18n-zh">：解析逗号分隔列表</span><span class="i18n-en" hidden>: Parses a comma-separated list</span></li>
+    <li><strong>StructuredOutputParser</strong><span class="i18n-zh">：解析为结构化字典</span><span class="i18n-en" hidden>: Parses into a structured dictionary</span></li>
   </ul>
 
-  <p><strong><span class="i18n-zh">格式不符时的处理</span><span class="i18n-en" hidden>格式不符时的处理</span></strong><span class="i18n-zh">：使用 OutputFixingParser 或 RetryOutputParser，让 LLM 在看到解析错误后重新生成。更好的方案是使用 API 原生的 Structured Output（如 OpenAI 的 response_format）。</span><span class="i18n-en" hidden>：使用 OutputFixingParser 或 RetryOutputParser，让 LLM 在看到解析错误后重新生成。更好的方案是使用 API 原生的 Structured Output（如 OpenAI 的 response_format）。</span></p>
+  <p><strong><span class="i18n-zh">格式不符时的处理</span><span class="i18n-en" hidden>Handling Format Mismatches</span></strong><span class="i18n-zh">：使用 OutputFixingParser 或 RetryOutputParser，让 LLM 在看到解析错误后重新生成。更好的方案是使用 API 原生的 Structured Output（如 OpenAI 的 response_format）。</span><span class="i18n-en" hidden>: Use OutputFixingParser or RetryOutputParser to have the LLM regenerate after seeing a parsing error. A better approach is to use the API's native Structured Output (e.g., OpenAI's response_format).</span></p>
 </div>
 
 <div class="answer-card" id="A35">
   <h2><span class="i18n-zh">A35 · 多轮对话 RAG 的指代消解</span><span class="i18n-en" hidden>A35 · Multi-turn RAG Anaphora Resolution</span></h2>
 
   <h3><span class="i18n-zh">问题示例</span><span class="i18n-en" hidden>Problem Example</span></h3>
-  <p><span class="i18n-zh">用户：&quot;iPhone 15 Pro 多少钱？&quot; → 机器人回答后 → 用户：&quot;它的续航怎么样？&quot; —— &quot;它&quot;指什么？</span><span class="i18n-en" hidden>用户：&quot;iPhone 15 Pro 多少钱？&quot; → 机器人回答后 → 用户：&quot;它的续航怎么样？&quot; —— &quot;它&quot;指什么？</span></p>
+  <p><span class="i18n-zh">用户：&quot;iPhone 15 Pro 多少钱？&quot; → 机器人回答后 → 用户：&quot;它的续航怎么样？&quot; —— &quot;它&quot;指什么？</span><span class="i18n-en" hidden>User: "How much is the iPhone 15 Pro?" → Bot replies → User: "How's its battery life?" — What does "its" refer to?</span></p>
 
   <h3><span class="i18n-zh">解决方案：Query Rewriting with LLM</span><span class="i18n-en" hidden>Solution: Query Rewriting with LLM</span></h3>
   <pre><code>def rewrite_query_with_history(query: str, history: list) -> str:
@@ -1101,11 +1101,11 @@ docs = retriever.invoke(standalone)</code></pre>
 <!-- ============ L3 ANSWERS ============ -->
 <div class="answer-card" id="A36">
   <h2><span class="i18n-zh">A36 · LangGraph 核心概念</span><span class="i18n-en" hidden>A36 · LangGraph Core Concepts</span></h2>
-  <p><strong>LangGraph</strong><span class="i18n-zh"> 是 LangChain 生态中的图结构 Agent 编排框架。它把 LLM 工作流建模为</span><span class="i18n-en" hidden> 是 LangChain 生态中的图结构 Agent 编排框架。它把 LLM 工作流建模为</span><strong><span class="i18n-zh">有向图</span><span class="i18n-en" hidden>有向图</span></strong><span class="i18n-zh">（Directed Graph），其中：</span><span class="i18n-en" hidden>（Directed Graph），其中：</span></p>
+  <p><strong>LangGraph</strong><span class="i18n-zh"> 是 LangChain 生态中的图结构 Agent 编排框架。它把 LLM 工作流建模为</span><span class="i18n-en" hidden> is a graph-structured Agent orchestration framework in the LangChain ecosystem. It models LLM workflows as a</span><strong><span class="i18n-zh">有向图</span><span class="i18n-en" hidden>Directed Graph</span></strong><span class="i18n-zh">（Directed Graph），其中：</span><span class="i18n-en" hidden>, where:</span></p>
   <ul>
-    <li><strong>State</strong><span class="i18n-zh">：图执行过程中共享的数据对象（TypedDict），所有节点可读写</span><span class="i18n-en" hidden>：图执行过程中共享的数据对象（TypedDict），所有节点可读写</span></li>
-    <li><strong>Node</strong><span class="i18n-zh">：计算单元（Python 函数），接收 State，返回 State 的部分更新</span><span class="i18n-en" hidden>：计算单元（Python 函数），接收 State，返回 State 的部分更新</span></li>
-    <li><strong>Edge</strong><span class="i18n-zh">：控制流——固定边（确定性）、条件边（动态路由，由函数决定下一个节点）</span><span class="i18n-en" hidden>：控制流——固定边（确定性）、条件边（动态路由，由函数决定下一个节点）</span></li>
+    <li><strong>State</strong><span class="i18n-zh">：图执行过程中共享的数据对象（TypedDict），所有节点可读写</span><span class="i18n-en" hidden>: A shared data object (TypedDict) during graph execution, readable and writable by all nodes</span></li>
+    <li><strong>Node</strong><span class="i18n-zh">：计算单元（Python 函数），接收 State，返回 State 的部分更新</span><span class="i18n-en" hidden>: Computation units (Python functions), receive State, return partial updates to State</span></li>
+    <li><strong>Edge</strong><span class="i18n-zh">：控制流——固定边（确定性）、条件边（动态路由，由函数决定下一个节点）</span><span class="i18n-en" hidden>: Control flow — fixed edges (deterministic), conditional edges (dynamic routing, next node determined by a function)</span></li>
   </ul>
   <p><strong><span class="i18n-zh">LangGraph vs LangChain 的核心差异：</span><span class="i18n-en" hidden>Core Differences between LangGraph vs LangChain:</span></strong><span class="i18n-zh">LangChain 的 Chain 是线性的 A→B→C，LangGraph 支持循环、条件分支、并行执行、状态持久化、人类审批中断——这些都是构建 Agent 的必需品。</span><span class="i18n-en" hidden>LangChain Chain is linear A→B→C; LangGraph supports loops, conditional branching, parallel execution, state persistence, human-in-the-loop interrupts — all essentials for building Agents.</span></p>
   <div class="rubric"><div class="title"><span class="i18n-zh">面试官评分标准</span><span class="i18n-en" hidden>Interviewer Scoring Criteria</span></div>
@@ -1151,12 +1151,12 @@ graph.add_edge("tools", "chatbot")
 app = graph.compile()
 result = app.invoke({"messages": [{"role": "user", "content": "What's the weather in Tokyo?"}]})
 print(result["messages"][-1].content)</code></pre>
-  <p><strong><span class="i18n-zh">关键点：</span><span class="i18n-en" hidden>Key Points:</span></strong><code>add_messages</code><span class="i18n-zh"> reducer 确保新消息追加到 messages 列表而非覆盖；</span><span class="i18n-en" hidden>reducer ensures new messages are appended to the messages list rather than overwritten;</span><code>tools_condition</code><span class="i18n-zh"> 检查 LLM 响应是否包含 tool_call；ToolNode 自动执行工具并返回 ToolMessage。</span><span class="i18n-en" hidden> 检查 LLM 响应是否包含 tool_call；ToolNode 自动执行工具并返回 ToolMessage。</span></p>
+  <p><strong><span class="i18n-zh">关键点：</span><span class="i18n-en" hidden>Key Points:</span></strong><code>add_messages</code><span class="i18n-zh"> reducer 确保新消息追加到 messages 列表而非覆盖；</span><span class="i18n-en" hidden>reducer ensures new messages are appended to the messages list rather than overwritten;</span><code>tools_condition</code><span class="i18n-zh"> 检查 LLM 响应是否包含 tool_call；ToolNode 自动执行工具并返回 ToolMessage。</span><span class="i18n-en" hidden> checks if the LLM response contains a tool_call; ToolNode automatically executes the tool and returns a ToolMessage.</span></p>
 </div>
 
 <div class="answer-card" id="A38">
   <h2><span class="i18n-zh">A38 · add_messages 缺失导致消息覆盖</span><span class="i18n-en" hidden>A38 · Missing add_messages Causes Message Overwrite</span></h2>
-  <p><strong><span class="i18n-zh">问题代码：</span><span class="i18n-en" hidden>问题代码：</span></strong></p>
+  <p><strong><span class="i18n-zh">问题代码：</span><span class="i18n-en" hidden>Problematic Code:</span></strong></p>
   <pre><code># ❌ 错误：没有 add_messages reducer
 class State(TypedDict):
     messages: list  # 默认覆盖写！
@@ -1169,13 +1169,13 @@ from typing import Annotated
 
 class State(TypedDict):
     messages: Annotated[list[BaseMessage], add_messages]  # ✅ 追加模式</code></pre>
-  <p><strong><span class="i18n-zh">add_messages 做了什么：</span><span class="i18n-en" hidden>What add_messages does:</span></strong><span class="i18n-zh">自动合并消息列表（非覆盖）、智能去重（相同 ID 的消息替换）、支持 RemoveMessage（用 RemoveMessage 对象删除消息）。</span><span class="i18n-en" hidden>自动合并消息列表（非覆盖）、智能去重（相同 ID 的消息替换）、支持 RemoveMessage（用 RemoveMessage 对象删除消息）。</span></p>
-  <p><span class="i18n-zh">这是 LangChain 社区 </span><span class="i18n-en" hidden>这是 LangChain 社区 </span><strong><span class="i18n-zh">#1 高频报错</span><span class="i18n-en" hidden>#1 Most Frequent Error</span></strong><span class="i18n-zh">，面试中必须能识别并修复。</span><span class="i18n-en" hidden>，面试中必须能识别并修复。</span></p>
+  <p><strong><span class="i18n-zh">add_messages 做了什么：</span><span class="i18n-en" hidden>What add_messages does:</span></strong><span class="i18n-zh">自动合并消息列表（非覆盖）、智能去重（相同 ID 的消息替换）、支持 RemoveMessage（用 RemoveMessage 对象删除消息）。</span><span class="i18n-en" hidden>Automatically merge message lists (non-overwriting), intelligent deduplication (replace messages with the same ID), support RemoveMessage (delete messages using RemoveMessage objects).</span></p>
+  <p><span class="i18n-zh">这是 LangChain 社区 </span><span class="i18n-en" hidden>This is the LangChain community </span><strong><span class="i18n-zh">#1 高频报错</span><span class="i18n-en" hidden>#1 Most Frequent Error</span></strong><span class="i18n-zh">，面试中必须能识别并修复。</span><span class="i18n-en" hidden>, must be identified and fixed during interviews.</span></p>
 </div>
 
 <div class="answer-card" id="A39">
   <h2><span class="i18n-zh">A39 · Reducer 机制</span><span class="i18n-en" hidden>A39 · Reducer Mechanism</span></h2>
-  <p><strong>Reducer</strong><span class="i18n-zh"> 定义了 State 的某个 key 如何合并多个更新。不指定 Reducer 时，默认行为是</span><span class="i18n-en" hidden>Defines how multiple updates to a State key are merged. Without specifying a Reducer, the default behavior is</span><strong><span class="i18n-zh">覆盖</span><span class="i18n-en" hidden>覆盖</span></strong>。</p>
+  <p><strong>Reducer</strong><span class="i18n-zh"> 定义了 State 的某个 key 如何合并多个更新。不指定 Reducer 时，默认行为是</span><span class="i18n-en" hidden>Defines how multiple updates to a State key are merged. Without specifying a Reducer, the default behavior is</span><strong><span class="i18n-zh">覆盖</span><span class="i18n-en" hidden>coverage</span></strong>。</p>
   <pre><code>from typing import Annotated
 from operator import add
 
@@ -1184,7 +1184,7 @@ class State(TypedDict):
     items: Annotated[list, add]                    # 列表拼接
     messages: Annotated[list, add_messages]         # 消息智能合并
     name: str                                       # 无 reducer → 覆盖</code></pre>
-  <p><strong><span class="i18n-zh">自定义 Reducer：</span><span class="i18n-en" hidden>自定义 Reducer：</span></strong></p>
+  <p><strong><span class="i18n-zh">自定义 Reducer：</span><span class="i18n-en" hidden>Custom Reducer:</span></strong></p>
   <pre><code>def merge_dicts(a: dict, b: dict) -> dict:
     """合并两个字典，保留最新的值"""
     return {**a, **b}
@@ -1196,12 +1196,12 @@ class State(TypedDict):
 <div class="answer-card" id="A40">
   <h2><span class="i18n-zh">A40 · LangGraph 三种边</span><span class="i18n-en" hidden>A40 · LangGraph Three Edge Types</span></h2>
   <table style="width:100%; border-collapse:collapse;">
-    <tr style="background:var(--surface-2);"><th style="padding:8px;"><span class="i18n-zh">类型</span><span class="i18n-en" hidden>Type</span></th><th style="padding:8px;"><span class="i18n-zh">写法</span><span class="i18n-en" hidden>写法</span></th><th style="padding:8px;"><span class="i18n-zh">场景</span><span class="i18n-en" hidden>Scenario</span></th></tr>
+    <tr style="background:var(--surface-2);"><th style="padding:8px;"><span class="i18n-zh">类型</span><span class="i18n-en" hidden>Type</span></th><th style="padding:8px;"><span class="i18n-zh">写法</span><span class="i18n-en" hidden>syntax</span></th><th style="padding:8px;"><span class="i18n-zh">场景</span><span class="i18n-en" hidden>Scenario</span></th></tr>
     <tr><td style="padding:8px;"><strong><span class="i18n-zh">固定边</span><span class="i18n-en" hidden>Fixed Edge</span></strong></td><td style="padding:8px;"><code>graph.add_edge("A", "B")</code></td><td style="padding:8px;"><span class="i18n-zh">确定性的顺序执行</span><span class="i18n-en" hidden>Deterministic sequential execution</span></td></tr>
-    <tr><td style="padding:8px;"><strong><span class="i18n-zh">条件边</span><span class="i18n-en" hidden>条件边</span></strong></td><td style="padding:8px;"><code>graph.add_conditional_edges("A", router_fn, path_map)</code></td><td style="padding:8px;"><span class="i18n-zh">LLM 决策路由、分支逻辑</span><span class="i18n-en" hidden>LLM decision routing, branching logic</span></td></tr>
-    <tr><td style="padding:8px;"><strong>Command</strong></td><td style="padding:8px;"><code>return Command(goto="B", update={"key": val})</code></td><td style="padding:8px;"><span class="i18n-zh">节点内动态路由+状态更新、跨图跳转</span><span class="i18n-en" hidden>节点内动态路由+状态更新、跨图跳转</span></td></tr>
+    <tr><td style="padding:8px;"><strong><span class="i18n-zh">条件边</span><span class="i18n-en" hidden>conditional edges</span></strong></td><td style="padding:8px;"><code>graph.add_conditional_edges("A", router_fn, path_map)</code></td><td style="padding:8px;"><span class="i18n-zh">LLM 决策路由、分支逻辑</span><span class="i18n-en" hidden>LLM decision routing, branching logic</span></td></tr>
+    <tr><td style="padding:8px;"><strong>Command</strong></td><td style="padding:8px;"><code>return Command(goto="B", update={"key": val})</code></td><td style="padding:8px;"><span class="i18n-zh">节点内动态路由+状态更新、跨图跳转</span><span class="i18n-en" hidden>dynamic routing within nodes + state updates, cross-graph jumps</span></td></tr>
   </table>
-  <p><strong><span class="i18n-zh">选型建议：</span><span class="i18n-en" hidden>选型建议：</span></strong><span class="i18n-zh">简单路由用条件边，需要同时更新状态和跳转用 Command，跨子图跳转必须用 Command。</span><span class="i18n-en" hidden>简单路由用条件边，需要同时更新状态和跳转用 Command，跨子图跳转必须用 Command。</span></p>
+  <p><strong><span class="i18n-zh">选型建议：</span><span class="i18n-en" hidden>Selection recommendations:</span></strong><span class="i18n-zh">简单路由用条件边，需要同时更新状态和跳转用 Command，跨子图跳转必须用 Command。</span><span class="i18n-en" hidden>Use conditional edges for simple routing, Command for simultaneous state updates and jumps, and Command is mandatory for cross-subgraph jumps.</span></p>
 </div>
 
 <div class="answer-card" id="A41">
@@ -1234,14 +1234,14 @@ graph.add_edge("technical_agent", END)</code></pre>
 
 <div class="answer-card" id="A42">
   <h2><span class="i18n-zh">A42 · tools_condition 不工作</span><span class="i18n-en" hidden>A42 · tools_condition Not Working</span></h2>
-  <p><strong><span class="i18n-zh">常见原因：</span><span class="i18n-en" hidden>常见原因：</span></strong></p>
+  <p><strong><span class="i18n-zh">常见原因：</span><span class="i18n-en" hidden>Common causes:</span></strong></p>
   <ol>
-    <li><strong><span class="i18n-zh">path_map 不匹配</span><span class="i18n-en" hidden>path_map Mismatch</span></strong><span class="i18n-zh">：条件函数返回 &quot;tools&quot; 但 path_map 中写的是 &quot;tool_node&quot;</span><span class="i18n-en" hidden>：条件函数返回 &quot;tools&quot; 但 path_map 中写的是 &quot;tool_node&quot;</span></li>
-    <li><strong><span class="i18n-zh">忘记添加 END 路径</span><span class="i18n-en" hidden>忘记添加 END 路径</span></strong><span class="i18n-zh">：没有处理非工具调用的情况</span><span class="i18n-en" hidden>：没有处理非工具调用的情况</span></li>
-    <li><strong><span class="i18n-zh">LLM 没有 bind_tools</span><span class="i18n-en" hidden>LLM not bound with tools</span></strong><span class="i18n-zh">：LLM 不知道有工具可用，从不返回 tool_call</span><span class="i18n-en" hidden>：LLM 不知道有工具可用，从不返回 tool_call</span></li>
-    <li><strong><span class="i18n-zh">ToolMessage 返回后 State 没有正确更新</span><span class="i18n-en" hidden>State not correctly updated after ToolMessage returned</span></strong><span class="i18n-zh">：ToolNode 返回的消息被覆盖而非追加</span><span class="i18n-en" hidden>：ToolNode 返回的消息被覆盖而非追加</span></li>
+    <li><strong><span class="i18n-zh">path_map 不匹配</span><span class="i18n-en" hidden>path_map Mismatch</span></strong><span class="i18n-zh">：条件函数返回 &quot;tools&quot; 但 path_map 中写的是 &quot;tool_node&quot;</span><span class="i18n-en" hidden>: The condition function returns &quot;tools&quot; but the path_map specifies &quot;tool_node&quot;</span></li>
+    <li><strong><span class="i18n-zh">忘记添加 END 路径</span><span class="i18n-en" hidden>Forgot to add the END path</span></strong><span class="i18n-zh">：没有处理非工具调用的情况</span><span class="i18n-en" hidden>: No handling for non-tool-call scenarios</span></li>
+    <li><strong><span class="i18n-zh">LLM 没有 bind_tools</span><span class="i18n-en" hidden>LLM not bound with tools</span></strong><span class="i18n-zh">：LLM 不知道有工具可用，从不返回 tool_call</span><span class="i18n-en" hidden>: The LLM is unaware of available tools and never returns a tool_call</span></li>
+    <li><strong><span class="i18n-zh">ToolMessage 返回后 State 没有正确更新</span><span class="i18n-en" hidden>State not correctly updated after ToolMessage returned</span></strong><span class="i18n-zh">：ToolNode 返回的消息被覆盖而非追加</span><span class="i18n-en" hidden>: Messages returned by ToolNode are overwritten instead of appended</span></li>
   </ol>
-  <p><strong><span class="i18n-zh">标准模板：</span><span class="i18n-en" hidden>标准模板：</span></strong></p>
+  <p><strong><span class="i18n-zh">标准模板：</span><span class="i18n-en" hidden>Standard template:</span></strong></p>
   <pre><code>graph.add_conditional_edges(
     "chatbot",
     tools_condition,  # 内置函数：检查 AIMessage.tool_calls
@@ -1258,24 +1258,24 @@ graph.add_edge("technical_agent", END)</code></pre>
        ┌─ tools (Act: 执行工具) → 返回 chatbot (Observe: LLM 看到工具结果)
        │
        └─ END (没有工具调用，最终回复)</code></pre>
-  <p><span class="i18n-zh">这是通过 </span><span class="i18n-en" hidden>这是通过 </span><code>tools_condition</code><span class="i18n-zh"> 的闭环实现的——只要 LLM 持续返回 tool_call，就会在 chatbot 和 tools 之间循环，直到 LLM 输出纯文本回复。</span><span class="i18n-en" hidden> 的闭环实现的——只要 LLM 持续返回 tool_call，就会在 chatbot 和 tools 之间循环，直到 LLM 输出纯文本回复。</span></p>
+  <p><span class="i18n-zh">这是通过 </span><span class="i18n-en" hidden>This is achieved through the </span><code>tools_condition</code><span class="i18n-zh"> 的闭环实现的——只要 LLM 持续返回 tool_call，就会在 chatbot 和 tools 之间循环，直到 LLM 输出纯文本回复。</span><span class="i18n-en" hidden> closed loop—as long as the LLM continuously returns tool_call, it will cycle between chatbot and tools until the LLM outputs a plain text reply.</span></p>
 </div>
 
 <div class="answer-card" id="A44">
   <h2><span class="i18n-zh">A44 · Graph 静默退出 5 种原因</span><span class="i18n-en" hidden>A44 · 5 Causes of Silent Graph Exit</span></h2>
   <ol>
-    <li><strong><span class="i18n-zh">条件边返回 END</span><span class="i18n-en" hidden>条件边返回 END</span></strong><span class="i18n-zh">：tools_condition 或自定义路由函数返回了 END，没有后续节点</span><span class="i18n-en" hidden>：tools_condition 或自定义路由函数返回了 END，没有后续节点</span></li>
-    <li><strong><span class="i18n-zh">条件边返回值无匹配</span><span class="i18n-en" hidden>条件边返回值无匹配</span></strong><span class="i18n-zh">：路由函数返回了 path_map 中不存在的值，LangGraph 默认行为是停止</span><span class="i18n-en" hidden>：路由函数返回了 path_map 中不存在的值，LangGraph 默认行为是停止</span></li>
-    <li><strong><span class="i18n-zh">节点返回了不存在的 State key</span><span class="i18n-en" hidden>节点返回了不存在的 State key</span></strong><span class="i18n-zh">：节点写入了一个未在 State schema 中定义的 key，更新被静默丢弃</span><span class="i18n-en" hidden>：节点写入了一个未在 State schema 中定义的 key，更新被静默丢弃</span></li>
-    <li><strong><span class="i18n-zh">Recursion Limit 触发</span><span class="i18n-en" hidden>Recursion Limit Triggered</span></strong><span class="i18n-zh">：图执行步数超过 recursion_limit（默认 25），抛出 GRAPH_RECURSION_LIMIT 错误（但可能被静默捕获）</span><span class="i18n-en" hidden>：图执行步数超过 recursion_limit（默认 25），抛出 GRAPH_RECURSION_LIMIT 错误（但可能被静默捕获）</span></li>
-    <li><strong><span class="i18n-zh">未配置 checkpointer 时使用 interrupt</span><span class="i18n-en" hidden>未配置 checkpointer 时使用 interrupt</span></strong><span class="i18n-zh">：interrupt() 需要 checkpointer，否则行为异常</span><span class="i18n-en" hidden>：interrupt() 需要 checkpointer，否则行为异常</span></li>
+    <li><strong><span class="i18n-zh">条件边返回 END</span><span class="i18n-en" hidden>Conditional edge returns END</span></strong><span class="i18n-zh">：tools_condition 或自定义路由函数返回了 END，没有后续节点</span><span class="i18n-en" hidden>: tools_condition or a custom routing function returns END, with no subsequent nodes</span></li>
+    <li><strong><span class="i18n-zh">条件边返回值无匹配</span><span class="i18n-en" hidden>Conditional edge return value has no match</span></strong><span class="i18n-zh">：路由函数返回了 path_map 中不存在的值，LangGraph 默认行为是停止</span><span class="i18n-en" hidden>: The routing function returns a value not present in path_map, and LangGraph's default behavior is to stop</span></li>
+    <li><strong><span class="i18n-zh">节点返回了不存在的 State key</span><span class="i18n-en" hidden>Node returns a non-existent State key</span></strong><span class="i18n-zh">：节点写入了一个未在 State schema 中定义的 key，更新被静默丢弃</span><span class="i18n-en" hidden>: A node writes a key not defined in the State schema, and the update is silently discarded</span></li>
+    <li><strong><span class="i18n-zh">Recursion Limit 触发</span><span class="i18n-en" hidden>Recursion Limit Triggered</span></strong><span class="i18n-zh">：图执行步数超过 recursion_limit（默认 25），抛出 GRAPH_RECURSION_LIMIT 错误（但可能被静默捕获）</span><span class="i18n-en" hidden>: The graph execution steps exceed recursion_limit (default 25), throwing a GRAPH_RECURSION_LIMIT error (but may be silently caught)</span></li>
+    <li><strong><span class="i18n-zh">未配置 checkpointer 时使用 interrupt</span><span class="i18n-en" hidden>Using interrupt without configuring a checkpointer</span></strong><span class="i18n-zh">：interrupt() 需要 checkpointer，否则行为异常</span><span class="i18n-en" hidden>: interrupt() requires a checkpointer, otherwise behavior is abnormal</span></li>
   </ol>
-  <p><strong><span class="i18n-zh">调试方法：</span><span class="i18n-en" hidden>调试方法：</span></strong><span class="i18n-zh">开启 LangSmith 追踪，检查每个节点的输入/输出 State。</span><span class="i18n-en" hidden>开启 LangSmith 追踪，检查每个节点的输入/输出 State。</span></p>
+  <p><strong><span class="i18n-zh">调试方法：</span><span class="i18n-en" hidden>Debugging methods:</span></strong><span class="i18n-zh">开启 LangSmith 追踪，检查每个节点的输入/输出 State。</span><span class="i18n-en" hidden>Enable LangSmith tracing to inspect the input/output State of each node.</span></p>
 </div>
 
 <div class="answer-card" id="A45">
   <h2><span class="i18n-zh">A45 · State 部分更新铁律</span><span class="i18n-en" hidden>A45 · State Partial Update Iron Rule</span></h2>
-  <p><strong><span class="i18n-zh">铁律：节点只返回自己负责的 key</span><span class="i18n-en" hidden>铁律：节点只返回自己负责的 key</span></strong><span class="i18n-zh">，不需要返回完整 State。</span><span class="i18n-en" hidden>，不需要返回完整 State。</span></p>
+  <p><strong><span class="i18n-zh">铁律：节点只返回自己负责的 key</span><span class="i18n-en" hidden>Iron rule: Nodes only return the keys they are responsible for</span></strong><span class="i18n-zh">，不需要返回完整 State。</span><span class="i18n-en" hidden>, without needing to return the full State.</span></p>
   <pre><code>def my_node(state: State) -> dict:
     # ✅ 正确：只返回自己更新的 key
     return {"messages": [AIMessage(content="Hi")]}
@@ -1283,7 +1283,7 @@ graph.add_edge("technical_agent", END)</code></pre>
 def my_node(state: State) -> dict:
     # ❌ 错误：返回了完整 State（可能覆盖其他节点并行写入的值）
     return dict(state) | {"messages": state["messages"] + [AIMessage(content="Hi")]}</code></pre>
-  <p><span class="i18n-zh">框架会根据 Reducer 自动将 Partial Update 合并到当前 State 中。</span><span class="i18n-en" hidden>框架会根据 Reducer 自动将 Partial Update 合并到当前 State 中。</span></p>
+  <p><span class="i18n-zh">框架会根据 Reducer 自动将 Partial Update 合并到当前 State 中。</span><span class="i18n-en" hidden>The framework automatically merges Partial Updates into the current State based on the Reducer.</span></p>
 </div>
 
 <div class="answer-card" id="A46">
@@ -1367,13 +1367,13 @@ try:
     result = app.invoke(input_data, {"recursion_limit": 10})
 except GraphRecursionError:
     print("Agent loop exceeded max iterations")</code></pre>
-  <p><strong><span class="i18n-zh">设计建议：</span><span class="i18n-en" hidden>设计建议：</span></strong><span class="i18n-zh">生产环境设置为合理上限（如 50-100），配合超时机制，防止 Agent 无限循环消耗 Token。</span><span class="i18n-en" hidden>生产环境设置为合理上限（如 50-100），配合超时机制，防止 Agent 无限循环消耗 Token。</span></p>
+  <p><strong><span class="i18n-zh">设计建议：</span><span class="i18n-en" hidden>Design recommendations:</span></strong><span class="i18n-zh">生产环境设置为合理上限（如 50-100），配合超时机制，防止 Agent 无限循环消耗 Token。</span><span class="i18n-en" hidden>Set a reasonable upper limit (e.g., 50-100) in production, combined with a timeout mechanism, to prevent the Agent from infinite looping and consuming tokens.</span></p>
 </div>
 
 <div class="answer-card" id="A49">
   <h2><span class="i18n-zh">A49 · Super-Step 和 Send API</span><span class="i18n-en" hidden>A49 · Super-Step and Send API</span></h2>
-  <p><strong>Super-Step</strong><span class="i18n-zh">：LangGraph 的一个执行&quot;滴答&quot;。当条件边返回多个目标节点时，这些节点在同一个 super-step 内</span><span class="i18n-en" hidden>：LangGraph 的一个执行&quot;滴答&quot;。当条件边返回多个目标节点时，这些节点在同一个 super-step 内</span><strong><span class="i18n-zh">并行执行</span><span class="i18n-en" hidden>并行执行</span></strong><span class="i18n-zh">。所有并行节点完成后，才进入下一个 super-step。</span><span class="i18n-en" hidden>. Only after all parallel nodes complete does execution move to the next super-step.</span></p>
-  <p><strong>Send API</strong><span class="i18n-zh">：实现 map-reduce 模式的动态扇出。</span><span class="i18n-en" hidden>：实现 map-reduce 模式的动态扇出。</span></p>
+  <p><strong>Super-Step</strong><span class="i18n-zh">：LangGraph 的一个执行&quot;滴答&quot;。当条件边返回多个目标节点时，这些节点在同一个 super-step 内</span><span class="i18n-en" hidden>: A single execution &quot;tick&quot; in LangGraph. When a conditional edge returns multiple target nodes, these nodes execute within the same super-step</span><strong><span class="i18n-zh">并行执行</span><span class="i18n-en" hidden>in parallel</span></strong><span class="i18n-zh">。所有并行节点完成后，才进入下一个 super-step。</span><span class="i18n-en" hidden>. Only after all parallel nodes complete does execution move to the next super-step.</span></p>
+  <p><strong>Send API</strong><span class="i18n-zh">：实现 map-reduce 模式的动态扇出。</span><span class="i18n-en" hidden>: Implements dynamic fan-out for map-reduce patterns.</span></p>
   <pre><code>from langgraph.types import Send
 
 def continue_to_jokes(state):
@@ -1418,20 +1418,20 @@ graph.add_conditional_edges("reviewer", route_after_review, {
 
 <div class="answer-card" id="A51">
   <h2><span class="i18n-zh">A51 · MessagesState vs 自定义 State</span><span class="i18n-en" hidden>A51 · MessagesState vs Custom State</span></h2>
-  <p><strong>MessagesState</strong><span class="i18n-zh"> 是 LangGraph 内置的预定义 State，包含 </span><span class="i18n-en" hidden> 是 LangGraph 内置的预定义 State，包含 </span><code>messages: Annotated[list, add_messages]</code><span class="i18n-zh">。适用场景：纯对话型 Agent，只需管理消息历史。</span><span class="i18n-en" hidden>. Use case: pure conversational Agents that only need to manage message history.</span></p>
-  <p><strong><span class="i18n-zh">自定义 State</span><span class="i18n-en" hidden>自定义 State</span></strong><span class="i18n-zh"> 在 MessagesState 基础上添加额外字段：</span><span class="i18n-en" hidden>Add extra fields on top of MessagesState:</span></p>
+  <p><strong>MessagesState</strong><span class="i18n-zh"> 是 LangGraph 内置的预定义 State，包含 </span><span class="i18n-en" hidden> is a built-in predefined State in LangGraph, containing </span><code>messages: Annotated[list, add_messages]</code><span class="i18n-zh">。适用场景：纯对话型 Agent，只需管理消息历史。</span><span class="i18n-en" hidden>. Use case: pure conversational Agents that only need to manage message history.</span></p>
+  <p><strong><span class="i18n-zh">自定义 State</span><span class="i18n-en" hidden>Custom State</span></strong><span class="i18n-zh"> 在 MessagesState 基础上添加额外字段：</span><span class="i18n-en" hidden>Add extra fields on top of MessagesState:</span></p>
   <pre><code>class CustomState(MessagesState):
     user_id: str
     retrieved_docs: list[str]
     tool_call_count: int
     needs_escalation: bool</code></pre>
-  <p><span class="i18n-zh">当 Agent 需要追踪非消息的状态（文档、计数、标记）时，继承 MessagesState 并添加自定义 key。</span><span class="i18n-en" hidden>当 Agent 需要追踪非消息的状态（文档、计数、标记）时，继承 MessagesState 并添加自定义 key。</span></p>
+  <p><span class="i18n-zh">当 Agent 需要追踪非消息的状态（文档、计数、标记）时，继承 MessagesState 并添加自定义 key。</span><span class="i18n-en" hidden>When an Agent needs to track non-message state (documents, counts, flags), inherit MessagesState and add custom keys.</span></p>
 </div>
 
 <div class="answer-card" id="A52">
   <h2><span class="i18n-zh">A52 · 并行 Reducer 重复问题</span><span class="i18n-en" hidden>A52 · Parallel Reducer Duplication Issue</span></h2>
   <p><span class="i18n-zh">多个并行节点同时读取 State，各自基于相同的旧 State 做了 append，然后各自写回——Reducer 看到两&quot;批次&quot;更新，每批都包含了&quot;旧数据+新数据&quot;，导致旧数据被重复追加。</span><span class="i18n-en" hidden>Multiple parallel nodes read State simultaneously, each appending based on the same old State and writing back — the Reducer sees two &quot;batches&quot; of updates, each containing &quot;old data + new data,&quot; causing old data to be duplicated.</span></p>
-  <p><strong><span class="i18n-zh">解决：</span><span class="i18n-en" hidden>解决：</span></strong><span class="i18n-zh">使用只追加新增部分的 Reducer，或确保并行节点操作不同的 State key。</span><span class="i18n-en" hidden>Use a Reducer that only appends new parts, or ensure parallel nodes operate on different State keys.</span></p>
+  <p><strong><span class="i18n-zh">解决：</span><span class="i18n-en" hidden>Solution:</span></strong><span class="i18n-zh">使用只追加新增部分的 Reducer，或确保并行节点操作不同的 State key。</span><span class="i18n-en" hidden>Use a Reducer that only appends new parts, or ensure parallel nodes operate on different State keys.</span></p>
 </div>
 
 <div class="answer-card" id="A53">
@@ -1444,9 +1444,9 @@ graph.add_conditional_edges("reviewer", route_after_review, {
 <div class="answer-card" id="A54">
   <h2>A54 · invoke vs ainvoke vs astream_events</h2>
   <ul>
-    <li><strong>invoke()</strong><span class="i18n-zh">：同步执行，返回最终 State</span><span class="i18n-en" hidden>：同步执行，返回最终 State</span></li>
-    <li><strong>ainvoke()</strong><span class="i18n-zh">：异步执行，适合 FastAPI/async 上下文</span><span class="i18n-en" hidden>：异步执行，适合 FastAPI/async 上下文</span></li>
-    <li><strong>astream_events(version="v2")</strong><span class="i18n-zh">：流式输出 token 级事件（on_chat_model_stream, on_tool_start, on_tool_end 等），适合构建实时 UI</span><span class="i18n-en" hidden>：流式输出 token 级事件（on_chat_model_stream, on_tool_start, on_tool_end 等），适合构建实时 UI</span></li>
+    <li><strong>invoke()</strong><span class="i18n-zh">：同步执行，返回最终 State</span><span class="i18n-en" hidden>: Synchronous execution, returns the final State</span></li>
+    <li><strong>ainvoke()</strong><span class="i18n-zh">：异步执行，适合 FastAPI/async 上下文</span><span class="i18n-en" hidden>: Asynchronous execution, suitable for FastAPI/async contexts</span></li>
+    <li><strong>astream_events(version="v2")</strong><span class="i18n-zh">：流式输出 token 级事件（on_chat_model_stream, on_tool_start, on_tool_end 等），适合构建实时 UI</span><span class="i18n-en" hidden>: Streams token-level events (on_chat_model_stream, on_tool_start, on_tool_end, etc.), suitable for building real-time UIs</span></li>
   </ul>
 </div>
 
@@ -1477,10 +1477,10 @@ def explain_result(state: State) -> dict:
 
 <div class="answer-card" id="A56">
   <h2><span class="i18n-zh">A56 · State 设计最佳实践</span><span class="i18n-en" hidden>A56 · State Design Best Practices</span></h2>
-  <p><strong>Small State Principle</strong><span class="i18n-zh">：State 只存图执行必要的共享数据。原因：</span><span class="i18n-en" hidden>：State 只存图执行必要的共享数据。原因：</span></p>
+  <p><strong>Small State Principle</strong><span class="i18n-zh">：State 只存图执行必要的共享数据。原因：</span><span class="i18n-en" hidden>: State only stores shared data necessary for graph execution. Reason:</span></p>
   <ol>
-    <li><span class="i18n-zh">每次 checkpoint 都会序列化完整 State → State 越大 checkpoint 越慢</span><span class="i18n-en" hidden>每次 checkpoint 都会序列化完整 State → State 越大 checkpoint 越慢</span></li>
-    <li><span class="i18n-zh">并行节点共享 State → State 越大竞争越激烈</span><span class="i18n-en" hidden>并行节点共享 State → State 越大竞争越激烈</span></li>
+    <li><span class="i18n-zh">每次 checkpoint 都会序列化完整 State → State 越大 checkpoint 越慢</span><span class="i18n-en" hidden>Each checkpoint serializes the full State → larger State means slower checkpoints</span></li>
+    <li><span class="i18n-zh">并行节点共享 State → State 越大竞争越激烈</span><span class="i18n-en" hidden>Parallel nodes share State → larger State means more contention</span></li>
     <li><span class="i18n-zh">State 通过 checkpoint 持久化 → 大 State 占用更多存储</span><span class="i18n-en" hidden>State persists via checkpoints → large State consumes more storage</span></li>
   </ol>
   <p><span class="i18n-zh">大对象（如整个知识库）应放在外部存储，State 中只存引用（如 doc_id）。</span><span class="i18n-en" hidden>Large objects (e.g., entire knowledge bases) should be stored externally; State only holds references (e.g., doc_id).</span></p>
@@ -1490,10 +1490,10 @@ def explain_result(state: State) -> dict:
   <h2>A57 · StateGraph API vs Functional API</h2>
   <table style="width:100%; border-collapse:collapse;">
     <tr style="background:var(--surface-2);"><th style="padding:8px;">StateGraph API</th><th style="padding:8px;">Functional API (@entrypoint/@task)</th></tr>
-    <tr><td style="padding:8px;"><span class="i18n-zh">显式定义节点和边</span><span class="i18n-en" hidden>显式定义节点和边</span></td><td style="padding:8px;"><span class="i18n-zh">隐式的调用依赖图</span><span class="i18n-en" hidden>隐式的调用依赖图</span></td></tr>
-    <tr><td style="padding:8px;"><span class="i18n-zh">完整的 checkpointing/HITL/streaming 支持</span><span class="i18n-en" hidden>Complete checkpointing/HITL/streaming support</span></td><td style="padding:8px;"><span class="i18n-zh">有限的 checkpointing（v1 仍在完善）</span><span class="i18n-en" hidden>有限的 checkpointing（v1 仍在完善）</span></td></tr>
-    <tr><td style="padding:8px;"><span class="i18n-zh">适合复杂控制流（循环、分支）</span><span class="i18n-en" hidden>适合复杂控制流（循环、分支）</span></td><td style="padding:8px;"><span class="i18n-zh">适合数据处理流水线</span><span class="i18n-en" hidden>适合数据处理流水线</span></td></tr>
-    <tr><td style="padding:8px;"><span class="i18n-zh">学习曲线较陡</span><span class="i18n-en" hidden>Steeper Learning Curve</span></td><td style="padding:8px;"><span class="i18n-zh">更 Pythonic，上手快</span><span class="i18n-en" hidden>更 Pythonic，上手快</span></td></tr>
+    <tr><td style="padding:8px;"><span class="i18n-zh">显式定义节点和边</span><span class="i18n-en" hidden>Explicitly define nodes and edges</span></td><td style="padding:8px;"><span class="i18n-zh">隐式的调用依赖图</span><span class="i18n-en" hidden>Implicit call dependency graph</span></td></tr>
+    <tr><td style="padding:8px;"><span class="i18n-zh">完整的 checkpointing/HITL/streaming 支持</span><span class="i18n-en" hidden>Complete checkpointing/HITL/streaming support</span></td><td style="padding:8px;"><span class="i18n-zh">有限的 checkpointing（v1 仍在完善）</span><span class="i18n-en" hidden>Limited checkpointing (v1 is still being improved)</span></td></tr>
+    <tr><td style="padding:8px;"><span class="i18n-zh">适合复杂控制流（循环、分支）</span><span class="i18n-en" hidden>Suitable for complex control flows (loops, branches)</span></td><td style="padding:8px;"><span class="i18n-zh">适合数据处理流水线</span><span class="i18n-en" hidden>Suitable for data processing pipelines</span></td></tr>
+    <tr><td style="padding:8px;"><span class="i18n-zh">学习曲线较陡</span><span class="i18n-en" hidden>Steeper Learning Curve</span></td><td style="padding:8px;"><span class="i18n-zh">更 Pythonic，上手快</span><span class="i18n-en" hidden>More Pythonic, quick to learn</span></td></tr>
   </table>
 </div>
 
@@ -1527,14 +1527,14 @@ graph.add_edge("generate", END)</code></pre>
 
 <div class="answer-card" id="A59">
   <h2><span class="i18n-zh">A59 · ToolNode 与 bind_tools</span><span class="i18n-en" hidden>A59 · ToolNode and bind_tools</span></h2>
-  <p><strong>bind_tools()</strong><span class="i18n-zh">：将工具定义（name, description, parameters JSON Schema）注入 LLM 的 API 调用，使 LLM 在需要时返回 tool_call 而非文本。</span><span class="i18n-en" hidden>：将工具定义（name, description, parameters JSON Schema）注入 LLM 的 API 调用，使 LLM 在需要时返回 tool_call 而非文本。</span></p>
-  <p><strong>ToolNode</strong><span class="i18n-zh">：接收 LLM 返回的 AIMessage（含 tool_calls），解析 tool_call 参数，执行对应的 Python 函数，返回 ToolMessage。</span><span class="i18n-en" hidden>：接收 LLM 返回的 AIMessage（含 tool_calls），解析 tool_call 参数，执行对应的 Python 函数，返回 ToolMessage。</span></p>
+  <p><strong>bind_tools()</strong><span class="i18n-zh">：将工具定义（name, description, parameters JSON Schema）注入 LLM 的 API 调用，使 LLM 在需要时返回 tool_call 而非文本。</span><span class="i18n-en" hidden>: Injects tool definitions (name, description, parameters JSON Schema) into the LLM's API call, causing the LLM to return a tool_call instead of text when needed.</span></p>
+  <p><strong>ToolNode</strong><span class="i18n-zh">：接收 LLM 返回的 AIMessage（含 tool_calls），解析 tool_call 参数，执行对应的 Python 函数，返回 ToolMessage。</span><span class="i18n-en" hidden>: Receives the AIMessage (containing tool_calls) returned by the LLM, parses the tool_call parameters, executes the corresponding Python function, and returns a ToolMessage.</span></p>
   <p><span class="i18n-zh">它们是协作关系：bind_tools 让 LLM&quot;知道&quot;工具有什么能力并&quot;请求&quot;使用；ToolNode 负责&quot;执行&quot;请求并&quot;返回&quot;结果给 LLM。</span><span class="i18n-en" hidden>They are cooperative: bind_tools lets the LLM &quot;know&quot; what capabilities tools have and &quot;request&quot; their use; ToolNode is responsible for &quot;executing&quot; the request and &quot;returning&quot; results to the LLM.</span></p>
 </div>
 
 <div class="answer-card" id="A60">
   <h2><span class="i18n-zh">A60 · 用户偏好记忆</span><span class="i18n-en" hidden>A60 · User Preference Memory</span></h2>
-  <p><strong><span class="i18n-zh">短会话内：</span><span class="i18n-en" hidden>短会话内：</span></strong></p>
+  <p><strong><span class="i18n-zh">短会话内：</span><span class="i18n-en" hidden>Within short sessions:</span></strong></p>
   <pre><code>class State(MessagesState):
     language_preference: str  # "zh" or "en"</code></pre>
   <p><strong><span class="i18n-zh">长期跨会话（Store API）：</span><span class="i18n-en" hidden>Long-term Cross-session (Store API):</span></strong></p>
@@ -1555,11 +1555,11 @@ system_prompt = f"Respond in {prefs.value['preferred']} with {prefs.value['level
   <h2><span class="i18n-zh">A61 · Checkpointing 机制</span><span class="i18n-en" hidden>A61 · Checkpointing Mechanism</span></h2>
   <p><strong>Checkpointing</strong><span class="i18n-zh"> 在每个 super-step 完成后自动保存 State 的快照。它解决了：</span><span class="i18n-en" hidden>Auto-saves a snapshot of State after each super-step completes. It solves:</span></p>
   <ol>
-    <li><strong><span class="i18n-zh">暂停/恢复</span><span class="i18n-en" hidden>暂停/恢复</span></strong><span class="i18n-zh">：Human-in-the-Loop 场景，图可以无限期暂停等待人类</span><span class="i18n-en" hidden>：Human-in-the-Loop 场景，图可以无限期暂停等待人类</span></li>
-    <li><strong><span class="i18n-zh">时间旅行</span><span class="i18n-en" hidden>时间旅行</span></strong><span class="i18n-zh">：回退到任意历史 checkpoint 重新执行</span><span class="i18n-en" hidden>：回退到任意历史 checkpoint 重新执行</span></li>
-    <li><strong><span class="i18n-zh">错误恢复</span><span class="i18n-en" hidden>错误恢复</span></strong><span class="i18n-zh">：图执行中断后从最近的 checkpoint 继续</span><span class="i18n-en" hidden>：图执行中断后从最近的 checkpoint 继续</span></li>
-    <li><strong><span class="i18n-zh">多会话隔离</span><span class="i18n-en" hidden>Multi-session Isolation</span></strong><span class="i18n-zh">：通过 thread_id 隔离不同用户的状态</span><span class="i18n-en" hidden>：通过 thread_id 隔离不同用户的状态</span></li>
-    <li><strong><span class="i18n-zh">可观测性</span><span class="i18n-en" hidden>Observability</span></strong><span class="i18n-zh">：完整的状态变更历史用于调试和审计</span><span class="i18n-en" hidden>：完整的状态变更历史用于调试和审计</span></li>
+    <li><strong><span class="i18n-zh">暂停/恢复</span><span class="i18n-en" hidden>Pause/Resume</span></strong><span class="i18n-zh">：Human-in-the-Loop 场景，图可以无限期暂停等待人类</span><span class="i18n-en" hidden>: Human-in-the-Loop scenario, the graph can pause indefinitely waiting for human input</span></li>
+    <li><strong><span class="i18n-zh">时间旅行</span><span class="i18n-en" hidden>Time Travel</span></strong><span class="i18n-zh">：回退到任意历史 checkpoint 重新执行</span><span class="i18n-en" hidden>: Roll back to any historical checkpoint and re-execute</span></li>
+    <li><strong><span class="i18n-zh">错误恢复</span><span class="i18n-en" hidden>Error Recovery</span></strong><span class="i18n-zh">：图执行中断后从最近的 checkpoint 继续</span><span class="i18n-en" hidden>: Continue from the most recent checkpoint after graph execution is interrupted</span></li>
+    <li><strong><span class="i18n-zh">多会话隔离</span><span class="i18n-en" hidden>Multi-session Isolation</span></strong><span class="i18n-zh">：通过 thread_id 隔离不同用户的状态</span><span class="i18n-en" hidden>: Isolates state for different users via thread_id</span></li>
+    <li><strong><span class="i18n-zh">可观测性</span><span class="i18n-en" hidden>Observability</span></strong><span class="i18n-zh">：完整的状态变更历史用于调试和审计</span><span class="i18n-en" hidden>: Complete state change history for debugging and auditing</span></li>
   </ol>
 </div>
 
@@ -1582,12 +1582,12 @@ checkpointer = PostgresSaver.from_conn_string("postgresql://user:pass@host:5432/
 graph = builder.compile(checkpointer=checkpointer)
 config = {"configurable": {"thread_id": "session-123"}}
 result = graph.invoke(initial_state, config)</code></pre>
-  <p><strong><span class="i18n-zh">设计原则：</span><span class="i18n-en" hidden>设计原则：</span></strong><span class="i18n-zh">graph 代码完全不变，只换 checkpointer 实现。这就是接口抽象的价值。</span><span class="i18n-en" hidden>Graph code remains completely unchanged; only the checkpointer implementation changes. This is the value of interface abstraction.</span></p>
+  <p><strong><span class="i18n-zh">设计原则：</span><span class="i18n-en" hidden>Design principles:</span></strong><span class="i18n-zh">graph 代码完全不变，只换 checkpointer 实现。这就是接口抽象的价值。</span><span class="i18n-en" hidden>Graph code remains completely unchanged; only the checkpointer implementation changes. This is the value of interface abstraction.</span></p>
 </div>
 
 <div class="answer-card" id="A63">
   <h2><span class="i18n-zh">A63 · thread_id 作用</span><span class="i18n-en" hidden>A63 · Purpose of thread_id</span></h2>
-  <p><strong>thread_id</strong><span class="i18n-zh"> 是 checkpoint 的命名空间标识符。每个 thread_id 拥有独立的状态历史和 checkpoint 链。</span><span class="i18n-en" hidden> 是 checkpoint 的命名空间标识符。每个 thread_id 拥有独立的状态历史和 checkpoint 链。</span></p>
+  <p><strong>thread_id</strong><span class="i18n-zh"> 是 checkpoint 的命名空间标识符。每个 thread_id 拥有独立的状态历史和 checkpoint 链。</span><span class="i18n-en" hidden> is the namespace identifier for checkpoints. Each thread_id has its own independent state history and checkpoint chain.</span></p>
   <p><span class="i18n-zh">如果两个用户共用同一个 thread_id：它们会互相覆盖对方的状态，A 用户的 checkpoint 被 B 用户的执行更新，导致状态混乱。因此必须为每个用户/会话分配唯一 thread_id。</span><span class="i18n-en" hidden>If two users share the same thread_id: they will overwrite each other state; User A checkpoint is updated by User B execution, causing state corruption. Therefore each user/session must be assigned a unique thread_id.</span></p>
 </div>
 
@@ -1615,11 +1615,11 @@ result = graph.invoke(None, {
   <h2>A65 · Streaming Modes</h2>
   <table style="width:100%; border-collapse:collapse;">
     <tr style="background:var(--surface-2);"><th style="padding:8px;">Mode</th><th style="padding:8px;"><span class="i18n-zh">输出</span><span class="i18n-en" hidden>Output</span></th><th style="padding:8px;"><span class="i18n-zh">用途</span><span class="i18n-en" hidden>Purpose</span></th></tr>
-    <tr><td style="padding:8px;"><strong>values</strong></td><td style="padding:8px;"><span class="i18n-zh">每步后的完整 State</span><span class="i18n-en" hidden>每步后的完整 State</span></td><td style="padding:8px;"><span class="i18n-zh">调试、状态检查</span><span class="i18n-en" hidden>调试、状态检查</span></td></tr>
-    <tr><td style="padding:8px;"><strong>updates</strong></td><td style="padding:8px;"><span class="i18n-zh">每步的 State 变化量</span><span class="i18n-en" hidden>每步的 State 变化量</span></td><td style="padding:8px;"><span class="i18n-zh">生产 UI — 轻量，显示哪个节点执行了</span><span class="i18n-en" hidden>生产 UI — 轻量，显示哪个节点执行了</span></td></tr>
-    <tr><td style="padding:8px;"><strong>messages</strong></td><td style="padding:8px;"><span class="i18n-zh">LLM token 流 + 元数据</span><span class="i18n-en" hidden>LLM token stream + metadata</span></td><td style="padding:8px;"><span class="i18n-zh">聊天 UI — token 级别展示</span><span class="i18n-en" hidden>聊天 UI — token 级别展示</span></td></tr>
-    <tr><td style="padding:8px;"><strong>custom</strong></td><td style="padding:8px;"><span class="i18n-zh">自定义事件 (get_stream_writer)</span><span class="i18n-en" hidden>自定义事件 (get_stream_writer)</span></td><td style="padding:8px;"><span class="i18n-zh">进度条、状态消息</span><span class="i18n-en" hidden>进度条、状态消息</span></td></tr>
-    <tr><td style="padding:8px;"><strong>debug</strong></td><td style="padding:8px;"><span class="i18n-zh">所有内部执行信息</span><span class="i18n-en" hidden>所有内部执行信息</span></td><td style="padding:8px;"><span class="i18n-zh">仅开发阶段</span><span class="i18n-en" hidden>Development Only</span></td></tr>
+    <tr><td style="padding:8px;"><strong>values</strong></td><td style="padding:8px;"><span class="i18n-zh">每步后的完整 State</span><span class="i18n-en" hidden>Complete State after each step</span></td><td style="padding:8px;"><span class="i18n-zh">调试、状态检查</span><span class="i18n-en" hidden>Debugging, state inspection</span></td></tr>
+    <tr><td style="padding:8px;"><strong>updates</strong></td><td style="padding:8px;"><span class="i18n-zh">每步的 State 变化量</span><span class="i18n-en" hidden>State delta per step</span></td><td style="padding:8px;"><span class="i18n-zh">生产 UI — 轻量，显示哪个节点执行了</span><span class="i18n-en" hidden>Production UI — lightweight, shows which node executed</span></td></tr>
+    <tr><td style="padding:8px;"><strong>messages</strong></td><td style="padding:8px;"><span class="i18n-zh">LLM token 流 + 元数据</span><span class="i18n-en" hidden>LLM token stream + metadata</span></td><td style="padding:8px;"><span class="i18n-zh">聊天 UI — token 级别展示</span><span class="i18n-en" hidden>Chat UI — token-level display</span></td></tr>
+    <tr><td style="padding:8px;"><strong>custom</strong></td><td style="padding:8px;"><span class="i18n-zh">自定义事件 (get_stream_writer)</span><span class="i18n-en" hidden>Custom events (get_stream_writer)</span></td><td style="padding:8px;"><span class="i18n-zh">进度条、状态消息</span><span class="i18n-en" hidden>Progress bars, status messages</span></td></tr>
+    <tr><td style="padding:8px;"><strong>debug</strong></td><td style="padding:8px;"><span class="i18n-zh">所有内部执行信息</span><span class="i18n-en" hidden>All internal execution information</span></td><td style="padding:8px;"><span class="i18n-zh">仅开发阶段</span><span class="i18n-en" hidden>Development Only</span></td></tr>
   </table>
   <p><span class="i18n-zh">生产推荐组合：</span><span class="i18n-en" hidden>Production Recommended Combination:</span><code>stream_mode=["updates", "custom", "messages"]</code></p>
   <p><strong><span class="i18n-zh">⚠️ 2026 更新：</span><span class="i18n-en" hidden>⚠️ 2026 Update:</span></strong><span class="i18n-zh">LangGraph v1.2.0 引入了 v3 事件模型（</span><span class="i18n-en" hidden>LangGraph v1.2.0 introduced the v3 event model (</span><code>stream_events(version="v3")</code><span class="i18n-zh">），新的事件类型包括 </span><span class="i18n-en" hidden>), new event types include</span><code>run.values</code>、<code>run.messages</code>、<code>run.lifecycle</code>、<code>run.subgraphs</code><span class="i18n-zh">。v2 仍为推荐稳定版本，v3 适合需要更细粒度控制的新项目。</span><span class="i18n-en" hidden>. v2 remains the recommended stable version; v3 suits new projects needing finer-grained control.</span></p>
@@ -1652,9 +1652,9 @@ for mode, chunk in graph.stream(
 <div class="answer-card" id="A67">
   <h2><span class="i18n-zh">A67 · HITL 实现方式</span><span class="i18n-en" hidden>A67 · HITL Implementation Methods</span></h2>
   <ul>
-    <li><strong>interrupt()</strong><span class="i18n-zh">：在节点函数内部调用，暂停执行并返回数据给前端。最灵活，适合动态审批流</span><span class="i18n-en" hidden>：在节点函数内部调用，暂停执行并返回数据给前端。最灵活，适合动态审批流</span></li>
-    <li><strong>interrupt_before=["node_name"]</strong><span class="i18n-zh">：在指定节点执行前暂停</span><span class="i18n-en" hidden>：在指定节点执行前暂停</span></li>
-    <li><strong>interrupt_after=["node_name"]</strong><span class="i18n-zh">：在指定节点执行后暂停</span><span class="i18n-en" hidden>：在指定节点执行后暂停</span></li>
+    <li><strong>interrupt()</strong><span class="i18n-zh">：在节点函数内部调用，暂停执行并返回数据给前端。最灵活，适合动态审批流</span><span class="i18n-en" hidden>: Called inside a node function, pauses execution and returns data to the frontend. Most flexible, suitable for dynamic approval flows</span></li>
+    <li><strong>interrupt_before=["node_name"]</strong><span class="i18n-zh">：在指定节点执行前暂停</span><span class="i18n-en" hidden>: Pauses before executing a specified node</span></li>
+    <li><strong>interrupt_after=["node_name"]</strong><span class="i18n-zh">：在指定节点执行后暂停</span><span class="i18n-en" hidden>: Pauses after executing a specified node</span></li>
   </ul>
   <pre><code># interrupt() 示例
 def approval_node(state: State):
@@ -1699,9 +1699,9 @@ graph.invoke(Command(resume={"approved": True}), config)</code></pre>
 
 <div class="answer-card" id="A69">
   <h2><span class="i18n-zh">A69 · Subgraph 概念</span><span class="i18n-en" hidden>A69 · Subgraph Concepts</span></h2>
-  <p><strong>Subgraph</strong><span class="i18n-zh"> 是一个被其他图作为节点使用的独立图。与普通节点的区别：Subgraph 内部有自己的节点、边、状态管理。</span><span class="i18n-en" hidden> 是一个被其他图作为节点使用的独立图。与普通节点的区别：Subgraph 内部有自己的节点、边、状态管理。</span></p>
-  <p><strong>Shared State</strong><span class="i18n-zh">（默认）：父图和子图共享同名的 State key（如都定义了 messages），值自动传递。</span><span class="i18n-en" hidden>（默认）：父图和子图共享同名的 State key（如都定义了 messages），值自动传递。</span></p>
-  <p><strong>Isolated State</strong><span class="i18n-zh">：子图使用独立的 State schema，通过 input/output 映射与父图通信。</span><span class="i18n-en" hidden>：子图使用独立的 State schema，通过 input/output 映射与父图通信。</span></p>
+  <p><strong>Subgraph</strong><span class="i18n-zh"> 是一个被其他图作为节点使用的独立图。与普通节点的区别：Subgraph 内部有自己的节点、边、状态管理。</span><span class="i18n-en" hidden> is an independent graph used as a node within another graph. Difference from a regular node: Subgraph has its own nodes, edges, and state management.</span></p>
+  <p><strong>Shared State</strong><span class="i18n-zh">（默认）：父图和子图共享同名的 State key（如都定义了 messages），值自动传递。</span><span class="i18n-en" hidden>(Default): Parent and child graphs share State keys with the same name (e.g., both define messages), values are automatically passed.</span></p>
+  <p><strong>Isolated State</strong><span class="i18n-zh">：子图使用独立的 State schema，通过 input/output 映射与父图通信。</span><span class="i18n-en" hidden>: Child graph uses an independent State schema, communicates with the parent graph via input/output mappings.</span></p>
 </div>
 
 <div class="answer-card" id="A70">
@@ -1738,26 +1738,26 @@ parent.add_conditional_edges("router", route_fn, {
 def subgraph_node(state: SubState):
     if state["needs_parent_attention"]:
         return Command(goto="parent_escalation_node", graph=Command.PARENT)</code></pre>
-  <p><span class="i18n-zh">Command 的核心优势：</span><span class="i18n-en" hidden>Core Advantages of Command:</span><strong><span class="i18n-zh">节点内决策</span><span class="i18n-en" hidden>节点内决策</span></strong><span class="i18n-zh">——不需要在边上写路由函数，节点本身可以决定下一个目标。</span><span class="i18n-en" hidden>——No need to write routing functions on edges; the node itself can decide the next target.</span></p>
+  <p><span class="i18n-zh">Command 的核心优势：</span><span class="i18n-en" hidden>Core Advantages of Command:</span><strong><span class="i18n-zh">节点内决策</span><span class="i18n-en" hidden>In-node decision making</span></strong><span class="i18n-zh">——不需要在边上写路由函数，节点本身可以决定下一个目标。</span><span class="i18n-en" hidden>——No need to write routing functions on edges; the node itself can decide the next target.</span></p>
 </div>
 
 <div class="answer-card" id="A72">
   <h2><span class="i18n-zh">A72 · 长时间运行任务</span><span class="i18n-en" hidden>A72 · Long-Running Tasks</span></h2>
   <ul>
-    <li><strong>interrupt()</strong><span class="i18n-zh">：适合需要人类审批的暂停（数分钟到数天）。Checkpoint 持久化到数据库，可以在任何时间恢复</span><span class="i18n-en" hidden>：适合需要人类审批的暂停（数分钟到数天）。Checkpoint 持久化到数据库，可以在任何时间恢复</span></li>
-    <li><strong>async node</strong><span class="i18n-zh">：适合 I/O 等待（API 调用、数据库查询）。不阻塞事件循环，但不能跨进程恢复</span><span class="i18n-en" hidden>：适合 I/O 等待（API 调用、数据库查询）。不阻塞事件循环，但不能跨进程恢复</span></li>
-    <li><strong><span class="i18n-zh">外部回调 + interrupt</span><span class="i18n-en" hidden>External Callback + interrupt</span></strong><span class="i18n-zh">：对于数小时到数天的异步任务（如支付回调），使用 interrupt 暂停 + webhook 触发 resume</span><span class="i18n-en" hidden>：对于数小时到数天的异步任务（如支付回调），使用 interrupt 暂停 + webhook 触发 resume</span></li>
+    <li><strong>interrupt()</strong><span class="i18n-zh">：适合需要人类审批的暂停（数分钟到数天）。Checkpoint 持久化到数据库，可以在任何时间恢复</span><span class="i18n-en" hidden>: Suitable for pauses requiring human approval (minutes to days). Checkpoints are persisted to the database and can be resumed at any time</span></li>
+    <li><strong>async node</strong><span class="i18n-zh">：适合 I/O 等待（API 调用、数据库查询）。不阻塞事件循环，但不能跨进程恢复</span><span class="i18n-en" hidden>: Suitable for I/O waits (API calls, database queries). Does not block the event loop, but cannot be resumed across processes</span></li>
+    <li><strong><span class="i18n-zh">外部回调 + interrupt</span><span class="i18n-en" hidden>External Callback + interrupt</span></strong><span class="i18n-zh">：对于数小时到数天的异步任务（如支付回调），使用 interrupt 暂停 + webhook 触发 resume</span><span class="i18n-en" hidden>: For asynchronous tasks lasting hours to days (e.g., payment callbacks), use interrupt to pause + webhook to trigger resume</span></li>
   </ul>
 </div>
 
 <div class="answer-card" id="A73">
   <h2><span class="i18n-zh">A73 · interrupt() 使用限制</span><span class="i18n-en" hidden>A73 · interrupt() Usage Limitations</span></h2>
-  <p><span class="i18n-zh">interrupt() 只能在 </span><span class="i18n-en" hidden>interrupt() can only be used in</span><strong><span class="i18n-zh">已编译图的节点函数内部</span><span class="i18n-en" hidden>已编译图的节点函数内部</span></strong><span class="i18n-zh">调用。不能在以下位置调用：</span><span class="i18n-en" hidden>调用。不能在以下位置调用：</span></p>
+  <p><span class="i18n-zh">interrupt() 只能在 </span><span class="i18n-en" hidden>interrupt() can only be used in</span><strong><span class="i18n-zh">已编译图的节点函数内部</span><span class="i18n-en" hidden>Called inside the node function of a compiled graph. Cannot be called in the following places:</span></strong><span class="i18n-zh">调用。不能在以下位置调用：</span><span class="i18n-en" hidden>Inside conditional edge functions</span></p>
   <ul>
     <li><span class="i18n-zh">图构建阶段的代码中（add_node 的参数之外）</span><span class="i18n-en" hidden>In graph construction phase code (outside add_node parameters)</span></li>
-    <li><span class="i18n-zh">条件边函数中</span><span class="i18n-en" hidden>条件边函数中</span></li>
-    <li><span class="i18n-zh">未编译的独立函数中</span><span class="i18n-en" hidden>未编译的独立函数中</span></li>
-    <li><span class="i18n-zh">需要配置 checkpointer，否则 interrupt 行为未定义</span><span class="i18n-en" hidden>需要配置 checkpointer，否则 interrupt 行为未定义</span></li>
+    <li><span class="i18n-zh">条件边函数中</span><span class="i18n-en" hidden>Inside uncompiled standalone functions</span></li>
+    <li><span class="i18n-zh">未编译的独立函数中</span><span class="i18n-en" hidden>A checkpointer must be configured, otherwise interrupt behavior is undefined</span></li>
+    <li><span class="i18n-zh">需要配置 checkpointer，否则 interrupt 行为未定义</span><span class="i18n-en" hidden>Short-term session state</span></li>
   </ul>
 </div>
 
@@ -1765,20 +1765,20 @@ def subgraph_node(state: SubState):
   <h2>A74 · Store API vs Checkpointing</h2>
   <table style="width:100%; border-collapse:collapse;">
     <tr style="background:var(--surface-2);"><th style="padding:8px;">Checkpointing</th><th style="padding:8px;">Store API</th></tr>
-    <tr><td style="padding:8px;"><span class="i18n-zh">短期会话状态</span><span class="i18n-en" hidden>短期会话状态</span></td><td style="padding:8px;"><span class="i18n-zh">长期跨会话记忆</span><span class="i18n-en" hidden>长期跨会话记忆</span></td></tr>
-    <tr><td style="padding:8px;"><span class="i18n-zh">thread 级别隔离</span><span class="i18n-en" hidden>Thread-Level Isolation</span></td><td style="padding:8px;"><span class="i18n-zh">自定义命名空间隔离</span><span class="i18n-en" hidden>自定义命名空间隔离</span></td></tr>
-    <tr><td style="padding:8px;"><span class="i18n-zh">自动保存（每个 super-step）</span><span class="i18n-en" hidden>自动保存（每个 super-step）</span></td><td style="padding:8px;"><span class="i18n-zh">手动 put/get</span><span class="i18n-en" hidden>手动 put/get</span></td></tr>
-    <tr><td style="padding:8px;"><span class="i18n-zh">适合：对话历史、Agent 执行状态</span><span class="i18n-en" hidden>适合：对话历史、Agent 执行状态</span></td><td style="padding:8px;"><span class="i18n-zh">适合：用户偏好、学习到的知识、全局配置</span><span class="i18n-en" hidden>适合：用户偏好、学习到的知识、全局配置</span></td></tr>
+    <tr><td style="padding:8px;"><span class="i18n-zh">短期会话状态</span><span class="i18n-en" hidden>Long-term cross-session memory</span></td><td style="padding:8px;"><span class="i18n-zh">长期跨会话记忆</span><span class="i18n-en" hidden>Custom namespace isolation</span></td></tr>
+    <tr><td style="padding:8px;"><span class="i18n-zh">thread 级别隔离</span><span class="i18n-en" hidden>Thread-Level Isolation</span></td><td style="padding:8px;"><span class="i18n-zh">自定义命名空间隔离</span><span class="i18n-en" hidden>Auto-save (every super-step)</span></td></tr>
+    <tr><td style="padding:8px;"><span class="i18n-zh">自动保存（每个 super-step）</span><span class="i18n-en" hidden>Manual put/get</span></td><td style="padding:8px;"><span class="i18n-zh">手动 put/get</span><span class="i18n-en" hidden>Suitable for: conversation history, Agent execution state</span></td></tr>
+    <tr><td style="padding:8px;"><span class="i18n-zh">适合：对话历史、Agent 执行状态</span><span class="i18n-en" hidden>Suitable for: user preferences, learned knowledge, global configuration</span></td><td style="padding:8px;"><span class="i18n-zh">适合：用户偏好、学习到的知识、全局配置</span><span class="i18n-en" hidden>: try/except to catch and handle within the node function</span></td></tr>
   </table>
 </div>
 
 <div class="answer-card" id="A75">
   <h2><span class="i18n-zh">A75 · LangGraph 4 层错误处理</span><span class="i18n-en" hidden>A75 · LangGraph 4-Layer Error Handling</span></h2>
   <ol>
-    <li><strong><span class="i18n-zh">Node 级</span><span class="i18n-en" hidden>Node Level</span></strong><span class="i18n-zh">：try/except 在节点函数内部捕获和处理</span><span class="i18n-en" hidden>：try/except 在节点函数内部捕获和处理</span></li>
-    <li><strong><span class="i18n-zh">Graph 级</span><span class="i18n-en" hidden>Graph Level</span></strong><span class="i18n-zh">：RetryPolicy 配置节点自动重试（max_attempts, initial_interval, backoff_factor）</span><span class="i18n-en" hidden>：RetryPolicy 配置节点自动重试（max_attempts, initial_interval, backoff_factor）</span></li>
-    <li><strong><span class="i18n-zh">App 级</span><span class="i18n-en" hidden>App Level</span></strong><span class="i18n-zh">：全局错误 handler，捕获未处理的异常并执行降级逻辑</span><span class="i18n-en" hidden>：全局错误 handler，捕获未处理的异常并执行降级逻辑</span></li>
-    <li><strong><span class="i18n-zh">Infra 级</span><span class="i18n-en" hidden>Infra Level</span></strong><span class="i18n-zh">：超时、熔断、限流——在网关/基础设施层实现</span><span class="i18n-en" hidden>：超时、熔断、限流——在网关/基础设施层实现</span></li>
+    <li><strong><span class="i18n-zh">Node 级</span><span class="i18n-en" hidden>Node Level</span></strong><span class="i18n-zh">：try/except 在节点函数内部捕获和处理</span><span class="i18n-en" hidden>: RetryPolicy configures automatic node retries (max_attempts, initial_interval, backoff_factor)</span></li>
+    <li><strong><span class="i18n-zh">Graph 级</span><span class="i18n-en" hidden>Graph Level</span></strong><span class="i18n-zh">：RetryPolicy 配置节点自动重试（max_attempts, initial_interval, backoff_factor）</span><span class="i18n-en" hidden>: Global error handler, catches unhandled exceptions and executes fallback logic</span></li>
+    <li><strong><span class="i18n-zh">App 级</span><span class="i18n-en" hidden>App Level</span></strong><span class="i18n-zh">：全局错误 handler，捕获未处理的异常并执行降级逻辑</span><span class="i18n-en" hidden>: Timeout, circuit breaker, rate limiting — implemented at the gateway/infrastructure layer</span></li>
+    <li><strong><span class="i18n-zh">Infra 级</span><span class="i18n-en" hidden>Infra Level</span></strong><span class="i18n-zh">：超时、熔断、限流——在网关/基础设施层实现</span><span class="i18n-en" hidden>: Adding a new key (with a default value) is usually safe</span></li>
   </ol>
   <pre><code># Graph-level retry
 from langgraph.pregel import RetryPolicy
@@ -1817,9 +1817,9 @@ LANGCHAIN_PROJECT=my-project</code></pre>
   <h2><span class="i18n-zh">A78 · 图迁移（Graph Migration）</span><span class="i18n-en" hidden>A78 · Graph Migration</span></h2>
   <p><span class="i18n-zh">图定义变更（增删节点、改 State schema）后，已有的 thread checkpoint 可能状态不兼容。LangGraph 的方案：</span><span class="i18n-en" hidden>After graph definition changes (add/remove nodes, modify State schema), existing thread checkpoints may be incompatible. LangGraph approach:</span></p>
   <ol>
-    <li><strong><span class="i18n-zh">向前兼容</span><span class="i18n-en" hidden>Forward Compatible</span></strong><span class="i18n-zh">：新增 key（有默认值）通常安全</span><span class="i18n-en" hidden>：新增 key（有默认值）通常安全</span></li>
-    <li><strong><span class="i18n-zh">破坏性变更</span><span class="i18n-en" hidden>破坏性变更</span></strong><span class="i18n-zh">：删除 key 或改类型 → 需要迁移函数遍历旧 checkpoint 并转换</span><span class="i18n-en" hidden>：删除 key 或改类型 → 需要迁移函数遍历旧 checkpoint 并转换</span></li>
-    <li><strong><span class="i18n-zh">版本标记</span><span class="i18n-en" hidden>版本标记</span></strong><span class="i18n-zh">：在 State 中加 schema_version 字段，节点执行前检查版本一致性</span><span class="i18n-en" hidden>：在 State 中加 schema_version 字段，节点执行前检查版本一致性</span></li>
+    <li><strong><span class="i18n-zh">向前兼容</span><span class="i18n-en" hidden>Forward Compatible</span></strong><span class="i18n-zh">：新增 key（有默认值）通常安全</span><span class="i18n-en" hidden>: Adding new keys (with defaults) is generally safe</span></li>
+    <li><strong><span class="i18n-zh">破坏性变更</span><span class="i18n-en" hidden>Breaking changes</span></strong><span class="i18n-zh">：删除 key 或改类型 → 需要迁移函数遍历旧 checkpoint 并转换</span><span class="i18n-en" hidden>: Deleting a key or changing its type → requires a migration function to traverse old checkpoints and convert them</span></li>
+    <li><strong><span class="i18n-zh">版本标记</span><span class="i18n-en" hidden>Version marking</span></strong><span class="i18n-zh">：在 State 中加 schema_version 字段，节点执行前检查版本一致性</span><span class="i18n-en" hidden>: Add a schema_version field in State, check version consistency before node execution</span></li>
   </ol>
 </div>
 
@@ -1844,10 +1844,10 @@ LANGCHAIN_PROJECT=my-project</code></pre>
 <div class="answer-card" id="A80">
   <h2><span class="i18n-zh">A80 · 上下文裁剪策略</span><span class="i18n-en" hidden>A80 · Context Trimming Strategy</span></h2>
   <ol>
-    <li><strong><span class="i18n-zh">滑动窗口</span><span class="i18n-en" hidden>滑动窗口</span></strong><span class="i18n-zh">：保留最近 N 条消息，丢弃早期消息</span><span class="i18n-en" hidden>：保留最近 N 条消息，丢弃早期消息</span></li>
-    <li><strong><span class="i18n-zh">智能摘要</span><span class="i18n-en" hidden>智能摘要</span></strong><span class="i18n-zh">：用 LLM 将早期对话压缩为摘要，保留摘要 + 最近消息</span><span class="i18n-en" hidden>：用 LLM 将早期对话压缩为摘要，保留摘要 + 最近消息</span></li>
-    <li><strong><span class="i18n-zh">选择性保留</span><span class="i18n-en" hidden>选择性保留</span></strong><span class="i18n-zh">：保留工具调用结果（有价值），丢弃中间推理（LLM 可重新推理）</span><span class="i18n-en" hidden>：保留工具调用结果（有价值），丢弃中间推理（LLM 可重新推理）</span></li>
-    <li><strong><span class="i18n-zh">Token 预算管理</span><span class="i18n-en" hidden>Token Budget Management</span></strong><span class="i18n-zh">：设定系统消息+工具定义+上下文+回复的总 token 上限</span><span class="i18n-en" hidden>：设定系统消息+工具定义+上下文+回复的总 token 上限</span></li>
+    <li><strong><span class="i18n-zh">滑动窗口</span><span class="i18n-en" hidden>Sliding window</span></strong><span class="i18n-zh">：保留最近 N 条消息，丢弃早期消息</span><span class="i18n-en" hidden>: Keep the most recent N messages, discard earlier ones</span></li>
+    <li><strong><span class="i18n-zh">智能摘要</span><span class="i18n-en" hidden>Smart summarization</span></strong><span class="i18n-zh">：用 LLM 将早期对话压缩为摘要，保留摘要 + 最近消息</span><span class="i18n-en" hidden>: Use an LLM to compress early conversations into a summary, retain the summary plus recent messages</span></li>
+    <li><strong><span class="i18n-zh">选择性保留</span><span class="i18n-en" hidden>Selective retention</span></strong><span class="i18n-zh">：保留工具调用结果（有价值），丢弃中间推理（LLM 可重新推理）</span><span class="i18n-en" hidden>: Keep tool call results (valuable), discard intermediate reasoning (LLM can re-reason)</span></li>
+    <li><strong><span class="i18n-zh">Token 预算管理</span><span class="i18n-en" hidden>Token Budget Management</span></strong><span class="i18n-zh">：设定系统消息+工具定义+上下文+回复的总 token 上限</span><span class="i18n-en" hidden>: Set a total token limit for system message + tool definitions + context + reply</span></li>
   </ol>
 </div>
 
@@ -1865,7 +1865,7 @@ LANGCHAIN_PROJECT=my-project</code></pre>
 
 <div class="answer-card" id="A82">
   <h2><span class="i18n-zh">A82 · 工具降级策略</span><span class="i18n-en" hidden>A82 · Tool Degradation Strategy</span></h2>
-  <p><span class="i18n-zh">当工具不可用时，返回描述性错误而非让 Agent 崩溃：</span><span class="i18n-en" hidden>当工具不可用时，返回描述性错误而非让 Agent 崩溃：</span></p>
+  <p><span class="i18n-zh">当工具不可用时，返回描述性错误而非让 Agent 崩溃：</span><span class="i18n-en" hidden>When a tool is unavailable, return a descriptive error instead of crashing the Agent:</span></p>
   <pre><code>@tool
 def search_web(query: str) -> str:
     try:
@@ -1878,11 +1878,11 @@ def search_web(query: str) -> str:
 
 <div class="answer-card" id="A83">
   <h2>A83 · GraphRAG</h2>
-  <p><strong>GraphRAG</strong><span class="i18n-zh">（微软）：将文档转换为知识图谱（实体→关系→社区），检索时使用社区摘要而非片段。相比传统 RAG：</span><span class="i18n-en" hidden>（微软）：将文档转换为知识图谱（实体→关系→社区），检索时使用社区摘要而非片段。相比传统 RAG：</span></p>
+  <p><strong>GraphRAG</strong><span class="i18n-zh">（微软）：将文档转换为知识图谱（实体→关系→社区），检索时使用社区摘要而非片段。相比传统 RAG：</span><span class="i18n-en" hidden>(Microsoft): Convert documents into a knowledge graph (entities → relationships → communities), retrieve using community summaries instead of fragments. Compared to traditional RAG:</span></p>
   <ul>
-    <li><strong><span class="i18n-zh">优势</span><span class="i18n-en" hidden>Advantage</span></strong><span class="i18n-zh">：理解实体间的全局关系，回答&quot;总结整个主题&quot;类的问题更优</span><span class="i18n-en" hidden>：理解实体间的全局关系，回答&quot;总结整个主题&quot;类的问题更优</span></li>
-    <li><strong><span class="i18n-zh">劣势</span><span class="i18n-en" hidden>Disadvantage</span></strong><span class="i18n-zh">：构建图谱成本高（LLM 提取实体+关系），延迟高</span><span class="i18n-en" hidden>：构建图谱成本高（LLM 提取实体+关系），延迟高</span></li>
-    <li><strong><span class="i18n-zh">LangGraph 实现</span><span class="i18n-en" hidden>LangGraph Implementation</span></strong><span class="i18n-zh">：用 LangGraph 编排 GraphRAG 的多步骤流程（实体提取→关系构建→社区检测→摘要生成→检索→回答）</span><span class="i18n-en" hidden>：用 LangGraph 编排 GraphRAG 的多步骤流程（实体提取→关系构建→社区检测→摘要生成→检索→回答）</span></li>
+    <li><strong><span class="i18n-zh">优势</span><span class="i18n-en" hidden>Advantage</span></strong><span class="i18n-zh">：理解实体间的全局关系，回答&quot;总结整个主题&quot;类的问题更优</span><span class="i18n-en" hidden>: Understands global relationships between entities, better at answering questions like "summarize the entire topic"</span></li>
+    <li><strong><span class="i18n-zh">劣势</span><span class="i18n-en" hidden>Disadvantage</span></strong><span class="i18n-zh">：构建图谱成本高（LLM 提取实体+关系），延迟高</span><span class="i18n-en" hidden>: High cost of building the graph (LLM extracts entities + relationships), high latency</span></li>
+    <li><strong><span class="i18n-zh">LangGraph 实现</span><span class="i18n-en" hidden>LangGraph Implementation</span></strong><span class="i18n-zh">：用 LangGraph 编排 GraphRAG 的多步骤流程（实体提取→关系构建→社区检测→摘要生成→检索→回答）</span><span class="i18n-en" hidden>: Use LangGraph to orchestrate GraphRAG's multi-step process (entity extraction → relationship building → community detection → summary generation → retrieval → answering)</span></li>
   </ul>
 </div>
 
@@ -1904,7 +1904,7 @@ graph.add_edge("agent_v2", "evaluator")  # both complete → evaluator runs once
 <div class="answer-card" id="A85">
   <h2>A85 · LangGraph Platform / LangSmith Deployment</h2>
   <p><strong><span class="i18n-zh">⚠️ 命名更新：</span><span class="i18n-en" hidden>⚠️ Naming Update:</span></strong><span class="i18n-zh">2025 年 10 月起，LangGraph Platform 更名为 </span><span class="i18n-en" hidden>Starting October 2025, LangGraph Platform renamed to</span><strong>LangSmith Deployment</strong><span class="i18n-zh">。2026 年 3 月发布了新的 CLI：</span><span class="i18n-en" hidden>. In March 2026, a new CLI was released:</span><code>langgraph deploy</code><span class="i18n-zh"> 取代了旧的 </span><span class="i18n-en" hidden>Replaced the old</span><code>langgraph up</code>。</p>
-  <p><span class="i18n-zh">提供：托管部署（一键部署 LangGraph API Server）、自动 scaling、cron jobs（定时触发 Agent）、webhook 集成、revision 管理（多版本切换）、内置监控仪表板。支持自托管 Docker 和云部署两种模式。</span><span class="i18n-en" hidden>提供：托管部署（一键部署 LangGraph API Server）、自动 scaling、cron jobs（定时触发 Agent）、webhook 集成、revision 管理（多版本切换）、内置监控仪表板。支持自托管 Docker 和云部署两种模式。</span></p>
+  <p><span class="i18n-zh">提供：托管部署（一键部署 LangGraph API Server）、自动 scaling、cron jobs（定时触发 Agent）、webhook 集成、revision 管理（多版本切换）、内置监控仪表板。支持自托管 Docker 和云部署两种模式。</span><span class="i18n-en" hidden>Provides: Managed deployment (one-click deploy LangGraph API Server), auto-scaling, cron jobs (scheduled Agent triggers), webhook integration, revision management (multi-version switching), built-in monitoring dashboard. Supports both self-hosted Docker and cloud deployment.</span></p>
 </div>
 
 <!-- ============ L5 ANSWERS ============ -->
@@ -1928,12 +1928,12 @@ graph.add_edge("agent_v2", "evaluator")  # both complete → evaluator runs once
   <h2><span class="i18n-zh">A87 · 1000 QPS 生产架构设计</span><span class="i18n-en" hidden>A87 · 1000 QPS Production Architecture Design</span></h2>
   <p><strong><span class="i18n-zh">关键架构决策：</span><span class="i18n-en" hidden>Key Architecture Decisions:</span></strong></p>
   <ol>
-    <li><strong><span class="i18n-zh">无状态节点水平扩展</span><span class="i18n-en" hidden>Horizontal scaling of stateless nodes</span></strong><span class="i18n-zh">：Agent 节点本身无状态（状态在 Postgres checkpoint），可无限制水平复制</span><span class="i18n-en" hidden>：Agent 节点本身无状态（状态在 Postgres checkpoint），可无限制水平复制</span></li>
-    <li><strong>Postgres Checkpointer</strong><span class="i18n-zh">：使用连接池（pgbouncer），读写分离，定期清理旧 checkpoint</span><span class="i18n-en" hidden>：使用连接池（pgbouncer），读写分离，定期清理旧 checkpoint</span></li>
-    <li><strong><span class="i18n-zh">模型调用队列</span><span class="i18n-en" hidden>Model Call Queue</span></strong><span class="i18n-zh">：使用 Redis + 令牌桶算法限流，控制对 LLM API 的并发调用</span><span class="i18n-en" hidden>：使用 Redis + 令牌桶算法限流，控制对 LLM API 的并发调用</span></li>
-    <li><strong><span class="i18n-zh">分层缓存</span><span class="i18n-en" hidden>Layered Caching</span></strong><span class="i18n-zh">：L1 Redis（热点问答缓存）、L2 向量数据库（RAG 结果缓存）</span><span class="i18n-en" hidden>：L1 Redis（热点问答缓存）、L2 向量数据库（RAG 结果缓存）</span></li>
-    <li><strong><span class="i18n-zh">监控栈</span><span class="i18n-en" hidden>Monitoring Stack</span></strong><span class="i18n-zh">：LangSmith（trace）+ Prometheus（指标）+ Grafana（仪表板）</span><span class="i18n-en" hidden>：LangSmith（trace）+ Prometheus（指标）+ Grafana（仪表板）</span></li>
-    <li><strong><span class="i18n-zh">多模型路由</span><span class="i18n-en" hidden>Multi-Model Routing</span></strong><span class="i18n-zh">：简单查询用 gpt-4o-mini（快+便宜），复杂推理用 Claude Opus</span><span class="i18n-en" hidden>：简单查询用 gpt-4o-mini（快+便宜），复杂推理用 Claude Opus</span></li>
+    <li><strong><span class="i18n-zh">无状态节点水平扩展</span><span class="i18n-en" hidden>Horizontal scaling of stateless nodes</span></strong><span class="i18n-zh">：Agent 节点本身无状态（状态在 Postgres checkpoint），可无限制水平复制</span><span class="i18n-en" hidden>: Agent nodes are stateless (state is in Postgres checkpoints), can be horizontally replicated without limits</span></li>
+    <li><strong>Postgres Checkpointer</strong><span class="i18n-zh">：使用连接池（pgbouncer），读写分离，定期清理旧 checkpoint</span><span class="i18n-en" hidden>: Use connection pooling (pgbouncer), read-write separation, periodically clean old checkpoints</span></li>
+    <li><strong><span class="i18n-zh">模型调用队列</span><span class="i18n-en" hidden>Model Call Queue</span></strong><span class="i18n-zh">：使用 Redis + 令牌桶算法限流，控制对 LLM API 的并发调用</span><span class="i18n-en" hidden>: Use Redis + token bucket algorithm for rate limiting, control concurrent calls to LLM API</span></li>
+    <li><strong><span class="i18n-zh">分层缓存</span><span class="i18n-en" hidden>Layered Caching</span></strong><span class="i18n-zh">：L1 Redis（热点问答缓存）、L2 向量数据库（RAG 结果缓存）</span><span class="i18n-en" hidden>: L1 Redis (hot QA cache), L2 vector database (RAG result cache)</span></li>
+    <li><strong><span class="i18n-zh">监控栈</span><span class="i18n-en" hidden>Monitoring Stack</span></strong><span class="i18n-zh">：LangSmith（trace）+ Prometheus（指标）+ Grafana（仪表板）</span><span class="i18n-en" hidden>: LangSmith (trace) + Prometheus (metrics) + Grafana (dashboard)</span></li>
+    <li><strong><span class="i18n-zh">多模型路由</span><span class="i18n-en" hidden>Multi-Model Routing</span></strong><span class="i18n-zh">：简单查询用 gpt-4o-mini（快+便宜），复杂推理用 Claude Opus</span><span class="i18n-en" hidden>: Use gpt-4o-mini for simple queries (fast + cheap), Claude Opus for complex reasoning</span></li>
   </ol>
 </div>
 
@@ -1962,7 +1962,7 @@ Writer Agent:
   <table style="width:100%; border-collapse:collapse;">
     <tr style="background:var(--surface-2);"><th style="padding:8px;"><span class="i18n-zh">模式</span><span class="i18n-en" hidden>Mode</span></th><th style="padding:8px;"><span class="i18n-zh">适用场景</span><span class="i18n-en" hidden>Use Cases</span></th><th style="padding:8px;"><span class="i18n-zh">LangGraph 实现</span><span class="i18n-en" hidden>LangGraph Implementation</span></th></tr>
     <tr><td style="padding:8px;"><span class="i18n-zh">共享 State</span><span class="i18n-en" hidden>Shared State</span></td><td style="padding:8px;"><span class="i18n-zh">同图内的 Agent 协作</span><span class="i18n-en" hidden>Agent collaboration within the same graph</span></td><td style="padding:8px;"><span class="i18n-zh">原生支持，State schema 定义共享字段</span><span class="i18n-en" hidden>Native support; State schema defines shared fields</span></td></tr>
-    <tr><td style="padding:8px;"><span class="i18n-zh">消息传递</span><span class="i18n-en" hidden>消息传递</span></td><td style="padding:8px;"><span class="i18n-zh">Agent 间显式通信</span><span class="i18n-en" hidden>Explicit inter-Agent communication</span></td><td style="padding:8px;"><span class="i18n-zh">通过 messages list + Command</span><span class="i18n-en" hidden>Via messages list + Command</span></td></tr>
+    <tr><td style="padding:8px;"><span class="i18n-zh">消息传递</span><span class="i18n-en" hidden>Message passing</span></td><td style="padding:8px;"><span class="i18n-zh">Agent 间显式通信</span><span class="i18n-en" hidden>Explicit inter-Agent communication</span></td><td style="padding:8px;"><span class="i18n-zh">通过 messages list + Command</span><span class="i18n-en" hidden>Via messages list + Command</span></td></tr>
     <tr><td style="padding:8px;">Store API</td><td style="padding:8px;"><span class="i18n-zh">跨图/跨会话共享</span><span class="i18n-en" hidden>Cross-graph / cross-session sharing</span></td><td style="padding:8px;"><span class="i18n-zh">命名空间隔离，持久化存储</span><span class="i18n-en" hidden>Namespaced isolation, persistent storage</span></td></tr>
   </table>
 </div>
@@ -2000,9 +2000,9 @@ Writer Agent:
 <div class="answer-card" id="A92">
   <h2><span class="i18n-zh">A92 · Agent 安全防护</span><span class="i18n-en" hidden>A92 · Agent Security Protection</span></h2>
   <ol>
-    <li><strong><span class="i18n-zh">Prompt Injection 防御</span><span class="i18n-en" hidden>Prompt Injection Defense</span></strong><span class="i18n-zh">：输入分离（用户输入和系统指令在不同的 message role）、输入过滤（检测已知注入模式）、输出验证（不执行用户提供的代码）</span><span class="i18n-en" hidden>：输入分离（用户输入和系统指令在不同的 message role）、输入过滤（检测已知注入模式）、输出验证（不执行用户提供的代码）</span></li>
-    <li><strong><span class="i18n-zh">数据泄露防御</span><span class="i18n-en" hidden>Data Leakage Defense</span></strong><span class="i18n-zh">：敏感数据脱敏（PII 检测+替换）、工具调用审计日志、最小权限原则（Agent 只能访问必要的工具和数据）</span><span class="i18n-en" hidden>：敏感数据脱敏（PII 检测+替换）、工具调用审计日志、最小权限原则（Agent 只能访问必要的工具和数据）</span></li>
-    <li><strong><span class="i18n-zh">工具滥用防御</span><span class="i18n-en" hidden>Tool Abuse Defense</span></strong><span class="i18n-zh">：Human-in-the-Loop（高风险操作需审批）、操作频率限制、金额/范围上限</span><span class="i18n-en" hidden>：Human-in-the-Loop（高风险操作需审批）、操作频率限制、金额/范围上限</span></li>
+    <li><strong><span class="i18n-zh">Prompt Injection 防御</span><span class="i18n-en" hidden>Prompt Injection Defense</span></strong><span class="i18n-zh">：输入分离（用户输入和系统指令在不同的 message role）、输入过滤（检测已知注入模式）、输出验证（不执行用户提供的代码）</span><span class="i18n-en" hidden>: Input separation (user input and system instructions in different message roles), input filtering (detect known injection patterns), output validation (do not execute user-provided code)</span></li>
+    <li><strong><span class="i18n-zh">数据泄露防御</span><span class="i18n-en" hidden>Data Leakage Defense</span></strong><span class="i18n-zh">：敏感数据脱敏（PII 检测+替换）、工具调用审计日志、最小权限原则（Agent 只能访问必要的工具和数据）</span><span class="i18n-en" hidden>: Sensitive data masking (PII detection + replacement), tool call audit logs, principle of least privilege (Agent can only access necessary tools and data)</span></li>
+    <li><strong><span class="i18n-zh">工具滥用防御</span><span class="i18n-en" hidden>Tool Abuse Defense</span></strong><span class="i18n-zh">：Human-in-the-Loop（高风险操作需审批）、操作频率限制、金额/范围上限</span><span class="i18n-en" hidden>: Human-in-the-Loop (high-risk operations require approval), operation frequency limits, amount/scope caps</span></li>
   </ol>
 </div>
 
@@ -2019,32 +2019,32 @@ Writer Agent:
 <div class="answer-card" id="A94">
   <h2><span class="i18n-zh">A94 · Agent 成本优化 8 大策略</span><span class="i18n-en" hidden>A94 · Agent Cost Optimization 8 Strategies</span></h2>
   <ol>
-    <li><strong>Model Routing</strong><span class="i18n-zh">：简单任务用小模型</span><span class="i18n-en" hidden>：简单任务用小模型</span></li>
-    <li><strong>Prompt Caching</strong><span class="i18n-zh">：长 system prompt 缓存命中省 90%</span><span class="i18n-en" hidden>：长 system prompt 缓存命中省 90%</span></li>
-    <li><strong><span class="i18n-zh">上下文压缩</span><span class="i18n-en" hidden>Context Compression</span></strong><span class="i18n-zh">：摘要历史对话，减少输入 token</span><span class="i18n-en" hidden>：摘要历史对话，减少输入 token</span></li>
-    <li><strong><span class="i18n-zh">结果缓存</span><span class="i18n-en" hidden>Result Caching</span></strong><span class="i18n-zh">：相同问题的答案缓存复用</span><span class="i18n-en" hidden>：相同问题的答案缓存复用</span></li>
-    <li><strong><span class="i18n-zh">批量处理</span><span class="i18n-en" hidden>Batch Processing</span></strong><span class="i18n-zh">：合并多个请求，利用 API batch 折扣</span><span class="i18n-en" hidden>：合并多个请求，利用 API batch 折扣</span></li>
-    <li><strong><span class="i18n-zh">更短 Prompt</span><span class="i18n-en" hidden>Shorter Prompts</span></strong><span class="i18n-zh">：精简指令，减少不必要的示例</span><span class="i18n-en" hidden>：精简指令，减少不必要的示例</span></li>
-    <li><strong><span class="i18n-zh">限制 Agent Loop</span><span class="i18n-en" hidden>Limit Agent Loop</span></strong><span class="i18n-zh">：设置合理的 recursion_limit，防止无谓循环</span><span class="i18n-en" hidden>：设置合理的 recursion_limit，防止无谓循环</span></li>
-    <li><strong><span class="i18n-zh">自建开源模型</span><span class="i18n-en" hidden>Self-hosted Open-source Models</span></strong><span class="i18n-zh">：高并发固定任务用 fine-tuned 开源模型替代付费 API</span><span class="i18n-en" hidden>：高并发固定任务用 fine-tuned 开源模型替代付费 API</span></li>
+    <li><strong>Model Routing</strong><span class="i18n-zh">：简单任务用小模型</span><span class="i18n-en" hidden>: Use small models for simple tasks</span></li>
+    <li><strong>Prompt Caching</strong><span class="i18n-zh">：长 system prompt 缓存命中省 90%</span><span class="i18n-en" hidden>: Long system prompt cache hits save 90%</span></li>
+    <li><strong><span class="i18n-zh">上下文压缩</span><span class="i18n-en" hidden>Context Compression</span></strong><span class="i18n-zh">：摘要历史对话，减少输入 token</span><span class="i18n-en" hidden>: Summarize historical conversations to reduce input tokens</span></li>
+    <li><strong><span class="i18n-zh">结果缓存</span><span class="i18n-en" hidden>Result Caching</span></strong><span class="i18n-zh">：相同问题的答案缓存复用</span><span class="i18n-en" hidden>: Cache and reuse answers to identical questions</span></li>
+    <li><strong><span class="i18n-zh">批量处理</span><span class="i18n-en" hidden>Batch Processing</span></strong><span class="i18n-zh">：合并多个请求，利用 API batch 折扣</span><span class="i18n-en" hidden>: Merge multiple requests to leverage API batch discounts</span></li>
+    <li><strong><span class="i18n-zh">更短 Prompt</span><span class="i18n-en" hidden>Shorter Prompts</span></strong><span class="i18n-zh">：精简指令，减少不必要的示例</span><span class="i18n-en" hidden>: Streamline instructions, reduce unnecessary examples</span></li>
+    <li><strong><span class="i18n-zh">限制 Agent Loop</span><span class="i18n-en" hidden>Limit Agent Loop</span></strong><span class="i18n-zh">：设置合理的 recursion_limit，防止无谓循环</span><span class="i18n-en" hidden>: Set a reasonable recursion_limit to prevent pointless loops</span></li>
+    <li><strong><span class="i18n-zh">自建开源模型</span><span class="i18n-en" hidden>Self-hosted Open-source Models</span></strong><span class="i18n-zh">：高并发固定任务用 fine-tuned 开源模型替代付费 API</span><span class="i18n-en" hidden>: For high-concurrency fixed tasks, use fine-tuned open-source models instead of paid APIs</span></li>
   </ol>
 </div>
 
 <div class="answer-card" id="A95">
   <h2><span class="i18n-zh">A95 · 企业级 RAG 系统设计</span><span class="i18n-en" hidden>A95 · Enterprise RAG System Design</span></h2>
-  <p><strong><span class="i18n-zh">核心架构：</span><span class="i18n-en" hidden>核心架构：</span></strong></p>
+  <p><strong><span class="i18n-zh">核心架构：</span><span class="i18n-en" hidden>Core architecture:</span></strong></p>
   <ol>
-    <li><strong><span class="i18n-zh">多租户隔离</span><span class="i18n-en" hidden>Multi-Tenant Isolation</span></strong><span class="i18n-zh">：tenant_id 作为 Store 命名空间和向量库 metadata filter</span><span class="i18n-en" hidden>：tenant_id 作为 Store 命名空间和向量库 metadata filter</span></li>
-    <li><strong><span class="i18n-zh">权限控制</span><span class="i18n-en" hidden>Permission Control</span></strong><span class="i18n-zh">：检索时通过 metadata filter 过滤无权访问的文档</span><span class="i18n-en" hidden>：检索时通过 metadata filter 过滤无权访问的文档</span></li>
-    <li><strong><span class="i18n-zh">文档管道</span><span class="i18n-en" hidden>Document Pipeline</span></strong><span class="i18n-zh">：Ingestion 子图（upload → parse → chunk → embed → index），支持多种格式</span><span class="i18n-en" hidden>：Ingestion 子图（upload → parse → chunk → embed → index），支持多种格式</span></li>
-    <li><strong><span class="i18n-zh">增量更新</span><span class="i18n-en" hidden>Incremental Updates</span></strong><span class="i18n-zh">：Webhook/CDC 触发 → 仅重新索引变更的文档</span><span class="i18n-en" hidden>：Webhook/CDC 触发 → 仅重新索引变更的文档</span></li>
-    <li><strong><span class="i18n-zh">Query 管道</span><span class="i18n-en" hidden>Query Pipeline</span></strong><span class="i18n-zh">：用户查询 → 权限注入 → Query Rewriting → Hybrid Search → Re-rank → Generate</span><span class="i18n-en" hidden>：用户查询 → 权限注入 → Query Rewriting → Hybrid Search → Re-rank → Generate</span></li>
+    <li><strong><span class="i18n-zh">多租户隔离</span><span class="i18n-en" hidden>Multi-Tenant Isolation</span></strong><span class="i18n-zh">：tenant_id 作为 Store 命名空间和向量库 metadata filter</span><span class="i18n-en" hidden>: tenant_id as Store namespace and vector library metadata filter</span></li>
+    <li><strong><span class="i18n-zh">权限控制</span><span class="i18n-en" hidden>Permission Control</span></strong><span class="i18n-zh">：检索时通过 metadata filter 过滤无权访问的文档</span><span class="i18n-en" hidden>: Filter out unauthorized documents during retrieval via metadata filter</span></li>
+    <li><strong><span class="i18n-zh">文档管道</span><span class="i18n-en" hidden>Document Pipeline</span></strong><span class="i18n-zh">：Ingestion 子图（upload → parse → chunk → embed → index），支持多种格式</span><span class="i18n-en" hidden>: Ingestion subgraph (upload → parse → chunk → embed → index), supports multiple formats</span></li>
+    <li><strong><span class="i18n-zh">增量更新</span><span class="i18n-en" hidden>Incremental Updates</span></strong><span class="i18n-zh">：Webhook/CDC 触发 → 仅重新索引变更的文档</span><span class="i18n-en" hidden>: Webhook/CDC trigger → only re-index changed documents</span></li>
+    <li><strong><span class="i18n-zh">Query 管道</span><span class="i18n-en" hidden>Query Pipeline</span></strong><span class="i18n-zh">：用户查询 → 权限注入 → Query Rewriting → Hybrid Search → Re-rank → Generate</span><span class="i18n-en" hidden>: User query → permission injection → Query Rewriting → Hybrid Search → Re-rank → Generate</span></li>
   </ol>
 </div>
 
 <div class="answer-card" id="A96">
   <h2><span class="i18n-zh">A96 · 企业系统集成 + MCP 角色</span><span class="i18n-en" hidden>A96 · Enterprise System Integration + MCP Role</span></h2>
-  <p><strong><span class="i18n-zh">MCP 的价值</span><span class="i18n-en" hidden>Value of MCP</span></strong><span class="i18n-zh">：将企业系统（CRM, ERP, DB）封装为 MCP Server，LangGraph Agent 通过 MCP Client 统一调用。</span><span class="i18n-en" hidden>：将企业系统（CRM, ERP, DB）封装为 MCP Server，LangGraph Agent 通过 MCP Client 统一调用。</span></p>
+  <p><strong><span class="i18n-zh">MCP 的价值</span><span class="i18n-en" hidden>Value of MCP</span></strong><span class="i18n-zh">：将企业系统（CRM, ERP, DB）封装为 MCP Server，LangGraph Agent 通过 MCP Client 统一调用。</span><span class="i18n-en" hidden>: Encapsulate enterprise systems (CRM, ERP, DB) as MCP Server, LangGraph Agent calls them uniformly via MCP Client.</span></p>
   <pre><code># MCP Server 封装企业 API
 @mcp.tool()
 def get_customer_info(customer_id: str) -> dict:
@@ -2069,17 +2069,17 @@ def check_inventory(sku: str) -> int:
     <tr><td style="padding:8px;"><span class="i18n-zh">适合开放、探索性任务</span><span class="i18n-en" hidden>Suited for open, exploratory tasks</span></td><td style="padding:8px;"><span class="i18n-zh">适合可预测、重复任务</span><span class="i18n-en" hidden>Suited for predictable, repetitive tasks</span></td></tr>
     <tr><td style="padding:8px;"><span class="i18n-zh">需要可观测性和安全护栏</span><span class="i18n-en" hidden>Requires observability and safety guardrails</span></td><td style="padding:8px;"><span class="i18n-zh">天然可审计</span><span class="i18n-en" hidden>Naturally Auditable</span></td></tr>
   </table>
-  <p><strong><span class="i18n-zh">选型指南</span><span class="i18n-en" hidden>Selection Guide</span></strong><span class="i18n-zh">：步骤固定且可预测 → 工作流引擎；需要理解和推理 → Agent；两者可以混合使用（Agent 作为工作流的某个步骤）。</span><span class="i18n-en" hidden>：步骤固定且可预测 → 工作流引擎；需要理解和推理 → Agent；两者可以混合使用（Agent 作为工作流的某个步骤）。</span></p>
+  <p><strong><span class="i18n-zh">选型指南</span><span class="i18n-en" hidden>Selection Guide</span></strong><span class="i18n-zh">：步骤固定且可预测 → 工作流引擎；需要理解和推理 → Agent；两者可以混合使用（Agent 作为工作流的某个步骤）。</span><span class="i18n-en" hidden>: Steps are fixed and predictable → workflow engine; requires understanding and reasoning → Agent; both can be mixed (Agent as a step in the workflow).</span></p>
 </div>
 
 <div class="answer-card" id="A98">
   <h2><span class="i18n-zh">A98 · Agent 确定性与可复现性</span><span class="i18n-en" hidden>A98 · Agent Determinism and Reproducibility</span></h2>
   <ol>
-    <li><strong><span class="i18n-zh">固定 seed</span><span class="i18n-en" hidden>Fixed Seed</span></strong><span class="i18n-zh">：LLM 推理时设置 seed 参数</span><span class="i18n-en" hidden>：LLM 推理时设置 seed 参数</span></li>
-    <li><strong>temperature=0</strong><span class="i18n-zh">：消除随机采样</span><span class="i18n-en" hidden>：消除随机采样</span></li>
-    <li><strong><span class="i18n-zh">完整 Trace</span><span class="i18n-en" hidden>Complete Trace</span></strong><span class="i18n-zh">：LangSmith 记录每个决策的输入输出</span><span class="i18n-en" hidden>：LangSmith 记录每个决策的输入输出</span></li>
-    <li><strong><span class="i18n-zh">Checkpoint 重放</span><span class="i18n-en" hidden>Checkpoint Replay</span></strong><span class="i18n-zh">：从特定 checkpoint 精确重现执行</span><span class="i18n-en" hidden>：从特定 checkpoint 精确重现执行</span></li>
-    <li><strong><span class="i18n-zh">测试框架</span><span class="i18n-en" hidden>Testing Framework</span></strong><span class="i18n-zh">：固定测试集 + snapshot testing</span><span class="i18n-en" hidden>：固定测试集 + snapshot testing</span></li>
+    <li><strong><span class="i18n-zh">固定 seed</span><span class="i18n-en" hidden>Fixed Seed</span></strong><span class="i18n-zh">：LLM 推理时设置 seed 参数</span><span class="i18n-en" hidden>: Set seed parameter during LLM inference</span></li>
+    <li><strong>temperature=0</strong><span class="i18n-zh">：消除随机采样</span><span class="i18n-en" hidden>: Eliminate random sampling</span></li>
+    <li><strong><span class="i18n-zh">完整 Trace</span><span class="i18n-en" hidden>Complete Trace</span></strong><span class="i18n-zh">：LangSmith 记录每个决策的输入输出</span><span class="i18n-en" hidden>: LangSmith records input and output for each decision</span></li>
+    <li><strong><span class="i18n-zh">Checkpoint 重放</span><span class="i18n-en" hidden>Checkpoint Replay</span></strong><span class="i18n-zh">：从特定 checkpoint 精确重现执行</span><span class="i18n-en" hidden>: Precisely reproduce execution from a specific checkpoint</span></li>
+    <li><strong><span class="i18n-zh">测试框架</span><span class="i18n-en" hidden>Testing Framework</span></strong><span class="i18n-zh">：固定测试集 + snapshot testing</span><span class="i18n-en" hidden>: Fixed test set + snapshot testing</span></li>
   </ol>
 </div>
 
@@ -2103,12 +2103,12 @@ def check_inventory(sku: str) -> int:
   <h2><span class="i18n-zh">A100 · 2026-2027 Agent 技术展望</span><span class="i18n-en" hidden>A100 · 2026-2027 Agent Technology Outlook</span></h2>
   <p><strong><span class="i18n-zh">核心趋势：</span><span class="i18n-en" hidden>Core Trends:</span></strong></p>
   <ol>
-    <li><strong><span class="i18n-zh">A2A (Agent-to-Agent) 协议标准化</span><span class="i18n-en" hidden>A2A (Agent-to-Agent) Protocol Standardization</span></strong><span class="i18n-zh">：Google 的 A2A 协议让不同框架构建的 Agent 可以互操作，LangGraph Agent 可以调用 CrewAI Agent</span><span class="i18n-en" hidden>：Google 的 A2A 协议让不同框架构建的 Agent 可以互操作，LangGraph Agent 可以调用 CrewAI Agent</span></li>
-    <li><strong><span class="i18n-zh">MCP 成为工具集成标准</span><span class="i18n-en" hidden>MCP Becomes Tool Integration Standard</span></strong><span class="i18n-zh">：越来越多的 SaaS 服务提供 MCP Server，Agent 的工具生态从碎片化走向统一</span><span class="i18n-en" hidden>：越来越多的 SaaS 服务提供 MCP Server，Agent 的工具生态从碎片化走向统一</span></li>
-    <li><strong><span class="i18n-zh">长期自主 Agent</span><span class="i18n-en" hidden>Long-term Autonomous Agents</span></strong><span class="i18n-zh">：24/7 运行的 Agent，自主监控环境、制定计划、执行任务</span><span class="i18n-en" hidden>：24/7 运行的 Agent，自主监控环境、制定计划、执行任务</span></li>
-    <li><strong><span class="i18n-zh">多模态 Agent</span><span class="i18n-en" hidden>Multimodal Agents</span></strong><span class="i18n-zh">：同时处理文本、图像、音频、视频的 Agent</span><span class="i18n-en" hidden>：同时处理文本、图像、音频、视频的 Agent</span></li>
-    <li><strong><span class="i18n-zh">Agent 安全治理</span><span class="i18n-en" hidden>Agent Security Governance</span></strong><span class="i18n-zh">：Agent 行为审计、权限控制、合规框架日趋成熟</span><span class="i18n-en" hidden>：Agent 行为审计、权限控制、合规框架日趋成熟</span></li>
-    <li><strong><span class="i18n-zh">LangGraph 定位</span><span class="i18n-en" hidden>LangGraph Positioning</span></strong><span class="i18n-zh">：从&quot;一个框架&quot;发展为 Agent 编排的标准平台，类似 Kubernetes 对容器编排的地位</span><span class="i18n-en" hidden>：从&quot;一个框架&quot;发展为 Agent 编排的标准平台，类似 Kubernetes 对容器编排的地位</span></li>
+    <li><strong><span class="i18n-zh">A2A (Agent-to-Agent) 协议标准化</span><span class="i18n-en" hidden>A2A (Agent-to-Agent) Protocol Standardization</span></strong><span class="i18n-zh">：Google 的 A2A 协议让不同框架构建的 Agent 可以互操作，LangGraph Agent 可以调用 CrewAI Agent</span><span class="i18n-en" hidden>: Google's A2A protocol enables interoperability between Agents built with different frameworks; LangGraph Agent can call CrewAI Agent</span></li>
+    <li><strong><span class="i18n-zh">MCP 成为工具集成标准</span><span class="i18n-en" hidden>MCP Becomes Tool Integration Standard</span></strong><span class="i18n-zh">：越来越多的 SaaS 服务提供 MCP Server，Agent 的工具生态从碎片化走向统一</span><span class="i18n-en" hidden>: More and more SaaS services provide MCP Server, the Agent tool ecosystem is moving from fragmentation to unification</span></li>
+    <li><strong><span class="i18n-zh">长期自主 Agent</span><span class="i18n-en" hidden>Long-term Autonomous Agents</span></strong><span class="i18n-zh">：24/7 运行的 Agent，自主监控环境、制定计划、执行任务</span><span class="i18n-en" hidden>: 24/7 running Agent that autonomously monitors the environment, makes plans, and executes tasks</span></li>
+    <li><strong><span class="i18n-zh">多模态 Agent</span><span class="i18n-en" hidden>Multimodal Agents</span></strong><span class="i18n-zh">：同时处理文本、图像、音频、视频的 Agent</span><span class="i18n-en" hidden>: Agent that processes text, images, audio, and video simultaneously</span></li>
+    <li><strong><span class="i18n-zh">Agent 安全治理</span><span class="i18n-en" hidden>Agent Security Governance</span></strong><span class="i18n-zh">：Agent 行为审计、权限控制、合规框架日趋成熟</span><span class="i18n-en" hidden>: Agent behavior auditing, permission control, and compliance frameworks are becoming increasingly mature</span></li>
+    <li><strong><span class="i18n-zh">LangGraph 定位</span><span class="i18n-en" hidden>LangGraph Positioning</span></strong><span class="i18n-zh">：从&quot;一个框架&quot;发展为 Agent 编排的标准平台，类似 Kubernetes 对容器编排的地位</span><span class="i18n-en" hidden>: Evolved from "a framework" to a standard platform for Agent orchestration, similar to Kubernetes' role in container orchestration</span></li>
   </ol>
 </div>
 
@@ -2117,7 +2117,7 @@ def check_inventory(sku: str) -> int:
 <div class="answer-card" id="A16m">
   <h2><span class="i18n-zh">A16 · 2026 主流 LLM 选型矩阵</span><span class="i18n-en" hidden>A16 · 2026 Mainstream LLM Selection Matrix</span></h2>
   <table style="width:100%; border-collapse:collapse;">
-    <tr style="background:var(--surface-2);"><th style="padding:8px;"><span class="i18n-zh">模型</span><span class="i18n-en" hidden>Model</span></th><th style="padding:8px;"><span class="i18n-zh">推理能力</span><span class="i18n-en" hidden>推理能力</span></th><th style="padding:8px;"><span class="i18n-zh">成本(1M tokens)</span><span class="i18n-en" hidden>成本(1M tokens)</span></th><th style="padding:8px;"><span class="i18n-zh">中文能力</span><span class="i18n-en" hidden>Chinese Capability</span></th><th style="padding:8px;"><span class="i18n-zh">部署方式</span><span class="i18n-en" hidden>部署方式</span></th><th style="padding:8px;"><span class="i18n-zh">最佳场景</span><span class="i18n-en" hidden>Best Scenario</span></th></tr>
+    <tr style="background:var(--surface-2);"><th style="padding:8px;"><span class="i18n-zh">模型</span><span class="i18n-en" hidden>Model</span></th><th style="padding:8px;"><span class="i18n-zh">推理能力</span><span class="i18n-en" hidden>Reasoning capability</span></th><th style="padding:8px;"><span class="i18n-zh">成本(1M tokens)</span><span class="i18n-en" hidden>Cost (1M tokens)</span></th><th style="padding:8px;"><span class="i18n-zh">中文能力</span><span class="i18n-en" hidden>Chinese Capability</span></th><th style="padding:8px;"><span class="i18n-zh">部署方式</span><span class="i18n-en" hidden>Deployment method</span></th><th style="padding:8px;"><span class="i18n-zh">最佳场景</span><span class="i18n-en" hidden>Best Scenario</span></th></tr>
     <tr><td style="padding:8px;"><strong>DeepSeek-V3</strong></td><td style="padding:8px;">★★★★☆</td><td style="padding:8px;">$0.27/$1.10</td><td style="padding:8px;">★★★★★</td><td style="padding:8px;"><span class="i18n-zh">API + 开源自部署</span><span class="i18n-en" hidden>API + Open-source Self-deployment</span></td><td style="padding:8px;"><span class="i18n-zh">中文场景、高并发低成本</span><span class="i18n-en" hidden>Chinese scenarios, high-concurrency low-cost</span></td></tr>
     <tr><td style="padding:8px;"><strong>DeepSeek-R1</strong></td><td style="padding:8px;">★★★★★</td><td style="padding:8px;">$0.55/$2.19</td><td style="padding:8px;">★★★★★</td><td style="padding:8px;"><span class="i18n-zh">API + 开源自部署</span><span class="i18n-en" hidden>API + Open-source Self-deployment</span></td><td style="padding:8px;"><span class="i18n-zh">复杂推理、数学/代码</span><span class="i18n-en" hidden>Complex reasoning, math/code</span></td></tr>
     <tr><td style="padding:8px;"><strong>Qwen3-235B</strong></td><td style="padding:8px;">★★★★☆</td><td style="padding:8px;"><span class="i18n-zh">中等</span><span class="i18n-en" hidden>Moderate</span></td><td style="padding:8px;">★★★★★</td><td style="padding:8px;"><span class="i18n-zh">开源自部署</span><span class="i18n-en" hidden>Open-source Self-deployed</span></td><td style="padding:8px;"><span class="i18n-zh">中文私有化部署</span><span class="i18n-en" hidden>Chinese private deployment</span></td></tr>
@@ -2125,7 +2125,7 @@ def check_inventory(sku: str) -> int:
     <tr><td style="padding:8px;"><strong>Claude Haiku 4.5</strong></td><td style="padding:8px;">★★★☆☆</td><td style="padding:8px;">$0.80/$4</td><td style="padding:8px;">★★★★☆</td><td style="padding:8px;">API only</td><td style="padding:8px;"><span class="i18n-zh">轻量任务、模型路由的 fallback</span><span class="i18n-en" hidden>Lightweight tasks, model routing fallback</span></td></tr>
     <tr><td style="padding:8px;"><strong>GPT-5</strong></td><td style="padding:8px;">★★★★★</td><td style="padding:8px;"><span class="i18n-zh">中等偏高</span><span class="i18n-en" hidden>Medium-High</span></td><td style="padding:8px;">★★★★☆</td><td style="padding:8px;">API only</td><td style="padding:8px;"><span class="i18n-zh">多模态、复杂 Agent</span><span class="i18n-en" hidden>Multimodal, complex Agents</span></td></tr>
   </table>
-  <p><strong><span class="i18n-zh">选型决策树：</span><span class="i18n-en" hidden>选型决策树：</span></strong></p>
+  <p><strong><span class="i18n-zh">选型决策树：</span><span class="i18n-en" hidden>Selection decision tree:</span></strong></p>
   <pre><code>if 需要私有化部署 and 中文场景: → Qwen3 / DeepSeek-V3 自部署
 elif 追求极致推理质量 and 预算充足: → Claude Opus 4.7
 elif 高并发低成本: → DeepSeek-V3 API (成本是 GPT-4o 的 1/10)
@@ -2135,14 +2135,14 @@ else: → 混合路由 — 简单任务 DeepSeek/Haiku, 复杂任务 Opus/R1</co
 
 <div class="answer-card" id="A17m">
   <h2><span class="i18n-zh">A17 · DeepSeek MLA 注意力机制</span><span class="i18n-en" hidden>A17 · DeepSeek MLA Attention Mechanism</span></h2>
-  <p><strong>MLA (Multi-head Latent Attention)</strong><span class="i18n-zh"> 是 DeepSeek-V2/V3 提出的注意力优化方案，核心思想：</span><span class="i18n-en" hidden> 是 DeepSeek-V2/V3 提出的注意力优化方案，核心思想：</span><strong><span class="i18n-zh">将 Keys 和 Values 投影到低维潜在空间，在潜在空间中进行注意力计算，仅在最后一步展开回原始维度。</span><span class="i18n-en" hidden>将 Keys 和 Values 投影到低维潜在空间，在潜在空间中进行注意力计算，仅在最后一步展开回原始维度。</span></strong></p>
-  <p><strong><span class="i18n-zh">工作原理：</span><span class="i18n-en" hidden>工作原理：</span></strong></p>
+  <p><strong>MLA (Multi-head Latent Attention)</strong><span class="i18n-zh"> 是 DeepSeek-V2/V3 提出的注意力优化方案，核心思想：</span><span class="i18n-en" hidden> is an attention optimization scheme proposed by DeepSeek-V2/V3, core idea:</span><strong><span class="i18n-zh">将 Keys 和 Values 投影到低维潜在空间，在潜在空间中进行注意力计算，仅在最后一步展开回原始维度。</span><span class="i18n-en" hidden>Project Keys and Values into a low-dimensional latent space, perform attention computation in the latent space, and only expand back to the original dimension in the final step.</span></strong></p>
+  <p><strong><span class="i18n-zh">工作原理：</span><span class="i18n-en" hidden>How it works:</span></strong></p>
   <ol>
     <li><span class="i18n-zh">传统 MHA：为每个 head 存储完整的 K 和 V 矩阵 → KV Cache 大小 = 2 × n_layers × d_model × seq_len</span><span class="i18n-en" hidden>Traditional MHA: Store complete K and V matrices per head → KV Cache Size = 2 × n_layers × d_model × seq_len</span></li>
     <li><span class="i18n-zh">MLA：将 K 和 V 压缩到低维潜在向量 c_KV（维度远小于 d_model），缓存只存这个压缩向量</span><span class="i18n-en" hidden>MLA: Compress K and V into a low-dimensional latent vector c_KV (dimension much smaller than d_model); cache only stores this compressed vector</span></li>
-    <li><span class="i18n-zh">推理时：从 c_KV 通过上投影矩阵恢复到完整维度，再做 Attention</span><span class="i18n-en" hidden>推理时：从 c_KV 通过上投影矩阵恢复到完整维度，再做 Attention</span></li>
+    <li><span class="i18n-zh">推理时：从 c_KV 通过上投影矩阵恢复到完整维度，再做 Attention</span><span class="i18n-en" hidden>During inference: restore from c_KV to full dimensions via the up-projection matrix, then perform Attention</span></li>
   </ol>
-  <p><strong><span class="i18n-zh">核心优势：</span><span class="i18n-en" hidden>核心优势：</span></strong><span class="i18n-zh">KV Cache 减少 90%+，推理成本大幅降低。这也是 DeepSeek 能做到 GPT-4o 1/10 价格的底层技术原因之一。</span><span class="i18n-en" hidden>KV Cache reduced by 90%+, significantly lowering inference cost. This is one of the underlying technical reasons DeepSeek achieves 1/10 the price of GPT-4o.</span></p>
+  <p><strong><span class="i18n-zh">核心优势：</span><span class="i18n-en" hidden>Core advantages:</span></strong><span class="i18n-zh">KV Cache 减少 90%+，推理成本大幅降低。这也是 DeepSeek 能做到 GPT-4o 1/10 价格的底层技术原因之一。</span><span class="i18n-en" hidden>KV Cache reduced by 90%+, significantly lowering inference cost. This is one of the underlying technical reasons DeepSeek achieves 1/10 the price of GPT-4o.</span></p>
   <p><strong><span class="i18n-zh">对比：</span><span class="i18n-en" hidden>Comparison:</span></strong><span class="i18n-zh">MHA (标准) → MQA (多 Query 共享 KV) → GQA (分组共享) → MLA (潜在压缩)，每次迭代都在减少 KV Cache。</span><span class="i18n-en" hidden>MHA (standard) → MQA (multi-query shared KV) → GQA (grouped shared) → MLA (latent compression) — each iteration reduces KV Cache.</span></p>
 </div>
 
@@ -2177,12 +2177,12 @@ async def aggregate_llm_results(prompt: str) -> list[dict]:
 # Usage
 results = asyncio.run(aggregate_llm_results("Explain quantum computing"))
 print(results)  # all successful results, failures captured as errors</code></pre>
-  <p><strong><span class="i18n-zh">关键：</span><span class="i18n-en" hidden>Key:</span></strong><code>return_exceptions=True</code><span class="i18n-zh"> 确保一个失败不影响其他；</span><span class="i18n-en" hidden> 确保一个失败不影响其他；</span><code>asyncio.timeout(30)</code><span class="i18n-zh"> 设置总时限。</span><span class="i18n-en" hidden> 设置总时限。</span></p>
+  <p><strong><span class="i18n-zh">关键：</span><span class="i18n-en" hidden>Key:</span></strong><code>return_exceptions=True</code><span class="i18n-zh"> 确保一个失败不影响其他；</span><span class="i18n-en" hidden> Ensure one failure does not affect others;</span><code>asyncio.timeout(30)</code><span class="i18n-zh"> 设置总时限。</span><span class="i18n-en" hidden> Set a total time limit.</span></p>
 </div>
 
 <div class="answer-card" id="A46m">
   <h2><span class="i18n-zh">A46 · MCP 协议架构原理</span><span class="i18n-en" hidden>A46 · MCP Protocol Architecture Principles</span></h2>
-  <p><strong>MCP (Model Context Protocol)</strong><span class="i18n-zh"> 由 Anthropic 于 2024 年 11 月提出，2025 年 12 月捐给 Linux Foundation Agentic AI Foundation。截至 2026 年，97M+ 下载，被 OpenAI、Google、Microsoft 等主流厂商采用。</span><span class="i18n-en" hidden> 由 Anthropic 于 2024 年 11 月提出，2025 年 12 月捐给 Linux Foundation Agentic AI Foundation。截至 2026 年，97M+ 下载，被 OpenAI、Google、Microsoft 等主流厂商采用。</span></p>
+  <p><strong>MCP (Model Context Protocol)</strong><span class="i18n-zh"> 由 Anthropic 于 2024 年 11 月提出，2025 年 12 月捐给 Linux Foundation Agentic AI Foundation。截至 2026 年，97M+ 下载，被 OpenAI、Google、Microsoft 等主流厂商采用。</span><span class="i18n-en" hidden> Proposed by Anthropic in November 2024, donated to the Linux Foundation Agentic AI Foundation in December 2025. As of 2026, 97M+ downloads, adopted by mainstream vendors such as OpenAI, Google, and Microsoft.</span></p>
   <p><strong><span class="i18n-zh">架构：</span><span class="i18n-en" hidden>Architecture:</span></strong></p>
   <pre><code>User (Host App)
   └─ MCP Client (内嵌在 Agent 中)
@@ -2191,8 +2191,8 @@ print(results)  # all successful results, failures captured as errors</code></pr
        └── MCP Server C (API)       → call external APIs</code></pre>
   <p><strong><span class="i18n-zh">三个原语：</span><span class="i18n-en" hidden>Three Primitives:</span></strong></p>
   <ul>
-    <li><strong>Tools</strong><span class="i18n-zh">：Agent 可调用的函数（类似 Function Calling）</span><span class="i18n-en" hidden>：Agent 可调用的函数（类似 Function Calling）</span></li>
-    <li><strong>Resources</strong><span class="i18n-zh">：Agent 可读取的数据源（文件、数据库记录）</span><span class="i18n-en" hidden>：Agent 可读取的数据源（文件、数据库记录）</span></li>
+    <li><strong>Tools</strong><span class="i18n-zh">：Agent 可调用的函数（类似 Function Calling）</span><span class="i18n-en" hidden>: Functions callable by the Agent (similar to Function Calling)</span></li>
+    <li><strong>Resources</strong><span class="i18n-zh">：Agent 可读取的数据源（文件、数据库记录）</span><span class="i18n-en" hidden>: Data sources readable by the Agent (files, database records)</span></li>
     <li><strong>Prompts</strong><span class="i18n-zh">：预定义的 prompt 模板</span><span class="i18n-en" hidden>: predefined prompt templates</span></li>
   </ul>
   <p><strong><span class="i18n-zh">与 Function Calling 的本质区别：</span><span class="i18n-en" hidden>Essential Differences from Function Calling:</span></strong><span class="i18n-zh">FC 每个 LLM 提供商有自己的格式（不兼容），MCP 统一标准 — 一次定义工具，所有支持 MCP 的 LLM 都可用。这解决了 &quot;M×N 集成问题&quot;。</span><span class="i18n-en" hidden>FC: each LLM provider has its own format (incompatible); MCP: unified standard — define tools once, usable by all MCP-supporting LLMs. This solves the &quot;M×N integration problem&quot;.</span></p>
@@ -2219,12 +2219,12 @@ def get_customer_info(customer_id: str) -> str:
     except Exception as e:
         # 优雅降级：告知 Agent 工具不可用
         return f"CRM查询失败: {str(e)}。Agent，请使用替代方案或告知用户暂时无法查询。"</code></pre>
-  <p><strong><span class="i18n-zh">降级策略：</span><span class="i18n-en" hidden>降级策略：</span></strong><span class="i18n-zh">工具返回描述性错误（不是抛异常）→ Agent 看到错误消息 → Agent 自主决策：用其他工具、用内部知识、或告知用户。</span><span class="i18n-en" hidden>工具返回描述性错误（不是抛异常）→ Agent 看到错误消息 → Agent 自主决策：用其他工具、用内部知识、或告知用户。</span></p>
+  <p><strong><span class="i18n-zh">降级策略：</span><span class="i18n-en" hidden>Degradation strategy:</span></strong><span class="i18n-zh">工具返回描述性错误（不是抛异常）→ Agent 看到错误消息 → Agent 自主决策：用其他工具、用内部知识、或告知用户。</span><span class="i18n-en" hidden>Tool returns a descriptive error (not throwing an exception) → Agent sees the error message → Agent autonomously decides: use another tool, use internal knowledge, or inform the user.</span></p>
 </div>
 
 <div class="answer-card" id="A85m">
   <h2><span class="i18n-zh">A85m · LangChain v1.0 Middleware 模式</span><span class="i18n-en" hidden>A85m · LangChain v1.0 Middleware Pattern</span></h2>
-  <p><strong>Middleware</strong><span class="i18n-zh"> 是 LangChain v1.0 `create_agent` 的核心扩展机制。它在 Agent 循环的每个步骤提供 hook 点，允许注入自定义逻辑：</span><span class="i18n-en" hidden> 是 LangChain v1.0 `create_agent` 的核心扩展机制。它在 Agent 循环的每个步骤提供 hook 点，允许注入自定义逻辑：</span></p>
+  <p><strong>Middleware</strong><span class="i18n-zh"> 是 LangChain v1.0 `create_agent` 的核心扩展机制。它在 Agent 循环的每个步骤提供 hook 点，允许注入自定义逻辑：</span><span class="i18n-en" hidden> is the core extension mechanism of LangChain v1.0 `create_agent`. It provides hook points at each step of the Agent loop, allowing injection of custom logic:</span></p>
   <pre><code>from langchain.agents import create_agent
 from langchain.agents.middleware import HumanInTheLoopMiddleware
 
@@ -2251,7 +2251,7 @@ class LoggingMiddleware(AgentMiddleware):
     def on_tool_start(self, state, runtime, tool_call):
         print(f"[TOOL] Calling {tool_call['name']} with {tool_call['args']}")
         return None</code></pre>
-  <p><strong><span class="i18n-zh">Middleware vs 旧模式：</span><span class="i18n-en" hidden>Middleware vs Old Pattern:</span></strong><span class="i18n-zh">旧版本需要在 LangGraph 层面手动添加 interrupt 和条件边。Middleware 将横切关注点（logging、HITL、错误处理）从 Agent 逻辑中解耦出来。</span><span class="i18n-en" hidden>旧版本需要在 LangGraph 层面手动添加 interrupt 和条件边。Middleware 将横切关注点（logging、HITL、错误处理）从 Agent 逻辑中解耦出来。</span></p>
+  <p><strong><span class="i18n-zh">Middleware vs 旧模式：</span><span class="i18n-en" hidden>Middleware vs Old Pattern:</span></strong><span class="i18n-zh">旧版本需要在 LangGraph 层面手动添加 interrupt 和条件边。Middleware 将横切关注点（logging、HITL、错误处理）从 Agent 逻辑中解耦出来。</span><span class="i18n-en" hidden>Older versions required manually adding interrupts and conditional edges at the LangGraph level. Middleware decouples cross-cutting concerns (logging, HITL, error handling) from the Agent logic.</span></p>
 </div>
 
 <div class="answer-card" id="A100a">
@@ -2261,7 +2261,7 @@ class LoggingMiddleware(AgentMiddleware):
     <tr><td style="padding:8px;"><span class="i18n-zh">提出者</span><span class="i18n-en" hidden>Proposer</span></td><td style="padding:8px;">Anthropic (2024.11)</td><td style="padding:8px;">Google (2025.04)</td></tr>
     <tr><td style="padding:8px;"><span class="i18n-zh">治理</span><span class="i18n-en" hidden>Governance</span></td><td style="padding:8px;">Linux Foundation (2025.12)</td><td style="padding:8px;">Linux Foundation (2025.06)</td></tr>
     <tr><td style="padding:8px;"><span class="i18n-zh">解决问题</span><span class="i18n-en" hidden>Problem Solved</span></td><td style="padding:8px;"><span class="i18n-zh">Agent ↔ Tool 集成标准化</span><span class="i18n-en" hidden>Agent ↔ Tool Integration Standardization</span></td><td style="padding:8px;"><span class="i18n-zh">Agent ↔ Agent 通信标准化</span><span class="i18n-en" hidden>Agent ↔ Agent Communication Standardization</span></td></tr>
-    <tr><td style="padding:8px;"><span class="i18n-zh">架构</span><span class="i18n-en" hidden>架构</span></td><td style="padding:8px;">Client-Server (JSON-RPC 2.0)</td><td style="padding:8px;"><span class="i18n-zh">Peer-to-Peer (Agent Cards 发现)</span><span class="i18n-en" hidden>Peer-to-Peer (Agent Cards Discovery)</span></td></tr>
+    <tr><td style="padding:8px;"><span class="i18n-zh">架构</span><span class="i18n-en" hidden>Architecture</span></td><td style="padding:8px;">Client-Server (JSON-RPC 2.0)</td><td style="padding:8px;"><span class="i18n-zh">Peer-to-Peer (Agent Cards 发现)</span><span class="i18n-en" hidden>Peer-to-Peer (Agent Cards Discovery)</span></td></tr>
     <tr><td style="padding:8px;"><span class="i18n-zh">典型场景</span><span class="i18n-en" hidden>Typical Scenario</span></td><td style="padding:8px;"><span class="i18n-zh">Agent 调用文件系统、数据库、API</span><span class="i18n-en" hidden>Agent calls file systems, databases, APIs</span></td><td style="padding:8px;"><span class="i18n-zh">Orchestrator 委派任务给 Specialist Agent</span><span class="i18n-en" hidden>Orchestrator delegates tasks to Specialist Agents</span></td></tr>
   </table>
   <p><strong><span class="i18n-zh">2026 标准分层架构：</span><span class="i18n-en" hidden>2026 Standard Layered Architecture:</span></strong></p>
@@ -2275,12 +2275,12 @@ Layer 1 (LLM): Each Agent's reasoning engine</code></pre>
   <p><strong><span class="i18n-zh">2026 年 3 月披露的关键 CVE：</span><span class="i18n-en" hidden>Key CVEs disclosed in March 2026:</span></strong><span class="i18n-zh">CVE-2025-68664（凭据泄露）、CVE-2025-67644（提示注入）。</span><span class="i18n-en" hidden>CVE-2025-68664 (credential leak), CVE-2025-67644 (prompt injection).</span></p>
   <p><strong><span class="i18n-zh">分层防御体系：</span><span class="i18n-en" hidden>Layered Defense System:</span></strong></p>
   <ol>
-    <li><strong><span class="i18n-zh">输入净化层</span><span class="i18n-en" hidden>Input Sanitization Layer</span></strong><span class="i18n-zh">：检测并过滤 prompt injection 模式（分隔符欺骗、角色切换、ignore 指令）</span><span class="i18n-en" hidden>：检测并过滤 prompt injection 模式（分隔符欺骗、角色切换、ignore 指令）</span></li>
-    <li><strong><span class="i18n-zh">工具权限分级</span><span class="i18n-en" hidden>Tool Permission Tiering</span></strong><span class="i18n-zh">：只读（search, get）vs 读写（update, create）vs 管理员（delete, config）— 按需授权</span><span class="i18n-en" hidden>：只读（search, get）vs 读写（update, create）vs 管理员（delete, config）— 按需授权</span></li>
-    <li><strong><span class="i18n-zh">MCP Server 验证</span><span class="i18n-en" hidden>MCP Server Verification</span></strong><span class="i18n-zh">：安装前审查 MCP Server 源码（类似 npm audit），限制 Server 的网络访问范围</span><span class="i18n-en" hidden>：安装前审查 MCP Server 源码（类似 npm audit），限制 Server 的网络访问范围</span></li>
-    <li><strong><span class="i18n-zh">HITL 审批</span><span class="i18n-en" hidden>HITL Approval</span></strong><span class="i18n-zh">：高风险操作（删除、发送邮件、修改配置）必须人工确认</span><span class="i18n-en" hidden>：高风险操作（删除、发送邮件、修改配置）必须人工确认</span></li>
-    <li><strong><span class="i18n-zh">审计日志</span><span class="i18n-en" hidden>Audit Logs</span></strong><span class="i18n-zh">：所有工具调用和状态变更全量记录，支持事后追溯</span><span class="i18n-en" hidden>：所有工具调用和状态变更全量记录，支持事后追溯</span></li>
-    <li><strong><span class="i18n-zh">凭据管理</span><span class="i18n-en" hidden>Credential Management</span></strong><span class="i18n-zh">：API Key 通过 Secrets Manager 注入（非环境变量明文），定期轮换</span><span class="i18n-en" hidden>：API Key 通过 Secrets Manager 注入（非环境变量明文），定期轮换</span></li>
+    <li><strong><span class="i18n-zh">输入净化层</span><span class="i18n-en" hidden>Input Sanitization Layer</span></strong><span class="i18n-zh">：检测并过滤 prompt injection 模式（分隔符欺骗、角色切换、ignore 指令）</span><span class="i18n-en" hidden>: Detect and filter prompt injection patterns (delimiter spoofing, role switching, ignore instructions)</span></li>
+    <li><strong><span class="i18n-zh">工具权限分级</span><span class="i18n-en" hidden>Tool Permission Tiering</span></strong><span class="i18n-zh">：只读（search, get）vs 读写（update, create）vs 管理员（delete, config）— 按需授权</span><span class="i18n-en" hidden>: Read-only (search, get) vs read-write (update, create) vs admin (delete, config) — authorize as needed</span></li>
+    <li><strong><span class="i18n-zh">MCP Server 验证</span><span class="i18n-en" hidden>MCP Server Verification</span></strong><span class="i18n-zh">：安装前审查 MCP Server 源码（类似 npm audit），限制 Server 的网络访问范围</span><span class="i18n-en" hidden>: Review MCP Server source code before installation (similar to npm audit), restrict the Server's network access scope</span></li>
+    <li><strong><span class="i18n-zh">HITL 审批</span><span class="i18n-en" hidden>HITL Approval</span></strong><span class="i18n-zh">：高风险操作（删除、发送邮件、修改配置）必须人工确认</span><span class="i18n-en" hidden>: High-risk operations (delete, send email, modify configuration) require manual confirmation</span></li>
+    <li><strong><span class="i18n-zh">审计日志</span><span class="i18n-en" hidden>Audit Logs</span></strong><span class="i18n-zh">：所有工具调用和状态变更全量记录，支持事后追溯</span><span class="i18n-en" hidden>: Full logging of all tool calls and state changes, supporting post-event traceability</span></li>
+    <li><strong><span class="i18n-zh">凭据管理</span><span class="i18n-en" hidden>Credential Management</span></strong><span class="i18n-zh">：API Key 通过 Secrets Manager 注入（非环境变量明文），定期轮换</span><span class="i18n-en" hidden>: API Keys injected via Secrets Manager (not plaintext environment variables), rotated periodically</span></li>
   </ol>
 </div>
 
@@ -2326,12 +2326,12 @@ langgraph up           # 旧版 Docker Compose 部署 (仍可用但不推荐)
 <nav style="margin-top:60px; padding:20px; background:var(--surface); border-radius:var(--radius);">
   <p style="margin:0 0 12px; color:var(--text-2);"><span class="i18n-zh">📍 答案库导航</span><span class="i18n-en" hidden>📍 Answer Bank Navigation</span></p>
   <a href="../index.html"><span class="i18n-zh">课程总览</span><span class="i18n-en" hidden>Course Overview</span></a>  · 
-  <a href="interview-bank.html"><span class="i18n-zh">面试题库</span><span class="i18n-en" hidden>面试题库</span></a>  · 
+  <a href="interview-bank.html"><span class="i18n-zh">面试题库</span><span class="i18n-en" hidden>Interview Question Bank</span></a>  · 
   <a href="fables.html"><span class="i18n-zh">寓言集</span><span class="i18n-en" hidden>Fable Collection</span></a>  · 
   <a href="pitfalls.html"><span class="i18n-zh">避坑指南</span><span class="i18n-en" hidden>Pitfall Guide</span></a>
 </nav>
 
-<a href="#" class="back-top" title="回到顶部">↑</a>
+<a href="#" class="back-top" data-i18n-title="misc.back_to_top" title="回到顶部">↑</a>
 
 <script src="../js/i18n-data.js"></script>
 <script src="../js/i18n.js"></script>

@@ -42,7 +42,7 @@
 </div>
 
 
-<div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><h3>⚔️ 实战编码 <span class="timer"><span class="clock">⏱</span> 30 分钟</span></h3>
+<div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><h3>⚔️ 实战编码 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">30 分钟</span><span class="i18n-en" hidden>30 min</span></span></h3>
 
 <pre><code><span class="kw">from</span> langgraph.types <span class="kw">import</span> interrupt, Command
 <span class="kw">from</span> langgraph.checkpoint.memory <span class="kw">import</span> InMemorySaver  <span class="i18n-zh" style="display:inline"><span class="cmt"># ⚠️ interrupt 必须配合 checkpointer！</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># interrupt requires a checkpointer!</span></span>
@@ -76,7 +76,7 @@ result = graph.invoke(input, config)
 <div class="i18n-zh"><li>实现 30 秒超时自动拒绝</li></div>
 <div class="i18n-en" hidden><li>Implement 30 second timeout auto-rejection</li></div>
 <div class="i18n-zh"><li>给 Agent 添加审批日志（每次审批记录到 state.approval_log）</li></div>
-<div class="i18n-en" hidden><li>给 Agent Add approval log (record each approval to state.approval_log）</li></div>
+<div class="i18n-en" hidden><li>Add approval log to Agent (record each approval to state.approval_log)</li></div>
 </ol>
 </div>
 
@@ -104,7 +104,7 @@ result[<span class="str">"__interrupt__"</span>]  <span class="i18n-zh" style="d
   <details class="notes-panel">
     <summary>📝 学习笔记</summary>
 
-    <textarea id="lesson-notes" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
+    <textarea id="lesson-notes" data-i18n-placeholder="notes.placeholder" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
     <div class="notes-actions">
       <button onclick="_exportNotes()">💾 保存到文件</button>
       <button onclick="_importNotes()">📂 加载文件</button>

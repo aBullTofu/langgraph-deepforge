@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L02 · 接入 LLM + 条件边 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L02 · 接入 LLM + 条件边 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css">
+<script>
+window.__I18N_PAGE_TITLE = {
+  zh: 'L02 · 接入 LLM + 条件边 — LangGraph DeepForge',
+  en: 'L02 · LLM Integration + Conditional Edges — LangGraph DeepForge'
+};
+</script></head>
 <body>
 <nav class="nav-bar"><div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
 <div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div><div class="i18n-zh"><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div>
@@ -7,7 +13,7 @@
 <div class="i18n-en" hidden><a href="../reference/pitfalls.html">⚠️ Pitfall</a></div><a href="L01-state-nodes-edges.html">L01</a><a href="L02-first-llm-agent.html" class="active">L02</a><a href="L03-tools.html">L03</a><a href="L04-agent-loop.html">L04</a></nav>
 
 
-<div class="phase" data-phase="ignition"><span class="phase-num">Phase 0 · Ignition</span><h3>⚡ 认知点火 <span class="timer"><span class="clock">⏱</span> 2 分钟</span></h3>
+<div class="phase" data-phase="ignition"><span class="phase-num">Phase 0 · Ignition</span><h3>⚡ 认知点火 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">2 分钟</span><span class="i18n-en" hidden>2 min</span></span></h3>
 
 <p>打开 L01 的 <code>l01_pipeline.py</code>。它的条件边判断逻辑是：</p>
 
@@ -23,7 +29,7 @@
 </div>
 
 
-<div class="phase" data-phase="fable"><span class="phase-num">Phase 1 · Fable</span><h3>📖 寓言：十字路口的客栈 <span class="timer"><span class="clock">⏱</span> 3 分钟</span></h3>
+<div class="phase" data-phase="fable"><span class="phase-num">Phase 1 · Fable</span><h3>📖 寓言：十字路口的客栈 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">3 分钟</span><span class="i18n-en" hidden>3 min</span></span></h3>
 
 <div class="card" style="border-color:var(--purple)"><p style="font-family:Georgia,serif;line-height:1.9">丝绸之路上的商队来到一个三岔路口。路口立着一间客栈，客栈里住着一位老旅人。这位老旅人有个神奇的本事：他只要看一眼你的货物和脸色，就能准确告诉你该走哪条路。"去长安卖丝绸？走左边，官道平坦。""去波斯卖茶叶？走中间，山路虽崎岖但路程最短。"商人问老旅人："你怎么知道？"老旅人说："我在这里住了四十年，看过十万支商队。他们去了哪条路、后来怎么样，我都记在心里。"<strong>徒弟继承了客栈，但没有四十年的经验。于是他给全世界的商人写信，收集每个人的答案，综合起来——虽然没师父准，但够用了。</strong></p>
 <div class="reveal">🔮 揭示：LLM 就是那个看十万支商队的徒弟 — 它不"知道"正确答案，但它见过的模式足够多，判断大概率是对的。条件边就是路标：LLM 输出一个分类，图据此走向不同分支。</div>
@@ -32,7 +38,7 @@
 </div>
 
 
-<div class="phase" data-phase="godview"><span class="phase-num">Phase 1 · GodView</span><h3>🗺 上帝视角 <span class="timer"><span class="clock">⏱</span> 7 分钟</span></h3>
+<div class="phase" data-phase="godview"><span class="phase-num">Phase 1 · GodView</span><h3>🗺 上帝视角 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">7 分钟</span><span class="i18n-en" hidden>7 min</span></span></h3>
 
 <div class="card accent-left"><div class="i18n-zh"><h3>📋 通关条件</h3></div>
 <div class="i18n-en" hidden><h3>📋 Clear Condition</h3></div>
@@ -52,13 +58,13 @@
 <div class="i18n-en" hidden><td>Understands emotion and intent</td></div></tr>
 <tr><div class="i18n-zh"><td>改需求 = 改代码</td></div>
 <div class="i18n-en" hidden><td>Change requirements = Change code</td></div><div class="i18n-zh"><td>改需求 = 改 prompt</td></div>
-<div class="i18n-en" hidden><td>Change requirements = 改 prompt</td></div></tr>
+<div class="i18n-en" hidden><td>Change requirements = Change prompt</td></div></tr>
 </table>
 </div>
 </div>
 
 
-<div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><h3>⚔️ 实战编码 <span class="timer"><span class="clock">⏱</span> 30 分钟</span></h3>
+<div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><h3>⚔️ 实战编码 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">30 分钟</span><span class="i18n-en" hidden>30 min</span></span></h3>
 
 <p>创建 <code>l02_intent_router.py</code>：</p>
 
@@ -150,7 +156,7 @@ tests = [<span class="str">"你好呀"</span>, <span class="str">"Python怎么�
 </div>
 <div class="box"><div class="num">1</div>
 <div class="i18n-zh"><p style="font-size:0.8em">LLM 的 temperature=0 能完全保证输出一致吗？</p></div>
-<div class="i18n-en" hidden><p style="font-size:0.8em">LLM 的 temperature=0 guarantee completely consistent output?</p></div>
+<div class="i18n-en" hidden><p style="font-size:0.8em">Does LLM's temperature=0 guarantee completely consistent output?</p></div>
 </div>
 </div>
 </div>
@@ -175,7 +181,7 @@ text = result.content  <span class="i18n-zh" style="display:inline"><span class=
   <details class="notes-panel">
     <summary>📝 学习笔记</summary>
 
-    <textarea id="lesson-notes" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
+    <textarea id="lesson-notes" data-i18n-placeholder="notes.placeholder" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
     <div class="notes-actions">
       <button onclick="_exportNotes()">💾 保存到文件</button>
       <button onclick="_importNotes()">📂 加载文件</button>

@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L03 · 工具调用 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L03 · 工具调用 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css">
+<script>
+window.__I18N_PAGE_TITLE = {
+  zh: 'L03 · 工具调用 — LangGraph DeepForge',
+  en: 'L03 · Tool Calling — LangGraph DeepForge'
+};
+</script></head>
 <body>
 <nav class="nav-bar"><div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
 <div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div><div class="i18n-zh"><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div>
@@ -7,10 +13,10 @@
 <div class="i18n-en" hidden><a href="../reference/pitfalls.html">⚠️ Pitfall</a></div><a href="L01-state-nodes-edges.html">L01</a><a href="L02-first-llm-agent.html">L02</a><a href="L03-tools.html" class="active">L03</a><a href="L04-agent-loop.html">L04</a></nav>
 
 
-<div class="phase" data-phase="ignition"><span class="phase-num">Phase 0 · Ignition</span><h3>⚡ 认知点火 <span class="timer"><span class="clock">⏱</span> 2 分钟</span></h3>
+<div class="phase" data-phase="ignition"><span class="phase-num">Phase 0 · Ignition</span><h3>⚡ 认知点火 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">2 分钟</span><span class="i18n-en" hidden>2 min</span></span></h3>
 
 <div class="i18n-zh"><p>L02 的 Agent 只会"说话"。试试问它：</p></div>
-<div class="i18n-en" hidden><p>L02 的 Agent Only"Speak"。Try asking it:</p></div>
+<div class="i18n-en" hidden><p>L02's Agent can only "speak". Try asking it:</p></div>
 
 <div class="scenario"><div class="role">🔥 点火问题</div>
 <p class="quote">"3 加 5 等于多少？" → L02 的 Agent 会回复"等于 8"——但这是 LLM <strong>背出来</strong>的，不是它<strong>算出来</strong>的。问它 "1234567 乘以 7654321 等于多少？"→ 它就瞎编了。</p>
@@ -30,7 +36,7 @@
 </div>
 
 
-<div class="phase" data-phase="godview"><span class="phase-num">Phase 1 · GodView</span><h3>🗺 上帝视角 <span class="timer"><span class="clock">⏱</span> 7 分钟</span></h3>
+<div class="phase" data-phase="godview"><span class="phase-num">Phase 1 · GodView</span><h3>🗺 上帝视角 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">7 分钟</span><span class="i18n-en" hidden>7 min</span></span></h3>
 
 <div class="card accent-left"><div class="i18n-zh"><h3>📋 通关条件</h3></div>
 <div class="i18n-en" hidden><h3>📋 Clear Condition</h3></div>
@@ -50,7 +56,7 @@
 </div>
 
 
-<div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><h3>⚔️ 实战编码 <span class="timer"><span class="clock">⏱</span> 30 分钟</span></h3>
+<div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><h3>⚔️ 实战编码 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">30 分钟</span><span class="i18n-en" hidden>30 min</span></span></h3>
 
 <p>创建 <code>l03_tool_agent.py</code>：</p>
 
@@ -123,7 +129,7 @@ graph = builder.compile()</code></pre>
 
 
 <div class="alert alert-warn" style="margin-top:16px"><div class="i18n-zh"><strong>⚠️ 避坑 INVALID_CHAT_HISTORY：</strong></div>
-<div class="i18n-en" hidden><strong>⚠️ Pitfall INVALID_CHAT_HISTORY：</strong></div>这是 #1 社区报错。原因：State 中 messages 没用 <code>add_messages</code> reducer → ToolNode 的输出覆盖了 LLM 的输出 → 对话历史缺失。解决方案见上方 Step 2。</div>
+<div class="i18n-en" hidden><strong>⚠️ Pitfall: INVALID_CHAT_HISTORY</strong></div>这是 #1 社区报错。原因：State 中 messages 没用 <code>add_messages</code> reducer → ToolNode 的输出覆盖了 LLM 的输出 → 对话历史缺失。解决方案见上方 Step 2。</div>
 </div>
 
 
@@ -135,7 +141,7 @@ graph = builder.compile()</code></pre>
 <ol><li>添加 <code>subtract</code> 和 <code>divide</code> 工具（除零返回友好错误）</li>
 <li>用 <code>requests</code> 或 <code>httpx</code> 实现一个真实的网络搜索工具</li>
 <div class="i18n-zh"><li>在 llm_node 中打印 LLM 的 tool_calls，观察它决定调了哪些工具、传了什么参数</li></div>
-<div class="i18n-en" hidden><li>在 llm_node print in LLM 的 tool_calls，observe which tools it decided to call and what parameters it passed</li></div>
+<div class="i18n-en" hidden><li>In llm_node, print LLM's tool_calls, observe which tools it decided to call and what parameters it passed</li></div>
 </ol>
 </div>
 
@@ -174,7 +180,7 @@ messages: Annotated[list, add_messages]</code></pre>
   <details class="notes-panel">
     <summary>📝 学习笔记</summary>
 
-    <textarea id="lesson-notes" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
+    <textarea id="lesson-notes" data-i18n-placeholder="notes.placeholder" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
     <div class="notes-actions">
       <button onclick="_exportNotes()">💾 保存到文件</button>
       <button onclick="_importNotes()">📂 加载文件</button>

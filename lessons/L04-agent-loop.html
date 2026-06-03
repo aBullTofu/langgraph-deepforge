@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L04 · ReAct 循环 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L04 · ReAct 循环 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css">
+<script>
+window.__I18N_PAGE_TITLE = {
+  zh: 'L04 · ReAct 循环 — LangGraph DeepForge',
+  en: 'L04 · ReAct Loop — LangGraph DeepForge'
+};
+</script></head>
 <body>
 <nav class="nav-bar"><div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
 <div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div><div class="i18n-zh"><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div>
@@ -7,7 +13,7 @@
 <div class="i18n-en" hidden><a href="../reference/pitfalls.html">⚠️ Pitfall</a></div><a href="L01-state-nodes-edges.html">L01</a><a href="L02-first-llm-agent.html">L02</a><a href="L03-tools.html">L03</a><a href="L04-agent-loop.html" class="active">L04</a><a href="L05-memory-persistence.html">L05</a></nav>
 
 
-<div class="phase" data-phase="ignition"><span class="phase-num">Phase 0 · Ignition</span><h3>⚡ 认知点火 <span class="timer"><span class="clock">⏱</span> 2 分钟</span></h3>
+<div class="phase" data-phase="ignition"><span class="phase-num">Phase 0 · Ignition</span><h3>⚡ 认知点火 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">2 分钟</span><span class="i18n-en" hidden>2 min</span></span></h3>
 
 <p>L03 用了 <code>ToolNode</code>——便利，但是黑盒。试着回答：</p>
 
@@ -30,7 +36,7 @@
 </div>
 
 
-<div class="phase" data-phase="godview"><span class="phase-num">Phase 1 · GodView</span><h3>🗺 上帝视角 <span class="timer"><span class="clock">⏱</span> 7 分钟</span></h3>
+<div class="phase" data-phase="godview"><span class="phase-num">Phase 1 · GodView</span><h3>🗺 上帝视角 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">7 分钟</span><span class="i18n-en" hidden>7 min</span></span></h3>
 
 <div class="card accent-left"><div class="i18n-zh"><h3>📋 通关条件</h3></div>
 <div class="i18n-en" hidden><h3>📋 Clear Condition</h3></div>
@@ -47,7 +53,7 @@
 </div>
 
 
-<div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><h3>⚔️ 实战编码 <span class="timer"><span class="clock">⏱</span> 30 分钟</span></h3>
+<div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><h3>⚔️ 实战编码 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">30 分钟</span><span class="i18n-en" hidden>30 min</span></span></h3>
 
 <p>创建 <code>l04_react_agent.py</code>：</p>
 
@@ -131,7 +137,7 @@ graph = builder.compile()</code></pre>
 </div>
 <div class="box"><div class="num">1</div>
 <div class="i18n-zh"><p style="font-size:0.8em">act() 中 try/except 返回错误字符串 vs 直接 raise——哪种更好？</p></div>
-<div class="i18n-en" hidden><p style="font-size:0.8em">act() 中 try/except Return error string vs Directly raise——Which is better?</p></div>
+<div class="i18n-en" hidden><p style="font-size:0.8em">In act(), try/except returning error string vs directly raising——Which is better?</p></div>
 </div>
 </div>
 </div>
@@ -156,7 +162,7 @@ graph = builder.compile()  <span class="i18n-zh" style="display:inline"><span cl
   <details class="notes-panel">
     <summary>📝 学习笔记</summary>
 
-    <textarea id="lesson-notes" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
+    <textarea id="lesson-notes" data-i18n-placeholder="notes.placeholder" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
     <div class="notes-actions">
       <button onclick="_exportNotes()">💾 保存到文件</button>
       <button onclick="_importNotes()">📂 加载文件</button>

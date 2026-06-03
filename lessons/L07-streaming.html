@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L07 · 流式输出 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L07 · 流式输出 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css">
+<script>
+window.__I18N_PAGE_TITLE = {
+  zh: 'L07 · 流式输出 — LangGraph DeepForge',
+  en: 'L07 · Streaming Output — LangGraph DeepForge'
+};
+</script></head>
 <body>
 <nav class="nav-bar"><div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
 <div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div><a href="L06-human-in-the-loop.html">L06</a><a href="L07-streaming.html" class="active">L07</a><a href="L08-error-handling.html">L08</a></nav>
@@ -18,7 +24,7 @@
 </div>
 </div>
 
-<div class="phase" data-phase="godview"><span class="phase-num">Phase 1 · GodView</span><h3>🗺 上帝视角 <span class="timer"><span class="clock">⏱</span> 7 分钟</span></h3>
+<div class="phase" data-phase="godview"><span class="phase-num">Phase 1 · GodView</span><h3>🗺 上帝视角 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">7 分钟</span><span class="i18n-en" hidden>7 min</span></span></h3>
 
 <div class="card accent-left"><div class="i18n-zh"><h3>📋 通关条件</h3></div>
 <div class="i18n-en" hidden><h3>📋 Clear Condition</h3></div>
@@ -26,7 +32,7 @@
 </div>
 </div>
 
-<div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><span class="timer"><span class="clock">⏱</span> 20 分钟</span></span></h3>
+<div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">20 分钟</span><span class="i18n-en" hidden>20 min</span></span></span></h3>
 
 <div class="i18n-zh"><h4>Event Streaming v3（推荐）</h4></div>
 <div class="i18n-en" hidden><h4>Event Streaming v3（recommended)</h4></div>
@@ -62,9 +68,9 @@ writer = get_stream_writer(); writer({<span class="str">"status"</span>: <span c
 <div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
 <div class="i18n-en" hidden><h4>🏗 Your Challenge</h4></div>
 <ol><div class="i18n-zh"><li>把 L05 的 Agent 改成流式输出（只改 invoke → stream_events）</li></div>
-<div class="i18n-en" hidden><li>把 L05 的 Agent to streaming output (just change invoke → stream_events）</li></div>
+<div class="i18n-en" hidden><li>Convert L05's Agent to streaming output (just change invoke → stream_events)</li></div>
 <div class="i18n-zh"><li>用 custom mode 在工具执行节点输出进度信息</li></div>
-<div class="i18n-en" hidden><li>用 custom mode Output progress info in the tool execution node</li></div>
+<div class="i18n-en" hidden><li>Use custom mode to output progress info in the tool execution node</li></div>
 </ol>
 </div>
 
@@ -92,7 +98,7 @@ stream.output  <span class="cmt"># 最终 state</span></code></pre>
   <details class="notes-panel">
     <summary>📝 学习笔记</summary>
 
-    <textarea id="lesson-notes" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
+    <textarea id="lesson-notes" data-i18n-placeholder="notes.placeholder" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
     <div class="notes-actions">
       <button onclick="_exportNotes()">💾 保存到文件</button>
       <button onclick="_importNotes()">📂 加载文件</button>

@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L05 · 记忆与持久化 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L05 · 记忆与持久化 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css">
+<script>
+window.__I18N_PAGE_TITLE = {
+  zh: 'L05 · 记忆与持久化 — LangGraph DeepForge',
+  en: 'L05 · Memory & Persistence — LangGraph DeepForge'
+};
+</script></head>
 <body>
 <nav class="nav-bar"><div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
 <div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div><div class="i18n-zh"><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div>
@@ -7,7 +13,7 @@
 <div class="i18n-en" hidden><a href="../reference/pitfalls.html">⚠️ Pitfall</a></div><a href="L04-agent-loop.html">L04</a><a href="L05-memory-persistence.html" class="active">L05</a><a href="L06-human-in-the-loop.html">L06</a></nav>
 
 
-<div class="phase" data-phase="ignition"><span class="phase-num">Phase 0 · Ignition</span><h3>⚡ 认知点火 <span class="timer"><span class="clock">⏱</span> 2 分钟</span></h3>
+<div class="phase" data-phase="ignition"><span class="phase-num">Phase 0 · Ignition</span><h3>⚡ 认知点火 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">2 分钟</span><span class="i18n-en" hidden>2 min</span></span></h3>
 
 <div class="scenario"><div class="role">🔥 点火问题</div>
 <p class="quote">"L04 的 Agent 完成了一次对话。第二次调用时，你传了新的消息——但 Agent 完全忘了刚才聊了什么。<strong>每次 graph.invoke() 都是从零开始。</strong>这和 ChatGPT 的行为完全不同。怎么让 Agent 记住上下文？"</p>
@@ -25,7 +31,7 @@
 </div>
 
 
-<div class="phase" data-phase="godview"><span class="phase-num">Phase 1 · GodView</span><h3>🗺 上帝视角 <span class="timer"><span class="clock">⏱</span> 7 分钟</span></h3>
+<div class="phase" data-phase="godview"><span class="phase-num">Phase 1 · GodView</span><h3>🗺 上帝视角 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">7 分钟</span><span class="i18n-en" hidden>7 min</span></span></h3>
 
 <div class="card accent-left"><div class="i18n-zh"><h3>📋 通关条件</h3></div>
 <div class="i18n-en" hidden><h3>📋 Clear Condition</h3></div>
@@ -40,7 +46,7 @@
 </div>
 
 
-<div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><h3>⚔️ 实战编码 <span class="timer"><span class="clock">⏱</span> 30 分钟</span></h3>
+<div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><h3>⚔️ 实战编码 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">30 分钟</span><span class="i18n-en" hidden>30 min</span></span></h3>
 
 <p>创建 <code>l05_memory_agent.py</code>。改 L04 的代码只需三行：</p>
 
@@ -88,11 +94,11 @@ r = graph.invoke({<span class="str">"messages"</span>: [HumanMessage(<span class
 <div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
 <div class="i18n-en" hidden><h4>🏗 Your Challenge</h4></div>
 <ol><div class="i18n-zh"><li>用 SqliteSaver 替换 InMemorySaver，重启 Python 后验证记忆是否还在</li></div>
-<div class="i18n-en" hidden><li>用 SqliteSaver Replace InMemorySaver，Restart Python then verify memory is still there</li></div>
+<div class="i18n-en" hidden><li>Replace InMemorySaver with SqliteSaver, restart Python, then verify memory is still there</li></div>
 <div class="i18n-zh"><li>创建两个不同 thread_id 的会话，验证它们的记忆完全隔离</li></div>
 <div class="i18n-en" hidden><li>CreateTwo different thread_id sessions, verify their memories are completely isolated</li></div>
 <div class="i18n-zh"><li>用 get_state_history() 打印某一会话的全部历史检查点</li></div>
-<div class="i18n-en" hidden><li>用 get_state_history() Print all historical checkpoints of a session</li></div>
+<div class="i18n-en" hidden><li>Use get_state_history() to print all historical checkpoints of a session</li></div>
 </ol>
 </div>
 
@@ -126,7 +132,7 @@ graph.get_state_history(config)  <span class="i18n-zh" style="display:inline"><s
   <details class="notes-panel">
     <summary>📝 学习笔记</summary>
 
-    <textarea id="lesson-notes" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
+    <textarea id="lesson-notes" data-i18n-placeholder="notes.placeholder" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
     <div class="notes-actions">
       <button onclick="_exportNotes()">💾 保存到文件</button>
       <button onclick="_importNotes()">📂 加载文件</button>

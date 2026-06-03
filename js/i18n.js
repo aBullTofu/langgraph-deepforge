@@ -32,6 +32,10 @@ var I18N = (function() {
     localStorage.setItem(STORAGE_KEY, lang);
     applyToDOM();
     updateSwitcherUI();
+    /* Update document title from page-level config */
+    if (window.__I18N_PAGE_TITLE && window.__I18N_PAGE_TITLE[lang]) {
+      document.title = window.__I18N_PAGE_TITLE[lang];
+    }
     if (window.onLangChange) window.onLangChange(lang);
   }
 
@@ -105,6 +109,11 @@ var I18N = (function() {
     if (!translated) {
       // Try trimmed match
       translated = CONTENT[text.trim()];
+    }
+    if (!translated) {
+      // Try whitespace-normalized match
+      var normalized = text.replace(/\s+/g, ' ');
+      translated = CONTENT[normalized];
     }
     if (translated) {
       // Save original Chinese for restoration

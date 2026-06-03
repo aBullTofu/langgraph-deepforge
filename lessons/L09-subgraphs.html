@@ -1,4 +1,10 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L09 · 子图 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L09 · 子图 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css">
+<script>
+window.__I18N_PAGE_TITLE = {
+  zh: 'L09 · 子图 — LangGraph DeepForge',
+  en: 'L09 · Subgraphs — LangGraph DeepForge'
+};
+</script></head>
 <body>
 <nav class="nav-bar"><div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
 <div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div><a href="L08-error-handling.html">L08</a><a href="L09-subgraphs.html" class="active">L09</a><a href="L10-multi-agent.html">L10</a><a href="L11-parallel-send.html">L11</a><a href="L12-production.html">L12</a></nav>
@@ -62,9 +68,9 @@ subgraph = sub_builder.compile()
 <div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
 <div class="i18n-en" hidden><h4>🏗 Your Challenge</h4></div>
 <ol><div class="i18n-zh"><li>把 L04 的手动 ReAct Agent 拆成子图：think + act 打包为一个 Agent 子图</li></div>
-<div class="i18n-en" hidden><li>把 L04 manual ReAct Agent Split into subgraphs:think + act Package as one Agent Subgraph</li></div>
+<div class="i18n-en" hidden><li>Split L04 manual ReAct Agent into subgraphs: think + act packaged as one Agent subgraph</li></div>
 <div class="i18n-zh"><li>创建两个不同 Agent 子图（数学 Agent + 天气 Agent），父图负责路由</li></div>
-<div class="i18n-en" hidden><li>CreateTwo different Agent Subgraphs (Math Agent + Weather Agent），Parent graph handles routing</li></div>
+<div class="i18n-en" hidden><li>Create two different Agent subgraphs (Math Agent + Weather Agent), parent graph handles routing</li></div>
 </ol>
 </div>
 
@@ -93,7 +99,7 @@ builder.add_node(<span class="str">"name"</span>, subgraph)</code></pre>
   <details class="notes-panel">
     <summary>📝 学习笔记</summary>
 
-    <textarea id="lesson-notes" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
+    <textarea id="lesson-notes" data-i18n-placeholder="notes.placeholder" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
     <div class="notes-actions">
       <button onclick="_exportNotes()">💾 保存到文件</button>
       <button onclick="_importNotes()">📂 加载文件</button>

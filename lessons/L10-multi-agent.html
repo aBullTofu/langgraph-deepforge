@@ -1,10 +1,16 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L10 · 多 Agent 协作 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L10 · 多 Agent 协作 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css">
+<script>
+window.__I18N_PAGE_TITLE = {
+  zh: 'L10 · 多 Agent 协作 — LangGraph DeepForge',
+  en: 'L10 · Multi-Agent Collaboration — LangGraph DeepForge'
+};
+</script></head>
 <body>
 <nav class="nav-bar"><div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
 <div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div><a href="L09-subgraphs.html">L09</a><a href="L10-multi-agent.html" class="active">L10</a><a href="L11-parallel-send.html">L11</a><a href="L12-production.html">L12</a></nav>
 
 <div class="hero"><div class="i18n-zh"><h1>L10 · 多 Agent 协作</h1></div>
-<div class="i18n-en" hidden><h1>L10 · 多 Agent Collaboration</h1></div>
+<div class="i18n-en" hidden><h1>L10 · Multi-Agent Collaboration</h1></div>
 <div class="i18n-zh"><p class="subtitle">Supervisor + Swarm — 让 Agent 分蘖</p></div>
 <div class="i18n-en" hidden><p class="subtitle">Supervisor + Swarm — Let Agents Branch Out</p></div>
 </div>
@@ -73,7 +79,7 @@ builder.add_conditional_edges(<span class="str">"supervisor"</span>, lambda s: s
   <details class="notes-panel">
     <summary>📝 学习笔记</summary>
 
-    <textarea id="lesson-notes" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
+    <textarea id="lesson-notes" data-i18n-placeholder="notes.placeholder" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
     <div class="notes-actions">
       <button onclick="_exportNotes()">💾 保存到文件</button>
       <button onclick="_importNotes()">📂 加载文件</button>
