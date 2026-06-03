@@ -13,7 +13,7 @@
   <div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
 <div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div>
   <div class="i18n-zh"><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div>
-<div class="i18n-en" hidden><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div>
+<div class="i18n-en" hidden><a href="../reference/meta-learning-guide.html">🧠 Meta-Learning</a></div>
   <a href="L01-state-nodes-edges.html" class="active">L01</a>
   <a href="L02-first-llm-agent.html">L02</a>
   <a href="L03-tools.html">L03</a>
@@ -32,7 +32,7 @@
     <div class="role">🔥 点火问题</div>
 
     <div class="i18n-zh"><p class="quote">"如果我想根据输入内容的不同，走完全不同的处理路径——比如空文本报错、短文本快速通道、长文本深度处理——hello_graph.py 需要改哪些地方？"</p></div>
-<div class="i18n-en" hidden><p class="quote">"如果我想根据输入内容的不同，走完全不同的处理路径——比如空文本报错、短文本快速通道、长文本深度处理——hello_graph.py 需要改哪些地方？"</p></div>
+<div class="i18n-en" hidden><p class="quote">"If I want to take different processing paths based on input — error on empty, fast-track short, deep-process long —hello_graph.py what needs to change?"</p></div>
 
   </div>
 
@@ -87,25 +87,25 @@
 
     <table>
       <tr><div class="i18n-zh"><th>LangGraph 概念</th></div>
-<div class="i18n-en" hidden><th>LangGraph 概念</th></div><div class="i18n-zh"><th>工厂类比</th></div>
-<div class="i18n-en" hidden><th>工厂类比</th></div><div class="i18n-zh"><th>职责</th></div>
+<div class="i18n-en" hidden><th>LangGraph Concept</th></div><div class="i18n-zh"><th>工厂类比</th></div>
+<div class="i18n-en" hidden><th>Factory Analogy</th></div><div class="i18n-zh"><th>职责</th></div>
 <div class="i18n-en" hidden><th>Responsibility</th></div></tr>
 
       <tr><td><strong>State</strong></td><div class="i18n-zh"><td>物料篮</td></div>
 <div class="i18n-en" hidden><td>Material Basket</td></div><div class="i18n-zh"><td>共享数据，随传送带流转</td></div>
-<div class="i18n-en" hidden><td>共享数据，随传送带流转</td></div></tr>
+<div class="i18n-en" hidden><td>Shared data, flows along the conveyor belt</td></div></tr>
 
       <tr><td><strong>Node</strong></td><div class="i18n-zh"><td>工位</td></div>
 <div class="i18n-en" hidden><td>Workstation</td></div><div class="i18n-zh"><td>读物料 → 加工 → 写回物料篮</td></div>
-<div class="i18n-en" hidden><td>读物料 → 加工 → 写回物料篮</td></div></tr>
+<div class="i18n-en" hidden><td>Read material → Process → Write back to material basket</td></div></tr>
 
       <tr><td><strong>Edge</strong></td><div class="i18n-zh"><td>传送带</td></div>
 <div class="i18n-en" hidden><td>Conveyor Belt</td></div><div class="i18n-zh"><td>物料从哪来、到哪去</td></div>
-<div class="i18n-en" hidden><td>物料从哪来、到哪去</td></div></tr>
+<div class="i18n-en" hidden><td>Where material comes from and goes</td></div></tr>
 
       <tr><td><strong>Conditional Edge</strong></td><div class="i18n-zh"><td>质检台</td></div>
 <div class="i18n-en" hidden><td>Inspection Station</td></div><div class="i18n-zh"><td>根据检测结果分岔传送带方向</td></div>
-<div class="i18n-en" hidden><td>根据检测结果分岔传送带方向</td></div></tr>
+<div class="i18n-en" hidden><td>Divert conveyor belt direction based on inspection result</td></div></tr>
 
     </table>
 
@@ -399,7 +399,7 @@ graph = builder.compile()</code></pre>
         条件边函数如果返回了映射字典中没有的值会怎样？（答案在盲区测试 Q3）
       </p></div>
 <div class="i18n-en" hidden><p style="font-size:0.85em;text-align:left;margin-top:8px;">
-        条件边函数如果返回了映射字典中没有的值会怎样？（答案在盲区测试 Q3）
+        What happens if a conditional edge function returns a value not in the mapping dict? (Answer in Blind Spot Test Q3）
       </p></div>
 
     </div>

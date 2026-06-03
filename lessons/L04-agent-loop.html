@@ -2,7 +2,7 @@
 <body>
 <nav class="nav-bar"><div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
 <div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div><div class="i18n-zh"><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div>
-<div class="i18n-en" hidden><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div><div class="i18n-zh"><a href="../reference/fables.html">📖 寓言集</a></div>
+<div class="i18n-en" hidden><a href="../reference/meta-learning-guide.html">🧠 Meta-Learning</a></div><div class="i18n-zh"><a href="../reference/fables.html">📖 寓言集</a></div>
 <div class="i18n-en" hidden><a href="../reference/fables.html">📖 Fable Collection</a></div><div class="i18n-zh"><a href="../reference/pitfalls.html">⚠️ 避坑</a></div>
 <div class="i18n-en" hidden><a href="../reference/pitfalls.html">⚠️ Pitfall</a></div><a href="L01-state-nodes-edges.html">L01</a><a href="L02-first-llm-agent.html">L02</a><a href="L03-tools.html">L03</a><a href="L04-agent-loop.html" class="active">L04</a><a href="L05-memory-persistence.html">L05</a></nav>
 
@@ -13,7 +13,7 @@
 
 <div class="scenario"><div class="role">🔥 点火问题</div>
 <div class="i18n-zh"><p class="quote">"如果工具调用失败（网络超时/参数错误），ToolNode 会怎么做？如果你想在执行工具前加权限检查、记录每次调用耗时、或者对大结果截断——你能改 ToolNode 的行为吗？"</p></div>
-<div class="i18n-en" hidden><p class="quote">"如果工具调用失败（网络超时/参数错误），ToolNode 会怎么做？如果你想在执行工具前加权限检查、记录每次调用耗时、或者对大结果截断——你能改 ToolNode 的行为吗？"</p></div>
+<div class="i18n-en" hidden><p class="quote">"If a tool call fails (network timeout/parameter error),ToolNode what would ToolNode do? If you want to add permission checks, log call duration, or truncate large results — can you modify ToolNode behavior?"</p></div>
 </div>
 
 <p>ToolNode 对简单场景足够，但当你需要<strong>完全控制</strong>时，必须手动实现。</p>
@@ -117,21 +117,21 @@ graph = builder.compile()</code></pre>
 <ol><li>给 act() 加入<strong>结果截断</strong>：超过 1000 字符只保留前 500</li>
 <li>给 act() 加入<strong>权限检查</strong>：创建一个 <code>delete_database</code> 的 mock 工具，执行前打印"⚠️ 危险操作！"</li>
 <div class="i18n-zh"><li>设置 LangSmith 并运行一次，观察 trace 中的每一步</li></div>
-<div class="i18n-en" hidden><li>设置 LangSmith 并运行一次，观察 trace 中的每一步</li></div>
+<div class="i18n-en" hidden><li>Setup LangSmith and run once, observe trace every step in</li></div>
 </ol>
 </div>
 
 <div class="review-321"><div class="box"><div class="num">3</div>
 <div class="i18n-zh"><p style="font-size:0.8em">① think→act→observe 是循环  ② 手动 act 让你完全控错  ③ MAX_CALLS 防死循环</p></div>
-<div class="i18n-en" hidden><p style="font-size:0.8em">① think→act→observe 是循环  ② 手动 act 让你完全控错  ③ MAX_CALLS Preventing Infinite Loops</p></div>
+<div class="i18n-en" hidden><p style="font-size:0.8em">① think→act→observe Is a loop  ② Manual act gives you full error control  ③ MAX_CALLS Preventing Infinite Loops</p></div>
 </div>
 <div class="box"><div class="num">2</div>
 <div class="i18n-zh"><p style="font-size:0.8em">• 智能客服自动查询 • 数据分析流水线</p></div>
-<div class="i18n-en" hidden><p style="font-size:0.8em">• 智能客服自动查询 • 数据分析流水线</p></div>
+<div class="i18n-en" hidden><p style="font-size:0.8em">• Intelligent customer service auto-query • Data analysis pipeline</p></div>
 </div>
 <div class="box"><div class="num">1</div>
 <div class="i18n-zh"><p style="font-size:0.8em">act() 中 try/except 返回错误字符串 vs 直接 raise——哪种更好？</p></div>
-<div class="i18n-en" hidden><p style="font-size:0.8em">act() 中 try/except 返回错误字符串 vs 直接 raise——哪种更好？</p></div>
+<div class="i18n-en" hidden><p style="font-size:0.8em">act() 中 try/except Return error string vs Directly raise——Which is better?</p></div>
 </div>
 </div>
 </div>

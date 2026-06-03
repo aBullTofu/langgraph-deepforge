@@ -4,7 +4,7 @@
 <div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div><a href="L09-subgraphs.html">L09</a><a href="L10-multi-agent.html" class="active">L10</a><a href="L11-parallel-send.html">L11</a><a href="L12-production.html">L12</a></nav>
 
 <div class="hero"><div class="i18n-zh"><h1>L10 · 多 Agent 协作</h1></div>
-<div class="i18n-en" hidden><h1>L10 · 多 Agent 协作</h1></div>
+<div class="i18n-en" hidden><h1>L10 · 多 Agent Collaboration</h1></div>
 <div class="i18n-zh"><p class="subtitle">Supervisor + Swarm — 让 Agent 分蘖</p></div>
 <div class="i18n-en" hidden><p class="subtitle">Supervisor + Swarm — Let Agents Branch Out</p></div>
 </div>
@@ -26,7 +26,7 @@
 <div class="i18n-en" hidden><h3>⚔️ Combat Coding</h3></div>
 
 <div class="i18n-zh"><h4>Supervisor 模式（中央调度）</h4></div>
-<div class="i18n-en" hidden><h4>Supervisor 模式（中央调度）</h4></div>
+<div class="i18n-en" hidden><h4>Supervisor Pattern (central dispatch)</h4></div>
 
 <pre><code><span class="kw">def</span> <span class="fn">supervisor</span>(state):  <span class="cmt"># LLM 决定下一个 worker</span>
     response = model.invoke(<span class="str">f"选择下一步：{TEAM_MEMBERS}\n当前：{state['task']}"</span>)
@@ -37,7 +37,7 @@ builder.add_node(<span class="str">"writer"</span>, writer_graph)
 builder.add_conditional_edges(<span class="str">"supervisor"</span>, lambda s: s[<span class="str">"next"</span>], mapping)</code></pre>
 
 <div class="i18n-zh"><h4>Swarm/Handoff 模式（Agent 间直接交接）</h4></div>
-<div class="i18n-en" hidden><h4>Swarm/Handoff 模式（Agent 间直接交接）</h4></div>
+<div class="i18n-en" hidden><h4>Swarm/Handoff Pattern (Agent direct handoff)</h4></div>
 
 <pre><code><span class="kw">def</span> <span class="fn">researcher</span>(state):
     <span class="kw">if</span> <span class="kw">not</span> need_research: <span class="kw">return</span> Command(goto=<span class="str">"writer"</span>)  <span class="cmt"># 跳过自己！</span>

@@ -2,7 +2,7 @@
 <body>
 <nav class="nav-bar"><div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
 <div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div><div class="i18n-zh"><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div>
-<div class="i18n-en" hidden><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div><div class="i18n-zh"><a href="../reference/fables.html">📖 寓言集</a></div>
+<div class="i18n-en" hidden><a href="../reference/meta-learning-guide.html">🧠 Meta-Learning</a></div><div class="i18n-zh"><a href="../reference/fables.html">📖 寓言集</a></div>
 <div class="i18n-en" hidden><a href="../reference/fables.html">📖 Fable Collection</a></div><div class="i18n-zh"><a href="../reference/pitfalls.html">⚠️ 避坑</a></div>
 <div class="i18n-en" hidden><a href="../reference/pitfalls.html">⚠️ Pitfall</a></div><a href="L05-memory-persistence.html">L05</a><a href="L06-human-in-the-loop.html" class="active">L06</a><a href="L07-streaming.html">L07</a></nav>
 
@@ -37,7 +37,7 @@
 <div class="card green-left"><div class="i18n-zh"><h3>🧠 心智模型：interrupt() = 塞车在收费站</h3></div>
 <div class="i18n-en" hidden><h3>🧠 Mental Model: interrupt() = Traffic Jam at the Tollbooth</h3></div>
 <div class="i18n-zh"><p>执行到 interrupt() → state 自动保存到 checkpointer → 返回 payload 给外部 → 等待 Command(resume=...) → 恢复执行。</p></div>
-<div class="i18n-en" hidden><p>执行到 interrupt() → state 自动保存到 checkpointer → 返回 payload 给外部 → 等待 Command(resume=...) → 恢复执行。</p></div>
+<div class="i18n-en" hidden><p>Executes to interrupt() → state Auto-save to checkpointer → Return payload to outside → Wait Command(resume=...) → Resumes execution.</p></div>
 </div>
 </div>
 
@@ -72,17 +72,17 @@ result = graph.invoke(input, config)
 <div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
 <div class="i18n-en" hidden><h4>🏗 Your Challenge</h4></div>
 <ol><div class="i18n-zh"><li>实现"修改后批准"：审批时不只是 y/n，允许人类修改后才能通过</li></div>
-<div class="i18n-en" hidden><li>实现"修改后批准"：审批时不只是 y/n，允许人类修改后才能通过</li></div>
+<div class="i18n-en" hidden><li>Implement"Approve with modification"：During approval, not just y/n，allow human modification before approval</li></div>
 <div class="i18n-zh"><li>实现 30 秒超时自动拒绝</li></div>
-<div class="i18n-en" hidden><li>实现 30 秒超时自动拒绝</li></div>
+<div class="i18n-en" hidden><li>Implement 30 second timeout auto-rejection</li></div>
 <div class="i18n-zh"><li>给 Agent 添加审批日志（每次审批记录到 state.approval_log）</li></div>
-<div class="i18n-en" hidden><li>给 Agent 添加审批日志（每次审批记录到 state.approval_log）</li></div>
+<div class="i18n-en" hidden><li>给 Agent Add approval log (record each approval to state.approval_log）</li></div>
 </ol>
 </div>
 
 <div class="review-321"><div class="box"><div class="num">3</div>
 <div class="i18n-zh"><p style="font-size:0.8em">① interrupt() 暂停  ② Command(resume=) 恢复  ③ interrupt 必须搭配 checkpointer</p></div>
-<div class="i18n-en" hidden><p style="font-size:0.8em">① interrupt() 暂停  ② Command(resume=) 恢复  ③ interrupt 必须搭配 checkpointer</p></div>
+<div class="i18n-en" hidden><p style="font-size:0.8em">① interrupt() Pause  ② Command(resume=) Recovery  ③ interrupt Must pair with checkpointer</p></div>
 </div>
 </div>
 </div>

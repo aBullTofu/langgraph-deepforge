@@ -4,7 +4,7 @@
 <div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div><a href="L11-parallel-send.html">L11</a><a href="L12-production.html" class="active">L12</a></nav>
 
 <div class="hero"><div class="i18n-zh"><h1>L12 · 生产部署</h1></div>
-<div class="i18n-en" hidden><h1>L12 · 生产部署</h1></div>
+<div class="i18n-en" hidden><h1>L12 · Production Deployment</h1></div>
 <div class="i18n-zh"><p class="subtitle">从本地脚本到可上线服务</p></div>
 <div class="i18n-en" hidden><p class="subtitle">From local script to production-ready service</p></div>
 </div>
@@ -18,7 +18,7 @@
 <div class="i18n-en" hidden><h3>📖 Fable: From Blacksmith Shop to Arsenal</h3></div>
 
 <div class="card" style="border-color:var(--purple)"><div class="i18n-zh"><p style="font-family:Georgia,serif;line-height:1.9">从前一个铁匠一天打五把剑。国王要一万把。于是他做了几件事：① 写手册（精确到炉温、淬火时间）② 建流水线（一人烧炉、一人锤打、一人淬火）③ 每工位放本子（每做完一把就记一笔）④ 设展示间（随时看进度和质量）。一个月后，一万把剑如期交付。</p></div>
-<div class="i18n-en" hidden><p style="font-family:Georgia,serif;line-height:1.9">从前一个铁匠一天打五把剑。国王要一万把。于是他做了几件事：① 写手册（精确到炉温、淬火时间）② 建流水线（一人烧炉、一人锤打、一人淬火）③ 每工位放本子（每做完一把就记一笔）④ 设展示间（随时看进度和质量）。一个月后，一万把剑如期交付。</p></div>
+<div class="i18n-en" hidden><p style="font-family:Georgia,serif;line-height:1.9">Once a blacksmith forged five swords a day. The king demanded ten thousand. So he did several things:① wrote a manual (precise furnace temperature, quenching time)② built an assembly line (one heating, one hammering, one quenching)③ placed a logbook at each station (record each completed sword)④ set up a showroom (monitor progress and quality anytime). One month later, ten thousand swords were delivered on schedule.</p></div>
 <p><a href="../reference/fables.html#fable-12">📖 完整寓言 →</a></p>
 </div>
 </div>
@@ -28,7 +28,7 @@
 
 
 <div class="i18n-zh"><h4>推荐项目结构</h4></div>
-<div class="i18n-en" hidden><h4>推荐项目结构</h4></div>
+<div class="i18n-en" hidden><h4>Recommended Project Structure</h4></div>
 
 <pre><code>my_agent/
 ├── agent/
@@ -51,7 +51,7 @@
 
 
 <div class="i18n-zh"><h4>CLI 命令</h4></div>
-<div class="i18n-en" hidden><h4>CLI 命令</h4></div>
+<div class="i18n-en" hidden><h4>CLI Command</h4></div>
 
 <pre><code>langgraph dev       <span class="cmt"># 本地开发服务器（热重载）</span>
 langgraph build     <span class="cmt"># 构建 Docker 镜像</span>
@@ -79,27 +79,27 @@ langgraph deploy    <span class="cmt"># 部署到 LangGraph Cloud</span></code><
 
 
 <div class="i18n-zh"><h4>性能要点</h4></div>
-<div class="i18n-en" hidden><h4>性能要点</h4></div>
+<div class="i18n-en" hidden><h4>Performance Tips</h4></div>
 
 <table><tr><div class="i18n-zh"><th>策略</th></div>
 <div class="i18n-en" hidden><th>Strategy</th></div><div class="i18n-zh"><th>效果</th></div>
 <div class="i18n-en" hidden><th>Effect</th></div></tr>
 
 <tr><div class="i18n-zh"><td>async 节点（ainvoke）</td></div>
-<div class="i18n-en" hidden><td>async 节点（ainvoke）</td></div><div class="i18n-zh"><td>I/O 密集场景吞吐量大幅提升</td></div>
-<div class="i18n-en" hidden><td>I/O 密集场景吞吐量大幅提升</td></div></tr>
+<div class="i18n-en" hidden><td>async Node (ainvoke）</td></div><div class="i18n-zh"><td>I/O 密集场景吞吐量大幅提升</td></div>
+<div class="i18n-en" hidden><td>I/O Massive throughput boost in I/O-heavy scenarios</td></div></tr>
 
 <tr><div class="i18n-zh"><td>PostgresSaver 替代 InMemorySaver</td></div>
-<div class="i18n-en" hidden><td>PostgresSaver 替代 InMemorySaver</td></div><div class="i18n-zh"><td>重启不丢状态，支持多实例</td></div>
-<div class="i18n-en" hidden><td>重启不丢状态，支持多实例</td></div></tr>
+<div class="i18n-en" hidden><td>PostgresSaver Alternative InMemorySaver</td></div><div class="i18n-zh"><td>重启不丢状态，支持多实例</td></div>
+<div class="i18n-en" hidden><td>No state loss on restart, supports multiple instances</td></div></tr>
 
 <tr><div class="i18n-zh"><td>无依赖节点自动并行</td></div>
-<div class="i18n-en" hidden><td>无依赖节点自动并行</td></div><div class="i18n-zh"><td>无需额外代码</td></div>
-<div class="i18n-en" hidden><td>无需额外代码</td></div></tr>
+<div class="i18n-en" hidden><td>Dependency-free nodes auto-parallelize</td></div><div class="i18n-zh"><td>无需额外代码</td></div>
+<div class="i18n-en" hidden><td>No extra code needed</td></div></tr>
 
 <tr><div class="i18n-zh"><td>Prompt Caching（Claude 特性）</td></div>
-<div class="i18n-en" hidden><td>Prompt Caching（Claude 特性）</td></div><div class="i18n-zh"><td>重复 prompt 前缀成本降低 90%</td></div>
-<div class="i18n-en" hidden><td>重复 prompt 前缀成本降低 90%</td></div></tr>
+<div class="i18n-en" hidden><td>Prompt Caching（Claude feature)</td></div><div class="i18n-zh"><td>重复 prompt 前缀成本降低 90%</td></div>
+<div class="i18n-en" hidden><td>Repeat prompt prefix cost reduced by 90%</td></div></tr>
 </table>
 </div>
 
@@ -110,16 +110,16 @@ langgraph deploy    <span class="cmt"># 部署到 LangGraph Cloud</span></code><
 <div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
 <div class="i18n-en" hidden><h4>🏗 Your Challenge</h4></div>
 <ol><div class="i18n-zh"><li>把 L04 的 ReAct Agent 按推荐结构重组</li></div>
-<div class="i18n-en" hidden><li>把 L04 的 ReAct Agent 按推荐结构重组</li></div>
+<div class="i18n-en" hidden><li>把 L04 的 ReAct Agent Reorganize by recommended structure</li></div>
 <li>运行 <code>langgraph dev</code> 启动本地服务器</li>
 <div class="i18n-zh"><li>设置 LangSmith，运行一次完整对话，查看 trace</li></div>
-<div class="i18n-en" hidden><li>设置 LangSmith，运行一次完整对话，查看 trace</li></div>
+<div class="i18n-en" hidden><li>Setup LangSmith，Run a full conversation, inspect trace</li></div>
 </ol>
 </div>
 
 <div class="review-321"><div class="box"><div class="num">3</div>
 <div class="i18n-zh"><p style="font-size:0.8em">① langgraph dev 本地跑  ② PostgresSaver 生产用  ③ LangSmith 全链路追踪</p></div>
-<div class="i18n-en" hidden><p style="font-size:0.8em">① langgraph dev 本地跑  ② PostgresSaver 生产用  ③ LangSmith 全链路追踪</p></div>
+<div class="i18n-en" hidden><p style="font-size:0.8em">① langgraph dev Local run  ② PostgresSaver Production use  ③ LangSmith Full-chain tracing</p></div>
 </div>
 </div>
 </div>

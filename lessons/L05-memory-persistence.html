@@ -2,7 +2,7 @@
 <body>
 <nav class="nav-bar"><div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
 <div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div><div class="i18n-zh"><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div>
-<div class="i18n-en" hidden><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div><div class="i18n-zh"><a href="../reference/fables.html">📖 寓言集</a></div>
+<div class="i18n-en" hidden><a href="../reference/meta-learning-guide.html">🧠 Meta-Learning</a></div><div class="i18n-zh"><a href="../reference/fables.html">📖 寓言集</a></div>
 <div class="i18n-en" hidden><a href="../reference/fables.html">📖 Fable Collection</a></div><div class="i18n-zh"><a href="../reference/pitfalls.html">⚠️ 避坑</a></div>
 <div class="i18n-en" hidden><a href="../reference/pitfalls.html">⚠️ Pitfall</a></div><a href="L04-agent-loop.html">L04</a><a href="L05-memory-persistence.html" class="active">L05</a><a href="L06-human-in-the-loop.html">L06</a></nav>
 
@@ -35,7 +35,7 @@
 <div class="card green-left"><div class="i18n-zh"><h3>🧠 心智模型：Checkpoint = 游戏存档</h3></div>
 <div class="i18n-en" hidden><h3>🧠 Mental Model: Checkpoint = Game Save</h3></div>
 <div class="i18n-zh"><p>每个 super-step 自动存档。thread_id = 存档文件名。get_state_history() = 查看所有存档。</p></div>
-<div class="i18n-en" hidden><p>每个 super-step 自动存档。thread_id = 存档文件名。get_state_history() = 查看所有存档。</p></div>
+<div class="i18n-en" hidden><p>Each super-step Auto-save.thread_id = Save file name.get_state_history() = View all saves.</p></div>
 </div>
 </div>
 
@@ -88,21 +88,21 @@ r = graph.invoke({<span class="str">"messages"</span>: [HumanMessage(<span class
 <div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
 <div class="i18n-en" hidden><h4>🏗 Your Challenge</h4></div>
 <ol><div class="i18n-zh"><li>用 SqliteSaver 替换 InMemorySaver，重启 Python 后验证记忆是否还在</li></div>
-<div class="i18n-en" hidden><li>用 SqliteSaver 替换 InMemorySaver，重启 Python 后验证记忆是否还在</li></div>
+<div class="i18n-en" hidden><li>用 SqliteSaver Replace InMemorySaver，Restart Python then verify memory is still there</li></div>
 <div class="i18n-zh"><li>创建两个不同 thread_id 的会话，验证它们的记忆完全隔离</li></div>
-<div class="i18n-en" hidden><li>Create两个不同 thread_id 的会话，验证它们的记忆完全隔离</li></div>
+<div class="i18n-en" hidden><li>CreateTwo different thread_id sessions, verify their memories are completely isolated</li></div>
 <div class="i18n-zh"><li>用 get_state_history() 打印某一会话的全部历史检查点</li></div>
-<div class="i18n-en" hidden><li>用 get_state_history() 打印某一会话的全部历史检查点</li></div>
+<div class="i18n-en" hidden><li>用 get_state_history() Print all historical checkpoints of a session</li></div>
 </ol>
 </div>
 
 <div class="review-321"><div class="box"><div class="num">3</div>
 <div class="i18n-zh"><p style="font-size:0.8em">① checkpointer 管持久化  ② thread_id 是会话指针  ③ InMemory 开发 / Sqlite 持久</p></div>
-<div class="i18n-en" hidden><p style="font-size:0.8em">① checkpointer 管持久化  ② thread_id 是会话指针  ③ InMemory 开发 / Sqlite 持久</p></div>
+<div class="i18n-en" hidden><p style="font-size:0.8em">① checkpointer Manages persistence  ② thread_id is the session pointer  ③ InMemory Development / Sqlite Persistent</p></div>
 </div>
 <div class="box"><div class="num">2</div>
 <div class="i18n-zh"><p style="font-size:0.8em">• 多轮对话客服 • 会话保持</p></div>
-<div class="i18n-en" hidden><p style="font-size:0.8em">• 多轮对话客服 • 会话保持</p></div>
+<div class="i18n-en" hidden><p style="font-size:0.8em">• Multi-turn customer service • Session persistence</p></div>
 </div>
 </div>
 </div>

@@ -22,27 +22,27 @@
 <div class="i18n-en" hidden><h3>🗺 God View</h3></div>
 
 <div class="card green-left"><div class="i18n-zh"><h3>🧠 四层防御体系</h3></div>
-<div class="i18n-en" hidden><h3>🧠 四层防御体系</h3></div>
+<div class="i18n-en" hidden><h3>🧠 Four-Layer Defense System</h3></div>
 
 <table><tr><div class="i18n-zh"><th>层级</th></div>
 <div class="i18n-en" hidden><th>Layer</th></div><div class="i18n-zh"><th>策略</th></div>
 <div class="i18n-en" hidden><th>Strategy</th></div><div class="i18n-zh"><th>LangGraph 实现</th></div>
-<div class="i18n-en" hidden><th>LangGraph 实现</th></div></tr>
+<div class="i18n-en" hidden><th>LangGraph Implement</th></div></tr>
 <tr><div class="i18n-zh"><td>1. 瞬时故障</td></div>
-<div class="i18n-en" hidden><td>1. 瞬时故障</td></div><div class="i18n-zh"><td>自动重试，指数退避</td></div>
-<div class="i18n-en" hidden><td>自动重试，指数退避</td></div><td>RetryPolicy(max_attempts=3, backoff_factor=2)</td></tr>
+<div class="i18n-en" hidden><td>1. Transient fault</td></div><div class="i18n-zh"><td>自动重试，指数退避</td></div>
+<div class="i18n-en" hidden><td>Auto-retry, exponential backoff</td></div><td>RetryPolicy(max_attempts=3, backoff_factor=2)</td></tr>
 <tr><div class="i18n-zh"><td>2. LLM 感知</td></div>
-<div class="i18n-en" hidden><td>2. LLM 感知</td></div><div class="i18n-zh"><td>工具返回错误信息给 LLM</td></div>
-<div class="i18n-en" hidden><td>工具返回错误信息给 LLM</td></div><div class="i18n-zh"><td>ToolMessage("错误：{msg}，请调整重试")</td></div>
-<div class="i18n-en" hidden><td>ToolMessage("错误：{msg}，请调整重试")</td></div></tr>
+<div class="i18n-en" hidden><td>2. LLM Perceive</td></div><div class="i18n-zh"><td>工具返回错误信息给 LLM</td></div>
+<div class="i18n-en" hidden><td>Tool returns error message to LLM</td></div><div class="i18n-zh"><td>ToolMessage("错误：{msg}，请调整重试")</td></div>
+<div class="i18n-en" hidden><td>ToolMessage("Error: {msg}，Please adjust and retry")</td></div></tr>
 <tr><div class="i18n-zh"><td>3. 人工介入</td></div>
-<div class="i18n-en" hidden><td>3. 人工介入</td></div><div class="i18n-zh"><td>暂停，等人类决定</td></div>
-<div class="i18n-en" hidden><td>暂停，等人类决定</td></div><div class="i18n-zh"><td>interrupt() 在重试耗尽后</td></div>
-<div class="i18n-en" hidden><td>interrupt() 在重试耗尽后</td></div></tr>
+<div class="i18n-en" hidden><td>3. Human intervention</td></div><div class="i18n-zh"><td>暂停，等人类决定</td></div>
+<div class="i18n-en" hidden><td>Pause, await human decision</td></div><div class="i18n-zh"><td>interrupt() 在重试耗尽后</td></div>
+<div class="i18n-en" hidden><td>interrupt() After retries exhausted</td></div></tr>
 <tr><div class="i18n-zh"><td>4. 降级回复</td></div>
-<div class="i18n-en" hidden><td>4. 降级回复</td></div><div class="i18n-zh"><td>安全停止，记录日志</td></div>
-<div class="i18n-en" hidden><td>安全停止，记录日志</td></div><div class="i18n-zh"><td>try/except → fallback 回复</td></div>
-<div class="i18n-en" hidden><td>try/except → fallback 回复</td></div></tr>
+<div class="i18n-en" hidden><td>4. Degraded response</td></div><div class="i18n-zh"><td>安全停止，记录日志</td></div>
+<div class="i18n-en" hidden><td>Safe stop, log the event</td></div><div class="i18n-zh"><td>try/except → fallback 回复</td></div>
+<div class="i18n-en" hidden><td>try/except → fallback Reply</td></div></tr>
 </table>
 </div>
 </div>
@@ -50,7 +50,7 @@
 <div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><h3>⚔️ 实战编码 <span class="timer"><span class="clock">⏱</span> 25 分钟</span></h3>
 
 <div class="i18n-zh"><h4>第 1 层：RetryPolicy</h4></div>
-<div class="i18n-en" hidden><h4>第 1 层：RetryPolicy</h4></div>
+<div class="i18n-en" hidden><h4>第 1 Layer: RetryPolicy</h4></div>
 
 <pre><code><span class="kw">from</span> langgraph.types <span class="kw">import</span> RetryPolicy
 builder.add_node(<span class="str">"api_call"</span>, call_external_api, retry_policy=RetryPolicy(
@@ -58,14 +58,14 @@ builder.add_node(<span class="str">"api_call"</span>, call_external_api, retry_p
 ))  <span class="cmt"># 重试间隔: 1s → 2s → 4s</span></code></pre>
 
 <div class="i18n-zh"><h4>第 2 层：LLM 感知错误（手动 act() 中）</h4></div>
-<div class="i18n-en" hidden><h4>第 2 层：LLM 感知错误（手动 act() 中）</h4></div>
+<div class="i18n-en" hidden><h4>第 2 Layer: LLM Perceive error (manual act() inside)</h4></div>
 
 <pre><code><span class="kw">try</span>: result = tool.invoke(args)
 <span class="kw">except</span> Exception <span class="kw">as</span> e:
     result = <span class="str">f"错误：{e}。请调整参数或换种方式重试。"</span>  <span class="cmt"># LLM 看到后自行调整</span></code></pre>
 
 <div class="i18n-zh"><h4>第 3+4 层：组合使用</h4></div>
-<div class="i18n-en" hidden><h4>第 3+4 层：组合使用</h4></div>
+<div class="i18n-en" hidden><h4>第 3+4 Layer: Combined usage</h4></div>
 
 <pre><code><span class="cmt"># RetryPolicy 自动重试 3 次 → 还失败 → interrupt 人工决定 → 降级</span>
 builder.add_node(<span class="str">"critical_action"</span>, critical_action, retry_policy=RetryPolicy(max_attempts=3))</code></pre>
@@ -80,15 +80,15 @@ builder.add_node(<span class="str">"critical_action"</span>, critical_action, re
 <div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
 <div class="i18n-en" hidden><h4>🏗 Your Challenge</h4></div>
 <ol><div class="i18n-zh"><li>给 L05 的 Agent 的 LLM 节点加上 RetryPolicy</li></div>
-<div class="i18n-en" hidden><li>给 L05 的 Agent 的 LLM 节点加上 RetryPolicy</li></div>
+<div class="i18n-en" hidden><li>给 L05 的 Agent 的 LLM Add to node RetryPolicy</li></div>
 <div class="i18n-zh"><li>让 act() 区分"可重试错误"（网络）和"不可重试错误"（参数格式不对）</li></div>
-<div class="i18n-en" hidden><li>让 act() 区分"可重试错误"（网络）和"不可重试错误"（参数格式不对）</li></div>
+<div class="i18n-en" hidden><li>让 act() Distinguish"retryable errors"（network) and"non-retryable errors"（wrong parameter format)</li></div>
 </ol>
 </div>
 
 <div class="review-321"><div class="box"><div class="num">3</div>
 <div class="i18n-zh"><p style="font-size:0.8em">① RetryPolicy 给机器用  ② 错误字符串给 LLM 用  ③ interrupt 给人用</p></div>
-<div class="i18n-en" hidden><p style="font-size:0.8em">① RetryPolicy 给机器用  ② 错误字符串给 LLM 用  ③ interrupt 给人用</p></div>
+<div class="i18n-en" hidden><p style="font-size:0.8em">① RetryPolicy For machine use  ② Error string to LLM 用  ③ interrupt For human use</p></div>
 </div>
 </div>
 </div>

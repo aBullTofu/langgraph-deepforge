@@ -29,7 +29,7 @@
 <div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><span class="timer"><span class="clock">⏱</span> 20 分钟</span></span></h3>
 
 <div class="i18n-zh"><h4>Event Streaming v3（推荐）</h4></div>
-<div class="i18n-en" hidden><h4>Event Streaming v3（推荐）</h4></div>
+<div class="i18n-en" hidden><h4>Event Streaming v3（recommended)</h4></div>
 
 <pre><code><span class="kw">from</span> langchain.messages <span class="kw">import</span> HumanMessage
 config = {<span class="str">"configurable"</span>: {<span class="str">"thread_id"</span>: <span class="str">"stream-demo"</span>}}
@@ -45,7 +45,7 @@ final = stream.output  <span class="cmt"># 最终 state</span></code></pre>
 
 
 <div class="i18n-zh"><h4>其他 Stream Modes（v2）</h4></div>
-<div class="i18n-en" hidden><h4>其他 Stream Modes（v2）</h4></div>
+<div class="i18n-en" hidden><h4>Other Stream Modes（v2）</h4></div>
 
 <pre><code><span class="cmt"># updates：每个节点完成后输出 state 变更</span>
 <span class="kw">for</span> chunk <span class="kw">in</span> graph.stream(input, stream_mode=<span class="str">"updates"</span>): ...
@@ -62,15 +62,15 @@ writer = get_stream_writer(); writer({<span class="str">"status"</span>: <span c
 <div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
 <div class="i18n-en" hidden><h4>🏗 Your Challenge</h4></div>
 <ol><div class="i18n-zh"><li>把 L05 的 Agent 改成流式输出（只改 invoke → stream_events）</li></div>
-<div class="i18n-en" hidden><li>把 L05 的 Agent 改成流式输出（只改 invoke → stream_events）</li></div>
+<div class="i18n-en" hidden><li>把 L05 的 Agent to streaming output (just change invoke → stream_events）</li></div>
 <div class="i18n-zh"><li>用 custom mode 在工具执行节点输出进度信息</li></div>
-<div class="i18n-en" hidden><li>用 custom mode 在工具执行节点输出进度信息</li></div>
+<div class="i18n-en" hidden><li>用 custom mode Output progress info in the tool execution node</li></div>
 </ol>
 </div>
 
 <div class="review-321"><div class="box"><div class="num">3</div>
 <div class="i18n-zh"><p style="font-size:0.8em">① v3 event streaming 推荐  ② stream.output 拿最终状态  ③ stream.interrupts 拿中断</p></div>
-<div class="i18n-en" hidden><p style="font-size:0.8em">① v3 event streaming 推荐  ② stream.output 拿最终状态  ③ stream.interrupts 拿中断</p></div>
+<div class="i18n-en" hidden><p style="font-size:0.8em">① v3 event streaming Recommended  ② stream.output Get final state  ③ stream.interrupts Get interrupts</p></div>
 </div>
 </div>
 </div>

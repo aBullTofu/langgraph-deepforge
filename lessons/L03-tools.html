@@ -2,7 +2,7 @@
 <body>
 <nav class="nav-bar"><div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
 <div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div><div class="i18n-zh"><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div>
-<div class="i18n-en" hidden><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div><div class="i18n-zh"><a href="../reference/fables.html">📖 寓言集</a></div>
+<div class="i18n-en" hidden><a href="../reference/meta-learning-guide.html">🧠 Meta-Learning</a></div><div class="i18n-zh"><a href="../reference/fables.html">📖 寓言集</a></div>
 <div class="i18n-en" hidden><a href="../reference/fables.html">📖 Fable Collection</a></div><div class="i18n-zh"><a href="../reference/pitfalls.html">⚠️ 避坑</a></div>
 <div class="i18n-en" hidden><a href="../reference/pitfalls.html">⚠️ Pitfall</a></div><a href="L01-state-nodes-edges.html">L01</a><a href="L02-first-llm-agent.html">L02</a><a href="L03-tools.html" class="active">L03</a><a href="L04-agent-loop.html">L04</a></nav>
 
@@ -10,7 +10,7 @@
 <div class="phase" data-phase="ignition"><span class="phase-num">Phase 0 · Ignition</span><h3>⚡ 认知点火 <span class="timer"><span class="clock">⏱</span> 2 分钟</span></h3>
 
 <div class="i18n-zh"><p>L02 的 Agent 只会"说话"。试试问它：</p></div>
-<div class="i18n-en" hidden><p>L02 的 Agent 只会"说话"。试试问它：</p></div>
+<div class="i18n-en" hidden><p>L02 的 Agent Only"Speak"。Try asking it:</p></div>
 
 <div class="scenario"><div class="role">🔥 点火问题</div>
 <p class="quote">"3 加 5 等于多少？" → L02 的 Agent 会回复"等于 8"——但这是 LLM <strong>背出来</strong>的，不是它<strong>算出来</strong>的。问它 "1234567 乘以 7654321 等于多少？"→ 它就瞎编了。</p>
@@ -88,7 +88,7 @@ model_with_tools = model.bind_tools(tools)  <span class="i18n-zh" style="display
 
 
 <div class="i18n-zh"><h4>Step 3：LLM 节点 + 条件边</h4></div>
-<div class="i18n-en" hidden><h4>Step 3：LLM 节点 + Conditional Edge</h4></div>
+<div class="i18n-en" hidden><h4>Step 3：LLM Node + Conditional Edge</h4></div>
 
 <pre><code><span class="kw">def</span> <span class="fn">llm_node</span>(state: AgentState) -> dict:
     msgs = [SystemMessage(<span class="str">"你是助手，需要计算时调用工具"</span>)] + state[<span class="str">"messages"</span>]
@@ -135,21 +135,21 @@ graph = builder.compile()</code></pre>
 <ol><li>添加 <code>subtract</code> 和 <code>divide</code> 工具（除零返回友好错误）</li>
 <li>用 <code>requests</code> 或 <code>httpx</code> 实现一个真实的网络搜索工具</li>
 <div class="i18n-zh"><li>在 llm_node 中打印 LLM 的 tool_calls，观察它决定调了哪些工具、传了什么参数</li></div>
-<div class="i18n-en" hidden><li>在 llm_node 中打印 LLM 的 tool_calls，观察它决定调了哪些工具、传了什么参数</li></div>
+<div class="i18n-en" hidden><li>在 llm_node print in LLM 的 tool_calls，observe which tools it decided to call and what parameters it passed</li></div>
 </ol>
 </div>
 
 <div class="review-321"><div class="box"><div class="num">3</div>
 <div class="i18n-zh"><p style="font-size:0.8em">① add_messages 是必须的  ② bind_tools 告知 LLM  ③ ToolNode 自动执行</p></div>
-<div class="i18n-en" hidden><p style="font-size:0.8em">① add_messages 是必须的  ② bind_tools 告知 LLM  ③ ToolNode 自动执行</p></div>
+<div class="i18n-en" hidden><p style="font-size:0.8em">① add_messages is mandatory  ② bind_tools Inform LLM  ③ ToolNode Auto-executes</p></div>
 </div>
 <div class="box"><div class="num">2</div>
 <div class="i18n-zh"><p style="font-size:0.8em">• Agent 管家 • 智能客服查询系统</p></div>
-<div class="i18n-en" hidden><p style="font-size:0.8em">• Agent 管家 • 智能客服查询系统</p></div>
+<div class="i18n-en" hidden><p style="font-size:0.8em">• Agent Agent • Intelligent customer service query system</p></div>
 </div>
 <div class="box"><div class="num">1</div>
 <div class="i18n-zh"><p style="font-size:0.8em">如果 LLM 同时调了两个工具，ToolNode 怎么处理？</p></div>
-<div class="i18n-en" hidden><p style="font-size:0.8em">如果 LLM 同时调了两个工具，ToolNode 怎么处理？</p></div>
+<div class="i18n-en" hidden><p style="font-size:0.8em">If LLM calls two tools simultaneously,ToolNode How to handle?</p></div>
 </div>
 </div>
 </div>

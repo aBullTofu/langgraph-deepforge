@@ -4,7 +4,7 @@
 <div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div><a href="L08-error-handling.html">L08</a><a href="L09-subgraphs.html" class="active">L09</a><a href="L10-multi-agent.html">L10</a><a href="L11-parallel-send.html">L11</a><a href="L12-production.html">L12</a></nav>
 
 <div class="hero"><div class="i18n-zh"><h1>L09 · 子图</h1></div>
-<div class="i18n-en" hidden><h1>L09 · 子图</h1></div>
+<div class="i18n-en" hidden><h1>L09 · Subgraph</h1></div>
 <div class="i18n-zh"><p class="subtitle">把复杂 Agent 拆成可管理的模块</p></div>
 <div class="i18n-en" hidden><p class="subtitle">Break complex Agents into manageable modules</p></div>
 </div>
@@ -26,7 +26,7 @@
 <div class="i18n-en" hidden><h3>⚔️ Combat Coding</h3></div>
 
 <div class="i18n-zh"><h4>模式一：不同 State Schema（推荐，解耦）</h4></div>
-<div class="i18n-en" hidden><h4>模式一：不同 State Schema（推荐，解耦）</h4></div>
+<div class="i18n-en" hidden><h4>Pattern 1: Different State Schema（recommended, decoupled)</h4></div>
 
 <pre><code><span class="cmt"># 子图独立 State</span>
 <span class="kw">class</span> <span class="type">SubState</span>(TypedDict): sub_input: str; sub_result: str
@@ -41,13 +41,13 @@ subgraph = sub_builder.compile()
 
 
 <div class="i18n-zh"><h4>模式二：共享 State Schema（直接挂载）</h4></div>
-<div class="i18n-en" hidden><h4>模式二：共享 State Schema（直接挂载）</h4></div>
+<div class="i18n-en" hidden><h4>Pattern 2: Shared State Schema（Direct mount)</h4></div>
 
 <pre><code>builder.add_node(<span class="str">"sub_node"</span>, compiled_subgraph)  <span class="cmt"># 子图直接作为节点，共享 State</span></code></pre>
 
 
 <div class="i18n-zh"><h4>Checkpoint 命名空间</h4></div>
-<div class="i18n-en" hidden><h4>Checkpoint 命名空间</h4></div>
+<div class="i18n-en" hidden><h4>Checkpoint Namespace</h4></div>
 
 <pre><code><span class="kw">def</span> <span class="fn">my_node</span>(state, config: RunnableConfig):
     ns = config[<span class="str">"configurable"</span>][<span class="str">"checkpoint_ns"</span>]  <span class="cmt"># 子图独立命名空间</span></code></pre>
@@ -62,15 +62,15 @@ subgraph = sub_builder.compile()
 <div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
 <div class="i18n-en" hidden><h4>🏗 Your Challenge</h4></div>
 <ol><div class="i18n-zh"><li>把 L04 的手动 ReAct Agent 拆成子图：think + act 打包为一个 Agent 子图</li></div>
-<div class="i18n-en" hidden><li>把 L04 的手动 ReAct Agent 拆成子图：think + act 打包为一个 Agent 子图</li></div>
+<div class="i18n-en" hidden><li>把 L04 manual ReAct Agent Split into subgraphs:think + act Package as one Agent Subgraph</li></div>
 <div class="i18n-zh"><li>创建两个不同 Agent 子图（数学 Agent + 天气 Agent），父图负责路由</li></div>
-<div class="i18n-en" hidden><li>Create两个不同 Agent 子图（数学 Agent + 天气 Agent），父图负责路由</li></div>
+<div class="i18n-en" hidden><li>CreateTwo different Agent Subgraphs (Math Agent + Weather Agent），Parent graph handles routing</li></div>
 </ol>
 </div>
 
 <div class="review-321"><div class="box"><div class="num">3</div>
 <div class="i18n-zh"><p style="font-size:0.8em">① 子图=独立图  ② 不同 Schema 用包装函数  ③ 共享 Schema 直接挂载</p></div>
-<div class="i18n-en" hidden><p style="font-size:0.8em">① 子图=独立图  ② 不同 Schema 用包装函数  ③ 共享 Schema 直接挂载</p></div>
+<div class="i18n-en" hidden><p style="font-size:0.8em">① Subgraph=Independent graph  ② Different Schema Use wrapper function  ③ Shared Schema Direct mount</p></div>
 </div>
 </div>
 </div>
