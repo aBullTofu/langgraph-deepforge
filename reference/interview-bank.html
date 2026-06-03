@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LangGraph & AI 面试题库 — 金字塔结构</title>
+<title><span class="i18n-zh">LangGraph &amp; AI 面试题库 — 金字塔结构</span><span class="i18n-en" hidden>LangGraph &amp; AI Interview Question Bank — Pyramid Structure</span></title>
 <link rel="stylesheet" href="../css/style.css">
 <style>
 /* ——— Pyramid Visualisation ——— */
@@ -124,1558 +124,918 @@
 .q-card.hidden { display: none; }
 </style>
 </head>
-
 <body>
 
 <!-- Hero -->
 <div class="hero">
-  <h1>🏔️ LangGraph & AI 面试题库</h1>
-
-  <p class="subtitle">金字塔结构 · 5 层 100 题 · 6 种题型 · 全面覆盖面试官考核维度</p>
-
+  <h1><span class="i18n-zh">🏔️ LangGraph &amp; AI 面试题库</span><span class="i18n-en" hidden>🏔️ LangGraph &amp; AI Interview Question Bank</span></h1>
+  <p class="subtitle"><span class="i18n-zh">金字塔结构 · 5 层 100 题 · 6 种题型 · 全面覆盖面试官考核维度</span><span class="i18n-en" hidden>Pyramid Structure · 5 Tiers 100 Questions · 6 Types · Full Coverage of Interviewer Evaluation Dimensions</span></p>
   <div class="badge-row">
-    <span class="badge badge-green">LangGraph 专项</span>
-    <span class="badge badge-yellow">AI 通用知识</span>
-    <span class="badge badge-red">真实面试真题</span>
-    <span class="badge" style="background:rgba(167,139,250,0.18);color:#a78bfa;">含答案库</span>
+    <span class="badge badge-green"><span class="i18n-zh">LangGraph 专项</span><span class="i18n-en" hidden>LangGraph Specialized</span></span>
+    <span class="badge badge-yellow"><span class="i18n-zh">AI 通用知识</span><span class="i18n-en" hidden>AI General Knowledge</span></span>
+    <span class="badge badge-red"><span class="i18n-zh">真实面试真题</span><span class="i18n-en" hidden>Real Interview Questions</span></span>
+    <span class="badge" style="background:rgba(167,139,250,0.18);color:#a78bfa;"><span class="i18n-zh">含答案库</span><span class="i18n-en" hidden>Includes Answer Bank</span></span>
   </div>
-
 </div>
-
 
 <!-- Stats -->
 <div class="stats-bar">
-  <div class="stat"><div class="num">100</div>
-<div class="label">总题目数</div>
+  <div class="stat"><div class="num">100</div><div class="label"><span class="i18n-zh">总题目数</span><span class="i18n-en" hidden>Total Questions</span></div></div>
+  <div class="stat"><div class="num">5</div><div class="label"><span class="i18n-zh">金字塔层级</span><span class="i18n-en" hidden>Pyramid Tiers</span></div></div>
+  <div class="stat"><div class="num">7</div><div class="label"><span class="i18n-zh">题目类型（含CR）</span><span class="i18n-en" hidden>Question Types (incl. CR)</span></div></div>
+  <div class="stat"><div class="num">25+</div><div class="label"><span class="i18n-zh">真题来源</span><span class="i18n-en" hidden>Real Question Sources</span></div></div>
+  <div class="stat"><div class="num">12</div><div class="label"><span class="i18n-zh">课程关联课时</span><span class="i18n-en" hidden>Related Course Lessons</span></div></div>
 </div>
-
-  <div class="stat"><div class="num">5</div>
-<div class="label">金字塔层级</div>
-</div>
-
-  <div class="stat"><div class="num">7</div>
-<div class="label">题目类型（含CR）</div>
-</div>
-
-  <div class="stat"><div class="num">25+</div>
-<div class="label">真题来源</div>
-</div>
-
-  <div class="stat"><div class="num">12</div>
-<div class="label">课程关联课时</div>
-</div>
-
-</div>
-
 
 <!-- Answer bank link -->
 <div class="answer-link-box">
-  <p>📖 所有题目的完整答案、代码示例和面试官评分解读 →</p>
-
-  <a href="answer-bank.html">查看完整答案库 (Answer Bank)</a>
+  <p><span class="i18n-zh">📖 所有题目的完整答案、代码示例和面试官评分解读 →</span><span class="i18n-en" hidden>📖 Complete answers, code examples, and interviewer scoring breakdowns for all questions →</span></p>
+  <a href="answer-bank.html"><span class="i18n-zh">查看完整答案库 (Answer Bank)</span><span class="i18n-en" hidden>View Complete Answer Bank (Answer Bank)</span></a>
 </div>
-
 
 <!-- Search -->
 <div class="search-box">
   <input type="text" id="searchInput" placeholder="🔍 搜索题目（关键词、题号、概念...）" oninput="filterQuestions()">
 </div>
 
-
 <!-- Pyramid -->
-<h2 style="text-align:center; border:none; margin-top:40px;">🏗️ 金字塔结构总览</h2>
-
-<p style="text-align:center; color:var(--text-2); margin-bottom: 10px;">点击层级跳转 | 从底层基础 → 顶层专家，层层递进</p>
-
+<h2 style="text-align:center; border:none; margin-top:40px;"><span class="i18n-zh">🏗️ 金字塔结构总览</span><span class="i18n-en" hidden>🏗️ Pyramid Structure Overview</span></h2>
+<p style="text-align:center; color:var(--text-2); margin-bottom: 10px;"><span class="i18n-zh">点击层级跳转 | 从底层基础 → 顶层专家，层层递进</span><span class="i18n-en" hidden>Click tiers to navigate | From foundation to expert, progressive learning</span></p>
 
 <div class="pyramid-container">
-  <div class="pyramid-layer pyr-l5 locked-content" data-require-stage="expert"><a href="#L5">🔴 L5 · 专家/架构层 — Multi-Agent, Production, A2A, Security</a><div class="qcount">15 题 (Q86-Q100)</div>
+  <div class="pyramid-layer pyr-l5 locked-content" data-require-stage="expert"><a href="#L5"><span class="i18n-zh">🔴 L5 · 专家/架构层 — Multi-Agent, Production, A2A, Security</span><span class="i18n-en" hidden>🔴 L5 · Expert/Architecture — Multi-Agent, Production, A2A, Security</span></a><div class="qcount"><span class="i18n-zh">15 题 (Q86-Q100)</span><span class="i18n-en" hidden>15 Questions (Q86-Q100)</span></div></div>
+  <div class="pyramid-layer pyr-l4 locked-content" data-require-stage="expert"><a href="#L4"><span class="i18n-zh">🟠 L4 · 高级应用层 — Checkpointing, Streaming, HITL, Middleware</span><span class="i18n-en" hidden>🟠 L4 · Advanced Applications — Checkpointing, Streaming, HITL, Middleware</span></a><div class="qcount"><span class="i18n-zh">18 题 (Q68-Q85)</span><span class="i18n-en" hidden>18 Questions (Q68-Q85)</span></div></div>
+  <div class="pyramid-layer pyr-l3 locked-content" data-require-stage="professional"><a href="#L3"><span class="i18n-zh">🟡 L3 · LangGraph 核心层 — StateGraph, Nodes, Edges, Reducers, Agent Loop</span><span class="i18n-en" hidden>🟡 L3 · LangGraph Core — StateGraph, Nodes, Edges, Reducers, Agent Loop</span></a><div class="qcount"><span class="i18n-zh">20 题 (Q48-Q67)</span><span class="i18n-en" hidden>20 Questions (Q48-Q67)</span></div></div>
+  <div class="pyramid-layer pyr-l2 locked-content" data-require-stage="professional"><a href="#L2"><span class="i18n-zh">🟢 L2 · LangChain &amp; RAG 技能层 — Chains, RAG, Vector DBs, MCP, Tools</span><span class="i18n-en" hidden>🟢 L2 · LangChain &amp; RAG Skills — Chains, RAG, Vector DBs, MCP, Tools</span></a><div class="qcount"><span class="i18n-zh">22 题 (Q26-Q47)</span><span class="i18n-en" hidden>22 Questions (Q26-Q47)</span></div></div>
+  <div class="pyramid-layer pyr-l1"><a href="#L1"><span class="i18n-zh">🔵 L1 · AI/LLM 基础层 — Transformers, LLM APIs, Prompt Engineering, 模型选型</span><span class="i18n-en" hidden>🔵 L1 · AI/LLM Fundamentals — Transformers, LLM APIs, Prompt Engineering, Model Selection</span></a><div class="qcount"><span class="i18n-zh">25 题 (Q1-Q25)</span><span class="i18n-en" hidden>25 Questions (Q1-Q25)</span></div></div>
 </div>
-
-  <div class="pyramid-layer pyr-l4 locked-content" data-require-stage="expert"><a href="#L4">🟠 L4 · 高级应用层 — Checkpointing, Streaming, HITL, Middleware</a><div class="qcount">18 题 (Q68-Q85)</div>
-</div>
-
-  <div class="pyramid-layer pyr-l3 locked-content" data-require-stage="professional"><a href="#L3">🟡 L3 · LangGraph 核心层 — StateGraph, Nodes, Edges, Reducers, Agent Loop</a><div class="qcount">20 题 (Q48-Q67)</div>
-</div>
-
-  <div class="pyramid-layer pyr-l2 locked-content" data-require-stage="professional"><a href="#L2">🟢 L2 · LangChain & RAG 技能层 — Chains, RAG, Vector DBs, MCP, Tools</a><div class="qcount">22 题 (Q26-Q47)</div>
-</div>
-
-  <div class="pyramid-layer pyr-l1"><a href="#L1">🔵 L1 · AI/LLM 基础层 — Transformers, LLM APIs, Prompt Engineering, 模型选型</a><div class="qcount">25 题 (Q1-Q25)</div>
-</div>
-
-</div>
-
 
 <!-- ——— L1: Foundation ——— -->
 <div class="q-section" id="L1">
-  <h2><span class="emoji">🔵</span> L1 · AI/LLM 基础层 <span class="badge badge-green" style="font-size:0.7em">25 题</span></h2>
-
-  <p style="color:var(--text-2); margin-bottom:20px;">考核 Transformer 原理、LLM 工作机制、Prompt Engineering、Embeddings、模型选型、Python 异步编程 — <strong>面试第一道筛子，60%候选人倒在这一层</strong></p>
-
+  <h2><span class="emoji">🔵</span><span class="i18n-zh"> L1 · AI/LLM 基础层 </span><span class="i18n-en" hidden>L1 · AI/LLM Fundamentals</span><span class="badge badge-green" style="font-size:0.7em"><span class="i18n-zh">25 题</span><span class="i18n-en" hidden>25 Questions</span></span></h2>
+  <p style="color:var(--text-2); margin-bottom:20px;"><span class="i18n-zh">考核 Transformer 原理、LLM 工作机制、Prompt Engineering、Embeddings、模型选型、Python 异步编程 — </span><span class="i18n-en" hidden>Covers Transformer principles, LLM mechanisms, Prompt Engineering, Embeddings, model selection, Python async programming —</span><strong><span class="i18n-zh">面试第一道筛子，60%候选人倒在这一层</span><span class="i18n-en" hidden>The first filter in interviews, 60% of candidates fail here</span></strong></p>
 
   <div class="q-card l1">
-    <div class="q-id">Q1 <span class="q-type type-kc">知识检查</span> <span class="q-type type-ca">对比分析</span></div>
-
-    <h3><a href="answer-bank.html#A1">Transformer 中的 Self-Attention 机制是如何工作的？为什么说 "Attention Is All You Need"？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>考察对 Transformer 核心机制的理解深度。不能只背公式，要能解释 Q/K/V 的直觉含义和 Multi-Head Attention 的设计动机。</div>
-
-    <div class="q-course-link">📎 预修知识 · 与 L01 StateGraph 的数据流概念呼应</div>
-
+    <div class="q-id">Q1 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span> <span class="q-type type-ca"><span class="i18n-zh">对比分析</span><span class="i18n-en" hidden>Comparative Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A1"><span class="i18n-zh">Transformer 中的 Self-Attention 机制是如何工作的？为什么说 &quot;Attention Is All You Need&quot;？</span><span class="i18n-en" hidden>How does the Self-Attention mechanism in Transformers work? Why is it said that "Attention Is All You Need"?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">考察对 Transformer 核心机制的理解深度。不能只背公式，要能解释 Q/K/V 的直觉含义和 Multi-Head Attention 的设计动机。</span><span class="i18n-en" hidden>Tests depth of understanding of the Transformer core mechanism. Not just memorizing formulas — explain the intuition behind Q/K/V and the design motivation for Multi-Head Attention.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 预修知识 · 与 L01 StateGraph 的数据流概念呼应</span><span class="i18n-en" hidden>📎 Prerequisite Knowledge · Echoes L01 StateGraph Data Flow Concepts</span></div>
   </div>
 
-
   <div class="q-card l1">
-    <div class="q-id">Q2 <span class="q-type type-ci">代码实现</span></div>
-
-    <h3><a href="answer-bank.html#A2">用 NumPy 从头实现一个简化的 Scaled Dot-Product Attention</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>这是大厂高频手写题。考察能否把理论转化为代码，同时检查对 softmax 数值稳定性、masking 的工程意识。</div>
-
-    <div class="q-course-link">📎 预修知识</div>
-
+    <div class="q-id">Q2 <span class="q-type type-ci"><span class="i18n-zh">代码实现</span><span class="i18n-en" hidden>Code Implementation</span></span></div>
+    <h3><a href="answer-bank.html#A2"><span class="i18n-zh">用 NumPy 从头实现一个简化的 Scaled Dot-Product Attention</span><span class="i18n-en" hidden>Implement a simplified Scaled Dot-Product Attention from scratch using NumPy</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">这是大厂高频手写题。考察能否把理论转化为代码，同时检查对 softmax 数值稳定性、masking 的工程意识。</span><span class="i18n-en" hidden>This is a high-frequency whiteboard coding question at top companies. Tests the ability to translate theory into code and engineering awareness of softmax numerical stability and masking.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 预修知识</span><span class="i18n-en" hidden>📎 Prerequisite Knowledge</span></div>
   </div>
 
-
   <div class="q-card l1">
-    <div class="q-id">Q3 <span class="q-type type-kc">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A3">为什么 Attention 计算中要除以 √dk？不除会怎样？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>字节/阿里高频题。测试对数学细节的理解和数值稳定性意识，区分"看过论文"和"真正理解"。</div>
-
-    <div class="q-course-link">📎 预修知识</div>
-
+    <div class="q-id">Q3 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A3"><span class="i18n-zh">为什么 Attention 计算中要除以 √dk？不除会怎样？</span><span class="i18n-en" hidden>Why divide by √dk in Attention computation? What happens if you do not?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">字节/阿里高频题。测试对数学细节的理解和数值稳定性意识，区分&quot;看过论文&quot;和&quot;真正理解&quot;。</span><span class="i18n-en" hidden>High-frequency question at ByteDance/Alibaba. Tests understanding of mathematical details and numerical stability awareness, distinguishing "read the paper" from "truly understood."</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 预修知识</span><span class="i18n-en" hidden>📎 Prerequisite Knowledge</span></div>
   </div>
 
-
   <div class="q-card l1">
-    <div class="q-id">Q4 <span class="q-type type-ca">对比分析</span></div>
-
-    <h3><a href="answer-bank.html#A4">位置编码有哪些类型？RoPE 相比 Sinusoidal Positional Encoding 有什么优势？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>考察对 LLM 演进趋势的跟踪。RoPE 是当前主流（LLaMA, Qwen, DeepSeek），要能解释其相对位置建模的核心思想。</div>
-
-    <div class="q-course-link">📎 预修知识</div>
-
+    <div class="q-id">Q4 <span class="q-type type-ca"><span class="i18n-zh">对比分析</span><span class="i18n-en" hidden>Comparative Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A4"><span class="i18n-zh">位置编码有哪些类型？RoPE 相比 Sinusoidal Positional Encoding 有什么优势？</span><span class="i18n-en" hidden>What types of positional encoding exist? What advantages does RoPE have over Sinusoidal Positional Encoding?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">考察对 LLM 演进趋势的跟踪。RoPE 是当前主流（LLaMA, Qwen, DeepSeek），要能解释其相对位置建模的核心思想。</span><span class="i18n-en" hidden>Tests tracking of LLM evolution trends. RoPE is currently mainstream (LLaMA, Qwen, DeepSeek) — must explain the core idea of relative position modeling.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 预修知识</span><span class="i18n-en" hidden>📎 Prerequisite Knowledge</span></div>
   </div>
 
-
   <div class="q-card l1">
-    <div class="q-id">Q5 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A5">一个 LLM 在回答"最新奥运会金牌榜"时产生幻觉，说出了一个不存在的运动员名字。请分析幻觉的根本原因和至少 3 种工程化解决方案。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>场景驱动考核幻觉治理。要区分训练数据截止、概率采样、缺乏 grounding 三种原因，并给出 RAG、function calling、constrained decoding 等方案。</div>
-
-    <div class="q-course-link">📎 预修知识 · 与 L02 Agent 幻觉控制呼应</div>
-
+    <div class="q-id">Q5 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A5"><span class="i18n-zh">一个 LLM 在回答&quot;最新奥运会金牌榜&quot;时产生幻觉，说出了一个不存在的运动员名字。请分析幻觉的根本原因和至少 3 种工程化解决方案。</span><span class="i18n-en" hidden>An LLM hallucinated when answering about "the latest Olympic medal table," inventing a non-existent athlete name. Analyze the root causes of hallucination and propose at least 3 engineering solutions.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">场景驱动考核幻觉治理。要区分训练数据截止、概率采样、缺乏 grounding 三种原因，并给出 RAG、function calling、constrained decoding 等方案。</span><span class="i18n-en" hidden>Scenario-driven assessment of hallucination governance. Distinguish three causes: training data cutoff, probabilistic sampling, lack of grounding. Provide solutions like RAG, function calling, constrained decoding.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 预修知识 · 与 L02 Agent 幻觉控制呼应</span><span class="i18n-en" hidden>📎 Prerequisite Knowledge · Echoes L02 Agent Hallucination Control</span></div>
   </div>
 
-
   <div class="q-card l1">
-    <div class="q-id">Q6 <span class="q-type type-kc">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A6">解释 Temperature、Top-p、Top-k 三个采样参数的区别和适用场景</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>基础但必考。要能说出事实性任务用低 temperature + greedy，创意任务用高 temperature，以及 Top-p 的动态候选集特点。</div>
-
-    <div class="q-course-link">📎 预修知识 · L02 Agent 配置中涉及</div>
-
+    <div class="q-id">Q6 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A6"><span class="i18n-zh">解释 Temperature、Top-p、Top-k 三个采样参数的区别和适用场景</span><span class="i18n-en" hidden>Explain the differences between Temperature, Top-p, and Top-k sampling parameters and their applicable scenarios</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">基础但必考。要能说出事实性任务用低 temperature + greedy，创意任务用高 temperature，以及 Top-p 的动态候选集特点。</span><span class="i18n-en" hidden>Basic but mandatory. Must state: factual tasks use low temperature + greedy, creative tasks use high temperature, and Top-p has dynamic candidate set characteristics.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 预修知识 · L02 Agent 配置中涉及</span><span class="i18n-en" hidden>📎 Prerequisite Knowledge · Involved in L02 Agent Configuration</span></div>
   </div>
 
-
   <div class="q-card l1">
-    <div class="q-id">Q7 <span class="q-type type-ca">对比分析</span></div>
-
-    <h3><a href="answer-bank.html#A7">GPT 系列（decoder-only） vs BERT（encoder-only） vs T5（encoder-decoder）的架构差异和各自适用场景是什么？为什么当前 LLM 都是 decoder-only？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>考察对 LLM 家族谱系的理解。Decoder-only 的统一序列建模、自回归生成、scaling law 友好是核心答案。</div>
-
-    <div class="q-course-link">📎 预修知识</div>
-
+    <div class="q-id">Q7 <span class="q-type type-ca"><span class="i18n-zh">对比分析</span><span class="i18n-en" hidden>Comparative Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A7"><span class="i18n-zh">GPT 系列（decoder-only） vs BERT（encoder-only） vs T5（encoder-decoder）的架构差异和各自适用场景是什么？为什么当前 LLM 都是 decoder-only？</span><span class="i18n-en" hidden>What are the architectural differences between GPT (decoder-only), BERT (encoder-only), and T5 (encoder-decoder), and their applicable scenarios? Why are current LLMs all decoder-only?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">考察对 LLM 家族谱系的理解。Decoder-only 的统一序列建模、自回归生成、scaling law 友好是核心答案。</span><span class="i18n-en" hidden>Tests understanding of the LLM family tree. Unified sequence modeling, autoregressive generation, and scaling law friendliness are the core answers.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 预修知识</span><span class="i18n-en" hidden>📎 Prerequisite Knowledge</span></div>
   </div>
 
-
   <div class="q-card l1">
-    <div class="q-id">Q8 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A8">给一个 LLM 设计 System Prompt 来构建一个"只会回答编程问题、拒绝聊天的 AI 助手"，写出 Prompt 并解释设计要点。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Prompt Engineering 实战。考察是否知道角色设定、边界定义、Few-shot 示例、输出格式约束等技巧。</div>
-
-    <div class="q-course-link">📎 预修知识 · L02 Agent system prompt 设计</div>
-
+    <div class="q-id">Q8 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A8"><span class="i18n-zh">给一个 LLM 设计 System Prompt 来构建一个&quot;只会回答编程问题、拒绝聊天的 AI 助手&quot;，写出 Prompt 并解释设计要点。</span><span class="i18n-en" hidden>Design a System Prompt for an LLM to create an "AI assistant that only answers programming questions and refuses to chat." Write the prompt and explain the design points.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Prompt Engineering 实战。考察是否知道角色设定、边界定义、Few-shot 示例、输出格式约束等技巧。</span><span class="i18n-en" hidden>Practical Prompt Engineering. Tests knowledge of role definition, boundary setting, few-shot examples, output format constraints, and other techniques.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 预修知识 · L02 Agent system prompt 设计</span><span class="i18n-en" hidden>📎 Prerequisite Knowledge · L02 Agent System Prompt Design</span></div>
   </div>
 
-
   <div class="q-card l1">
-    <div class="q-id">Q9 <span class="q-type type-kc">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A9">什么是 Tokenization？BPE（Byte-Pair Encoding）的基本原理是什么？为什么中文 tokenization 比英文更困难？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Tokenization 是 LLM 最基础但容易被忽略的环节，直接影响推理成本和效果。</div>
-
-    <div class="q-course-link">📎 预修知识</div>
-
+    <div class="q-id">Q9 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A9"><span class="i18n-zh">什么是 Tokenization？BPE（Byte-Pair Encoding）的基本原理是什么？为什么中文 tokenization 比英文更困难？</span><span class="i18n-en" hidden>What is Tokenization? What is the basic principle of BPE (Byte-Pair Encoding)? Why is Chinese tokenization more difficult than English?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Tokenization 是 LLM 最基础但容易被忽略的环节，直接影响推理成本和效果。</span><span class="i18n-en" hidden>Tokenization is the most basic yet easily overlooked aspect of LLMs, directly affecting inference cost and effectiveness.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 预修知识</span><span class="i18n-en" hidden>📎 Prerequisite Knowledge</span></div>
   </div>
 
-
   <div class="q-card l1">
-    <div class="q-id">Q10 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A10">用户报告你的 LLM 应用"输出太长被截断了"。分析可能的原因和解决方案。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>综合排查能力。涉及 max_tokens、context window、output parser、streaming 等多个知识点。</div>
-
-    <div class="q-course-link">📎 预修知识 · L07 Streaming 直接相关</div>
-
+    <div class="q-id">Q10 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A10"><span class="i18n-zh">用户报告你的 LLM 应用&quot;输出太长被截断了&quot;。分析可能的原因和解决方案。</span><span class="i18n-en" hidden>A user reports that your LLM application "output is too long and gets truncated." Analyze possible causes and solutions.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">综合排查能力。涉及 max_tokens、context window、output parser、streaming 等多个知识点。</span><span class="i18n-en" hidden>Comprehensive troubleshooting ability. Involves max_tokens, context window, output parser, streaming, and more.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 预修知识 · L07 Streaming 直接相关</span><span class="i18n-en" hidden>📎 Prerequisite Knowledge · Directly Related to L07 Streaming</span></div>
   </div>
 
-
   <div class="q-card l1">
-    <div class="q-id">Q11 <span class="q-type type-ca">对比分析</span></div>
-
-    <h3><a href="answer-bank.html#A11">OpenAI API vs 开源模型（LLaMA/Qwen/DeepSeek）的选型决策：从成本、隐私、可控性、效果四个维度分析。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>工程决策能力。不能只说"开源好"或"API 方便"，要能根据场景（金融/医疗/通用）给出具体选型逻辑。</div>
-
-    <div class="q-course-link">📎 预修知识 · L12 Production 涉及模型选型</div>
-
+    <div class="q-id">Q11 <span class="q-type type-ca"><span class="i18n-zh">对比分析</span><span class="i18n-en" hidden>Comparative Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A11"><span class="i18n-zh">OpenAI API vs 开源模型（LLaMA/Qwen/DeepSeek）的选型决策：从成本、隐私、可控性、效果四个维度分析。</span><span class="i18n-en" hidden>OpenAI API vs open-source models (LLaMA/Qwen/DeepSeek): analyze selection decisions across four dimensions: cost, privacy, controllability, and effectiveness.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">工程决策能力。不能只说&quot;开源好&quot;或&quot;API 方便&quot;，要能根据场景（金融/医疗/通用）给出具体选型逻辑。</span><span class="i18n-en" hidden>Engineering decision-making ability. Cannot just say "open-source is better" or "API is convenient" — must provide specific selection logic based on scenarios (finance/healthcare/general).</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 预修知识 · L12 Production 涉及模型选型</span><span class="i18n-en" hidden>📎 Prerequisite Knowledge · L12 Production Involves Model Selection</span></div>
   </div>
 
-
   <div class="q-card l1">
-    <div class="q-id">Q12 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A12">如何让 LLM 输出结构化的 JSON？有哪些方法？各自的优缺点是什么？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Structured Output 是 Agent 开发的基础。考察 prompt 约束、JSON mode、function calling、grammar-guided generation 等多种方案。</div>
-
-    <div class="q-course-link">📎 预修知识 · L03 Tools 中涉及 structured output</div>
-
+    <div class="q-id">Q12 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A12"><span class="i18n-zh">如何让 LLM 输出结构化的 JSON？有哪些方法？各自的优缺点是什么？</span><span class="i18n-en" hidden>How to make an LLM output structured JSON? What methods exist? What are their pros and cons?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Structured Output 是 Agent 开发的基础。考察 prompt 约束、JSON mode、function calling、grammar-guided generation 等多种方案。</span><span class="i18n-en" hidden>Structured Output is fundamental to Agent development. Tests prompt constraints, JSON mode, function calling, grammar-guided generation, and other approaches.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 预修知识 · L03 Tools 中涉及 structured output</span><span class="i18n-en" hidden>📎 Prerequisite Knowledge · L03 Tools Involves Structured Output</span></div>
   </div>
 
-
   <div class="q-card l1">
-    <div class="q-id">Q13 <span class="q-type type-kc">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A13">什么是 Embedding？文本 Embedding 的语义空间有什么特性？Cosine Similarity 为什么比 Euclidean Distance 更常用？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Vector 基础是 RAG 的基石。要能解释 embedding 在高维空间中的语义聚集特性。</div>
-
-    <div class="q-course-link">📎 预修知识 · L03 RAG 基础</div>
-
+    <div class="q-id">Q13 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A13"><span class="i18n-zh">什么是 Embedding？文本 Embedding 的语义空间有什么特性？Cosine Similarity 为什么比 Euclidean Distance 更常用？</span><span class="i18n-en" hidden>What is Embedding? What characteristics does the semantic space of text embeddings have? Why is Cosine Similarity more commonly used than Euclidean Distance?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Vector 基础是 RAG 的基石。要能解释 embedding 在高维空间中的语义聚集特性。</span><span class="i18n-en" hidden>Vector fundamentals are the cornerstone of RAG. Must explain the semantic clustering properties of embeddings in high-dimensional space.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 预修知识 · L03 RAG 基础</span><span class="i18n-en" hidden>📎 Prerequisite Knowledge · L03 RAG Fundamentals</span></div>
   </div>
 
-
   <div class="q-card l1">
-    <div class="q-id">Q14 <span class="q-type type-kc">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A14">什么是 Context Window（上下文窗口）？128K 上下文是不是意味着 RAG 不再需要了？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>考察对长上下文 LLM 时代的工程判断。长上下文不能替代 RAG，因为成本、延迟、"Lost in the Middle" 效应。</div>
-
-    <div class="q-course-link">📎 预修知识 · L03 RAG 基础</div>
-
+    <div class="q-id">Q14 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A14"><span class="i18n-zh">什么是 Context Window（上下文窗口）？128K 上下文是不是意味着 RAG 不再需要了？</span><span class="i18n-en" hidden>What is a Context Window? Does 128K context mean RAG is no longer needed?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">考察对长上下文 LLM 时代的工程判断。长上下文不能替代 RAG，因为成本、延迟、&quot;Lost in the Middle&quot; 效应。</span><span class="i18n-en" hidden>Tests engineering judgment in the long-context LLM era. Long context cannot replace RAG due to cost, latency, and the "Lost in the Middle" effect.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 预修知识 · L03 RAG 基础</span><span class="i18n-en" hidden>📎 Prerequisite Knowledge · L03 RAG Fundamentals</span></div>
   </div>
 
-
   <div class="q-card l1">
-    <div class="q-id">Q15 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A15">Prompt Caching 是什么？什么场景下用它最有效？它的工作原理是怎样的？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>成本优化意识。Prompt caching 可以将长 system prompt 的重复成本降低 90%，是生产环境必备知识。</div>
-
-    <div class="q-course-link">📎 预修知识 · L12 Production 成本优化</div>
-
+    <div class="q-id">Q15 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A15"><span class="i18n-zh">Prompt Caching 是什么？什么场景下用它最有效？它的工作原理是怎样的？</span><span class="i18n-en" hidden>What is Prompt Caching? In what scenarios is it most effective? How does it work?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">成本优化意识。Prompt caching 可以将长 system prompt 的重复成本降低 90%，是生产环境必备知识。</span><span class="i18n-en" hidden>Cost optimization awareness. Prompt caching can reduce the recurring cost of long system prompts by 90% — essential knowledge for production environments.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 预修知识 · L12 Production 成本优化</span><span class="i18n-en" hidden>📎 Prerequisite Knowledge · L12 Production Cost Optimization</span></div>
   </div>
 
-
   <div class="q-card l1">
-    <div class="q-id">Q16 <span class="q-type type-ca">对比分析</span> <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A16m">2026 年主流 LLM 选型：DeepSeek-V3/R1、Qwen3、Claude Opus 4.7、GPT-5 — 从成本、推理能力、中文能力、部署方式四个维度给出选型决策矩阵</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>2026 面试官不再接受"用 OpenAI"这种一刀切答案。要能根据场景（高精度推理/低成本批量/中文优化/私有化部署）给出具体选型逻辑。DeepSeek 的 MoE+MLA、Qwen 的中文优势、Claude 的深度推理都是高频考点。</div>
-
-    <div class="q-course-link">📎 预修知识 · L02 Agent 模型选择</div>
-
+    <div class="q-id">Q16 <span class="q-type type-ca"><span class="i18n-zh">对比分析</span><span class="i18n-en" hidden>Comparative Analysis</span></span> <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A16m"><span class="i18n-zh">2026 年主流 LLM 选型：DeepSeek-V3/R1、Qwen3、Claude Opus 4.7、GPT-5 — 从成本、推理能力、中文能力、部署方式四个维度给出选型决策矩阵</span><span class="i18n-en" hidden>2026 mainstream LLM selection: DeepSeek-V3/R1, Qwen3, Claude Opus 4.7, GPT-5 — provide a selection decision matrix across cost, reasoning capability, Chinese capability, and deployment methods</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">2026 面试官不再接受&quot;用 OpenAI&quot;这种一刀切答案。要能根据场景（高精度推理/低成本批量/中文优化/私有化部署）给出具体选型逻辑。DeepSeek 的 MoE+MLA、Qwen 的中文优势、Claude 的深度推理都是高频考点。</span><span class="i18n-en" hidden>2026 interviewers no longer accept "just use OpenAI" as a one-size-fits-all answer. Must provide specific selection logic based on scenarios (high-precision reasoning/low-cost batch/Chinese optimization/private deployment). DeepSeek MoE+MLA, Qwen Chinese advantage, and Claude deep reasoning are all high-frequency topics.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 预修知识 · L02 Agent 模型选择</span><span class="i18n-en" hidden>📎 Prerequisite Knowledge · L02 Agent Model Selection</span></div>
   </div>
 
-
   <div class="q-card l1">
-    <div class="q-id">Q17 <span class="q-type type-kc">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A17m">DeepSeek-V2/V3 的 MLA (Multi-head Latent Attention) 是什么？它如何压缩 KV Cache？相比 MHA 和 GQA 有什么优势？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>2026 年中国面试最高频话题之一。MLA 是 DeepSeek 的核心创新，通过低秩压缩将 KV cache 减少 90%+，是 DeepSeek 低成本推理的关键。要能说出"将 K 和 V 投影到低维潜在空间再展开"的核心思想。</div>
-
-    <div class="q-course-link">📎 L12 Production 模型推理优化</div>
-
+    <div class="q-id">Q17 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A17m"><span class="i18n-zh">DeepSeek-V2/V3 的 MLA (Multi-head Latent Attention) 是什么？它如何压缩 KV Cache？相比 MHA 和 GQA 有什么优势？</span><span class="i18n-en" hidden>What is DeepSeek-V2/V3 MLA (Multi-head Latent Attention)? How does it compress KV Cache? What advantages does it have over MHA and GQA?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">2026 年中国面试最高频话题之一。MLA 是 DeepSeek 的核心创新，通过低秩压缩将 KV cache 减少 90%+，是 DeepSeek 低成本推理的关键。要能说出&quot;将 K 和 V 投影到低维潜在空间再展开&quot;的核心思想。</span><span class="i18n-en" hidden>One of the highest-frequency interview topics in China 2026. MLA is DeepSeek core innovation, reducing KV cache by 90%+ through low-rank compression — the key to DeepSeek low-cost inference. Must articulate the core idea of "projecting K and V into a low-dimensional latent space then expanding."</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L12 Production 模型推理优化</span><span class="i18n-en" hidden>📎 L12 Production Model Inference Optimization</span></div>
   </div>
 
-
   <div class="q-card l1">
-    <div class="q-id">Q18 <span class="q-type type-ci">代码实现</span></div>
-
-    <h3><a href="answer-bank.html#A18m">用 Python asyncio 实现一个并发调用 3 个不同 LLM API 的聚合函数，要求：设置总超时 30s、任一失败不影响其余、返回所有成功结果</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Python 异步编程是 Agent 开发的基础功。Agent 需要同时调用多个工具/模型，asyncio.gather + return_exceptions 是最佳实践。</div>
-
-    <div class="q-course-link">📎 预修知识 · L04 Agent Loop 并发调用</div>
-
+    <div class="q-id">Q18 <span class="q-type type-ci"><span class="i18n-zh">代码实现</span><span class="i18n-en" hidden>Code Implementation</span></span></div>
+    <h3><a href="answer-bank.html#A18m"><span class="i18n-zh">用 Python asyncio 实现一个并发调用 3 个不同 LLM API 的聚合函数，要求：设置总超时 30s、任一失败不影响其余、返回所有成功结果</span><span class="i18n-en" hidden>Implement a concurrent aggregation function in Python asyncio that calls 3 different LLM APIs: total timeout 30s, any single failure does not affect others, return all successful results</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Python 异步编程是 Agent 开发的基础功。Agent 需要同时调用多个工具/模型，asyncio.gather + return_exceptions 是最佳实践。</span><span class="i18n-en" hidden>Python async programming is a fundamental skill for Agent development. Agents need to call multiple tools/models concurrently — asyncio.gather + return_exceptions is best practice.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 预修知识 · L04 Agent Loop 并发调用</span><span class="i18n-en" hidden>📎 Prerequisite Knowledge · L04 Agent Loop Concurrent Calls</span></div>
   </div>
 
-
   <div class="q-card l1">
-    <div class="q-id">Q19 <span class="q-type type-kc">知识检查</span> <span class="q-type type-db">调试排错</span></div>
-
-    <h3><a href="answer-bank.html#A19m">什么是 KV Cache？为什么它对 LLM 推理性能至关重要？如果 KV Cache 被错误共享会导致什么问题？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>KV Cache 是理解 LLM 推理成本的基础。自回归生成时，已计算的 K/V 被缓存避免重复计算。Prompt Caching 本质上是 KV Cache 的跨请求复用。</div>
-
+    <div class="q-id">Q19 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span> <span class="q-type type-db"><span class="i18n-zh">调试排错</span><span class="i18n-en" hidden>Debugging</span></span></div>
+    <h3><a href="answer-bank.html#A19m"><span class="i18n-zh">什么是 KV Cache？为什么它对 LLM 推理性能至关重要？如果 KV Cache 被错误共享会导致什么问题？</span><span class="i18n-en" hidden>What is KV Cache? Why is it critical for LLM inference performance? What problems arise if KV Cache is incorrectly shared?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">KV Cache 是理解 LLM 推理成本的基础。自回归生成时，已计算的 K/V 被缓存避免重复计算。Prompt Caching 本质上是 KV Cache 的跨请求复用。</span><span class="i18n-en" hidden>KV Cache is fundamental to understanding LLM inference cost. During autoregressive generation, computed K/V are cached to avoid recomputation. Prompt Caching is essentially cross-request KV Cache reuse.</span></div>
     <div class="q-course-link">📎 L07 Streaming + L12 Production</div>
-
   </div>
 
-
   <div class="q-card l1">
-    <div class="q-id">Q20 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A20m">一个 Agent 每天处理 10 万次调用，每次平均 3000 input tokens + 500 output tokens。用 GPT-4o ($2.50/$10 per 1M tokens) 估算日成本，并提出 3 种降本方案。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>成本意识是生产级工程师的标志。不能只看单价，要会算总账。降本方案：模型路由（简单任务用小模型）、Prompt Caching、上下文压缩。</div>
-
-    <div class="q-course-link">📎 L12 Production 成本优化</div>
-
+    <div class="q-id">Q20 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A20m"><span class="i18n-zh">一个 Agent 每天处理 10 万次调用，每次平均 3000 input tokens + 500 output tokens。用 GPT-4o ($2.50/$10 per 1M tokens) 估算日成本，并提出 3 种降本方案。</span><span class="i18n-en" hidden>An Agent handles 100K calls per day, each averaging 3000 input tokens + 500 output tokens. Using GPT-4o ($2.50/$10 per 1M tokens), estimate daily cost and propose 3 cost-reduction strategies.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">成本意识是生产级工程师的标志。不能只看单价，要会算总账。降本方案：模型路由（简单任务用小模型）、Prompt Caching、上下文压缩。</span><span class="i18n-en" hidden>Cost awareness is the mark of a production-grade engineer. Cannot just look at unit prices — must calculate total cost. Reduction strategies: model routing (small models for simple tasks), Prompt Caching, context compression.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L12 Production 成本优化</span><span class="i18n-en" hidden>📎 L12 Production Cost Optimization</span></div>
   </div>
 
-
   <div class="q-card l1">
-    <div class="q-id">Q21 <span class="q-type type-ka">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A21m">LoRA 和 QLoRA 是什么？什么场景下应该 Fine-tune 而不是用 Few-shot Prompting？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Fine-tuning 是 RAG/Prompt Engineering 之外的第三条路。LoRA 通过低秩矩阵适配只训练少量参数（<1%），QLoRA 进一步量化到 4-bit。</div>
-
-    <div class="q-course-link">📎 预修知识 · L12 Production</div>
-
+    <div class="q-id">Q21 <span class="q-type type-ka"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A21m"><span class="i18n-zh">LoRA 和 QLoRA 是什么？什么场景下应该 Fine-tune 而不是用 Few-shot Prompting？</span><span class="i18n-en" hidden>What are LoRA and QLoRA? In what scenarios should you Fine-tune instead of using Few-shot Prompting?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Fine-tuning 是 RAG/Prompt Engineering 之外的第三条路。LoRA 通过低秩矩阵适配只训练少量参数（</span><span class="i18n-en" hidden>Fine-tuning is the third path beyond RAG/Prompt Engineering. LoRA trains only a small number of parameters (</span><<span class="i18n-zh">1%），QLoRA 进一步量化到 4-bit。</span><span class="i18n-en" hidden>1%), QLoRA further quantizes to 4-bit.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 预修知识 · L12 Production</span><span class="i18n-en" hidden>📎 Prerequisite Knowledge · L12 Production</span></div>
   </div>
 
-
   <div class="q-card l1">
-    <div class="q-id">Q22 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A22m">LLM 推理中 GPU 显存不够怎么办？列出至少 5 种优化策略及其 trade-off。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>GPU 显存是部署自建模型的第一拦路虎。量化(GPTQ/AWQ)、Flash Attention、vLLM PagedAttention、tensor parallelism、CPU offloading。</div>
-
-    <div class="q-course-link">📎 L12 Production GPU 部署</div>
-
+    <div class="q-id">Q22 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A22m"><span class="i18n-zh">LLM 推理中 GPU 显存不够怎么办？列出至少 5 种优化策略及其 trade-off。</span><span class="i18n-en" hidden>What to do when GPU memory is insufficient for LLM inference? List at least 5 optimization strategies and their trade-offs.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">GPU 显存是部署自建模型的第一拦路虎。量化(GPTQ/AWQ)、Flash Attention、vLLM PagedAttention、tensor parallelism、CPU offloading。</span><span class="i18n-en" hidden>GPU memory is the first barrier to self-hosted model deployment. Quantization (GPTQ/AWQ), Flash Attention, vLLM PagedAttention, tensor parallelism, CPU offloading.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L12 Production GPU 部署</span><span class="i18n-en" hidden>📎 L12 Production GPU Deployment</span></div>
   </div>
 
-
   <div class="q-card l1">
-    <div class="q-id">Q23 <span class="q-type type-ka">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A23m">如何评估一个 LLM 的质量？预训练阶段和指令微调阶段的评估指标有什么不同？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>评估意识。预训练看 PPL（困惑度），指令微调后看 MMLU（知识）、HumanEval（代码）、MT-Bench（对话）、AlpacaEval（指令跟随）。</div>
-
+    <div class="q-id">Q23 <span class="q-type type-ka"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A23m"><span class="i18n-zh">如何评估一个 LLM 的质量？预训练阶段和指令微调阶段的评估指标有什么不同？</span><span class="i18n-en" hidden>How to evaluate the quality of an LLM? What are the different evaluation metrics for pre-training vs instruction fine-tuning stages?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">评估意识。预训练看 PPL（困惑度），指令微调后看 MMLU（知识）、HumanEval（代码）、MT-Bench（对话）、AlpacaEval（指令跟随）。</span><span class="i18n-en" hidden>Evaluation awareness. Pre-training looks at PPL (perplexity); post-instruction-tuning looks at MMLU (knowledge), HumanEval (code), MT-Bench (conversation), AlpacaEval (instruction following).</span></div>
     <div class="q-course-link">📎 L12 Evaluation</div>
-
   </div>
 
-
   <div class="q-card l1">
-    <div class="q-id">Q24 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A24m">上下文窗口从 4K → 128K → 1M token，Agent 架构需要做什么调整？哪些模式会改变，哪些不会？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>长上下文不是万能药。1M context 下 RAG 仍然需要（成本+Lost in Middle），但 Agent 的上下文裁剪策略需要重新设计，"全量塞入"不可行。</div>
-
-    <div class="q-course-link">📎 L05 Memory + L12 上下文管理</div>
-
+    <div class="q-id">Q24 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A24m"><span class="i18n-zh">上下文窗口从 4K → 128K → 1M token，Agent 架构需要做什么调整？哪些模式会改变，哪些不会？</span><span class="i18n-en" hidden>As context windows go from 4K → 128K → 1M tokens, what adjustments does Agent architecture need? Which patterns change, and which do not?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">长上下文不是万能药。1M context 下 RAG 仍然需要（成本+Lost in Middle），但 Agent 的上下文裁剪策略需要重新设计，&quot;全量塞入&quot;不可行。</span><span class="i18n-en" hidden>Long context is not a panacea. Even with 1M context, RAG is still needed (cost + Lost in Middle), but Agent context trimming strategies need redesign — "stuff everything in" is not feasible.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L05 Memory + L12 上下文管理</span><span class="i18n-en" hidden>📎 L05 Memory + L12 Context Management</span></div>
   </div>
 
-
   <div class="q-card l1">
-    <div class="q-id">Q25 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A25m">Prompt Injection（提示词注入）是什么？给出 3 种防御方案，并说明各自的局限性。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>AI Safety 是 2026 年面试必考题。防御方案：输入输出分离（user vs system message role）、输入过滤+净化、权限分级+Human-in-the-Loop。要能说出每种方案被绕过的可能。</div>
-
+    <div class="q-id">Q25 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A25m"><span class="i18n-zh">Prompt Injection（提示词注入）是什么？给出 3 种防御方案，并说明各自的局限性。</span><span class="i18n-en" hidden>What is Prompt Injection? Provide 3 defense strategies and explain their limitations.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">AI Safety 是 2026 年面试必考题。防御方案：输入输出分离（user vs system message role）、输入过滤+净化、权限分级+Human-in-the-Loop。要能说出每种方案被绕过的可能。</span><span class="i18n-en" hidden>AI Safety is a must-ask topic in 2026 interviews. Defense strategies: input/output separation (user vs system message role), input filtering + sanitization, permission tiering + Human-in-the-Loop. Must explain how each can be bypassed.</span></div>
     <div class="q-course-link">📎 L06 HITL + L12 Security</div>
-
   </div>
-
 </div>
-
 
 <!-- ——— L2: LangChain & RAG ——— -->
 <div class="locked-content" data-require-stage="professional">
 <div class="q-section" id="L2">
-  <h2><span class="emoji">🟢</span> L2 · LangChain & RAG 技能层 <span class="badge badge-green" style="font-size:0.7em">22 题</span></h2>
-
-  <p style="color:var(--text-2); margin-bottom:20px;">考核 LangChain 核心组件、RAG 全链路、向量数据库、<strong>MCP 协议</strong>、工具调用 — LangGraph 的前置技能</p>
-
+  <h2><span class="emoji">🟢</span><span class="i18n-zh"> L2 · LangChain &amp; RAG 技能层 </span><span class="i18n-en" hidden>L2 · LangChain &amp; RAG Skills</span><span class="badge badge-green" style="font-size:0.7em"><span class="i18n-zh">22 题</span><span class="i18n-en" hidden>22 Questions</span></span></h2>
+  <p style="color:var(--text-2); margin-bottom:20px;"><span class="i18n-zh">考核 LangChain 核心组件、RAG 全链路、向量数据库、</span><span class="i18n-en" hidden>Covers LangChain core components, RAG pipeline, vector databases, </span><strong><span class="i18n-zh">MCP 协议</span><span class="i18n-en" hidden>MCP protocol</span></strong><span class="i18n-zh">、工具调用 — LangGraph 的前置技能</span><span class="i18n-en" hidden>, tool calling — Prerequisite skills for LangGraph</span></p>
 
   <div class="q-card l2">
-    <div class="q-id">Q16 <span class="q-type type-kc">知识检查</span> <span class="q-type type-ca">对比分析</span></div>
-
-    <h3><a href="answer-bank.html#A16">LangChain 解决了什么问题？它的核心抽象有哪些？Chain 和 Agent 的根本区别是什么？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>几乎所有 AI 面试的开场题。要把 LangChain 定位为"LLM 应用开发的脚手架"，说清 Model I/O、Retrieval、Chains、Agents、Memory 五大模块。</div>
-
-    <div class="q-course-link">📎 L01 StateGraph 引出 LangChain → LangGraph 演化</div>
-
+    <div class="q-id">Q16 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span> <span class="q-type type-ca"><span class="i18n-zh">对比分析</span><span class="i18n-en" hidden>Comparative Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A16"><span class="i18n-zh">LangChain 解决了什么问题？它的核心抽象有哪些？Chain 和 Agent 的根本区别是什么？</span><span class="i18n-en" hidden>What problems does LangChain solve? What are its core abstractions? What is the fundamental difference between Chain and Agent?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">几乎所有 AI 面试的开场题。要把 LangChain 定位为&quot;LLM 应用开发的脚手架&quot;，说清 Model I/O、Retrieval、Chains、Agents、Memory 五大模块。</span><span class="i18n-en" hidden>The opening question in almost every AI interview. Position LangChain as "scaffolding for LLM application development," clearly explaining the five modules: Model I/O, Retrieval, Chains, Agents, Memory.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L01 StateGraph 引出 LangChain → LangGraph 演化</span><span class="i18n-en" hidden>📎 L01 StateGraph → LangChain → LangGraph Evolution</span></div>
   </div>
 
-
   <div class="q-card l2">
-    <div class="q-id">Q17 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A17">什么是 RAG（Retrieval-Augmented Generation）？请详细描述一个完整的 RAG Pipeline 从文档到答案的全过程。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>RAG 是最基础的应用模式。要能画出完整链路：Document → Chunking → Embedding → Vector Store → Query → Retrieve → Rerank → Generate。</div>
-
-    <div class="q-course-link">📎 L03 Tools 中 RAG 集成</div>
-
+    <div class="q-id">Q17 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A17"><span class="i18n-zh">什么是 RAG（Retrieval-Augmented Generation）？请详细描述一个完整的 RAG Pipeline 从文档到答案的全过程。</span><span class="i18n-en" hidden>What is RAG (Retrieval-Augmented Generation)? Describe in detail the complete RAG Pipeline from document to answer.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">RAG 是最基础的应用模式。要能画出完整链路：Document → Chunking → Embedding → Vector Store → Query → Retrieve → Rerank → Generate。</span><span class="i18n-en" hidden>RAG is the most fundamental application pattern. Must draw the complete chain: Document → Chunking → Embedding → Vector Store → Query → Retrieve → Rerank → Generate.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L03 Tools 中 RAG 集成</span><span class="i18n-en" hidden>📎 L03 Tools RAG Integration</span></div>
   </div>
 
-
   <div class="q-card l2">
-    <div class="q-id">Q18 <span class="q-type type-ca">对比分析</span></div>
-
-    <h3><a href="answer-bank.html#A18">Naive RAG、Advanced RAG、Agentic RAG 有什么区别？分别在什么场景选用？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>RAG 演进路径的理解。Naive=检索+生成, Advanced=加rerank/query rewrite, Agentic=Agent 自主决定何时检索、检索什么、检索后怎么用。</div>
-
-    <div class="q-course-link">📎 L04 Agent Loop 中 Agentic RAG</div>
-
+    <div class="q-id">Q18 <span class="q-type type-ca"><span class="i18n-zh">对比分析</span><span class="i18n-en" hidden>Comparative Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A18"><span class="i18n-zh">Naive RAG、Advanced RAG、Agentic RAG 有什么区别？分别在什么场景选用？</span><span class="i18n-en" hidden>What are the differences between Naive RAG, Advanced RAG, and Agentic RAG? In what scenarios is each chosen?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">RAG 演进路径的理解。Naive=检索+生成, Advanced=加rerank/query rewrite, Agentic=Agent 自主决定何时检索、检索什么、检索后怎么用。</span><span class="i18n-en" hidden>Understanding of RAG evolution path. Naive = retrieve + generate, Advanced = add rerank/query rewrite, Agentic = Agent autonomously decides when to retrieve, what to retrieve, and how to use retrieval results.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L04 Agent Loop 中 Agentic RAG</span><span class="i18n-en" hidden>📎 L04 Agent Loop Agentic RAG</span></div>
   </div>
 
-
   <div class="q-card l2">
-    <div class="q-id">Q19 <span class="q-type type-sa">场景分析</span> <span class="q-type type-db">调试排错</span></div>
-
-    <h3><a href="answer-bank.html#A19">RAG 系统检索到的文档与用户问题不相关，可能的原因有哪些？如何逐一排查和修复？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>RAG 排错是实战高频场景。涉及 chunk size、embedding model 选择、query rewriting、hybrid search、reranker 等调试手段。</div>
-
+    <div class="q-id">Q19 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span> <span class="q-type type-db"><span class="i18n-zh">调试排错</span><span class="i18n-en" hidden>Debugging</span></span></div>
+    <h3><a href="answer-bank.html#A19"><span class="i18n-zh">RAG 系统检索到的文档与用户问题不相关，可能的原因有哪些？如何逐一排查和修复？</span><span class="i18n-en" hidden>Documents retrieved by a RAG system are irrelevant to the user query. What are possible causes? How to troubleshoot and fix each one?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">RAG 排错是实战高频场景。涉及 chunk size、embedding model 选择、query rewriting、hybrid search、reranker 等调试手段。</span><span class="i18n-en" hidden>RAG troubleshooting is a high-frequency practical scenario. Involves chunk size, embedding model selection, query rewriting, hybrid search, reranker, and other debugging techniques.</span></div>
     <div class="q-course-link">📎 L03 Tools + L04 Agent Loop</div>
-
   </div>
 
-
   <div class="q-card l2">
-    <div class="q-id">Q20 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A20">文档 Chunking 策略如何选择？Chunk Size 太大或太小各有什么问题？什么是 Semantic Chunking？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Chunking 是 RAG 的决定性因素。要说出：太小→丢失上下文, 太大→噪音+Lost in Middle, Semantic Chunking 按语义边界切分。</div>
-
-    <div class="q-course-link">📎 L03 Tools RAG 预处理</div>
-
+    <div class="q-id">Q20 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A20"><span class="i18n-zh">文档 Chunking 策略如何选择？Chunk Size 太大或太小各有什么问题？什么是 Semantic Chunking？</span><span class="i18n-en" hidden>How to choose a document Chunking strategy? What are the problems with too large or too small Chunk Size? What is Semantic Chunking?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Chunking 是 RAG 的决定性因素。要说出：太小→丢失上下文, 太大→噪音+Lost in Middle, Semantic Chunking 按语义边界切分。</span><span class="i18n-en" hidden>Chunking is the decisive factor for RAG. Must state: too small → loses context, too large → noise + Lost in Middle, Semantic Chunking splits at semantic boundaries.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L03 Tools RAG 预处理</span><span class="i18n-en" hidden>📎 L03 Tools RAG Preprocessing</span></div>
   </div>
 
-
   <div class="q-card l2">
-    <div class="q-id">Q21 <span class="q-type type-kc">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A21">什么是向量数据库？FAISS、Chroma、Pinecone、Weaviate 各有什么特点？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>向量数据库选型。FAISS（本地/高性能）、Chroma（轻量开发）、Pinecone（托管/生产）、Weaviate（混合搜索）。</div>
-
+    <div class="q-id">Q21 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A21"><span class="i18n-zh">什么是向量数据库？FAISS、Chroma、Pinecone、Weaviate 各有什么特点？</span><span class="i18n-en" hidden>What is a vector database? What are the characteristics of FAISS, Chroma, Pinecone, and Weaviate?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">向量数据库选型。FAISS（本地/高性能）、Chroma（轻量开发）、Pinecone（托管/生产）、Weaviate（混合搜索）。</span><span class="i18n-en" hidden>Vector database selection. FAISS (local/high-performance), Chroma (lightweight development), Pinecone (managed/production), Weaviate (hybrid search).</span></div>
     <div class="q-course-link">📎 L03 Tools</div>
-
   </div>
 
-
   <div class="q-card l2">
-    <div class="q-id">Q22 <span class="q-type type-ca">对比分析</span></div>
-
-    <h3><a href="answer-bank.html#A22">语义搜索（Semantic Search）和关键词搜索（Keyword Search）各有什么优缺点？什么场景需要混合检索（Hybrid Search）？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>检索策略的深度理解。语义搜索理解同义词但可能漏精确匹配，关键词搜索精确但不懂语义，工业场景通常需要混合。</div>
-
-    <div class="q-course-link">📎 L03 Tools 检索策略</div>
-
+    <div class="q-id">Q22 <span class="q-type type-ca"><span class="i18n-zh">对比分析</span><span class="i18n-en" hidden>Comparative Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A22"><span class="i18n-zh">语义搜索（Semantic Search）和关键词搜索（Keyword Search）各有什么优缺点？什么场景需要混合检索（Hybrid Search）？</span><span class="i18n-en" hidden>What are the pros and cons of Semantic Search vs Keyword Search? In what scenarios is Hybrid Search needed?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">检索策略的深度理解。语义搜索理解同义词但可能漏精确匹配，关键词搜索精确但不懂语义，工业场景通常需要混合。</span><span class="i18n-en" hidden>Deep understanding of retrieval strategies. Semantic search understands synonyms but may miss exact matches; keyword search is precise but lacks semantic understanding. Industrial scenarios typically need both.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L03 Tools 检索策略</span><span class="i18n-en" hidden>📎 L03 Tools Retrieval Strategies</span></div>
   </div>
 
-
   <div class="q-card l2">
-    <div class="q-id">Q23 <span class="q-type type-ci">代码实现</span></div>
-
-    <h3><a href="answer-bank.html#A23">用 LangChain 实现一个 RAG 系统：加载 PDF → 分块 → 创建 FAISS 索引 → 相似度检索 → 生成回答。写完整代码。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>RAG 端到端编码能力。要完整写出 DocumentLoader → TextSplitter → Embeddings → VectorStore → Retriever → LLM Chain。</div>
-
-    <div class="q-course-link">📎 L03 Tools 实战</div>
-
+    <div class="q-id">Q23 <span class="q-type type-ci"><span class="i18n-zh">代码实现</span><span class="i18n-en" hidden>Code Implementation</span></span></div>
+    <h3><a href="answer-bank.html#A23"><span class="i18n-zh">用 LangChain 实现一个 RAG 系统：加载 PDF → 分块 → 创建 FAISS 索引 → 相似度检索 → 生成回答。写完整代码。</span><span class="i18n-en" hidden>Implement a RAG system with LangChain: load PDF → split into chunks → create FAISS index → similarity search → generate answer. Write complete code.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">RAG 端到端编码能力。要完整写出 DocumentLoader → TextSplitter → Embeddings → VectorStore → Retriever → LLM Chain。</span><span class="i18n-en" hidden>End-to-end RAG coding ability. Must fully write out DocumentLoader → TextSplitter → Embeddings → VectorStore → Retriever → LLM Chain.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L03 Tools 实战</span><span class="i18n-en" hidden>📎 L03 Tools Hands-on</span></div>
   </div>
 
-
   <div class="q-card l2">
-    <div class="q-id">Q24 <span class="q-type type-kc">知识检查</span> <span class="q-type type-ca">对比分析</span></div>
-
-    <h3><a href="answer-bank.html#A24">RAG、Fine-tuning、Prompt Engineering 三者的适用场景和成本对比？什么时候该 Fine-tune 而不是用 RAG？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>方案选型决策能力。核心判断：RAG=外部知识注入, Fine-tune=行为/风格内化, PE=快速迭代。Fine-tune 适合风格/格式固化, RAG 适合知识频繁更新。</div>
-
+    <div class="q-id">Q24 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span> <span class="q-type type-ca"><span class="i18n-zh">对比分析</span><span class="i18n-en" hidden>Comparative Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A24"><span class="i18n-zh">RAG、Fine-tuning、Prompt Engineering 三者的适用场景和成本对比？什么时候该 Fine-tune 而不是用 RAG？</span><span class="i18n-en" hidden>What are the applicable scenarios and cost comparisons of RAG, Fine-tuning, and Prompt Engineering? When should you Fine-tune instead of using RAG?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">方案选型决策能力。核心判断：RAG=外部知识注入, Fine-tune=行为/风格内化, PE=快速迭代。Fine-tune 适合风格/格式固化, RAG 适合知识频繁更新。</span><span class="i18n-en" hidden>Solution selection decision-making ability. Core judgment: RAG = external knowledge injection, Fine-tune = behavior/style internalization, PE = rapid iteration. Fine-tune suits style/format solidification; RAG suits frequently updated knowledge.</span></div>
     <div class="q-course-link">📎 L03 Tools + L12 Production</div>
-
   </div>
 
-
   <div class="q-card l2">
-    <div class="q-id">Q25 <span class="q-type type-kc">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A25">LangChain 中的 Memory 有哪几种类型？ConversationBufferMemory 和 ConversationSummaryMemory 的区别？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>记忆管理是 Agent 核心。Buffer 存储完整历史（简单但费 token），Summary 只存摘要（省 token 但丢失细节），实际生产更倾向用 LangGraph 的 checkpoint。</div>
-
+    <div class="q-id">Q25 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A25"><span class="i18n-zh">LangChain 中的 Memory 有哪几种类型？ConversationBufferMemory 和 ConversationSummaryMemory 的区别？</span><span class="i18n-en" hidden>What types of Memory exist in LangChain? What is the difference between ConversationBufferMemory and ConversationSummaryMemory?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">记忆管理是 Agent 核心。Buffer 存储完整历史（简单但费 token），Summary 只存摘要（省 token 但丢失细节），实际生产更倾向用 LangGraph 的 checkpoint。</span><span class="i18n-en" hidden>Memory management is core to Agents. Buffer stores complete history (simple but token-expensive), Summary stores only summaries (token-efficient but loses detail). Production tends to prefer LangGraph checkpointing.</span></div>
     <div class="q-course-link">📎 L05 Memory & Persistence</div>
-
   </div>
 
-
   <div class="q-card l2">
-    <div class="q-id">Q26 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A26">用户问"上周的产品发布会结果如何？"，你的 RAG 系统中没有相关信息。设计一个优雅的"不知道"处理策略。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>边界情况处理。好的设计：检索置信度阈值 → 低于阈值时触发"知识库未覆盖"回复 → 可选升级到人工或建议联网搜索。</div>
-
-    <div class="q-course-link">📎 L06 HITL 审批流程</div>
-
+    <div class="q-id">Q26 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A26"><span class="i18n-zh">用户问&quot;上周的产品发布会结果如何？&quot;，你的 RAG 系统中没有相关信息。设计一个优雅的&quot;不知道&quot;处理策略。</span><span class="i18n-en" hidden>A user asks "How did last week product launch go?" and your RAG system has no relevant information. Design an elegant "I do not know" handling strategy.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">边界情况处理。好的设计：检索置信度阈值 → 低于阈值时触发&quot;知识库未覆盖&quot;回复 → 可选升级到人工或建议联网搜索。</span><span class="i18n-en" hidden>Edge case handling. Good design: retrieval confidence threshold → trigger "knowledge base uncovered" response when below threshold → optional escalation to human or suggest web search.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L06 HITL 审批流程</span><span class="i18n-en" hidden>📎 L06 HITL Approval Workflow</span></div>
   </div>
 
-
   <div class="q-card l2">
-    <div class="q-id">Q27 <span class="q-type type-ka">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A27">什么是 Re-Ranking？为什么 RAG 系统中需要 Re-Ranker？常用的 Re-Ranker 有哪些？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>RAG 进阶知识。向量检索返回 Top-K 不一定最相关，Re-Ranker 用 Cross-Encoder 对候选文档做精细排序，显著提升 RAG 质量。</div>
-
-    <div class="q-course-link">📎 L03 Tools 检索优化</div>
-
+    <div class="q-id">Q27 <span class="q-type type-ka"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A27"><span class="i18n-zh">什么是 Re-Ranking？为什么 RAG 系统中需要 Re-Ranker？常用的 Re-Ranker 有哪些？</span><span class="i18n-en" hidden>What is Re-Ranking? Why does a RAG system need a Re-Ranker? What are commonly used Re-Rankers?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">RAG 进阶知识。向量检索返回 Top-K 不一定最相关，Re-Ranker 用 Cross-Encoder 对候选文档做精细排序，显著提升 RAG 质量。</span><span class="i18n-en" hidden>Advanced RAG knowledge. Vector retrieval Top-K may not be the most relevant; Re-Ranker uses Cross-Encoder to finely rank candidate documents, significantly improving RAG quality.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L03 Tools 检索优化</span><span class="i18n-en" hidden>📎 L03 Tools Retrieval Optimization</span></div>
   </div>
 
-
   <div class="q-card l2">
-    <div class="q-id">Q28 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A28">如何评估一个 RAG 系统的质量？需要关注哪些指标？手写一个简单的 RAG 评估方案。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>评估体系设计。三个维度：检索质量（Recall, MRR）、生成质量（Faithfulness, Relevance）、端到端（Answer Correctness）。</div>
-
+    <div class="q-id">Q28 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A28"><span class="i18n-zh">如何评估一个 RAG 系统的质量？需要关注哪些指标？手写一个简单的 RAG 评估方案。</span><span class="i18n-en" hidden>How to evaluate the quality of a RAG system? What metrics should be monitored? Write a simple RAG evaluation plan.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">评估体系设计。三个维度：检索质量（Recall, MRR）、生成质量（Faithfulness, Relevance）、端到端（Answer Correctness）。</span><span class="i18n-en" hidden>Evaluation framework design. Three dimensions: retrieval quality (Recall, MRR), generation quality (Faithfulness, Relevance), end-to-end (Answer Correctness).</span></div>
     <div class="q-course-link">📎 L12 Production Evaluation</div>
-
   </div>
 
-
   <div class="q-card l2">
-    <div class="q-id">Q29 <span class="q-type type-ci">代码实现</span></div>
-
-    <h3><a href="answer-bank.html#A29">用 LangChain 的 create_agent 创建一个能搜索网页 + 计算数学的工具调用 Agent。写完整代码。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Agent 编码基础。要写出 tool 定义（@tool 装饰器）、agent 创建（create_agent）、agent 调用流程。</div>
-
+    <div class="q-id">Q29 <span class="q-type type-ci"><span class="i18n-zh">代码实现</span><span class="i18n-en" hidden>Code Implementation</span></span></div>
+    <h3><a href="answer-bank.html#A29"><span class="i18n-zh">用 LangChain 的 create_agent 创建一个能搜索网页 + 计算数学的工具调用 Agent。写完整代码。</span><span class="i18n-en" hidden>Create a tool-calling Agent with LangChain create_agent that can search the web + calculate math. Write complete code.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Agent 编码基础。要写出 tool 定义（@tool 装饰器）、agent 创建（create_agent）、agent 调用流程。</span><span class="i18n-en" hidden>Agent coding fundamentals. Must write tool definition (@tool decorator), agent creation (create_agent), agent invocation flow.</span></div>
     <div class="q-course-link">📎 L03 Tools → L04 Agent Loop</div>
-
   </div>
 
-
   <div class="q-card l2">
-    <div class="q-id">Q30 <span class="q-type type-ca">对比分析</span></div>
-
-    <h3><a href="answer-bank.html#A30">LangChain、LlamaIndex、Haystack、DSPy 各有什么特点和适用场景？你会如何给一个新项目选型？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>AI 框架全景图。LC=通用框架, LI=数据/RAG 专精, Haystack=NLP Pipeline, DSPy=编程式 Prompt 优化。</div>
-
-    <div class="q-course-link">📎 框架选型全景</div>
-
+    <div class="q-id">Q30 <span class="q-type type-ca"><span class="i18n-zh">对比分析</span><span class="i18n-en" hidden>Comparative Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A30"><span class="i18n-zh">LangChain、LlamaIndex、Haystack、DSPy 各有什么特点和适用场景？你会如何给一个新项目选型？</span><span class="i18n-en" hidden>What are the characteristics and applicable scenarios of LangChain, LlamaIndex, Haystack, and DSPy? How would you select one for a new project?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">AI 框架全景图。LC=通用框架, LI=数据/RAG 专精, Haystack=NLP Pipeline, DSPy=编程式 Prompt 优化。</span><span class="i18n-en" hidden>AI framework landscape. LC = general framework, LI = data/RAG specialist, Haystack = NLP Pipeline, DSPy = programmatic Prompt optimization.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 框架选型全景</span><span class="i18n-en" hidden>📎 Framework Selection Overview</span></div>
   </div>
 
-
   <div class="q-card l2">
-    <div class="q-id">Q31 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A31">LangChain 应用中遇到 API Rate Limit 或 Token 超限问题，如何处理？设计一个健壮的调用策略。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>生产环境鲁棒性。Retry with exponential backoff、Token counting + 截断、fallback model、队列削峰。</div>
-
+    <div class="q-id">Q31 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A31"><span class="i18n-zh">LangChain 应用中遇到 API Rate Limit 或 Token 超限问题，如何处理？设计一个健壮的调用策略。</span><span class="i18n-en" hidden>How to handle API Rate Limit or Token limit issues in LangChain applications? Design a robust calling strategy.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">生产环境鲁棒性。Retry with exponential backoff、Token counting + 截断、fallback model、队列削峰。</span><span class="i18n-en" hidden>Production environment robustness. Retry with exponential backoff, Token counting + truncation, fallback model, queue peak shaving.</span></div>
     <div class="q-course-link">📎 L08 Error Handling</div>
-
   </div>
 
-
   <div class="q-card l2">
-    <div class="q-id">Q32 <span class="q-type type-kc">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A32">什么是 MCP（Model Context Protocol）？它和传统的 Function Calling 有什么不同？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>MCP 是 2025 年最热话题，考察对新技术的关注。MCP 标准化了工具/资源/提示的接口，实现了 LLM 与外部系统的解耦。</div>
-
-    <div class="q-course-link">📎 L03 Tools 进阶</div>
-
+    <div class="q-id">Q32 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A32"><span class="i18n-zh">什么是 MCP（Model Context Protocol）？它和传统的 Function Calling 有什么不同？</span><span class="i18n-en" hidden>What is MCP (Model Context Protocol)? How is it different from traditional Function Calling?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">MCP 是 2025 年最热话题，考察对新技术的关注。MCP 标准化了工具/资源/提示的接口，实现了 LLM 与外部系统的解耦。</span><span class="i18n-en" hidden>MCP was the hottest topic of 2025, testing attention to new technology. MCP standardizes tool/resource/prompt interfaces, decoupling LLMs from external systems.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L03 Tools 进阶</span><span class="i18n-en" hidden>📎 L03 Tools Advanced</span></div>
   </div>
 
-
   <div class="q-card l2">
-    <div class="q-id">Q33 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A33">如何给一个 LangChain chain 添加缓存层？哪些场景适合缓存，哪些不适合？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>性能优化意识。LLM 调用缓存（相同 prompt → 相同结果）、Embedding 缓存（相同文本 → 相同向量），但不适合需要实时性或随机性的场景。</div>
-
+    <div class="q-id">Q33 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A33"><span class="i18n-zh">如何给一个 LangChain chain 添加缓存层？哪些场景适合缓存，哪些不适合？</span><span class="i18n-en" hidden>How to add a caching layer to a LangChain chain? Which scenarios are suitable for caching, and which are not?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">性能优化意识。LLM 调用缓存（相同 prompt → 相同结果）、Embedding 缓存（相同文本 → 相同向量），但不适合需要实时性或随机性的场景。</span><span class="i18n-en" hidden>Performance optimization awareness. LLM call caching (same prompt → same result), Embedding caching (same text → same vector), but unsuitable for scenarios requiring real-time or randomness.</span></div>
     <div class="q-course-link">📎 L05 Memory + L12 Production</div>
-
   </div>
 
-
   <div class="q-card l2">
-    <div class="q-id">Q34 <span class="q-type type-ka">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A34">什么是 Output Parser？LangChain 中常见的 Parser 有哪些？当 LLM 输出不符合预期格式时如何处理？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>结构化输出是 Agent 与外部系统交互的关键。StrOutputParser, JsonOutputParser, PydanticOutputParser, 以及 retry + 修正策略。</div>
-
+    <div class="q-id">Q34 <span class="q-type type-ka"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A34"><span class="i18n-zh">什么是 Output Parser？LangChain 中常见的 Parser 有哪些？当 LLM 输出不符合预期格式时如何处理？</span><span class="i18n-en" hidden>What is an Output Parser? What are common Parsers in LangChain? How to handle LLM output that does not match expected format?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">结构化输出是 Agent 与外部系统交互的关键。StrOutputParser, JsonOutputParser, PydanticOutputParser, 以及 retry + 修正策略。</span><span class="i18n-en" hidden>Structured output is key for Agent interaction with external systems. StrOutputParser, JsonOutputParser, PydanticOutputParser, plus retry + correction strategies.</span></div>
     <div class="q-course-link">📎 L03 Tools output parsing</div>
-
   </div>
 
-
   <div class="q-card l2">
-    <div class="q-id">Q35 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A35">设计一个客服 RAG 系统，要求能处理多轮对话中的指代消解（如"它多少钱？"中的"它"指什么产品）。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>多轮 RAG 是实际场景的复杂点。Query rewriting（用 LLM 将模糊问题改写为独立问题）+ Conversation history 上下文。</div>
-
-    <div class="q-course-link">📎 L05 Memory + L03 RAG 进阶</div>
-
+    <div class="q-id">Q35 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A35"><span class="i18n-zh">设计一个客服 RAG 系统，要求能处理多轮对话中的指代消解（如&quot;它多少钱？&quot;中的&quot;它&quot;指什么产品）。</span><span class="i18n-en" hidden>Design a customer service RAG system that handles anaphora resolution in multi-turn conversations (e.g., "How much is it?" — what does "it" refer to?).</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">多轮 RAG 是实际场景的复杂点。Query rewriting（用 LLM 将模糊问题改写为独立问题）+ Conversation history 上下文。</span><span class="i18n-en" hidden>Multi-turn RAG is a complexity point in real scenarios. Query rewriting (using LLM to rewrite ambiguous questions into standalone ones) + Conversation history context.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L05 Memory + L03 RAG 进阶</span><span class="i18n-en" hidden>📎 L05 Memory + L03 RAG Advanced</span></div>
   </div>
 
-
   <div class="q-card l2">
-    <div class="q-id">Q46 <span class="q-type type-sa">场景分析</span> <span class="q-type type-ca">对比分析</span></div>
-
-    <h3><a href="answer-bank.html#A46m">MCP (Model Context Protocol) 的架构原理是什么？它如何解决 LLM 与外部工具的集成问题？用一个实际场景说明 MCP Server 和 MCP Client 的交互流程。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>MCP 是 2026 年 Agent 开发的标配（97M+ 下载，Anthropic 提出，已捐给 Linux Foundation）。要能说出 Client-Server 架构、三个原语（Tools/Resources/Prompts）、JSON-RPC 2.0 协议、以及为什么它比每个工具写一个 custom connector 更好。</div>
-
-    <div class="q-course-link">📎 L03 Tools 进阶 · MCP 实战</div>
-
+    <div class="q-id">Q46 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span> <span class="q-type type-ca"><span class="i18n-zh">对比分析</span><span class="i18n-en" hidden>Comparative Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A46m"><span class="i18n-zh">MCP (Model Context Protocol) 的架构原理是什么？它如何解决 LLM 与外部工具的集成问题？用一个实际场景说明 MCP Server 和 MCP Client 的交互流程。</span><span class="i18n-en" hidden>What is the architectural principle of MCP (Model Context Protocol)? How does it solve the integration problem between LLMs and external tools? Illustrate the MCP Server and MCP Client interaction flow with a real scenario.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">MCP 是 2026 年 Agent 开发的标配（97M+ 下载，Anthropic 提出，已捐给 Linux Foundation）。要能说出 Client-Server 架构、三个原语（Tools/Resources/Prompts）、JSON-RPC 2.0 协议、以及为什么它比每个工具写一个 custom connector 更好。</span><span class="i18n-en" hidden>MCP is standard for 2026 Agent development (97M+ downloads, proposed by Anthropic, donated to Linux Foundation). Must describe Client-Server architecture, three primitives (Tools/Resources/Prompts), JSON-RPC 2.0 protocol, and why it is better than writing a custom connector for each tool.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L03 Tools 进阶 · MCP 实战</span><span class="i18n-en" hidden>📎 L03 Tools Advanced · MCP in Practice</span></div>
   </div>
 
-
   <div class="q-card l2">
-    <div class="q-id">Q47 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A47m">你有一个 LangGraph Agent，需要访问公司内部的 CRM、ERP 和知识库系统。设计基于 MCP 的集成方案，并讨论：如果某个 MCP Server 宕机，Agent 如何优雅降级？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>MCP 生产落地实战。三个系统封装为三个 MCP Server → Agent 通过 MCP Client 统一调用 → 错误处理：try/except + ToolMessage 描述错误 + Agent 自行决策替代方案。</div>
-
+    <div class="q-id">Q47 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A47m"><span class="i18n-zh">你有一个 LangGraph Agent，需要访问公司内部的 CRM、ERP 和知识库系统。设计基于 MCP 的集成方案，并讨论：如果某个 MCP Server 宕机，Agent 如何优雅降级？</span><span class="i18n-en" hidden>You have a LangGraph Agent that needs to access internal CRM, ERP, and knowledge base systems. Design an MCP-based integration plan and discuss: if an MCP Server goes down, how does the Agent gracefully degrade?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">MCP 生产落地实战。三个系统封装为三个 MCP Server → Agent 通过 MCP Client 统一调用 → 错误处理：try/except + ToolMessage 描述错误 + Agent 自行决策替代方案。</span><span class="i18n-en" hidden>MCP production deployment in practice. Three systems wrapped as three MCP Servers → Agent unified calling via MCP Client → Error handling: try/except + ToolMessage describing error + Agent autonomously decides on alternatives.</span></div>
     <div class="q-course-link">📎 L03 Tools + L08 Error Handling</div>
-
   </div>
-
 </div>
-
 
 <!-- ——— L3: LangGraph Core ——— -->
 </div>
-
 <div class="locked-content" data-require-stage="professional">
 <div class="q-section" id="L3">
-  <h2><span class="emoji">🟡</span> L3 · LangGraph 核心层 <span class="badge badge-yellow" style="font-size:0.7em">20 题</span></h2>
-
-  <p style="color:var(--text-2); margin-bottom:20px;">考核 StateGraph、State 管理、Reducer、条件边、Agent Loop — <strong>LangGraph 的灵魂，面试核心得分区</strong></p>
-
+  <h2><span class="emoji">🟡</span><span class="i18n-zh"> L3 · LangGraph 核心层 </span><span class="i18n-en" hidden>L3 · LangGraph Core</span><span class="badge badge-yellow" style="font-size:0.7em"><span class="i18n-zh">20 题</span><span class="i18n-en" hidden>20 Questions</span></span></h2>
+  <p style="color:var(--text-2); margin-bottom:20px;"><span class="i18n-zh">考核 StateGraph、State 管理、Reducer、条件边、Agent Loop — </span><span class="i18n-en" hidden>Covers StateGraph, State management, Reducers, conditional edges, Agent Loop —</span><strong><span class="i18n-zh">LangGraph 的灵魂，面试核心得分区</span><span class="i18n-en" hidden>The soul of LangGraph, core scoring area in interviews</span></strong></p>
 
   <div class="q-card l3">
-    <div class="q-id">Q36 <span class="q-type type-kc">知识检查</span> <span class="q-type type-ca">对比分析</span></div>
-
-    <h3><a href="answer-bank.html#A36">LangGraph 是什么？它解决了 LangChain 的什么问题？用一张图描述 StateGraph 的核心概念（State, Node, Edge）。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>几乎所有 LangGraph 面试的开场题。要能说清：LC 是线性的，LG 是图结构的，State 是共享内存，Node 是计算单元，Edge 是控制流。</div>
-
+    <div class="q-id">Q36 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span> <span class="q-type type-ca"><span class="i18n-zh">对比分析</span><span class="i18n-en" hidden>Comparative Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A36"><span class="i18n-zh">LangGraph 是什么？它解决了 LangChain 的什么问题？用一张图描述 StateGraph 的核心概念（State, Node, Edge）。</span><span class="i18n-en" hidden>What is LangGraph? What problems does it solve for LangChain? Describe the core concepts of StateGraph (State, Node, Edge) with a diagram.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">几乎所有 LangGraph 面试的开场题。要能说清：LC 是线性的，LG 是图结构的，State 是共享内存，Node 是计算单元，Edge 是控制流。</span><span class="i18n-en" hidden>The opening question in almost every LangGraph interview. Must explain clearly: LC is linear, LG is graph-structured, State is shared memory, Node is a computation unit, Edge is control flow.</span></div>
     <div class="q-course-link">📎 L01 State, Nodes, Edges</div>
-
   </div>
 
-
   <div class="q-card l3">
-    <div class="q-id">Q37 <span class="q-type type-ci">代码实现</span></div>
-
-    <h3><a href="answer-bank.html#A37">用 StateGraph 构建一个简单的 Agent：一个 LLM 节点 + 条件边（根据是否需要工具调用路由到工具节点或 END）。写完整代码。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>这是 LangGraph 的 "Hello World" 级代码题。State 定义 → 节点函数 → 条件边 → compile → invoke。80% 候选人在这里出错。</div>
-
+    <div class="q-id">Q37 <span class="q-type type-ci"><span class="i18n-zh">代码实现</span><span class="i18n-en" hidden>Code Implementation</span></span></div>
+    <h3><a href="answer-bank.html#A37"><span class="i18n-zh">用 StateGraph 构建一个简单的 Agent：一个 LLM 节点 + 条件边（根据是否需要工具调用路由到工具节点或 END）。写完整代码。</span><span class="i18n-en" hidden>Build a simple Agent with StateGraph: one LLM node + conditional edges (route to tool node or END based on whether tool call is needed). Write complete code.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">这是 LangGraph 的 &quot;Hello World&quot; 级代码题。State 定义 → 节点函数 → 条件边 → compile → invoke。80% 候选人在这里出错。</span><span class="i18n-en" hidden>This is the "Hello World" level coding question for LangGraph. State definition → node function → conditional edge → compile → invoke. 80% of candidates make mistakes here.</span></div>
     <div class="q-course-link">📎 L01 StateGraph + L02 First LLM Agent</div>
-
   </div>
 
-
   <div class="q-card l3">
-    <div class="q-id">Q38 <span class="q-type type-db">调试排错</span></div>
-
-    <h3><a href="answer-bank.html#A38">下面这段 LangGraph 代码有什么问题？为什么消息没有累积而是被覆盖了？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>这是 LangChain 社区 #1 高频报错！没有使用 add_messages reducer，节点返回的新消息覆盖了旧消息。要解释 Reducer 的合并语义。</div>
-
-    <div class="q-course-link">📎 L01 Reducers — 避坑指南核心</div>
-
+    <div class="q-id">Q38 <span class="q-type type-db"><span class="i18n-zh">调试排错</span><span class="i18n-en" hidden>Debugging</span></span></div>
+    <h3><a href="answer-bank.html#A38"><span class="i18n-zh">下面这段 LangGraph 代码有什么问题？为什么消息没有累积而是被覆盖了？</span><span class="i18n-en" hidden>What is wrong with this LangGraph code? Why are messages being overwritten instead of accumulated?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">这是 LangChain 社区 #1 高频报错！没有使用 add_messages reducer，节点返回的新消息覆盖了旧消息。要解释 Reducer 的合并语义。</span><span class="i18n-en" hidden>This is the #1 most frequent error in the LangChain community! Missing add_messages reducer causes new messages to overwrite old ones. Must explain Reducer merge semantics.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L01 Reducers — 避坑指南核心</span><span class="i18n-en" hidden>📎 L01 Reducers — Pitfall Guide Core</span></div>
   </div>
 
-
   <div class="q-card l3">
-    <div class="q-id">Q39 <span class="q-type type-kc">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A39">LangGraph 中的 Reducer 是什么？add_messages 做了什么？自定义 Reducer 怎么写？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Reducer 是 State 管理的核心。add_messages 处理消息的智能合并（追加而非覆盖、去重、支持 RemoveMessage），自定义 Reducer 用 Annotated[type, reducer_fn]。</div>
-
-    <div class="q-course-link">📎 L01 Reducers 深度讲解</div>
-
+    <div class="q-id">Q39 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A39"><span class="i18n-zh">LangGraph 中的 Reducer 是什么？add_messages 做了什么？自定义 Reducer 怎么写？</span><span class="i18n-en" hidden>What is a Reducer in LangGraph? What does add_messages do? How to write a custom Reducer?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Reducer 是 State 管理的核心。add_messages 处理消息的智能合并（追加而非覆盖、去重、支持 RemoveMessage），自定义 Reducer 用 Annotated[type, reducer_fn]。</span><span class="i18n-en" hidden>Reducer is the core of State management. add_messages handles intelligent message merging (append not overwrite, dedup, supports RemoveMessage). Custom reducer uses Annotated[type, reducer_fn].</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L01 Reducers 深度讲解</span><span class="i18n-en" hidden>📎 L01 Reducers In-Depth</span></div>
   </div>
 
-
   <div class="q-card l3">
-    <div class="q-id">Q40 <span class="q-type type-kc">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A40">LangGraph 中有哪几种类型的边？固定边（add_edge）、条件边（add_conditional_edges）、Command 分别用于什么场景？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>控制流理解。固定边=确定路由, 条件边=动态路由, Command=同时更新状态+路由（跨图跳转）。Command 是 v1 新增，体现 API 演进。</div>
-
+    <div class="q-id">Q40 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A40"><span class="i18n-zh">LangGraph 中有哪几种类型的边？固定边（add_edge）、条件边（add_conditional_edges）、Command 分别用于什么场景？</span><span class="i18n-en" hidden>What types of edges exist in LangGraph? What scenarios are fixed edges (add_edge), conditional edges (add_conditional_edges), and Command used for?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">控制流理解。固定边=确定路由, 条件边=动态路由, Command=同时更新状态+路由（跨图跳转）。Command 是 v1 新增，体现 API 演进。</span><span class="i18n-en" hidden>Control flow understanding. Fixed edge = deterministic routing, conditional edge = dynamic routing, Command = simultaneous state update + routing (cross-graph jumps). Command added in v1, reflecting API evolution.</span></div>
     <div class="q-course-link">📎 L01 Edges + L09 Subgraphs (Command)</div>
-
   </div>
 
-
   <div class="q-card l3">
-    <div class="q-id">Q41 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A41">设计一个 Customer Support Graph：需要 Intent Classification 节点将用户问题路由到 Sales/Support/Technical 三个不同的处理节点，每个处理节点有不同的工具。画出 Graph 结构并写关键代码。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>条件路由实战。intent_classifier → conditional_edge → {sales_agent, support_agent, tech_agent} → END。</div>
-
-    <div class="q-course-link">📎 L01/L02 条件路由实战</div>
-
+    <div class="q-id">Q41 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A41"><span class="i18n-zh">设计一个 Customer Support Graph：需要 Intent Classification 节点将用户问题路由到 Sales/Support/Technical 三个不同的处理节点，每个处理节点有不同的工具。画出 Graph 结构并写关键代码。</span><span class="i18n-en" hidden>Design a Customer Support Graph: use an Intent Classification node to route user questions to three different handler nodes (Sales/Support/Technical), each with different tools. Draw the graph structure and write key code.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">条件路由实战。intent_classifier → conditional_edge → {sales_agent, support_agent, tech_agent} → END。</span><span class="i18n-en" hidden>Conditional routing in practice. intent_classifier → conditional_edge → {sales_agent, support_agent, tech_agent} → END.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L01/L02 条件路由实战</span><span class="i18n-en" hidden>📎 L01/L02 Conditional Routing Hands-on</span></div>
   </div>
 
-
   <div class="q-card l3">
-    <div class="q-id">Q42 <span class="q-type type-ci">代码实现</span> <span class="q-type type-db">调试排错</span></div>
-
-    <h3><a href="answer-bank.html#A42">下面的条件边代码为什么不工作？tools_condition 返回了 "tools" 但 Agent 没有调用工具而是直接结束了。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>条件边常见错误。通常是路由函数返回值与 add_conditional_edges 的 path_map 不匹配，或忘记添加 END 对应的边。</div>
-
-    <div class="q-course-link">📎 L02 First LLM Agent — 避坑指南</div>
-
+    <div class="q-id">Q42 <span class="q-type type-ci"><span class="i18n-zh">代码实现</span><span class="i18n-en" hidden>Code Implementation</span></span> <span class="q-type type-db"><span class="i18n-zh">调试排错</span><span class="i18n-en" hidden>Debugging</span></span></div>
+    <h3><a href="answer-bank.html#A42"><span class="i18n-zh">下面的条件边代码为什么不工作？tools_condition 返回了 &quot;tools&quot; 但 Agent 没有调用工具而是直接结束了。</span><span class="i18n-en" hidden>Why does this conditional edge code not work? tools_condition returned "tools" but the Agent did not call tools and ended directly.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">条件边常见错误。通常是路由函数返回值与 add_conditional_edges 的 path_map 不匹配，或忘记添加 END 对应的边。</span><span class="i18n-en" hidden>Common conditional edge error. Usually the routing function return value does not match add_conditional_edges path_map, or forgetting to add the END edge.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L02 First LLM Agent — 避坑指南</span><span class="i18n-en" hidden>📎 L02 First LLM Agent — Pitfall Guide</span></div>
   </div>
 
-
   <div class="q-card l3">
-    <div class="q-id">Q43 <span class="q-type type-kc">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A43">LangGraph 中的 Agent Loop 是如何实现的？ReAct 模式在 LangGraph 中如何体现？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Agent 核心机制。llm_node → tools_condition → [tool_node → llm_node] 的循环结构，直到 tools_condition 返回 END。</div>
-
+    <div class="q-id">Q43 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A43"><span class="i18n-zh">LangGraph 中的 Agent Loop 是如何实现的？ReAct 模式在 LangGraph 中如何体现？</span><span class="i18n-en" hidden>How is the Agent Loop implemented in LangGraph? How is the ReAct pattern manifested in LangGraph?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Agent 核心机制。llm_node → tools_condition → [tool_node → llm_node] 的循环结构，直到 tools_condition 返回 END。</span><span class="i18n-en" hidden>Agent core mechanism. The loop structure of llm_node → tools_condition → [tool_node → llm_node], continuing until tools_condition returns END.</span></div>
     <div class="q-course-link">📎 L04 Agent Loop (ReAct)</div>
-
   </div>
 
-
   <div class="q-card l3">
-    <div class="q-id">Q44 <span class="q-type type-db">调试排错</span></div>
-
-    <h3><a href="answer-bank.html#A44">Graph 运行到一半"静默退出"了，没有报错但也没有输出最终结果。分析可能的 5 种原因。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>这是论坛第二高频问题。原因：END 被条件边选中、节点返回到未定义的 key、显式 END 连接、递归上限触发、未配置 checkpointer 时使用 interrupt。</div>
-
-    <div class="q-course-link">📎 pitfalls.html 调试策略</div>
-
+    <div class="q-id">Q44 <span class="q-type type-db"><span class="i18n-zh">调试排错</span><span class="i18n-en" hidden>Debugging</span></span></div>
+    <h3><a href="answer-bank.html#A44"><span class="i18n-zh">Graph 运行到一半&quot;静默退出&quot;了，没有报错但也没有输出最终结果。分析可能的 5 种原因。</span><span class="i18n-en" hidden>The Graph "silently exits" mid-execution with no error but no final output. Analyze 5 possible causes.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">这是论坛第二高频问题。原因：END 被条件边选中、节点返回到未定义的 key、显式 END 连接、递归上限触发、未配置 checkpointer 时使用 interrupt。</span><span class="i18n-en" hidden>The second most frequent forum question. Causes: END selected by conditional edge, node returns to undefined key, explicit END connection, recursion limit triggered, using interrupt without checkpointer configured.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 pitfalls.html 调试策略</span><span class="i18n-en" hidden>📎 pitfalls.html Debugging Strategies</span></div>
   </div>
 
-
   <div class="q-card l3">
-    <div class="q-id">Q45 <span class="q-type type-kc">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A45">LangGraph 中 State 的 key 可以被节点选择性更新吗？节点必须返回完整的 State 吗？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>State 更新语义。核心铁律：节点只返回自己负责的 key 的 Partial State，框架会根据 Reducer 自动合并。返回完整 State 可能导致并发问题。</div>
-
-    <div class="q-course-link">📎 L01 State 更新铁律</div>
-
+    <div class="q-id">Q45 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A45"><span class="i18n-zh">LangGraph 中 State 的 key 可以被节点选择性更新吗？节点必须返回完整的 State 吗？</span><span class="i18n-en" hidden>Can State keys in LangGraph be selectively updated by nodes? Must nodes return the complete State?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">State 更新语义。核心铁律：节点只返回自己负责的 key 的 Partial State，框架会根据 Reducer 自动合并。返回完整 State 可能导致并发问题。</span><span class="i18n-en" hidden>State update semantics. Core iron rule: nodes only return Partial State for keys they are responsible for; the framework auto-merges via Reducers. Returning full State can cause concurrency issues.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L01 State 更新铁律</span><span class="i18n-en" hidden>📎 L01 State Update Iron Rule</span></div>
   </div>
 
-
   <div class="q-card l3">
-    <div class="q-id">Q46 <span class="q-type type-ci">代码实现</span></div>
-
-    <h3><a href="answer-bank.html#A46">实现一个带有 Self-Reflection 的 Agent：如果初次回答质量不够，Agent 自动反思并改进回答。写 LangGraph 代码。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>进阶 Agent 设计。generate → reflect → (if quality < threshold) → refine → reflect 的循环结构。考核对循环和条件的综合运用。</div>
-
-    <div class="q-course-link">📎 L04 Agent Loop 进阶</div>
-
+    <div class="q-id">Q46 <span class="q-type type-ci"><span class="i18n-zh">代码实现</span><span class="i18n-en" hidden>Code Implementation</span></span></div>
+    <h3><a href="answer-bank.html#A46"><span class="i18n-zh">实现一个带有 Self-Reflection 的 Agent：如果初次回答质量不够，Agent 自动反思并改进回答。写 LangGraph 代码。</span><span class="i18n-en" hidden>Implement a Self-Reflection Agent: if the initial answer quality is insufficient, the Agent automatically reflects and improves the answer. Write LangGraph code.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">进阶 Agent 设计。generate → reflect → (if quality </span><span class="i18n-en" hidden>Advanced Agent design. generate → reflect → (if quality</span><<span class="i18n-zh"> threshold) → refine → reflect 的循环结构。考核对循环和条件的综合运用。</span><span class="i18n-en" hidden>threshold) → refine → reflect loop structure. Tests comprehensive use of loops and conditionals.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L04 Agent Loop 进阶</span><span class="i18n-en" hidden>📎 L04 Agent Loop Advanced</span></div>
   </div>
 
-
   <div class="q-card l3">
-    <div class="q-id">Q47 <span class="q-type type-ci">代码实现</span></div>
-
-    <h3><a href="answer-bank.html#A47">使用 LangGraph 的 Functional API（@entrypoint + @task）构建与上题相同逻辑的 Agent。比较两种 API 的优劣。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Functional API 是 v1 新增，考核对新 API 的了解。@entrypoint 定义入口，@task 定义可并行的计算单元，更 Pythonic。</div>
-
-    <div class="q-course-link">📎 L02 Functional API（进阶）</div>
-
+    <div class="q-id">Q47 <span class="q-type type-ci"><span class="i18n-zh">代码实现</span><span class="i18n-en" hidden>Code Implementation</span></span></div>
+    <h3><a href="answer-bank.html#A47"><span class="i18n-zh">使用 LangGraph 的 Functional API（@entrypoint + @task）构建与上题相同逻辑的 Agent。比较两种 API 的优劣。</span><span class="i18n-en" hidden>Use LangGraph Functional API (@entrypoint + @task) to build an Agent with the same logic as the previous question. Compare the pros and cons of both APIs.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Functional API 是 v1 新增，考核对新 API 的了解。@entrypoint 定义入口，@task 定义可并行的计算单元，更 Pythonic。</span><span class="i18n-en" hidden>Functional API is new in v1, testing knowledge of the new API. @entrypoint defines entry, @task defines parallelizable computation units, more Pythonic.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L02 Functional API（进阶）</span><span class="i18n-en" hidden>📎 L02 Functional API (Advanced)</span></div>
   </div>
 
-
   <div class="q-card l3">
-    <div class="q-id">Q48 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A48">Agent 在循环中不断调用同一个工具，陷入死循环。LangGraph 提供了什么机制来防止这种情况？如何设置？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Recursion Limit 是基础但重要的安全机制。compile(recursion_limit=...) 设置最大步数，GRAPH_RECURSION_LIMIT 错误码的含义。</div>
-
+    <div class="q-id">Q48 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A48"><span class="i18n-zh">Agent 在循环中不断调用同一个工具，陷入死循环。LangGraph 提供了什么机制来防止这种情况？如何设置？</span><span class="i18n-en" hidden>An Agent keeps calling the same tool in a loop, stuck in an infinite loop. What mechanism does LangGraph provide to prevent this? How to configure it?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Recursion Limit 是基础但重要的安全机制。compile(recursion_limit=...) 设置最大步数，GRAPH_RECURSION_LIMIT 错误码的含义。</span><span class="i18n-en" hidden>Recursion Limit is a basic but important safety mechanism. compile(recursion_limit=...) sets max steps, and the meaning of GRAPH_RECURSION_LIMIT error code.</span></div>
     <div class="q-course-link">📎 L08 Error Handling — GRAPH_RECURSION_LIMIT</div>
-
   </div>
 
-
   <div class="q-card l3">
-    <div class="q-id">Q49 <span class="q-type type-kc">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A49">LangGraph 中如何表示并行执行？什么是 Super-Step？Send API 是做什么的？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>并行是 LangGraph 的高级特性。条件边返回多个目标→并行执行，Send API 实现 map-reduce 模式的动态扇出。</div>
-
+    <div class="q-id">Q49 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A49"><span class="i18n-zh">LangGraph 中如何表示并行执行？什么是 Super-Step？Send API 是做什么的？</span><span class="i18n-en" hidden>How to express parallel execution in LangGraph? What is a Super-Step? What does the Send API do?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">并行是 LangGraph 的高级特性。条件边返回多个目标→并行执行，Send API 实现 map-reduce 模式的动态扇出。</span><span class="i18n-en" hidden>Parallelism is an advanced LangGraph feature. Conditional edge returns multiple targets → parallel execution, Send API implements map-reduce style dynamic fan-out.</span></div>
     <div class="q-course-link">📎 L11 Parallel & Send</div>
-
   </div>
 
-
   <div class="q-card l3">
-    <div class="q-id">Q50 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A50">设计一个"三节点审查流程"：Writer 写稿 → Reviewer 审查 → 如果通过则发布，不通过则返回 Writer 修改（最多 3 次）。画出 Graph 结构并写出关键代码。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>循环 + 计数器的综合设计。在 State 中维护 review_count，条件边判断 count < 3 且不通过时返回 writer。</div>
-
+    <div class="q-id">Q50 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A50"><span class="i18n-zh">设计一个&quot;三节点审查流程&quot;：Writer 写稿 → Reviewer 审查 → 如果通过则发布，不通过则返回 Writer 修改（最多 3 次）。画出 Graph 结构并写出关键代码。</span><span class="i18n-en" hidden>Design a "three-node review workflow": Writer drafts → Reviewer reviews → if approved, publish; if not, return to Writer for revision (max 3 times). Draw the Graph structure and write key code.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">循环 + 计数器的综合设计。在 State 中维护 review_count，条件边判断 count </span><span class="i18n-en" hidden>Comprehensive loops + counters design. Maintain review_count in State; conditional edge checks count</span><<span class="i18n-zh"> 3 且不通过时返回 writer。</span><span class="i18n-en" hidden>3 and returns to writer if not approved.</span></div>
     <div class="q-course-link">📎 L04 Agent Loop + L06 HITL</div>
-
   </div>
 
-
   <div class="q-card l3">
-    <div class="q-id">Q51 <span class="q-type type-kc">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A51">MessagesState 和自定义 TypedDict State 有什么区别？什么场景应该继承 MessagesState？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>State 设计决策。MessagesState 内置 messages 字段和 add_messages reducer，适合对话型 Agent。自定义 State 适合需要存储非消息数据（如文档、状态标记）的场景。</div>
-
-    <div class="q-course-link">📎 L01 State 设计</div>
-
+    <div class="q-id">Q51 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A51"><span class="i18n-zh">MessagesState 和自定义 TypedDict State 有什么区别？什么场景应该继承 MessagesState？</span><span class="i18n-en" hidden>What is the difference between MessagesState and custom TypedDict State? In what scenarios should you inherit MessagesState?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">State 设计决策。MessagesState 内置 messages 字段和 add_messages reducer，适合对话型 Agent。自定义 State 适合需要存储非消息数据（如文档、状态标记）的场景。</span><span class="i18n-en" hidden>State design decision. MessagesState has built-in messages field and add_messages reducer, suitable for conversational Agents. Custom State suits scenarios needing non-message data (documents, status flags).</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L01 State 设计</span><span class="i18n-en" hidden>📎 L01 State Design</span></div>
   </div>
 
-
   <div class="q-card l3">
-    <div class="q-id">Q52 <span class="q-type type-db">调试排错</span></div>
-
-    <h3><a href="answer-bank.html#A52">State 中使用 Annotated[list, add] 做 Reducer，为什么在并行节点执行时会出现重复数据？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Reducer 在并行场景下的陷阱。多个并行节点同时读取 state，各自 append 后写回，如果不理解 super-step 的合并语义就会导致重复。</div>
-
-    <div class="q-course-link">📎 L11 Parallel — 避坑指南</div>
-
+    <div class="q-id">Q52 <span class="q-type type-db"><span class="i18n-zh">调试排错</span><span class="i18n-en" hidden>Debugging</span></span></div>
+    <h3><a href="answer-bank.html#A52"><span class="i18n-zh">State 中使用 Annotated[list, add] 做 Reducer，为什么在并行节点执行时会出现重复数据？</span><span class="i18n-en" hidden>When using Annotated[list, add] as a Reducer in State, why does duplicate data appear during parallel node execution?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Reducer 在并行场景下的陷阱。多个并行节点同时读取 state，各自 append 后写回，如果不理解 super-step 的合并语义就会导致重复。</span><span class="i18n-en" hidden>Reducer traps in parallel scenarios. Multiple parallel nodes read state simultaneously, each appending and writing back; duplication occurs without understanding super-step merge semantics.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L11 Parallel — 避坑指南</span><span class="i18n-en" hidden>📎 L11 Parallel — Pitfall Guide</span></div>
   </div>
 
-
   <div class="q-card l3">
-    <div class="q-id">Q53 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A53">构建一个研究助手 Agent：需要先搜索网页 → 读取搜索结果中的关键页面 → 综合信息写出研究报告。画出 Graph 并实现。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>多步骤 Agent 综合设计。search → select_urls → (并行) fetch_pages → synthesize → review → finalize。</div>
-
+    <div class="q-id">Q53 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A53"><span class="i18n-zh">构建一个研究助手 Agent：需要先搜索网页 → 读取搜索结果中的关键页面 → 综合信息写出研究报告。画出 Graph 并实现。</span><span class="i18n-en" hidden>Build a research assistant Agent: search the web → read key pages from search results → synthesize information into a research report. Draw the Graph and implement.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">多步骤 Agent 综合设计。search → select_urls → (并行) fetch_pages → synthesize → review → finalize。</span><span class="i18n-en" hidden>Multi-step Agent comprehensive design. search → select_urls → (parallel) fetch_pages → synthesize → review → finalize.</span></div>
     <div class="q-course-link">📎 L04 Agent Loop + L10 Multi-Agent</div>
-
   </div>
 
-
   <div class="q-card l3">
-    <div class="q-id">Q54 <span class="q-type type-kc">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A54">LangGraph 中 graph.invoke() 和 graph.ainvoke() 的区别？什么是 astream_events()？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>同步/异步 API 理解。invoke 同步阻塞，ainvoke 异步非阻塞，astream_events 是 v2 事件流 API（推荐），提供 token 级粒度控制。</div>
-
+    <div class="q-id">Q54 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A54"><span class="i18n-zh">LangGraph 中 graph.invoke() 和 graph.ainvoke() 的区别？什么是 astream_events()？</span><span class="i18n-en" hidden>What is the difference between graph.invoke() and graph.ainvoke() in LangGraph? What is astream_events()?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">同步/异步 API 理解。invoke 同步阻塞，ainvoke 异步非阻塞，astream_events 是 v2 事件流 API（推荐），提供 token 级粒度控制。</span><span class="i18n-en" hidden>Sync/async API understanding. invoke is synchronous blocking, ainvoke is async non-blocking, astream_events is the v2 event stream API (recommended), providing token-level granularity.</span></div>
     <div class="q-course-link">📎 L07 Streaming</div>
-
   </div>
 
-
   <div class="q-card l3">
-    <div class="q-id">Q55 <span class="q-type type-ci">代码实现</span></div>
-
-    <h3><a href="answer-bank.html#A55">用 LangGraph 实现一个 SQL 查询 Agent：用户自然语言 → 生成 SQL → 执行 SQL → 如果出错则自动修正 → 用自然语言解释结果。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>工具调用 + 错误恢复综合编码。需要 text2sql → db_execute → (error?) → fix_sql → db_execute → explain_result 的多分支流程。</div>
-
+    <div class="q-id">Q55 <span class="q-type type-ci"><span class="i18n-zh">代码实现</span><span class="i18n-en" hidden>Code Implementation</span></span></div>
+    <h3><a href="answer-bank.html#A55"><span class="i18n-zh">用 LangGraph 实现一个 SQL 查询 Agent：用户自然语言 → 生成 SQL → 执行 SQL → 如果出错则自动修正 → 用自然语言解释结果。</span><span class="i18n-en" hidden>Implement a SQL query Agent with LangGraph: natural language → generate SQL → execute SQL → auto-correct if error → explain results in natural language.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">工具调用 + 错误恢复综合编码。需要 text2sql → db_execute → (error?) → fix_sql → db_execute → explain_result 的多分支流程。</span><span class="i18n-en" hidden>Comprehensive coding of tool calling + error recovery. Requires the multi-branch flow: text2sql → db_execute → (error?) → fix_sql → db_execute → explain_result.</span></div>
     <div class="q-course-link">📎 L03 Tools + L08 Error Handling</div>
-
   </div>
 
-
   <div class="q-card l3">
-    <div class="q-id">Q56 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A56">LangGraph 的 State 应该只包含必要的 key 还是尽量多存？State 设计的最佳实践是什么？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>State 设计哲学。Small State Principle：State 只存图执行的共享数据，大对象放外部存储。每次 checkpoint 都会序列化 State，过大影响性能。</div>
-
+    <div class="q-id">Q56 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A56"><span class="i18n-zh">LangGraph 的 State 应该只包含必要的 key 还是尽量多存？State 设计的最佳实践是什么？</span><span class="i18n-en" hidden>Should LangGraph State contain only necessary keys or as many as possible? What are State design best practices?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">State 设计哲学。Small State Principle：State 只存图执行的共享数据，大对象放外部存储。每次 checkpoint 都会序列化 State，过大影响性能。</span><span class="i18n-en" hidden>State design philosophy. Small State Principle: State only stores shared data for graph execution; large objects go to external storage. Each checkpoint serializes State; oversized State impacts performance.</span></div>
     <div class="q-course-link">📎 L01 State + L05 Checkpointing</div>
-
   </div>
 
-
   <div class="q-card l3">
-    <div class="q-id">Q57 <span class="q-type type-ca">对比分析</span></div>
-
-    <h3><a href="answer-bank.html#A57">StateGraph API vs Functional API（@entrypoint/@task）：什么时候选哪个？能不能混用？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>API 选型判断。StateGraph 适合复杂控制流/持久化/HITL，Functional API 适合数据处理流水线/批处理/更 Pythonic 的场景。</div>
-
+    <div class="q-id">Q57 <span class="q-type type-ca"><span class="i18n-zh">对比分析</span><span class="i18n-en" hidden>Comparative Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A57"><span class="i18n-zh">StateGraph API vs Functional API（@entrypoint/@task）：什么时候选哪个？能不能混用？</span><span class="i18n-en" hidden>StateGraph API vs Functional API (@entrypoint/@task): when to choose which? Can they be mixed?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">API 选型判断。StateGraph 适合复杂控制流/持久化/HITL，Functional API 适合数据处理流水线/批处理/更 Pythonic 的场景。</span><span class="i18n-en" hidden>API selection judgment. StateGraph suits complex control flow/persistence/HITL; Functional API suits data processing pipelines/batch processing/more Pythonic scenarios.</span></div>
     <div class="q-course-link">📎 L01 StateGraph + L02 Functional API</div>
-
   </div>
 
-
   <div class="q-card l3">
-    <div class="q-id">Q58 <span class="q-type type-ci">代码实现</span></div>
-
-    <h3><a href="answer-bank.html#A58">用 LangGraph 实现一个多步骤 RAG：检索 → 判断相关性 → 如果不相关则改写查询重新检索 → 生成回答。完整的 SELF-RAG 简化版。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>SELF-RAG 是面试热门。retrieve → grade_relevance → {relevant: generate, not_relevant: rewrite_query → retrieve} 的闭环。</div>
-
+    <div class="q-id">Q58 <span class="q-type type-ci"><span class="i18n-zh">代码实现</span><span class="i18n-en" hidden>Code Implementation</span></span></div>
+    <h3><a href="answer-bank.html#A58"><span class="i18n-zh">用 LangGraph 实现一个多步骤 RAG：检索 → 判断相关性 → 如果不相关则改写查询重新检索 → 生成回答。完整的 SELF-RAG 简化版。</span><span class="i18n-en" hidden>Implement a multi-step RAG with LangGraph: retrieve → assess relevance → if irrelevant, rewrite query and re-retrieve → generate answer. A simplified complete SELF-RAG.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">SELF-RAG 是面试热门。retrieve → grade_relevance → {relevant: generate, not_relevant: rewrite_query → retrieve} 的闭环。</span><span class="i18n-en" hidden>SELF-RAG is an interview hot topic. The closed loop of retrieve → grade_relevance → {relevant: generate, not_relevant: rewrite_query → retrieve}.</span></div>
     <div class="q-course-link">📎 L03 Tools + L04 Agent Loop</div>
-
   </div>
 
-
   <div class="q-card l3">
-    <div class="q-id">Q59 <span class="q-type type-kc">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A59">什么是 ToolNode？它内部做了什么？llm.bind_tools() 和 ToolNode 是什么关系？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>工具调用机制理解。bind_tools 给 LLM 注入工具 schema，ToolNode 负责解析 LLM 返回的 tool_call 并实际执行工具，返回 ToolMessage。</div>
-
+    <div class="q-id">Q59 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A59"><span class="i18n-zh">什么是 ToolNode？它内部做了什么？llm.bind_tools() 和 ToolNode 是什么关系？</span><span class="i18n-en" hidden>What is ToolNode? What does it do internally? What is the relationship between llm.bind_tools() and ToolNode?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">工具调用机制理解。bind_tools 给 LLM 注入工具 schema，ToolNode 负责解析 LLM 返回的 tool_call 并实际执行工具，返回 ToolMessage。</span><span class="i18n-en" hidden>Understanding of tool calling mechanism. bind_tools injects tool schema into LLM; ToolNode parses LLM-returned tool_call, executes the tool, and returns ToolMessage.</span></div>
     <div class="q-course-link">📎 L03 Tools</div>
-
   </div>
-
 
   <div class="q-card l3">
-    <div class="q-id">Q60 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A60">多轮对话中，用户说"用中文回答"，Agent 如何记住这个偏好？LangGraph 中有哪几种方式实现用户偏好记忆？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>用户偏好管理。短会话用 State 中的 preference key，长期跨会话用 Store API（put/get），system prompt 中注入。</div>
-
+    <div class="q-id">Q60 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A60"><span class="i18n-zh">多轮对话中，用户说&quot;用中文回答&quot;，Agent 如何记住这个偏好？LangGraph 中有哪几种方式实现用户偏好记忆？</span><span class="i18n-en" hidden>In a multi-turn conversation, a user says "answer in Chinese." How does the Agent remember this preference? What are the ways to implement user preference memory in LangGraph?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">用户偏好管理。短会话用 State 中的 preference key，长期跨会话用 Store API（put/get），system prompt 中注入。</span><span class="i18n-en" hidden>User preference management. Short sessions use preference key in State; long-term cross-session uses Store API (put/get), injected into system prompt.</span></div>
     <div class="q-course-link">📎 L05 Memory & Store API</div>
-
   </div>
-
 </div>
-
 
 <!-- ——— L4: LangGraph Advanced ——— -->
 </div>
-
 <div class="locked-content" data-require-stage="expert">
 <div class="q-section" id="L4">
-  <h2><span class="emoji">🟠</span> L4 · LangGraph 高级应用层 <span class="badge badge-yellow" style="font-size:0.7em">18 题</span></h2>
-
-  <p style="color:var(--text-2); margin-bottom:20px;">考核 Checkpointing、Streaming、HITL、<strong>Middleware</strong>、Subgraphs、错误处理 — <strong>2026 生产级 LangGraph 必备</strong></p>
-
+  <h2><span class="emoji">🟠</span><span class="i18n-zh"> L4 · LangGraph 高级应用层 </span><span class="i18n-en" hidden>L4 · LangGraph Advanced Applications</span><span class="badge badge-yellow" style="font-size:0.7em"><span class="i18n-zh">18 题</span><span class="i18n-en" hidden>18 Questions</span></span></h2>
+  <p style="color:var(--text-2); margin-bottom:20px;"><span class="i18n-zh">考核 Checkpointing、Streaming、HITL、</span><span class="i18n-en" hidden>Covers Checkpointing, Streaming, HITL, </span><strong>Middleware</strong><span class="i18n-zh">、Subgraphs、错误处理 — </span><span class="i18n-en" hidden>, Subgraphs, error handling —</span><strong><span class="i18n-zh">2026 生产级 LangGraph 必备</span><span class="i18n-en" hidden>Essential for 2026 production-grade LangGraph</span></strong></p>
 
   <div class="q-card l4">
-    <div class="q-id">Q61 <span class="q-type type-kc">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A61">LangGraph 的 Checkpointing 机制是什么？它解决了什么问题？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Checkpointing 是 LangGraph 最强大的特性之一。每个 super-step 后自动保存状态快照，支持暂停/恢复、时间旅行、错误恢复。</div>
-
+    <div class="q-id">Q61 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A61"><span class="i18n-zh">LangGraph 的 Checkpointing 机制是什么？它解决了什么问题？</span><span class="i18n-en" hidden>What is LangGraph Checkpointing mechanism? What problems does it solve?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Checkpointing 是 LangGraph 最强大的特性之一。每个 super-step 后自动保存状态快照，支持暂停/恢复、时间旅行、错误恢复。</span><span class="i18n-en" hidden>Checkpointing is one of the most powerful LangGraph features. State snapshots are saved after each super-step, supporting pause/resume, time travel, and error recovery.</span></div>
     <div class="q-course-link">📎 L05 Memory & Persistence</div>
-
   </div>
 
-
   <div class="q-card l4">
-    <div class="q-id">Q62 <span class="q-type type-ci">代码实现</span></div>
-
-    <h3><a href="answer-bank.html#A62">为 StateGraph 添加 Checkpointer：从 MemorySaver 开始，然后升级到 SqliteSaver，最后升级到 PostgresSaver。写出配置代码并说明各阶段的适用场景。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Checkpointer 演进路径。MemorySaver（开发/测试）→ SqliteSaver（单机/轻量生产）→ PostgresSaver（多实例/高可用生产）。</div>
-
+    <div class="q-id">Q62 <span class="q-type type-ci"><span class="i18n-zh">代码实现</span><span class="i18n-en" hidden>Code Implementation</span></span></div>
+    <h3><a href="answer-bank.html#A62"><span class="i18n-zh">为 StateGraph 添加 Checkpointer：从 MemorySaver 开始，然后升级到 SqliteSaver，最后升级到 PostgresSaver。写出配置代码并说明各阶段的适用场景。</span><span class="i18n-en" hidden>Add a Checkpointer to StateGraph: start with MemorySaver, upgrade to SqliteSaver, then PostgresSaver. Write configuration code and explain applicable scenarios for each stage.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Checkpointer 演进路径。MemorySaver（开发/测试）→ SqliteSaver（单机/轻量生产）→ PostgresSaver（多实例/高可用生产）。</span><span class="i18n-en" hidden>Checkpointer evolution path. MemorySaver (dev/test) → SqliteSaver (single-machine/light production) → PostgresSaver (multi-instance/high-availability production).</span></div>
     <div class="q-course-link">📎 L05 Memory & Persistence</div>
-
   </div>
 
-
   <div class="q-card l4">
-    <div class="q-id">Q63 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A63">thread_id 在 LangGraph 中起什么作用？如果两个用户共用了同一个 thread_id 会发生什么？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Thread 隔离理解。thread_id 是 checkpoint 命名空间，不同 thread_id 拥有独立的状态历史。共用会导致状态污染。</div>
-
-    <div class="q-course-link">📎 L05 Persistence — thread 模型</div>
-
+    <div class="q-id">Q63 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A63"><span class="i18n-zh">thread_id 在 LangGraph 中起什么作用？如果两个用户共用了同一个 thread_id 会发生什么？</span><span class="i18n-en" hidden>What role does thread_id play in LangGraph? What happens if two users share the same thread_id?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Thread 隔离理解。thread_id 是 checkpoint 命名空间，不同 thread_id 拥有独立的状态历史。共用会导致状态污染。</span><span class="i18n-en" hidden>Thread isolation understanding. thread_id is the checkpoint namespace; different thread_ids have independent state histories. Sharing causes state pollution.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L05 Persistence — thread 模型</span><span class="i18n-en" hidden>📎 L05 Persistence — Thread Model</span></div>
   </div>
 
-
   <div class="q-card l4">
-    <div class="q-id">Q64 <span class="q-type type-kc">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A64">什么是 Time Travel（时间旅行）？LangGraph 中如何实现"回退到之前的某个 checkpoint 并重新执行"？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>时间旅行是 checkpointing 的高级应用。get_state_history() → 找到目标 checkpoint_id → invoke(config, checkpoint_id=...) 从该点重新执行。</div>
-
+    <div class="q-id">Q64 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A64"><span class="i18n-zh">什么是 Time Travel（时间旅行）？LangGraph 中如何实现&quot;回退到之前的某个 checkpoint 并重新执行&quot;？</span><span class="i18n-en" hidden>What is Time Travel? How to implement "roll back to a previous checkpoint and re-execute" in LangGraph?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">时间旅行是 checkpointing 的高级应用。get_state_history() → 找到目标 checkpoint_id → invoke(config, checkpoint_id=...) 从该点重新执行。</span><span class="i18n-en" hidden>Time travel is an advanced checkpointing application. get_state_history() → find target checkpoint_id → invoke(config, checkpoint_id=...) to re-execute from that point.</span></div>
     <div class="q-course-link">📎 L05 Time Travel</div>
-
   </div>
 
-
   <div class="q-card l4">
-    <div class="q-id">Q65 <span class="q-type type-kc">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A65">LangGraph 有哪些 Streaming Modes？values, updates, messages, custom, debug 各自输出什么？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Streaming 选型。values=完整 State（调试用），updates=State 增量（UI 更新），messages=LLM token 流（聊天 UI），custom=自定义事件（进度条），debug=全量（仅开发）。</div>
-
+    <div class="q-id">Q65 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A65"><span class="i18n-zh">LangGraph 有哪些 Streaming Modes？values, updates, messages, custom, debug 各自输出什么？</span><span class="i18n-en" hidden>What Streaming Modes does LangGraph have? What does each of values, updates, messages, custom, and debug output?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Streaming 选型。values=完整 State（调试用），updates=State 增量（UI 更新），messages=LLM token 流（聊天 UI），custom=自定义事件（进度条），debug=全量（仅开发）。</span><span class="i18n-en" hidden>Streaming selection. values = full State (debugging), updates = State diffs (UI updates), messages = LLM token stream (chat UI), custom = custom events (progress bars), debug = full output (dev only).</span></div>
     <div class="q-course-link">📎 L07 Streaming</div>
-
   </div>
 
-
   <div class="q-card l4">
-    <div class="q-id">Q66 <span class="q-type type-ci">代码实现</span></div>
-
-    <h3><a href="answer-bank.html#A66">实现一个支持多模式 Streaming 的 LangGraph Agent：同时输出 (1) 节点状态更新，(2) LLM token 流，(3) 自定义进度事件。写出完整代码。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>多模式 Streaming 是生产 UI 的标准需求。stream(stream_mode=["updates","custom","messages"]) 同时输出三种模式。</div>
-
-    <div class="q-course-link">📎 L07 Streaming 实战</div>
-
+    <div class="q-id">Q66 <span class="q-type type-ci"><span class="i18n-zh">代码实现</span><span class="i18n-en" hidden>Code Implementation</span></span></div>
+    <h3><a href="answer-bank.html#A66"><span class="i18n-zh">实现一个支持多模式 Streaming 的 LangGraph Agent：同时输出 (1) 节点状态更新，(2) LLM token 流，(3) 自定义进度事件。写出完整代码。</span><span class="i18n-en" hidden>Implement a LangGraph Agent with multi-mode Streaming: simultaneously output (1) node state updates, (2) LLM token stream, (3) custom progress events. Write complete code.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">多模式 Streaming 是生产 UI 的标准需求。stream(stream_mode=[&quot;updates&quot;,&quot;custom&quot;,&quot;messages&quot;]) 同时输出三种模式。</span><span class="i18n-en" hidden>Multi-mode Streaming is a standard requirement for production UIs. stream(stream_mode=["updates","custom","messages"]) outputs three modes simultaneously.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L07 Streaming 实战</span><span class="i18n-en" hidden>📎 L07 Streaming Hands-on</span></div>
   </div>
 
-
   <div class="q-card l4">
-    <div class="q-id">Q67 <span class="q-type type-kc">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A67">LangGraph 的 Human-in-the-Loop（HITL）有哪几种实现方式？interrupt() 和 interrupt_before/after 的区别？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>HITL 是生产 Agent 的关键特性。interrupt()=节点内部动态暂停（审批流），interrupt_before=进入节点前暂停，interrupt_after=节点执行后暂停。</div>
-
+    <div class="q-id">Q67 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A67"><span class="i18n-zh">LangGraph 的 Human-in-the-Loop（HITL）有哪几种实现方式？interrupt() 和 interrupt_before/after 的区别？</span><span class="i18n-en" hidden>What are the implementation methods for LangGraph Human-in-the-Loop (HITL)? What is the difference between interrupt() and interrupt_before/after?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">HITL 是生产 Agent 的关键特性。interrupt()=节点内部动态暂停（审批流），interrupt_before=进入节点前暂停，interrupt_after=节点执行后暂停。</span><span class="i18n-en" hidden>HITL is a key feature for production Agents. interrupt() = dynamic pause within a node (approval flow), interrupt_before = pause before entering a node, interrupt_after = pause after node execution.</span></div>
     <div class="q-course-link">📎 L06 Human-in-the-Loop</div>
-
   </div>
 
-
   <div class="q-card l4">
-    <div class="q-id">Q68 <span class="q-type type-ci">代码实现</span></div>
-
-    <h3><a href="answer-bank.html#A68">实现一个审批工作流：Agent 制定计划后暂停等待人类审批，人类可以通过 Command(resume=...) 批准或拒绝，批准后继续执行。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>HITL 编码。interrupt() 在节点内暂停 → 前端展示 plan → 人类调用 graph.invoke(Command(resume={"approved": True}), config) 恢复。</div>
-
-    <div class="q-course-link">📎 L06 HITL 实战</div>
-
+    <div class="q-id">Q68 <span class="q-type type-ci"><span class="i18n-zh">代码实现</span><span class="i18n-en" hidden>Code Implementation</span></span></div>
+    <h3><a href="answer-bank.html#A68"><span class="i18n-zh">实现一个审批工作流：Agent 制定计划后暂停等待人类审批，人类可以通过 Command(resume=...) 批准或拒绝，批准后继续执行。</span><span class="i18n-en" hidden>Implement an approval workflow: Agent pauses after creating a plan, waiting for human approval. Humans can approve or reject via Command(resume=...), continuing execution if approved.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">HITL 编码。interrupt() 在节点内暂停 → 前端展示 plan → 人类调用 graph.invoke(Command(resume={&quot;approved&quot;: True}), config) 恢复。</span><span class="i18n-en" hidden>HITL coding. interrupt() pauses within a node → frontend displays plan → human calls graph.invoke(Command(resume={"approved": True}), config) to resume.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L06 HITL 实战</span><span class="i18n-en" hidden>📎 L06 HITL Hands-on</span></div>
   </div>
 
-
   <div class="q-card l4">
-    <div class="q-id">Q69 <span class="q-type type-kc">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A69">LangGraph 中的 Subgraph 是什么？它和"多个节点"有什么区别？Shared State 和 Isolated State 分别怎么配置？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Subgraph 用于模块化和复用。Shared State（默认，key 名一致即共享）vs Isolated State（通过 input/output schema 映射）。</div>
-
+    <div class="q-id">Q69 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A69"><span class="i18n-zh">LangGraph 中的 Subgraph 是什么？它和&quot;多个节点&quot;有什么区别？Shared State 和 Isolated State 分别怎么配置？</span><span class="i18n-en" hidden>What is a Subgraph in LangGraph? How is it different from "multiple nodes"? How to configure Shared State and Isolated State?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Subgraph 用于模块化和复用。Shared State（默认，key 名一致即共享）vs Isolated State（通过 input/output schema 映射）。</span><span class="i18n-en" hidden>Subgraph for modularization and reuse. Shared State (default, same key name = shared) vs Isolated State (mapped via input/output schema).</span></div>
     <div class="q-course-link">📎 L09 Subgraphs</div>
-
   </div>
 
-
   <div class="q-card l4">
-    <div class="q-id">Q70 <span class="q-type type-ci">代码实现</span></div>
-
-    <h3><a href="answer-bank.html#A70">将一个复杂的 Agent 重构为父图 + 子图结构：父图负责路由，子图分别处理 Sales 和 Support 两个业务。写出 Subgraph 的构建和集成代码。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Subgraph 实战编码。子图用独立的 StateGraph 构建 → compile() → 父图用 add_node("sales", sales_subgraph) 集成。</div>
-
-    <div class="q-course-link">📎 L09 Subgraphs 实战</div>
-
+    <div class="q-id">Q70 <span class="q-type type-ci"><span class="i18n-zh">代码实现</span><span class="i18n-en" hidden>Code Implementation</span></span></div>
+    <h3><a href="answer-bank.html#A70"><span class="i18n-zh">将一个复杂的 Agent 重构为父图 + 子图结构：父图负责路由，子图分别处理 Sales 和 Support 两个业务。写出 Subgraph 的构建和集成代码。</span><span class="i18n-en" hidden>Refactor a complex Agent into parent graph + child graph structure: parent handles routing, children handle Sales and Support respectively. Write Subgraph construction and integration code.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Subgraph 实战编码。子图用独立的 StateGraph 构建 → compile() → 父图用 add_node(&quot;sales&quot;, sales_subgraph) 集成。</span><span class="i18n-en" hidden>Subgraph practical coding. Child graph built with independent StateGraph → compile() → parent integrates with add_node("sales", sales_subgraph).</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L09 Subgraphs 实战</span><span class="i18n-en" hidden>📎 L09 Subgraphs Hands-on</span></div>
   </div>
 
-
   <div class="q-card l4">
-    <div class="q-id">Q71 <span class="q-type type-kc">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A71">Command 在 LangGraph 中有哪些用途？它和传统的条件边返回字符串路由有什么区别？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Command 是 v1 新增的重要 API。用途：(1) 节点内动态路由到其他节点，(2) 同时更新 State，(3) 跨图跳转（子图→父图）。</div>
-
-    <div class="q-course-link">📎 L09 Subgraphs (Command 跳转)</div>
-
+    <div class="q-id">Q71 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A71"><span class="i18n-zh">Command 在 LangGraph 中有哪些用途？它和传统的条件边返回字符串路由有什么区别？</span><span class="i18n-en" hidden>What are the uses of Command in LangGraph? How does it differ from traditional conditional edge string routing?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Command 是 v1 新增的重要 API。用途：(1) 节点内动态路由到其他节点，(2) 同时更新 State，(3) 跨图跳转（子图→父图）。</span><span class="i18n-en" hidden>Command is an important API added in v1. Uses: (1) dynamic routing to other nodes within a node, (2) simultaneous State update, (3) cross-graph jumps (child→parent).</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L09 Subgraphs (Command 跳转)</span><span class="i18n-en" hidden>📎 L09 Subgraphs (Command Jumps)</span></div>
   </div>
 
-
   <div class="q-card l4">
-    <div class="q-id">Q72 <span class="q-type type-ca">对比分析</span></div>
-
-    <h3><a href="answer-bank.html#A72">LangGraph 中长时间运行的任务（如调用外部 API 等待异步结果）如何处理？interrupt 和 async node 各自的适用场景？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>异步任务处理。interrupt 适合需要人类审批的暂停，async node 适合 I/O 等待。对于回调式异步任务（如支付结果），用 interrupt + 外部 webhook 恢复。</div>
-
+    <div class="q-id">Q72 <span class="q-type type-ca"><span class="i18n-zh">对比分析</span><span class="i18n-en" hidden>Comparative Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A72"><span class="i18n-zh">LangGraph 中长时间运行的任务（如调用外部 API 等待异步结果）如何处理？interrupt 和 async node 各自的适用场景？</span><span class="i18n-en" hidden>How to handle long-running tasks in LangGraph (e.g., calling external API and waiting for async results)? What are the applicable scenarios for interrupt vs async node?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">异步任务处理。interrupt 适合需要人类审批的暂停，async node 适合 I/O 等待。对于回调式异步任务（如支付结果），用 interrupt + 外部 webhook 恢复。</span><span class="i18n-en" hidden>Async task handling. interrupt suits human-approval pauses; async node suits I/O waiting. For callback-style async tasks (e.g., payment results), use interrupt + external webhook to resume.</span></div>
     <div class="q-course-link">📎 L06 HITL + L07 Streaming</div>
-
   </div>
 
-
   <div class="q-card l4">
-    <div class="q-id">Q73 <span class="q-type type-db">调试排错</span></div>
-
-    <h3><a href="answer-bank.html#A73">下面这段代码在使用 interrupt() 时报错 "Interrupt not allowed outside of a node"。为什么？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>interrupt 使用限制。interrupt() 只能在节点函数内部调用，不能在节点外（如图构建阶段）或嵌套在非 LangGraph 管理的异步任务中。</div>
-
-    <div class="q-course-link">📎 L06 HITL — 避坑指南</div>
-
+    <div class="q-id">Q73 <span class="q-type type-db"><span class="i18n-zh">调试排错</span><span class="i18n-en" hidden>Debugging</span></span></div>
+    <h3><a href="answer-bank.html#A73"><span class="i18n-zh">下面这段代码在使用 interrupt() 时报错 &quot;Interrupt not allowed outside of a node&quot;。为什么？</span><span class="i18n-en" hidden>This code throws "Interrupt not allowed outside of a node" when using interrupt(). Why?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">interrupt 使用限制。interrupt() 只能在节点函数内部调用，不能在节点外（如图构建阶段）或嵌套在非 LangGraph 管理的异步任务中。</span><span class="i18n-en" hidden>interrupt() usage limitations. interrupt() can only be called inside a node function, not outside (e.g., graph construction phase) or nested in async tasks not managed by LangGraph.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L06 HITL — 避坑指南</span><span class="i18n-en" hidden>📎 L06 HITL — Pitfall Guide</span></div>
   </div>
 
-
   <div class="q-card l4">
-    <div class="q-id">Q74 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A74">LangGraph 的 Store API 做什么？它和 Checkpointing 有什么不同？设计一个用 Store 管理用户长期偏好的方案。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Store 是 v1 新增的长期记忆方案。Checkpoint=短期会话状态（thread 级别），Store=长期跨会话记忆（命名空间级别）。</div>
-
+    <div class="q-id">Q74 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A74"><span class="i18n-zh">LangGraph 的 Store API 做什么？它和 Checkpointing 有什么不同？设计一个用 Store 管理用户长期偏好的方案。</span><span class="i18n-en" hidden>What does LangGraph Store API do? How is it different from Checkpointing? Design a scheme for managing long-term user preferences with Store.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Store 是 v1 新增的长期记忆方案。Checkpoint=短期会话状态（thread 级别），Store=长期跨会话记忆（命名空间级别）。</span><span class="i18n-en" hidden>Store is a long-term memory solution added in v1. Checkpoint = short-term session state (thread level), Store = long-term cross-session memory (namespace level).</span></div>
     <div class="q-course-link">📎 L05 Store API + Memory</div>
-
   </div>
 
-
   <div class="q-card l4">
-    <div class="q-id">Q75 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A75">LangGraph 4 层错误处理策略是什么？哪些错误应该在节点层处理，哪些应该在图层处理？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>错误处理分级。Node 级（try/except）、Graph 级（retry policy）、App 级（全局错误 handler）、Infra 级（超时/熔断）。</div>
-
-    <div class="q-course-link">📎 L08 Error Handling — 四层策略</div>
-
+    <div class="q-id">Q75 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A75"><span class="i18n-zh">LangGraph 4 层错误处理策略是什么？哪些错误应该在节点层处理，哪些应该在图层处理？</span><span class="i18n-en" hidden>What is the LangGraph 4-layer error handling strategy? Which errors should be handled at the node level vs graph level?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">错误处理分级。Node 级（try/except）、Graph 级（retry policy）、App 级（全局错误 handler）、Infra 级（超时/熔断）。</span><span class="i18n-en" hidden>Error handling tiers. Node level (try/except), Graph level (retry policy), App level (global error handler), Infra level (timeout/circuit breaker).</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L08 Error Handling — 四层策略</span><span class="i18n-en" hidden>📎 L08 Error Handling — Four-Layer Strategy</span></div>
   </div>
 
-
   <div class="q-card l4">
-    <div class="q-id">Q76 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A76">如何给 LangGraph 的节点添加重试逻辑？retry 和 fallback 节点怎么设计？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>容错设计。RetryPolicy 配置（max_attempts, initial_interval, backoff_factor）、fallback 节点作为降级路径。</div>
-
-    <div class="q-course-link">📎 L08 Error Handling 实战</div>
-
+    <div class="q-id">Q76 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A76"><span class="i18n-zh">如何给 LangGraph 的节点添加重试逻辑？retry 和 fallback 节点怎么设计？</span><span class="i18n-en" hidden>How to add retry logic to LangGraph nodes? How to design retry and fallback nodes?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">容错设计。RetryPolicy 配置（max_attempts, initial_interval, backoff_factor）、fallback 节点作为降级路径。</span><span class="i18n-en" hidden>Fault-tolerant design. RetryPolicy configuration (max_attempts, initial_interval, backoff_factor), fallback node as degradation path.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L08 Error Handling 实战</span><span class="i18n-en" hidden>📎 L08 Error Handling Hands-on</span></div>
   </div>
 
-
   <div class="q-card l4">
-    <div class="q-id">Q77 <span class="q-type type-kc">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A77">LangSmith 在 LangGraph 开发中起什么作用？如何配置 LangSmith 追踪 Agent 执行？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>可观测性是生产必备。LangSmith 提供全链路追踪（trace 每个节点/LLM 调用/tool 调用）、性能监控、错误定位。</div>
-
-    <div class="q-course-link">📎 L04 LangSmith 设置 + L12 Production</div>
-
+    <div class="q-id">Q77 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A77"><span class="i18n-zh">LangSmith 在 LangGraph 开发中起什么作用？如何配置 LangSmith 追踪 Agent 执行？</span><span class="i18n-en" hidden>What role does LangSmith play in LangGraph development? How to configure LangSmith to trace Agent execution?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">可观测性是生产必备。LangSmith 提供全链路追踪（trace 每个节点/LLM 调用/tool 调用）、性能监控、错误定位。</span><span class="i18n-en" hidden>Observability is essential for production. LangSmith provides full-chain tracing (trace every node/LLM call/tool call), performance monitoring, and error localization.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L04 LangSmith 设置 + L12 Production</span><span class="i18n-en" hidden>📎 L04 LangSmith Setup + L12 Production</span></div>
   </div>
 
-
   <div class="q-card l4">
-    <div class="q-id">Q78 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A78">图定义变更后已有的 thread checkpoint 会出问题吗？LangGraph 如何处理图迁移（Graph Migration）？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>生产环境版本管理。LangGraph 支持 checkpointer 迁移，但新增/删除节点或修改 State schema 时需要迁移策略（版本标记、数据迁移函数）。</div>
-
-    <div class="q-course-link">📎 L12 Production — 图迁移</div>
-
+    <div class="q-id">Q78 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A78"><span class="i18n-zh">图定义变更后已有的 thread checkpoint 会出问题吗？LangGraph 如何处理图迁移（Graph Migration）？</span><span class="i18n-en" hidden>Will existing thread checkpoints break after graph definition changes? How does LangGraph handle Graph Migration?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">生产环境版本管理。LangGraph 支持 checkpointer 迁移，但新增/删除节点或修改 State schema 时需要迁移策略（版本标记、数据迁移函数）。</span><span class="i18n-en" hidden>Production version management. LangGraph supports checkpointer migration, but migration strategy is needed when adding/removing nodes or modifying State schema (version markers, data migration functions).</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L12 Production — 图迁移</span><span class="i18n-en" hidden>📎 L12 Production — Graph Migration</span></div>
   </div>
 
-
   <div class="q-card l4">
-    <div class="q-id">Q79 <span class="q-type type-ci">代码实现</span></div>
-
-    <h3><a href="answer-bank.html#A79">实现带 Token 级 Streaming 的 Chat Agent：用户在浏览器中输入消息，Agent 以 token 流形式展示思考过程和工具调用过程。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>端到端 Streaming。astream_events(version="v2") 可以捕获 on_chat_model_stream、on_tool_start、on_tool_end 等事件。</div>
-
-    <div class="q-course-link">📎 L07 Streaming 实战</div>
-
+    <div class="q-id">Q79 <span class="q-type type-ci"><span class="i18n-zh">代码实现</span><span class="i18n-en" hidden>Code Implementation</span></span></div>
+    <h3><a href="answer-bank.html#A79"><span class="i18n-zh">实现带 Token 级 Streaming 的 Chat Agent：用户在浏览器中输入消息，Agent 以 token 流形式展示思考过程和工具调用过程。</span><span class="i18n-en" hidden>Implement a Chat Agent with token-level Streaming: user inputs a message in the browser; Agent displays thinking and tool calling process as a token stream.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">端到端 Streaming。astream_events(version=&quot;v2&quot;) 可以捕获 on_chat_model_stream、on_tool_start、on_tool_end 等事件。</span><span class="i18n-en" hidden>End-to-end Streaming. astream_events(version="v2") captures events like on_chat_model_stream, on_tool_start, on_tool_end, etc.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L07 Streaming 实战</span><span class="i18n-en" hidden>📎 L07 Streaming Hands-on</span></div>
   </div>
 
-
   <div class="q-card l4">
-    <div class="q-id">Q80 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A80">LangGraph Agent 的上下文窗口不断增长，如何管理？什么是上下文裁剪（Context Trimming）策略？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Token 管理是生产 Agent 的核心挑战。策略：滑动窗口保留最近 N 条消息、摘要压缩旧消息、基于重要性的选择性保留（如保留工具调用结果而丢弃中间推理）。</div>
-
-    <div class="q-course-link">📎 L05 Memory + L12 上下文管理</div>
-
+    <div class="q-id">Q80 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A80"><span class="i18n-zh">LangGraph Agent 的上下文窗口不断增长，如何管理？什么是上下文裁剪（Context Trimming）策略？</span><span class="i18n-en" hidden>How to manage the ever-growing context window of a LangGraph Agent? What is Context Trimming strategy?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Token 管理是生产 Agent 的核心挑战。策略：滑动窗口保留最近 N 条消息、摘要压缩旧消息、基于重要性的选择性保留（如保留工具调用结果而丢弃中间推理）。</span><span class="i18n-en" hidden>Token management is a core challenge for production Agents. Strategies: sliding window keeping last N messages, summarization compression of old messages, importance-based selective retention (keep tool results, discard intermediate reasoning).</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L05 Memory + L12 上下文管理</span><span class="i18n-en" hidden>📎 L05 Memory + L12 Context Management</span></div>
   </div>
 
-
   <div class="q-card l4">
-    <div class="q-id">Q81 <span class="q-type type-kc">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A81">LangGraph 中如何实现模型的动态选择和切换（Model Routing）？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>成本优化策略。简单任务用小模型（如 Haiku），复杂任务用大模型（如 Opus）。在节点中根据任务复杂度标记选择不同的 LLM 实例。</div>
-
-    <div class="q-course-link">📎 L12 Production — 模型路由</div>
-
+    <div class="q-id">Q81 <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A81"><span class="i18n-zh">LangGraph 中如何实现模型的动态选择和切换（Model Routing）？</span><span class="i18n-en" hidden>How to implement dynamic model selection and switching (Model Routing) in LangGraph?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">成本优化策略。简单任务用小模型（如 Haiku），复杂任务用大模型（如 Opus）。在节点中根据任务复杂度标记选择不同的 LLM 实例。</span><span class="i18n-en" hidden>Cost optimization strategy. Simple tasks use small models (e.g., Haiku), complex tasks use large models (e.g., Opus). Select different LLM instances in nodes based on task complexity markers.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L12 Production — 模型路由</span><span class="i18n-en" hidden>📎 L12 Production — Model Routing</span></div>
   </div>
 
-
   <div class="q-card l4">
-    <div class="q-id">Q82 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A82">Agent 使用了多个工具，其中一个工具（如搜索 API）突然不可用。如何设计降级策略保证 Agent 仍然尽可能完成任务？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>优雅降级。工具失败 → try/except → 返回 ToolMessage 说明失败原因 → Agent 决定是否用其他工具替代或告知用户部分完成。</div>
-
-    <div class="q-course-link">📎 L08 Error Handling — 降级策略</div>
-
+    <div class="q-id">Q82 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A82"><span class="i18n-zh">Agent 使用了多个工具，其中一个工具（如搜索 API）突然不可用。如何设计降级策略保证 Agent 仍然尽可能完成任务？</span><span class="i18n-en" hidden>An Agent uses multiple tools; one tool (e.g., search API) suddenly becomes unavailable. How to design a degradation strategy so the Agent still completes the task as much as possible?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">优雅降级。工具失败 → try/except → 返回 ToolMessage 说明失败原因 → Agent 决定是否用其他工具替代或告知用户部分完成。</span><span class="i18n-en" hidden>Graceful degradation. Tool failure → try/except → return ToolMessage describing failure → Agent decides whether to substitute with other tools or inform user of partial completion.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L08 Error Handling — 降级策略</span><span class="i18n-en" hidden>📎 L08 Error Handling — Degradation Strategy</span></div>
   </div>
 
-
   <div class="q-card l4">
-    <div class="q-id">Q83 <span class="q-type type-ka">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A83">什么是 GraphRAG？它和传统 RAG 有什么区别？LangGraph 如何实现 GraphRAG？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>GraphRAG 是 2025-26 热门话题。传统 RAG 用向量检索独立片段，GraphRAG 构建知识图谱理解实体关系，再用社区摘要+向量检索。</div>
-
-    <div class="q-course-link">📎 L03 RAG 进阶</div>
-
+    <div class="q-id">Q83 <span class="q-type type-ka"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A83"><span class="i18n-zh">什么是 GraphRAG？它和传统 RAG 有什么区别？LangGraph 如何实现 GraphRAG？</span><span class="i18n-en" hidden>What is GraphRAG? How is it different from traditional RAG? How to implement GraphRAG with LangGraph?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">GraphRAG 是 2025-26 热门话题。传统 RAG 用向量检索独立片段，GraphRAG 构建知识图谱理解实体关系，再用社区摘要+向量检索。</span><span class="i18n-en" hidden>GraphRAG is a hot topic in 2025-26. Traditional RAG uses vector retrieval for independent fragments; GraphRAG builds knowledge graphs to understand entity relationships, then uses community summaries + vector retrieval.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L03 RAG 进阶</span><span class="i18n-en" hidden>📎 L03 RAG Advanced</span></div>
   </div>
 
-
   <div class="q-card l4">
-    <div class="q-id">Q84 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A84">设计一个"A/B 测试"框架，用 LangGraph 同时调用两个不同的 Agent 策略，比较它们的输出质量并自动选择更好的结果。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>高级 Agent 设计。并行执行两个 Agent → Evaluator 节点评估两个输出 → 选择更优结果或人工决策。</div>
-
+    <div class="q-id">Q84 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A84"><span class="i18n-zh">设计一个&quot;A/B 测试&quot;框架，用 LangGraph 同时调用两个不同的 Agent 策略，比较它们的输出质量并自动选择更好的结果。</span><span class="i18n-en" hidden>Design an "A/B testing" framework using LangGraph to simultaneously call two different Agent strategies, compare output quality, and automatically select the better result.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">高级 Agent 设计。并行执行两个 Agent → Evaluator 节点评估两个输出 → 选择更优结果或人工决策。</span><span class="i18n-en" hidden>Advanced Agent design. Execute two Agents in parallel → Evaluator node assesses both outputs → select the better result or manual decision.</span></div>
     <div class="q-course-link">📎 L11 Parallel + L12 Evaluation</div>
-
   </div>
 
-
   <div class="q-card l4">
-    <div class="q-id">Q85 <span class="q-type type-ka">知识检查</span></div>
-
-    <h3><a href="answer-bank.html#A85">LangGraph Platform 是什么？LangGraph Cloud 提供了哪些开箱即用的功能？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>LangGraph 商业化产品认知。Platform 提供托管部署、自动 scaling、cron jobs、webhook、revision 管理等生产级功能。</div>
-
+    <div class="q-id">Q85 <span class="q-type type-ka"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span></div>
+    <h3><a href="answer-bank.html#A85"><span class="i18n-zh">LangGraph Platform 是什么？LangGraph Cloud 提供了哪些开箱即用的功能？</span><span class="i18n-en" hidden>What is LangGraph Platform? What out-of-the-box features does LangGraph Cloud provide?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">LangGraph 商业化产品认知。Platform 提供托管部署、自动 scaling、cron jobs、webhook、revision 管理等生产级功能。</span><span class="i18n-en" hidden>LangGraph commercial product awareness. Platform provides managed deployment, auto-scaling, cron jobs, webhooks, revision management, and other production-grade features.</span></div>
     <div class="q-course-link">📎 L12 Production — LangGraph Cloud</div>
-
   </div>
-
 
   <div class="q-card l4">
-    <div class="q-id">Q85m <span class="q-type type-kc">知识检查</span> <span class="q-type type-ci">代码实现</span></div>
-
-    <h3><a href="answer-bank.html#A85m">LangChain v1.0 的 Middleware 模式是什么？如何用 Middleware 给 Agent 添加"所有工具调用前必须经过人类审批"的行为？写出代码。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Middleware 是 LangChain v1.0 `create_agent` 的核心扩展机制（替代了旧版本需要在 LangGraph 层面手动干预的模式）。它定义了一组 hook（before_model, after_model, on_tool_start 等），允许在 Agent 循环的每个步骤注入自定义逻辑。</div>
-
+    <div class="q-id">Q85m <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span> <span class="q-type type-ci"><span class="i18n-zh">代码实现</span><span class="i18n-en" hidden>Code Implementation</span></span></div>
+    <h3><a href="answer-bank.html#A85m"><span class="i18n-zh">LangChain v1.0 的 Middleware 模式是什么？如何用 Middleware 给 Agent 添加&quot;所有工具调用前必须经过人类审批&quot;的行为？写出代码。</span><span class="i18n-en" hidden>What is the LangChain v1.0 Middleware pattern? How to use Middleware to add "all tool calls must be approved by a human" behavior to an Agent? Write code.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Middleware 是 LangChain v1.0 `create_agent` 的核心扩展机制（替代了旧版本需要在 LangGraph 层面手动干预的模式）。它定义了一组 hook（before_model, after_model, on_tool_start 等），允许在 Agent 循环的每个步骤注入自定义逻辑。</span><span class="i18n-en" hidden>Middleware is the core extension mechanism of LangChain v1.0 `create_agent` (replacing the old pattern of manual intervention at the LangGraph level). It defines hooks (before_model, after_model, on_tool_start, etc.) allowing custom logic injection at each step of the Agent loop.</span></div>
     <div class="q-course-link">📎 L06 HITL + LangChain v1.0 Middleware</div>
-
   </div>
-
 </div>
-
 
 <!-- ——— L5: Expert / Architecture ——— -->
 </div>
-
 <div class="locked-content" data-require-stage="expert">
 <div class="q-section" id="L5">
-  <h2><span class="emoji">🔴</span> L5 · 专家/架构层 <span class="badge badge-red" style="font-size:0.7em">15 题</span></h2>
-
-  <p style="color:var(--text-2); margin-bottom:20px;">考核 Multi-Agent 系统设计、生产部署(<code>langgraph deploy</code>)、A2A 协议、安全防御、评估体系 — <strong>架构师级，区分 P6 vs P7</strong></p>
-
+  <h2><span class="emoji">🔴</span><span class="i18n-zh"> L5 · 专家/架构层 </span><span class="i18n-en" hidden>L5 · Expert/Architecture Tier</span><span class="badge badge-red" style="font-size:0.7em"><span class="i18n-zh">15 题</span><span class="i18n-en" hidden>15 Questions</span></span></h2>
+  <p style="color:var(--text-2); margin-bottom:20px;"><span class="i18n-zh">考核 Multi-Agent 系统设计、生产部署(</span><span class="i18n-en" hidden>Covers Multi-Agent system design, production deployment (</span><code>langgraph deploy</code><span class="i18n-zh">)、A2A 协议、安全防御、评估体系 — </span><span class="i18n-en" hidden>), A2A protocol, security defense, evaluation systems —</span><strong><span class="i18n-zh">架构师级，区分 P6 vs P7</span><span class="i18n-en" hidden>Architect-level, distinguishes P6 vs P7</span></strong></p>
 
   <div class="q-card l5">
-    <div class="q-id">Q86 <span class="q-type type-sd">系统设计</span></div>
-
-    <h3><a href="answer-bank.html#A86">设计一个 Multi-Agent 代码审查系统：包含 Code Analyzer、Security Checker、Style Checker、Test Generator 四个 Agent，以及一个 Orchestrator Agent 协调它们。画出架构图并说明 Agent 间的通信机制。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Multi-Agent 系统设计是大厂 P6+ 核心考题。涉及 Agent 角色定义、通信模式（共享 State vs 消息传递）、Orchestrator 路由、结果聚合。</div>
-
+    <div class="q-id">Q86 <span class="q-type type-sd"><span class="i18n-zh">系统设计</span><span class="i18n-en" hidden>System Design</span></span></div>
+    <h3><a href="answer-bank.html#A86"><span class="i18n-zh">设计一个 Multi-Agent 代码审查系统：包含 Code Analyzer、Security Checker、Style Checker、Test Generator 四个 Agent，以及一个 Orchestrator Agent 协调它们。画出架构图并说明 Agent 间的通信机制。</span><span class="i18n-en" hidden>Design a Multi-Agent code review system: include Code Analyzer, Security Checker, Style Checker, Test Generator (four Agents), plus an Orchestrator Agent to coordinate them. Draw the architecture diagram and explain the inter-Agent communication mechanism.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Multi-Agent 系统设计是大厂 P6+ 核心考题。涉及 Agent 角色定义、通信模式（共享 State vs 消息传递）、Orchestrator 路由、结果聚合。</span><span class="i18n-en" hidden>Multi-Agent system design is a core topic for P6+ at major companies. Involves Agent role definition, communication patterns (shared State vs message passing), Orchestrator routing, and result aggregation.</span></div>
     <div class="q-course-link">📎 L10 Multi-Agent Systems</div>
-
   </div>
 
-
   <div class="q-card l5">
-    <div class="q-id">Q87 <span class="q-type type-sa">场景分析</span> <span class="q-type type-sd">系统设计</span></div>
-
-    <h3><a href="answer-bank.html#A87">如何设计一个能处理 1000 QPS 的生产级 LangGraph Agent 系统？考虑负载均衡、checkpointer 并发、模型 Rate Limit、缓存、监控。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>生产架构综合题。要点：无状态节点可水平扩展、Postgres checkpointer 连接池、模型调用队列+限流、Redis 缓存、LangSmith 监控+Prometheus。</div>
-
-    <div class="q-course-link">📎 L12 Production 全栈</div>
-
+    <div class="q-id">Q87 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span> <span class="q-type type-sd"><span class="i18n-zh">系统设计</span><span class="i18n-en" hidden>System Design</span></span></div>
+    <h3><a href="answer-bank.html#A87"><span class="i18n-zh">如何设计一个能处理 1000 QPS 的生产级 LangGraph Agent 系统？考虑负载均衡、checkpointer 并发、模型 Rate Limit、缓存、监控。</span><span class="i18n-en" hidden>How to design a production-grade LangGraph Agent system handling 1000 QPS? Consider load balancing, checkpointer concurrency, model Rate Limit, caching, and monitoring.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">生产架构综合题。要点：无状态节点可水平扩展、Postgres checkpointer 连接池、模型调用队列+限流、Redis 缓存、LangSmith 监控+Prometheus。</span><span class="i18n-en" hidden>Comprehensive production architecture question. Key points: stateless nodes horizontally scalable, Postgres checkpointer connection pool, model call queue + rate limiting, Redis cache, LangSmith monitoring + Prometheus.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L12 Production 全栈</span><span class="i18n-en" hidden>📎 L12 Production Full-Stack</span></div>
   </div>
 
-
   <div class="q-card l5">
-    <div class="q-id">Q88 <span class="q-type type-sd">系统设计</span></div>
-
-    <h3><a href="answer-bank.html#A88">构建一个"自主研究 Agent"：给定一个研究主题，Agent 自动搜索文献、阅读论文、提取关键发现、交叉验证、生成研究报告。设计完整的 Multi-Agent 架构。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>复杂 Agent 系统设计。需要 Searcher → Reader → Extractor → Validator → Writer 的流水线，加上 Orchestrator 的任务分解和调度。</div>
-
+    <div class="q-id">Q88 <span class="q-type type-sd"><span class="i18n-zh">系统设计</span><span class="i18n-en" hidden>System Design</span></span></div>
+    <h3><a href="answer-bank.html#A88"><span class="i18n-zh">构建一个&quot;自主研究 Agent&quot;：给定一个研究主题，Agent 自动搜索文献、阅读论文、提取关键发现、交叉验证、生成研究报告。设计完整的 Multi-Agent 架构。</span><span class="i18n-en" hidden>Build an "autonomous research Agent": given a research topic, the Agent automatically searches literature, reads papers, extracts key findings, cross-validates, and generates a research report. Design the complete Multi-Agent architecture.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">复杂 Agent 系统设计。需要 Searcher → Reader → Extractor → Validator → Writer 的流水线，加上 Orchestrator 的任务分解和调度。</span><span class="i18n-en" hidden>Complex Agent system design. Requires a pipeline of Searcher → Reader → Extractor → Validator → Writer, plus Orchestrator task decomposition and scheduling.</span></div>
     <div class="q-course-link">📎 L10 Multi-Agent + L11 Parallel</div>
-
   </div>
 
-
   <div class="q-card l5">
-    <div class="q-id">Q89 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A89">Agent 间如何通信？共享 State、消息传递、事件总线各自的适用场景和优缺点？LangGraph 中推荐哪种？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Agent 通信模式是 Multi-Agent 系统的核心架构决策。LangGraph 原生推荐共享 State（同图内）和 Store（跨图/跨会话）。</div>
-
-    <div class="q-course-link">📎 L10 Multi-Agent 通信模式</div>
-
+    <div class="q-id">Q89 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A89"><span class="i18n-zh">Agent 间如何通信？共享 State、消息传递、事件总线各自的适用场景和优缺点？LangGraph 中推荐哪种？</span><span class="i18n-en" hidden>How do Agents communicate? What are the applicable scenarios, pros, and cons of shared State, message passing, and event buses? Which does LangGraph recommend?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Agent 通信模式是 Multi-Agent 系统的核心架构决策。LangGraph 原生推荐共享 State（同图内）和 Store（跨图/跨会话）。</span><span class="i18n-en" hidden>Agent communication patterns are core architectural decisions for Multi-Agent systems. LangGraph natively recommends shared State (within same graph) and Store (cross-graph/cross-session).</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L10 Multi-Agent 通信模式</span><span class="i18n-en" hidden>📎 L10 Multi-Agent Communication Patterns</span></div>
   </div>
 
-
   <div class="q-card l5">
-    <div class="q-id">Q90 <span class="q-type type-ca">对比分析</span></div>
-
-    <h3><a href="answer-bank.html#A90">LangGraph vs CrewAI vs AutoGen vs OpenAI Swarm：Multi-Agent 框架全景对比。各自的优势、劣势和适用场景？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>框架选型是架构师核心能力。LangGraph=灵活精细控制, CrewAI=快速原型角色分工, AutoGen=微软生态+对话驱动, Swarm=轻量实验。</div>
-
-    <div class="q-course-link">📎 L10 Multi-Agent 框架对比</div>
-
+    <div class="q-id">Q90 <span class="q-type type-ca"><span class="i18n-zh">对比分析</span><span class="i18n-en" hidden>Comparative Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A90"><span class="i18n-zh">LangGraph vs CrewAI vs AutoGen vs OpenAI Swarm：Multi-Agent 框架全景对比。各自的优势、劣势和适用场景？</span><span class="i18n-en" hidden>LangGraph vs CrewAI vs AutoGen vs OpenAI Swarm: a panoramic comparison of Multi-Agent frameworks. What are their strengths, weaknesses, and applicable scenarios?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">框架选型是架构师核心能力。LangGraph=灵活精细控制, CrewAI=快速原型角色分工, AutoGen=微软生态+对话驱动, Swarm=轻量实验。</span><span class="i18n-en" hidden>Framework selection is a core architect competency. LangGraph = flexible fine-grained control, CrewAI = rapid prototyping with role division, AutoGen = Microsoft ecosystem + conversation-driven, Swarm = lightweight experimentation.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L10 Multi-Agent 框架对比</span><span class="i18n-en" hidden>📎 L10 Multi-Agent Framework Comparison</span></div>
   </div>
 
-
   <div class="q-card l5">
-    <div class="q-id">Q91 <span class="q-type type-sd">系统设计</span></div>
-
-    <h3><a href="answer-bank.html#A91">设计一个 AI 客服系统的完整技术方案：需要支持多渠道（网页/微信/电话）、多语言、情绪检测、升级到人工客服、知识库管理。使用 LangGraph 作为核心编排引擎。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>端到端系统设计。考核点：Graph 结构设计（Intent → Sentiment → Route → Resolve/Handoff）、与外部系统集成、SLA 保障。</div>
-
-    <div class="q-course-link">📎 L12 Production 综合</div>
-
+    <div class="q-id">Q91 <span class="q-type type-sd"><span class="i18n-zh">系统设计</span><span class="i18n-en" hidden>System Design</span></span></div>
+    <h3><a href="answer-bank.html#A91"><span class="i18n-zh">设计一个 AI 客服系统的完整技术方案：需要支持多渠道（网页/微信/电话）、多语言、情绪检测、升级到人工客服、知识库管理。使用 LangGraph 作为核心编排引擎。</span><span class="i18n-en" hidden>Design a complete technical plan for an AI customer service system: support multi-channel (web/WeChat/phone), multi-language, sentiment detection, escalation to human agent, knowledge base management. Use LangGraph as the core orchestration engine.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">端到端系统设计。考核点：Graph 结构设计（Intent → Sentiment → Route → Resolve/Handoff）、与外部系统集成、SLA 保障。</span><span class="i18n-en" hidden>End-to-end system design. Assessment points: Graph structure design (Intent → Sentiment → Route → Resolve/Handoff), external system integration, SLA guarantees.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L12 Production 综合</span><span class="i18n-en" hidden>📎 L12 Production Comprehensive</span></div>
   </div>
 
-
   <div class="q-card l5">
-    <div class="q-id">Q92 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A92">Agent 系统如何做安全防护？Prompt Injection、数据泄露、工具滥用分别如何防御？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>AI Safety 是生产系统的底线。防御手段：输入过滤+输出审查、工具调用权限分级、敏感数据脱敏、Human-in-the-Loop 审批高风险操作。</div>
-
+    <div class="q-id">Q92 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A92"><span class="i18n-zh">Agent 系统如何做安全防护？Prompt Injection、数据泄露、工具滥用分别如何防御？</span><span class="i18n-en" hidden>How to secure an Agent system? How to defend against Prompt Injection, data leakage, and tool abuse respectively?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">AI Safety 是生产系统的底线。防御手段：输入过滤+输出审查、工具调用权限分级、敏感数据脱敏、Human-in-the-Loop 审批高风险操作。</span><span class="i18n-en" hidden>AI Safety is the bottom line for production systems. Defense measures: input filtering + output review, tool call permission tiering, sensitive data masking, Human-in-the-Loop approval for high-risk operations.</span></div>
     <div class="q-course-link">📎 L06 HITL + L12 Security</div>
-
   </div>
 
-
   <div class="q-card l5">
-    <div class="q-id">Q93 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A93">如何评估一个 Agent 系统的质量？设计一套完整的 Agent 评估体系，包括离线评估和在线监控。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>Agent 评估比 LLM 评估更复杂。离线：功能测试集（任务完成率、工具选择准确率）；在线：延迟 P50/P99、Token 成本、用户满意度、幻觉率。</div>
-
+    <div class="q-id">Q93 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A93"><span class="i18n-zh">如何评估一个 Agent 系统的质量？设计一套完整的 Agent 评估体系，包括离线评估和在线监控。</span><span class="i18n-en" hidden>How to evaluate the quality of an Agent system? Design a complete Agent evaluation framework including offline evaluation and online monitoring.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">Agent 评估比 LLM 评估更复杂。离线：功能测试集（任务完成率、工具选择准确率）；在线：延迟 P50/P99、Token 成本、用户满意度、幻觉率。</span><span class="i18n-en" hidden>Agent evaluation is more complex than LLM evaluation. Offline: functional test suite (task completion rate, tool selection accuracy); Online: latency P50/P99, Token cost, user satisfaction, hallucination rate.</span></div>
     <div class="q-course-link">📎 L12 Evaluation & Monitoring</div>
-
   </div>
 
-
   <div class="q-card l5">
-    <div class="q-id">Q94 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A94">如何做 Agent 系统的成本优化？列出至少 8 种具体的降本策略。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>成本是生产 Agent 的核心关注点。策略：模型路由、Prompt Caching、上下文压缩、结果缓存、批量处理、选择更短 prompt、减少不必要的 agent loop 迭代、使用更便宜的 embedding 模型。</div>
-
-    <div class="q-course-link">📎 L12 Production 成本优化</div>
-
+    <div class="q-id">Q94 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A94"><span class="i18n-zh">如何做 Agent 系统的成本优化？列出至少 8 种具体的降本策略。</span><span class="i18n-en" hidden>How to optimize Agent system costs? List at least 8 specific cost-reduction strategies.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">成本是生产 Agent 的核心关注点。策略：模型路由、Prompt Caching、上下文压缩、结果缓存、批量处理、选择更短 prompt、减少不必要的 agent loop 迭代、使用更便宜的 embedding 模型。</span><span class="i18n-en" hidden>Cost is a core concern for production Agents. Strategies: model routing, Prompt Caching, context compression, result caching, batch processing, shorter prompts, reducing unnecessary agent loop iterations, cheaper embedding models.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L12 Production 成本优化</span><span class="i18n-en" hidden>📎 L12 Production Cost Optimization</span></div>
   </div>
 
-
   <div class="q-card l5">
-    <div class="q-id">Q95 <span class="q-type type-sd">系统设计</span></div>
-
-    <h3><a href="answer-bank.html#A95">设计一个企业级 RAG 系统：支持多租户、权限隔离、多种文档格式、自动更新知识库。LangGraph 如何编排这些能力？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>企业级架构设计。租户隔离（tenant_id → namespace）、权限（检索前过滤）、文档管道（ingestion → processing → indexing 子图）、增量更新（CDC + 重新索引）。</div>
-
-    <div class="q-course-link">📎 L12 Production — 企业级 RAG</div>
-
+    <div class="q-id">Q95 <span class="q-type type-sd"><span class="i18n-zh">系统设计</span><span class="i18n-en" hidden>System Design</span></span></div>
+    <h3><a href="answer-bank.html#A95"><span class="i18n-zh">设计一个企业级 RAG 系统：支持多租户、权限隔离、多种文档格式、自动更新知识库。LangGraph 如何编排这些能力？</span><span class="i18n-en" hidden>Design an enterprise RAG system: support multi-tenancy, permission isolation, multiple document formats, automatic knowledge base updates. How does LangGraph orchestrate these capabilities?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">企业级架构设计。租户隔离（tenant_id → namespace）、权限（检索前过滤）、文档管道（ingestion → processing → indexing 子图）、增量更新（CDC + 重新索引）。</span><span class="i18n-en" hidden>Enterprise architecture design. Tenant isolation (tenant_id → namespace), permissions (pre-retrieval filtering), document pipeline (ingestion → processing → indexing subgraph), incremental updates (CDC + re-indexing).</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L12 Production — 企业级 RAG</span><span class="i18n-en" hidden>📎 L12 Production — Enterprise RAG</span></div>
   </div>
 
-
   <div class="q-card l5">
-    <div class="q-id">Q96 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A96">LangGraph Agent 如何与现有的企业系统（CRM、ERP、数据库）集成？讨论 MCP 协议在这种集成中的角色。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>企业集成是落地关键。MCP 提供标准化的工具/资源接口，LangGraph Agent 通过 MCP client 调用 MCP server，MCP server 封装企业系统 API。</div>
-
-    <div class="q-course-link">📎 L12 Production — 企业集成</div>
-
+    <div class="q-id">Q96 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A96"><span class="i18n-zh">LangGraph Agent 如何与现有的企业系统（CRM、ERP、数据库）集成？讨论 MCP 协议在这种集成中的角色。</span><span class="i18n-en" hidden>How does a LangGraph Agent integrate with existing enterprise systems (CRM, ERP, databases)? Discuss the role of the MCP protocol in this integration.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">企业集成是落地关键。MCP 提供标准化的工具/资源接口，LangGraph Agent 通过 MCP client 调用 MCP server，MCP server 封装企业系统 API。</span><span class="i18n-en" hidden>Enterprise integration is key to landing. MCP provides standardized tool/resource interfaces; LangGraph Agent calls MCP server via MCP client; MCP server encapsulates enterprise system APIs.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L12 Production — 企业集成</span><span class="i18n-en" hidden>📎 L12 Production — Enterprise Integration</span></div>
   </div>
 
-
   <div class="q-card l5">
-    <div class="q-id">Q97 <span class="q-type type-ca">对比分析</span></div>
-
-    <h3><a href="answer-bank.html#A97">Agent 系统 vs 传统工作流引擎（如 Temporal、Airflow）的核心区别是什么？什么场景该用 Agent 而不是工作流？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>技术选型决策。工作流=预定义步骤+确定性执行，Agent=LLM 动态决策+不确定性。可预测的重复任务用工作流，需要理解和推理的开放任务用 Agent。</div>
-
-    <div class="q-course-link">📎 L12 Production 架构决策</div>
-
+    <div class="q-id">Q97 <span class="q-type type-ca"><span class="i18n-zh">对比分析</span><span class="i18n-en" hidden>Comparative Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A97"><span class="i18n-zh">Agent 系统 vs 传统工作流引擎（如 Temporal、Airflow）的核心区别是什么？什么场景该用 Agent 而不是工作流？</span><span class="i18n-en" hidden>What is the core difference between Agent systems and traditional workflow engines (e.g., Temporal, Airflow)? In what scenarios should you use Agent instead of workflow?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">技术选型决策。工作流=预定义步骤+确定性执行，Agent=LLM 动态决策+不确定性。可预测的重复任务用工作流，需要理解和推理的开放任务用 Agent。</span><span class="i18n-en" hidden>Technology selection decision. Workflow = predefined steps + deterministic execution, Agent = LLM dynamic decision-making + uncertainty. Use workflow for predictable repetitive tasks; use Agent for open tasks requiring understanding and reasoning.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L12 Production 架构决策</span><span class="i18n-en" hidden>📎 L12 Production Architecture Decision</span></div>
   </div>
 
-
   <div class="q-card l5">
-    <div class="q-id">Q98 <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A98">如何确保 LangGraph Agent 的确定性（Determinism）和可复现性（Reproducibility）？这对生产系统为什么重要？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>生产可靠性。手段：固定 seed、temperature=0、记录完整 trace（LangSmith）、checkpoint 重放、A/B 测试框架。</div>
-
-    <div class="q-course-link">📎 L12 Production — 可靠性</div>
-
+    <div class="q-id">Q98 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A98"><span class="i18n-zh">如何确保 LangGraph Agent 的确定性（Determinism）和可复现性（Reproducibility）？这对生产系统为什么重要？</span><span class="i18n-en" hidden>How to ensure determinism and reproducibility of LangGraph Agents? Why is this important for production systems?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">生产可靠性。手段：固定 seed、temperature=0、记录完整 trace（LangSmith）、checkpoint 重放、A/B 测试框架。</span><span class="i18n-en" hidden>Production reliability. Methods: fixed seed, temperature=0, complete trace recording (LangSmith), checkpoint replay, A/B testing framework.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L12 Production — 可靠性</span><span class="i18n-en" hidden>📎 L12 Production — Reliability</span></div>
   </div>
 
-
   <div class="q-card l5">
-    <div class="q-id">Q99 <span class="q-type type-sd">系统设计</span></div>
-
-    <h3><a href="answer-bank.html#A99">设计一个"AI 驱动的 DevOps 助手"：能够接收监控告警 → 分析日志 → 搜索知识库 → 提出修复方案 → 自动执行安全的修复（如重启服务）→ 记录事后分析。使用 LangGraph 设计全流程。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>综合系统设计——融合了事件驱动、工具调用、HITL（危险操作审批）、RAG（知识库检索）、状态持久化。</div>
-
-    <div class="q-course-link">📎 L12 Production — 综合实战</div>
-
+    <div class="q-id">Q99 <span class="q-type type-sd"><span class="i18n-zh">系统设计</span><span class="i18n-en" hidden>System Design</span></span></div>
+    <h3><a href="answer-bank.html#A99"><span class="i18n-zh">设计一个&quot;AI 驱动的 DevOps 助手&quot;：能够接收监控告警 → 分析日志 → 搜索知识库 → 提出修复方案 → 自动执行安全的修复（如重启服务）→ 记录事后分析。使用 LangGraph 设计全流程。</span><span class="i18n-en" hidden>Design an "AI-driven DevOps assistant": receive monitoring alerts → analyze logs → search knowledge base → propose repair plan → automatically execute safe repairs (e.g., restart service) → record post-mortem analysis. Use LangGraph to design the complete workflow.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">综合系统设计——融合了事件驱动、工具调用、HITL（危险操作审批）、RAG（知识库检索）、状态持久化。</span><span class="i18n-en" hidden>Comprehensive system design — integrating event-driven, tool calling, HITL (dangerous operation approval), RAG (knowledge base retrieval), state persistence.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 L12 Production — 综合实战</span><span class="i18n-en" hidden>📎 L12 Production — Comprehensive Practice</span></div>
   </div>
 
-
   <div class="q-card l5">
-    <div class="q-id">Q100 <span class="q-type type-sa">场景分析</span> <span class="q-type type-ca">对比分析</span></div>
-
-    <h3><a href="answer-bank.html#A100">展望 2026-2027：Agent 技术会朝什么方向发展？LangGraph 在未来 Agent 生态中的定位是什么？</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>行业洞察和前瞻性。方向：Agent-to-Agent 协议标准化（A2A/MCP）、多模态 Agent、长期自主 Agent（24/7 运行）、Agent 安全治理框架。</div>
-
-    <div class="q-course-link">📎 领域全貌 — 前沿趋势</div>
-
+    <div class="q-id">Q100 <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span> <span class="q-type type-ca"><span class="i18n-zh">对比分析</span><span class="i18n-en" hidden>Comparative Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A100"><span class="i18n-zh">展望 2026-2027：Agent 技术会朝什么方向发展？LangGraph 在未来 Agent 生态中的定位是什么？</span><span class="i18n-en" hidden>Looking ahead to 2026-2027: What direction will Agent technology evolve? What is LangGraph positioning in the future Agent ecosystem?</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">行业洞察和前瞻性。方向：Agent-to-Agent 协议标准化（A2A/MCP）、多模态 Agent、长期自主 Agent（24/7 运行）、Agent 安全治理框架。</span><span class="i18n-en" hidden>Industry insight and foresight. Directions: Agent-to-Agent protocol standardization (A2A/MCP), multimodal Agents, long-term autonomous Agents (24/7 operation), Agent security governance frameworks.</span></div>
+    <div class="q-course-link"><span class="i18n-zh">📎 领域全貌 — 前沿趋势</span><span class="i18n-en" hidden>📎 Domain Overview — Frontier Trends</span></div>
   </div>
 
-
   <div class="q-card l5">
-    <div class="q-id">Q100a <span class="q-type type-kc">知识检查</span> <span class="q-type type-ca">对比分析</span></div>
-
-    <h3><a href="answer-bank.html#A100a">MCP 和 A2A 协议分别解决什么问题？为什么 2026 年的 Agent 架构需要同时使用两者？给出 MCP+A2A 分层架构图。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>MCP（Anthropic）= Agent-to-Tool 标准化，A2A（Google）= Agent-to-Agent 标准化。MCP 是垂直集成（一个 Agent 调用多个工具），A2A 是水平协调（多个 Agent 互相委派任务）。2026 年行业共识：MCP 打底 → A2A 做多 Agent 编排。</div>
-
+    <div class="q-id">Q100a <span class="q-type type-kc"><span class="i18n-zh">知识检查</span><span class="i18n-en" hidden>Knowledge Check</span></span> <span class="q-type type-ca"><span class="i18n-zh">对比分析</span><span class="i18n-en" hidden>Comparative Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A100a"><span class="i18n-zh">MCP 和 A2A 协议分别解决什么问题？为什么 2026 年的 Agent 架构需要同时使用两者？给出 MCP+A2A 分层架构图。</span><span class="i18n-en" hidden>What problems do MCP and A2A protocols solve respectively? Why does 2026 Agent architecture need both? Provide MCP+A2A layered architecture diagram.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">MCP（Anthropic）= Agent-to-Tool 标准化，A2A（Google）= Agent-to-Agent 标准化。MCP 是垂直集成（一个 Agent 调用多个工具），A2A 是水平协调（多个 Agent 互相委派任务）。2026 年行业共识：MCP 打底 → A2A 做多 Agent 编排。</span><span class="i18n-en" hidden>MCP (Anthropic) = Agent-to-Tool standardization, A2A (Google) = Agent-to-Agent standardization. MCP is vertical integration (one Agent calls multiple tools), A2A is horizontal coordination (multiple Agents delegate tasks to each other). 2026 industry consensus: MCP as foundation → A2A for multi-Agent orchestration.</span></div>
     <div class="q-course-link">📎 L10 Multi-Agent + L12 Enterprise Integration</div>
-
   </div>
 
-
   <div class="q-card l5">
-    <div class="q-id">Q100b <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A100b">2026 年 3 月披露了 LangChain/LangGraph 的多个 CVE 漏洞（CVE-2025-68664 等），涉及凭据泄露和提示注入。作为架构师，你如何防御这些攻击？设计一个 Agent 安全防护体系。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>安全是 2026 面试新热点。防御体系至少包含：输入净化层、工具权限分级（只读/读写/管理员）、MCP Server 来源验证、Human-in-the-Loop 审批高风险操作、审计日志全记录。</div>
-
+    <div class="q-id">Q100b <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A100b"><span class="i18n-zh">2026 年 3 月披露了 LangChain/LangGraph 的多个 CVE 漏洞（CVE-2025-68664 等），涉及凭据泄露和提示注入。作为架构师，你如何防御这些攻击？设计一个 Agent 安全防护体系。</span><span class="i18n-en" hidden>In March 2026, multiple CVE vulnerabilities were disclosed for LangChain/LangGraph (CVE-2025-68664 etc.), involving credential leakage and prompt injection. As an architect, how do you defend against these attacks? Design an Agent security defense system.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">安全是 2026 面试新热点。防御体系至少包含：输入净化层、工具权限分级（只读/读写/管理员）、MCP Server 来源验证、Human-in-the-Loop 审批高风险操作、审计日志全记录。</span><span class="i18n-en" hidden>Security is a new hot topic in 2026 interviews. Defense system at minimum includes: input sanitization layer, tool permission tiering (read-only/read-write/admin), MCP Server source verification, Human-in-the-Loop approval for high-risk operations, complete audit logging.</span></div>
     <div class="q-course-link">📎 L06 HITL + L12 Security + 2026 CVEs</div>
-
   </div>
-
 
   <div class="q-card l5">
-    <div class="q-id">Q100c <span class="q-type type-ci">代码实现</span> <span class="q-type type-sa">场景分析</span></div>
-
-    <h3><a href="answer-bank.html#A100c">用 `langgraph deploy` 将一个 LangGraph Agent 部署到生产环境：写出 `langgraph.json` 配置文件、说明 Postgres Checkpointer 和 Redis 缓存的配置方式、以及多区域部署（US/EU）的注意事项。</a></h3>
-
-    <div class="q-hint">💡 <strong>面试官意图：</strong>2026 年 LangGraph CLI 已从 `langgraph up` 迁移到 `langgraph deploy`（2026年3月）。考核是否真正在生产环境部署过 LangGraph Agent。</div>
-
+    <div class="q-id">Q100c <span class="q-type type-ci"><span class="i18n-zh">代码实现</span><span class="i18n-en" hidden>Code Implementation</span></span> <span class="q-type type-sa"><span class="i18n-zh">场景分析</span><span class="i18n-en" hidden>Scenario Analysis</span></span></div>
+    <h3><a href="answer-bank.html#A100c"><span class="i18n-zh">用 `langgraph deploy` 将一个 LangGraph Agent 部署到生产环境：写出 `langgraph.json` 配置文件、说明 Postgres Checkpointer 和 Redis 缓存的配置方式、以及多区域部署（US/EU）的注意事项。</span><span class="i18n-en" hidden>Deploy a LangGraph Agent to production using `langgraph deploy`: write the `langgraph.json` config file, explain Postgres Checkpointer and Redis cache configuration, and multi-region deployment (US/EU) considerations.</span></a></h3>
+    <div class="q-hint">💡 <strong><span class="i18n-zh">面试官意图：</span><span class="i18n-en" hidden>Interviewer Intent:</span></strong><span class="i18n-zh">2026 年 LangGraph CLI 已从 `langgraph up` 迁移到 `langgraph deploy`（2026年3月）。考核是否真正在生产环境部署过 LangGraph Agent。</span><span class="i18n-en" hidden>The LangGraph CLI migrated from `langgraph up` to `langgraph deploy` (March 2026). Tests whether the candidate has actually deployed a LangGraph Agent in production.</span></div>
     <div class="q-course-link">📎 L12 Production · LangGraph Platform GA</div>
-
   </div>
-
 </div>
 
-
 </div>
-
 
 <!-- Answer link -->
 <div class="answer-link-box" style="margin-top:50px;">
-  <p>📖 以上 100 道题目的完整答案、代码示例、面试官评分解读 →</p>
-
-  <a href="answer-bank.html">查看完整答案库 (Answer Bank)</a>
+  <p><span class="i18n-zh">📖 以上 100 道题目的完整答案、代码示例、面试官评分解读 →</span><span class="i18n-en" hidden>📖 Complete answers, code examples, and interviewer scoring breakdowns for all 100 questions →</span></p>
+  <a href="answer-bank.html"><span class="i18n-zh">查看完整答案库 (Answer Bank)</span><span class="i18n-en" hidden>View Complete Answer Bank (Answer Bank)</span></a>
 </div>
-
 
 <!-- Nav footer -->
 <nav style="margin-top:60px; padding:20px; background:var(--surface); border-radius:var(--radius);">
-  <p style="margin:0 0 12px; color:var(--text-2);">📍 题库导航</p>
-
-  <a href="../index.html">课程总览</a> &nbsp;·&nbsp;
-  <a href="answer-bank.html">答案库</a> &nbsp;·&nbsp;
-  <a href="fables.html">寓言集</a> &nbsp;·&nbsp;
-  <a href="pitfalls.html">避坑指南</a> &nbsp;·&nbsp;
-  <a href="meta-learning-guide.html">元学习指南</a>
+  <p style="margin:0 0 12px; color:var(--text-2);"><span class="i18n-zh">📍 题库导航</span><span class="i18n-en" hidden>📍 Question Bank Navigation</span></p>
+  <a href="../index.html"><span class="i18n-zh">课程总览</span><span class="i18n-en" hidden>Course Overview</span></a>  · 
+  <a href="answer-bank.html"><span class="i18n-zh">答案库</span><span class="i18n-en" hidden>Answer Bank</span></a>  · 
+  <a href="fables.html"><span class="i18n-zh">寓言集</span><span class="i18n-en" hidden>Fable Collection</span></a>  · 
+  <a href="pitfalls.html"><span class="i18n-zh">避坑指南</span><span class="i18n-en" hidden>Pitfall Guide</span></a>  · 
+  <a href="meta-learning-guide.html"><span class="i18n-zh">元学习指南</span><span class="i18n-en" hidden>Meta-Learning Guide</span></a>
 </nav>
-
 
 <script>
 function filterQuestions() {
@@ -1711,5 +1071,4 @@ function filterQuestions() {
 </script>
 
 </body>
-
 </html>
