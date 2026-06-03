@@ -1,127 +1,127 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>避坑指南 — LangGraph 常见错误与调试</title><link rel="stylesheet" href="../css/style.css"></head><body>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title><div class="i18n-zh">避坑指南 — LangGraph 常见错误与调试</div><div class="i18n-en" hidden>Pitfalls Guide — Common LangGraph Errors & Debugging</div></title><link rel="stylesheet" href="../css/style.css"></head><body>
 <nav class="nav-bar"><a href="../index.html">🏠 总览</a><a href="meta-learning-guide.html">🧠 元学习</a><a href="fables.html">📖 寓言集</a><a href="pitfalls.html" class="active">⚠️ 避坑指南</a><a href="../lessons/L01-state-nodes-edges.html">L01</a><span style="color:var(--text-2)">···</span><a href="../lessons/L12-production.html">L12</a></nav>
 
-<div class="hero"><h1>⚠️ 避坑指南</h1><p class="subtitle">7 大反模式 + 11 个错误码 + 调试策略 — 来自官方文档和社区论坛的真实血泪</p><div class="badge-row"><span class="badge badge-red">社区高频问题</span><span class="badge badge-yellow">官方错误码</span><span class="badge badge-accent">调试策略</span></div></div>
+<div class="hero"><h1><div class="i18n-zh">⚠️ 避坑指南</div><div class="i18n-en" hidden>⚠️ Pitfalls Guide</div></h1><p class="subtitle"><div class="i18n-zh">7 大反模式 + 11 个错误码 + 调试策略 — 来自官方文档和社区论坛的真实血泪</div><div class="i18n-en" hidden>7 Anti-Patterns + 11 Error Codes + Debugging Strategies — real lessons from official docs and community forums</div></p><div class="badge-row"><span class="badge badge-red"><div class="i18n-zh">社区高频问题</div><div class="i18n-en" hidden>Community Hot Topics</div></span><span class="badge badge-yellow"><div class="i18n-zh">官方错误码</div><div class="i18n-en" hidden>Official Error Codes</div></span><span class="badge badge-accent"><div class="i18n-zh">调试策略</div><div class="i18n-en" hidden>Debugging Strategies</div></span></div></div>
 
-<h2>🔥 七大反模式（来自社区论坛真实案例）</h2>
+<h2><div class="i18n-zh">🔥 七大反模式（来自社区论坛真实案例）</div><div class="i18n-en" hidden>🔥 Seven Anti-Patterns (Real Cases from Community Forums)</div></h2>
 
-<div class="card red-left"><h3>反模式 1：忘记 Reducer — 消息被覆盖</h3>
-<p><strong>症状：</strong>消息列表只剩最后一条，前面的对话全部消失。</p>
-<p><strong>原因：</strong>State 字段默认"替换"而非"追加"。每个节点返回的新值覆盖旧值。</p>
-<pre><code><span class="cmt"># ❌ 错误</span>
+<div class="card red-left"><h3><div class="i18n-zh">反模式 1：忘记 Reducer — 消息被覆盖</div><div class="i18n-en" hidden>Anti-Pattern 1: Forgetting the Reducer — Messages Get Overwritten</div></h3>
+<p><strong><div class="i18n-zh">症状：</div><div class="i18n-en" hidden>Symptoms: </div></strong><div class="i18n-zh">消息列表只剩最后一条，前面的对话全部消失。</div><div class="i18n-en" hidden>Only the last message remains in the list; all prior conversation is gone.</div></p>
+<p><strong><div class="i18n-zh">原因：</div><div class="i18n-en" hidden>Cause: </div></strong><div class="i18n-zh">State 字段默认"替换"而非"追加"。每个节点返回的新值覆盖旧值。</div><div class="i18n-en" hidden>State fields default to "replace" rather than "append." Each node's returned value overwrites the previous one.</div></p>
+<pre><code><span class="cmt"># ❌ Wrong</span>
 <span class="kw">class</span> <span class="type">State</span>(TypedDict):
-    messages: list   <span class="cmt"># 每次写入覆盖上一次</span>
+    messages: list   <span class="cmt"># Each write overwrites the previous one</span>
 
-<span class="cmt"># ✅ 正确</span>
+<span class="cmt"># ✅ Correct</span>
 <span class="kw">from</span> langgraph.graph.message <span class="kw">import</span> add_messages
 <span class="kw">class</span> <span class="type">State</span>(TypedDict):
-    messages: Annotated[list, add_messages]  <span class="cmt"># 追加而非覆盖</span></code></pre>
-<p><strong>影响范围：</strong>L01-L04 的所有 State 定义。</p>
+    messages: Annotated[list, add_messages]  <span class="cmt"># Append instead of overwrite</span></code></pre>
+<p><strong><div class="i18n-zh">影响范围：</div><div class="i18n-en" hidden>Impact Scope: </div></strong><div class="i18n-zh">L01-L04 的所有 State 定义。</div><div class="i18n-en" hidden>All State definitions in L01-L04.</div></p>
 </div>
 
-<div class="card red-left"><h3>反模式 2：ToolNode 输出覆盖对话导致 OpenAI 400</h3>
-<p><strong>症状：</strong><code>messages with role 'tool' must be a response to a preceding message with 'tool_calls'</code></p>
-<p><strong>原因：</strong>ToolNode 返回的 ToolMessage 覆盖了对话历史，导致 LLM 收到的上下文里 tool 消息前面没有 assistant 消息。</p>
-<pre><code><span class="cmt"># 这个错误的本质是反模式 1 在工具调用场景下的表现</span>
-<span class="cmt"># 解决：确保 messages 字段使用 add_messages reducer</span></code></pre>
-<p><strong>影响范围：</strong>L03（工具调用）、L04（ReAct 循环）</p>
+<div class="card red-left"><h3><div class="i18n-zh">反模式 2：ToolNode 输出覆盖对话导致 OpenAI 400</div><div class="i18n-en" hidden>Anti-Pattern 2: ToolNode Output Overwrites Conversation, Causing OpenAI 400</div></h3>
+<p><strong><div class="i18n-zh">症状：</div><div class="i18n-en" hidden>Symptoms: </div></strong><code>messages with role 'tool' must be a response to a preceding message with 'tool_calls'</code></p>
+<p><strong><div class="i18n-zh">原因：</div><div class="i18n-en" hidden>Cause: </div></strong><div class="i18n-zh">ToolNode 返回的 ToolMessage 覆盖了对话历史，导致 LLM 收到的上下文里 tool 消息前面没有 assistant 消息。</div><div class="i18n-en" hidden>The ToolMessage returned by ToolNode overwrites conversation history, so the LLM receives a context where a tool message has no preceding assistant message.</div></p>
+<pre><code><span class="cmt"># This error is essentially Anti-Pattern 1 in the tool-calling context</span>
+<span class="cmt"># Fix: ensure the messages field uses the add_messages reducer</span></code></pre>
+<p><strong><div class="i18n-zh">影响范围：</div><div class="i18n-en" hidden>Impact Scope: </div></strong><div class="i18n-zh">L03（工具调用）、L04（ReAct 循环）</div><div class="i18n-en" hidden>L03 (Tool Calling), L04 (ReAct Loop)</div></p>
 </div>
 
-<div class="card red-left"><h3>反模式 3：突变 State（原地修改）</h3>
-<p><strong>症状：</strong>不可预测的行为，状态在不同节点间"泄露"。</p>
-<pre><code><span class="cmt"># ❌ 错误 — 原地修改</span>
+<div class="card red-left"><h3><div class="i18n-zh">反模式 3：突变 State（原地修改）</div><div class="i18n-en" hidden>Anti-Pattern 3: Mutating State (In-Place Modification)</div></h3>
+<p><strong><div class="i18n-zh">症状：</div><div class="i18n-en" hidden>Symptoms: </div></strong><div class="i18n-zh">不可预测的行为，状态在不同节点间"泄露"。</div><div class="i18n-en" hidden>Unpredictable behavior; state "leaks" between nodes.</div></p>
+<pre><code><span class="cmt"># ❌ Wrong — in-place mutation</span>
 <span class="kw">def</span> <span class="fn">bad_node</span>(state):
-    state[<span class="str">"messages"</span>].append(new_msg)  <span class="cmt"># 直接改了传入的 state！</span>
-    <span class="kw">return</span> state  <span class="cmt"># 返回完整 state</span>
+    state[<span class="str">"messages"</span>].append(new_msg)  <span class="cmt"># Directly mutates the incoming state!</span>
+    <span class="kw">return</span> state  <span class="cmt"># Returns the full state</span>
 
-<span class="cmt"># ✅ 正确 — 返回部分更新</span>
+<span class="cmt"># ✅ Correct — return partial update</span>
 <span class="kw">def</span> <span class="fn">good_node</span>(state):
-    <span class="kw">return</span> {<span class="str">"messages"</span>: [new_msg]}  <span class="cmt"># 只返回本节点负责的键</span></code></pre>
-<p><strong>铁律：</strong>State 是只读的。节点只返回自己负责的键的更新 dict。</p>
+    <span class="kw">return</span> {<span class="str">"messages"</span>: [new_msg]}  <span class="cmt"># Only return the keys this node is responsible for</span></code></pre>
+<p><strong><div class="i18n-zh">铁律：</div><div class="i18n-en" hidden>Iron Rule: </div></strong><div class="i18n-zh">State 是只读的。节点只返回自己负责的键的更新 dict。</div><div class="i18n-en" hidden>State is read-only. Nodes only return an update dict for the keys they are responsible for.</div></p>
 </div>
 
 <div class="card red-left"><div class="locked-content" data-require-stage="professional">
-<h3>反模式 4：手动追加 + Reducer 双重追加</h3>
-<p><strong>症状：</strong>消息列表中每条消息出现两次（重复）。</p>
-<pre><code><span class="cmt"># ❌ 错误 — 手动追加了，reducer 又追加一次</span>
+<h3><div class="i18n-zh">反模式 4：手动追加 + Reducer 双重追加</div><div class="i18n-en" hidden>Anti-Pattern 4: Manual Append + Reducer Double-Append</div></h3>
+<p><strong><div class="i18n-zh">症状：</div><div class="i18n-en" hidden>Symptoms: </div></strong><div class="i18n-zh">消息列表中每条消息出现两次（重复）。</div><div class="i18n-en" hidden>Each message appears twice (duplicated) in the message list.</div></p>
+<pre><code><span class="cmt"># ❌ Wrong — manually appended, then reducer appends again</span>
 <span class="kw">def</span> <span class="fn">node</span>(state):
     <span class="kw">return</span> {<span class="str">"messages"</span>: state[<span class="str">"messages"</span>] + [new_msg]}
 
-<span class="cmt"># ✅ 正确 — 让 reducer 处理合并</span>
+<span class="cmt"># ✅ Correct — let the reducer handle merging</span>
 <span class="kw">def</span> <span class="fn">node</span>(state):
     <span class="kw">return</span> {<span class="str">"messages"</span>: [new_msg]}</code></pre>
 </div>
 
-<div class="card red-left"><h3>反模式 5：Optional 包裹顺序错误</h3>
-<pre><code><span class="cmt"># ❌ — reducer 被忽略</span>
+<div class="card red-left"><h3><div class="i18n-zh">反模式 5：Optional 包裹顺序错误</div><div class="i18n-en" hidden>Anti-Pattern 5: Incorrect Optional Wrapping Order</div></h3>
+<pre><code><span class="cmt"># ❌ — reducer is ignored</span>
 logs: Optional[Annotated[list[str], add]]
 
-<span class="cmt"># ✅ — Annotated 必须在最外层</span>
+<span class="cmt"># ✅ — Annotated must be the outermost wrapper</span>
 logs: Annotated[Optional[list[str]], add]</code></pre>
 </div>
 
-<div class="card red-left"><h3>反模式 6：条件边 + 固定边混用导致并行</h3>
-<p><strong>症状：</strong>条件边的分支全部执行，而非只执行一个。</p>
-<p><strong>原因：</strong>从同一个节点同时添加了固定边和条件边 → LangGraph 理解为"都要执行"。</p>
-<pre><code><span class="cmt"># ❌ — 两个都加了，导致并行</span>
-builder.add_edge(<span class="str">"classify"</span>, <span class="str">"handle_a"</span>)   <span class="cmt"># 删掉这行！</span>
+<div class="card red-left"><h3><div class="i18n-zh">反模式 6：条件边 + 固定边混用导致并行</div><div class="i18n-en" hidden>Anti-Pattern 6: Mixing Conditional and Fixed Edges Causes Parallel Execution</div></h3>
+<p><strong><div class="i18n-zh">症状：</div><div class="i18n-en" hidden>Symptoms: </div></strong><div class="i18n-zh">条件边的分支全部执行，而非只执行一个。</div><div class="i18n-en" hidden>All branches of the conditional edge execute, rather than just one.</div></p>
+<p><strong><div class="i18n-zh">原因：</div><div class="i18n-en" hidden>Cause: </div></strong><div class="i18n-zh">从同一个节点同时添加了固定边和条件边 → LangGraph 理解为"都要执行"。</div><div class="i18n-en" hidden>Both a fixed edge and a conditional edge were added from the same node → LangGraph interprets this as "execute both."</div></p>
+<pre><code><span class="cmt"># ❌ — both added, causing parallel execution</span>
+builder.add_edge(<span class="str">"classify"</span>, <span class="str">"handle_a"</span>)   <span class="cmt"># Delete this line!</span>
 builder.add_conditional_edges(<span class="str">"classify"</span>, router, mapping)
 
-<span class="cmt"># ✅ — 只用条件边</span>
+<span class="cmt"># ✅ — only use conditional edges</span>
 builder.add_conditional_edges(<span class="str">"classify"</span>, router, mapping)</code></pre>
 </div>
 
 <div class="card red-left"></div>
 <div class="locked-content" data-require-stage="professional">
-<h3>反模式 7：没有 Checkpointer 就用 interrupt()</h3>
-<p><strong>症状：</strong>interrupt() 不生效，图不暂停，或报错 MISSING_CHECKPOINTER。</p>
-<pre><code><span class="cmt"># ❌ — 没有 checkpointer</span>
-graph = builder.compile()  <span class="cmt"># 缺少 checkpointer！</span>
+<h3><div class="i18n-zh">反模式 7：没有 Checkpointer 就用 interrupt()</div><div class="i18n-en" hidden>Anti-Pattern 7: Using interrupt() Without a Checkpointer</div></h3>
+<p><strong><div class="i18n-zh">症状：</div><div class="i18n-en" hidden>Symptoms: </div></strong><div class="i18n-zh">interrupt() 不生效，图不暂停，或报错 MISSING_CHECKPOINTER。</div><div class="i18n-en" hidden>interrupt() has no effect, graph doesn't pause, or MISSING_CHECKPOINTER error.</div></p>
+<pre><code><span class="cmt"># ❌ — no checkpointer</span>
+graph = builder.compile()  <span class="cmt"># Missing checkpointer!</span>
 <span class="kw">def</span> <span class="fn">node</span>(state):
-    interrupt(<span class="str">"等等！"</span>)  <span class="cmt"># 不生效</span>
+    interrupt(<span class="str">"Wait!"</span>)  <span class="cmt"># Has no effect</span>
 
-<span class="cmt"># ✅ — 必须注入 checkpointer</span>
+<span class="cmt"># ✅ — must inject checkpointer</span>
 <span class="kw">from</span> langgraph.checkpoint.memory <span class="kw">import</span> InMemorySaver
 graph = builder.compile(checkpointer=InMemorySaver())</code></pre>
 </div>
 
-<h2>🚨 11 个官方错误码速查</h2>
-<table><tr><th>错误码</th><th>含义</th><th>常见原因</th><th>相关课程</th></tr>
-<tr><td>GRAPH_RECURSION_LIMIT</td><td>递归次数超限</td><td>Agent 循环未终止，LLM 反复调工具</td><td>L04</td></tr>
-<tr><td>INVALID_CHAT_HISTORY</td><td>对话历史格式错误</td><td>消息类型不匹配（反模式1/2）</td><td>L03</td></tr>
-<tr><td>MISSING_CHECKPOINTER</td><td>缺少持久化配置</td><td>用了 interrupt() 但没配置 checkpointer</td><td>L05/L06</td></tr>
-<tr><td>INVALID_GRAPH_NODE_RETURN_VALUE</td><td>节点返回值无效</td><td>返回了 State 中未声明的键、或返回了 None 以外非 dict 类型</td><td>L01</td></tr>
-<tr><div class="locked-content" data-require-stage="professional"><td>INVALID_CONCURRENT_GRAPH_UPDATE</td><td>并发更新冲突</td><td>并行节点写入同一键但没配置正确的 reducer</td><td>L11</td></tr>
-<tr><td>INVALID_PROMPT_INPUT</td><td>Prompt 输入无效</td><td>传了模型不支持的参数</td><td>L02</td></tr>
-<tr><td>INVALID_TOOL_RESULTS</td><td>工具返回格式无效</td><td>ToolMessage 内容格式不对</td><td>L03</td></tr>
-<tr><td>MESSAGE_COERCION_FAILURE</td><td>消息类型转换失败</td><td>传了纯字符串而非消息对象（反模式2）</td><td>L01</td></tr>
-<tr><td>MODEL_AUTHENTICATION</td><td>API Key 无效</td><td>环境变量未设置或过期</td><td>L02</td></tr>
-<tr><td>MODEL_RATE_LIMIT</td><td>API 限流</td><td>请求太频繁</td><td>L08</td></tr>
-<tr><td>MULTIPLE_SUBGRAPHS</td></div><td>子图配置冲突</td><td>多个子图使用了相同的 checkpoint 命名空间</td><td>L09</td></tr></table>
+<h2><div class="i18n-zh">🚨 11 个官方错误码速查</div><div class="i18n-en" hidden>🚨 11 Official Error Codes Quick Reference</div></h2>
+<table><tr><th><div class="i18n-zh">错误码</div><div class="i18n-en" hidden>Error Code</div></th><th><div class="i18n-zh">含义</div><div class="i18n-en" hidden>Meaning</div></th><th><div class="i18n-zh">常见原因</div><div class="i18n-en" hidden>Common Cause</div></th><th><div class="i18n-zh">相关课程</div><div class="i18n-en" hidden>Related Lesson</div></th></tr>
+<tr><td>GRAPH_RECURSION_LIMIT</td><td><div class="i18n-zh">递归次数超限</div><div class="i18n-en" hidden>Recursion limit exceeded</div></td><td><div class="i18n-zh">Agent 循环未终止，LLM 反复调工具</div><div class="i18n-en" hidden>Agent loop never terminates; LLM repeatedly calls tools</div></td><td>L04</td></tr>
+<tr><td>INVALID_CHAT_HISTORY</td><td><div class="i18n-zh">对话历史格式错误</div><div class="i18n-en" hidden>Invalid conversation history format</div></td><td><div class="i18n-zh">消息类型不匹配（反模式1/2）</div><div class="i18n-en" hidden>Message type mismatch (Anti-Pattern 1/2)</div></td><td>L03</td></tr>
+<tr><td>MISSING_CHECKPOINTER</td><td><div class="i18n-zh">缺少持久化配置</div><div class="i18n-en" hidden>Missing persistence configuration</div></td><td><div class="i18n-zh">用了 interrupt() 但没配置 checkpointer</div><div class="i18n-en" hidden>Used interrupt() without configuring a checkpointer</div></td><td>L05/L06</td></tr>
+<tr><td>INVALID_GRAPH_NODE_RETURN_VALUE</td><td><div class="i18n-zh">节点返回值无效</div><div class="i18n-en" hidden>Invalid graph node return value</div></td><td><div class="i18n-zh">返回了 State 中未声明的键、或返回了 None 以外非 dict 类型</div><div class="i18n-en" hidden>Returned keys not declared in State, or returned a non-dict type other than None</div></td><td>L01</td></tr>
+<tr><td><div class="locked-content" data-require-stage="professional"><td>INVALID_CONCURRENT_GRAPH_UPDATE</td><td><div class="i18n-zh">并发更新冲突</div><div class="i18n-en" hidden>Concurrent update conflict</div></td><td><div class="i18n-zh">并行节点写入同一键但没配置正确的 reducer</div><div class="i18n-en" hidden">Parallel nodes write to the same key without a proper reducer</div></td><td>L11</td></tr>
+<tr><td>INVALID_PROMPT_INPUT</td><td><div class="i18n-zh">Prompt 输入无效</div><div class="i18n-en" hidden>Invalid prompt input</div></td><td><div class="i18n-zh">传了模型不支持的参数</div><div class="i18n-en" hidden">Passed parameters not supported by the model</div></td><td>L02</td></tr>
+<tr><td>INVALID_TOOL_RESULTS</td><td><div class="i18n-zh">工具返回格式无效</div><div class="i18n-en" hidden">Invalid tool result format</div></td><td><div class="i18n-zh">ToolMessage 内容格式不对</div><div class="i18n-en" hidden>Incorrect ToolMessage content format</div></td><td>L03</td></tr>
+<tr><td>MESSAGE_COERCION_FAILURE</td><td><div class="i18n-zh">消息类型转换失败</div><div class="i18n-en" hidden>Message type coercion failure</div></td><td><div class="i18n-zh">传了纯字符串而非消息对象（反模式2）</div><div class="i18n-en" hidden>Passed a plain string instead of a message object (Anti-Pattern 2)</div></td><td>L01</td></tr>
+<tr><td>MODEL_AUTHENTICATION</td><td><div class="i18n-zh">API Key 无效</div><div class="i18n-en" hidden>Invalid API Key</div></td><td><div class="i18n-zh">环境变量未设置或过期</div><div class="i18n-en" hidden>Environment variable not set or expired</div></td><td>L02</td></tr>
+<tr><td>MODEL_RATE_LIMIT</td><td><div class="i18n-zh">API 限流</div><div class="i18n-en" hidden>API rate limit</div></td><td><div class="i18n-zh">请求太频繁</div><div class="i18n-en" hidden>Requests too frequent</div></td><td>L08</td></tr>
+<tr><td>MULTIPLE_SUBGRAPHS</td></div><td><div class="i18n-zh">子图配置冲突</div><div class="i18n-en" hidden>Subgraph configuration conflict</div></td><td><div class="i18n-zh">多个子图使用了相同的 checkpoint 命名空间</div><div class="i18n-en" hidden>Multiple subgraphs use the same checkpoint namespace</div></td><td>L09</td></tr></table>
 
-<h2>🔧 七种"静默退出"与排查</h2>
-<p>图停下来了但没有报错？逐一排查：</p>
-<ol><li><strong>条件边返回了 END</strong> — 这是正常行为，检查路由逻辑是否符合预期</li><li><strong>没有节点被调度</strong> — 条件边映射字典缺少某个返回值 → 加 else 兜底</li><li><strong>写入了 State 未声明的键</strong> — LangGraph 静默忽略，后续节点读不到数据</li><li><strong>显式连接到 END</strong> — 检查是否有不必要的 <code>add_edge(xxx, END)</code></li><li><strong>递归限制</strong> — 默认最多递归 25 次，可在 compile 时设置 <code>recursion_limit</code></li><li><strong>interrupt() 没有 checkpointer</strong> — 行为不可预测</li><li><strong>节点返回了空 dict</strong> — 图认为无事可做</li></ol>
+<h2><div class="i18n-zh">🔧 七种"静默退出"与排查</div><div class="i18n-en" hidden>🔧 Seven Types of "Silent Exit" and Diagnosis</div></h2>
+<p><div class="i18n-zh">图停下来了但没有报错？逐一排查：</div><div class="i18n-en" hidden>Graph stopped but no error? Check one by one:</div></p>
+<ol><li><strong><div class="i18n-zh">条件边返回了 END</div><div class="i18n-en" hidden>Conditional edge returned END</div></strong> — <div class="i18n-zh">这是正常行为，检查路由逻辑是否符合预期</div><div class="i18n-en" hidden>This is normal behavior; check whether the routing logic matches expectations</div></li><li><strong><div class="i18n-zh">没有节点被调度</div><div class="i18n-en" hidden>No node was scheduled</div></strong> — <div class="i18n-zh">条件边映射字典缺少某个返回值 → 加 else 兜底</div><div class="i18n-en" hidden>Conditional edge mapping dict is missing a return value → add an else fallback</div></li><li><strong><div class="i18n-zh">写入了 State 未声明的键</div><div class="i18n-en" hidden>Wrote a key not declared in State</div></strong> — <div class="i18n-zh">LangGraph 静默忽略，后续节点读不到数据</div><div class="i18n-en" hidden>LangGraph silently ignores it; downstream nodes can't read the data</div></li><li><strong><div class="i18n-zh">显式连接到 END</div><div class="i18n-en" hidden>Explicitly connected to END</div></strong> — <div class="i18n-zh">检查是否有不必要的 <code>add_edge(xxx, END)</code></div><div class="i18n-en" hidden>Check for unnecessary <code>add_edge(xxx, END)</code></div></li><li><strong><div class="i18n-zh">递归限制</div><div class="i18n-en" hidden>Recursion limit</div></strong> — <div class="i18n-zh">默认最多递归 25 次，可在 compile 时设置 <code>recursion_limit</code></div><div class="i18n-en" hidden>Default max 25 recursions; set <code>recursion_limit</code> at compile time</div></li><li><strong><div class="i18n-zh">interrupt() 没有 checkpointer</div><div class="i18n-en" hidden>interrupt() without checkpointer</div></strong> — <div class="i18n-zh">行为不可预测</div><div class="i18n-en" hidden>Behavior is unpredictable</div></li><li><strong><div class="i18n-zh">节点返回了空 dict</div><div class="i18n-en" hidden>Node returned an empty dict</div></strong> — <div class="i18n-zh">图认为无事可做</div><div class="i18n-en" hidden>Graph considers there is nothing to do</div></li></ol>
 
-<h2>🔍 推荐的调试策略</h2>
-<pre><code><span class="cmt"># 1. 可视化图结构（检查是否有意外路径）</span>
+<h2><div class="i18n-zh">🔍 推荐的调试策略</div><div class="i18n-en" hidden>🔍 Recommended Debugging Strategies</div></h2>
+<pre><code><span class="cmt"># 1. Visualize graph structure (check for unexpected paths)</span>
 <span class="kw">print</span>(graph.get_graph().draw_ascii())
 
-<span class="cmt"># 2. 用 debug 模式看到每一步的完整状态</span>
+<span class="cmt"># 2. Use debug mode to see full state at every step</span>
 <span class="kw">for</span> event <span class="kw">in</span> graph.stream(input, stream_mode=[<span class="str">"debug"</span>, <span class="str">"updates"</span>]):
     <span class="kw">print</span>(event)
 
-<span class="cmt"># 3. 检查条件边函数返回值</span>
+<span class="cmt"># 3. Check conditional edge function return values</span>
 <span class="kw">def</span> <span class="fn">router</span>(state):
     result = decide(state)
-    <span class="kw">print</span>(<span class="str">f"Router: → {result}"</span>)  <span class="cmt"># 加一行日志</span>
+    <span class="kw">print</span>(<span class="str">f"Router: → {result}"</span>)  <span class="cmt"># Add a log line</span>
     <span class="kw">return</span> result
 
-<span class="cmt"># 4. 检查 State 的中间值</span>
+<span class="cmt"># 4. Check intermediate State values</span>
 <span class="kw">def</span> <span class="fn">my_node</span>(state):
     <span class="kw">print</span>(<span class="str">f"State keys: {state.keys()}"</span>)
     <span class="kw">return</span> {<span class="str">"field"</span>: value}</code></pre>
-<p style="margin-top:48px;padding-top:20px;border-top:1px solid var(--border);color:var(--text-2);font-size:0.85em;text-align:center">避坑指南 · 社区血泪凝成 · 2026-06-02</p>
+<p style="margin-top:48px;padding-top:20px;border-top:1px solid var(--border);color:var(--text-2);font-size:0.85em;text-align:center"><div class="i18n-zh">避坑指南 · 社区血泪凝成 · 2026-06-02</div><div class="i18n-en" hidden>Pitfalls Guide · Forged from Community Experience · 2026-06-02</div></p>
 <script src="../js/i18n-data.js"></script>
 <script src="../js/i18n.js"></script>
 <script src="../js/store.js"></script>

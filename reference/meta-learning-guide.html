@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>元学习指南 — LangGraph 核心思维模型</title>
+<title><div class="i18n-zh">元学习指南 — LangGraph 核心思维模型</div><div class="i18n-en" hidden>Meta-Learning Guide — LangGraph Core Mental Models</div></title>
 <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -24,319 +24,332 @@
 </nav>
 
 <div class="hero">
-  <h1>🧠 元学习指南</h1>
-  <p class="subtitle">"记忆不是学习的门槛，提问才是。" — MIT 研究生 2 天通关方法论</p>
+  <h1><div class="i18n-zh">🧠 元学习指南</div><div class="i18n-en" hidden>🧠 Meta-Learning Guide</div></h1>
+  <p class="subtitle"><div class="i18n-zh">"记忆不是学习的门槛，提问才是。" — MIT 研究生 2 天通关方法论</div><div class="i18n-en" hidden>"Memorization is not the barrier to learning — asking questions is." — MIT Grad Student 2-Day Mastery Method</div></p>
   <div class="badge-row">
-    <span class="badge badge-purple">五个核心思维模型</span>
-    <span class="badge badge-yellow">领域全貌</span>
-    <span class="badge badge-red">17 道盲区测试题</span>
-    <span class="badge badge-green">面试题库集成</span>
+    <span class="badge badge-purple"><div class="i18n-zh">五个核心思维模型</div><div class="i18n-en" hidden>Five Core Mental Models</div></span>
+    <span class="badge badge-yellow"><div class="i18n-zh">领域全貌</div><div class="i18n-en" hidden>Landscape Overview</div></span>
+    <span class="badge badge-red"><div class="i18n-zh">17 道盲区测试题</div><div class="i18n-en" hidden>17 Blind Spot Questions</div></span>
+    <span class="badge badge-green"><div class="i18n-zh">面试题库集成</div><div class="i18n-en" hidden>Interview Bank Integration</div></span>
   </div>
 </div>
 
 <!-- ════════════════ MENTAL MODELS ════════════════ -->
-<h2>🗿 一、六个核心思维模型</h2>
-<p>LangGraph 专家的思考方式与初学者不同——不是因为知道更多 API，而是因为他们用这六个模型理解所有问题。<strong>前五个来自学习实践，第六个来自面试反馈。</strong>面试官正是用这些模型来设计考题，区分"会调 API"和"真懂 Agent 架构"。</p>
+<h2><div class="i18n-zh">🗿 一、六个核心思维模型</div><div class="i18n-en" hidden>🗿 1. Six Core Mental Models</div></h2>
+<p><div class="i18n-zh">LangGraph 专家的思考方式与初学者不同——不是因为知道更多 API，而是因为他们用这六个模型理解所有问题。<strong>前五个来自学习实践，第六个来自面试反馈。</strong>面试官正是用这些模型来设计考题，区分"会调 API"和"真懂 Agent 架构"。</div><div class="i18n-en" hidden>LangGraph experts think differently from beginners — not because they know more APIs, but because they use these six models to understand every problem. <strong>The first five come from learning practice; the sixth comes from interview feedback.</strong> Interviewers use these very models to design questions that distinguish "API callers" from those who "truly understand Agent architecture."</div></p>
 
 <div class="card accent-left">
-  <h3>模型 1：图即程序 <span class="badge badge-accent">Graph as Program</span></h3>
-  <p><strong>初学者想：</strong>LangGraph 是一个库，有一些类和方法。</p>
-  <p><strong>专家想：</strong>我的程序不是顺序脚本，是一个有向图。控制流从"按行执行"变成"按边流动"。</p>
-  <div class="alert alert-info"><strong>自检：</strong>你能在 30 秒内把一段业务流程画成节点+边的图吗？</div>
+  <h3><div class="i18n-zh">模型 1：图即程序</div><div class="i18n-en" hidden>Model 1: Graph as Program</div> <span class="badge badge-accent">Graph as Program</span></h3>
+  <p><strong><div class="i18n-zh">初学者想：</div><div class="i18n-en" hidden>Beginner thinks: </div></strong><div class="i18n-zh">LangGraph 是一个库，有一些类和方法。</div><div class="i18n-en" hidden>LangGraph is a library with some classes and methods.</div></p>
+  <p><strong><div class="i18n-zh">专家想：</div><div class="i18n-en" hidden>Expert thinks: </div></strong><div class="i18n-zh">我的程序不是顺序脚本，是一个有向图。控制流从"按行执行"变成"按边流动"。</div><div class="i18n-en" hidden>My program is not a sequential script — it's a directed graph. Control flow shifts from "execute line by line" to "flow along edges."</div></p>
+  <div class="alert alert-info"><strong><div class="i18n-zh">自检：</div><div class="i18n-en" hidden>Self-Check: </div></strong><div class="i18n-zh">你能在 30 秒内把一段业务流程画成节点+边的图吗？</div><div class="i18n-en" hidden>Can you sketch a business process as a nodes + edges diagram in 30 seconds?</div></div>
 </div>
 
 <div class="card accent-left">
-  <h3>模型 2：State 是唯一真相来源 <span class="badge badge-accent">Single Source of Truth</span></h3>
-  <p><strong>初学者想：</strong>State 就是一个 dict，存点变量。</p>
-  <p><strong>专家想：</strong>节点之间不直接调用、不传参、不共享全局变量——只通过读写 State 交互。这像一个团队共用一块白板。</p>
-  <div class="alert alert-info"><strong>自检：</strong>你给一个节点新增字段时，是否先想好了"谁写？谁读？用什么 reducer？"</div>
+  <h3><div class="i18n-zh">模型 2：State 是唯一真相来源</div><div class="i18n-en" hidden>Model 2: State is the Single Source of Truth</div> <span class="badge badge-accent">Single Source of Truth</span></h3>
+  <p><strong><div class="i18n-zh">初学者想：</div><div class="i18n-en" hidden>Beginner thinks: </div></strong><div class="i18n-zh">State 就是一个 dict，存点变量。</div><div class="i18n-en" hidden>State is just a dict — store some variables in it.</div></p>
+  <p><strong><div class="i18n-zh">专家想：</div><div class="i18n-en" hidden>Expert thinks: </div></strong><div class="i18n-zh">节点之间不直接调用、不传参、不共享全局变量——只通过读写 State 交互。这像一个团队共用一块白板。</div><div class="i18n-en" hidden>Nodes don't call each other directly, don't pass parameters, don't share globals — they interact solely by reading and writing State. It's like a team sharing a single whiteboard.</div></p>
+  <div class="alert alert-info"><strong><div class="i18n-zh">自检：</div><div class="i18n-en" hidden>Self-Check: </div></strong><div class="i18n-zh">你给一个节点新增字段时，是否先想好了"谁写？谁读？用什么 reducer？"</div><div class="i18n-en" hidden>When adding a new field to a node, do you first decide "Who writes? Who reads? What reducer?"</div></div>
 </div>
 
 <div class="card accent-left">
   <div class="locked-content" data-require-stage="professional">
-<h3>模型 3：确定性框架包裹非确定性推理 <span class="badge badge-accent">Duality</span></h3>
-  <p><strong>初学者想：</strong>AI Agent 很随机，不可靠。</p>
-  <p><strong>专家想：</strong>图的路径（走向哪个节点、何时结束）是确定的；LLM 在节点内的输出是不确定的。我用图结构"驯服" LLM 的随机性。</p>
-  <div class="alert alert-info"><strong>自检：</strong>当 Agent 行为异常时，你先怀疑图结构还是先怀疑 prompt？</div>
+<h3><div class="i18n-zh">模型 3：确定性框架包裹非确定性推理</div><div class="i18n-en" hidden>Model 3: Deterministic Framework Wrapping Non-Deterministic Reasoning</div> <span class="badge badge-accent">Duality</span></h3>
+  <p><strong><div class="i18n-zh">初学者想：</div><div class="i18n-en" hidden>Beginner thinks: </div></strong><div class="i18n-zh">AI Agent 很随机，不可靠。</div><div class="i18n-en" hidden>AI Agents are random and unreliable.</div></p>
+  <p><strong><div class="i18n-zh">专家想：</div><div class="i18n-en" hidden>Expert thinks: </div></strong><div class="i18n-zh">图的路径（走向哪个节点、何时结束）是确定的；LLM 在节点内的输出是不确定的。我用图结构"驯服" LLM 的随机性。</div><div class="i18n-en" hidden>The graph's path (which node to go to, when to end) is deterministic; the LLM's output within a node is non-deterministic. I use the graph structure to "tame" the LLM's randomness.</div></p>
+  <div class="alert alert-info"><strong><div class="i18n-zh">自检：</div><div class="i18n-en" hidden>Self-Check: </div></strong><div class="i18n-zh">当 Agent 行为异常时，你先怀疑图结构还是先怀疑 prompt？</div><div class="i18n-en" hidden>When the Agent behaves unexpectedly, do you suspect the graph structure first or the prompt first?</div></div>
 </div>
 
 <div class="card accent-left">
-  <h3>模型 4：控制力在连接处，不在执行处 <span class="badge badge-accent">Power at Boundary</span></h3>
-  <p><strong>初学者想：</strong>LangGraph 的核心价值在节点里。</p>
-  <p><strong>专家想：</strong>节点里只是普通 Python。真正的控制力在节点之间——条件边、interrupt、retry、checkpoint、stream。20% 时间写节点，80% 时间设计边。</p>
-  <div class="alert alert-info"><strong>自检：</strong>你最近写的 Agent，节点间逻辑比节点内逻辑更复杂吗？</div>
+  <h3><div class="i18n-zh">模型 4：控制力在连接处，不在执行处</div><div class="i18n-en" hidden>Model 4: Power Lies at the Boundaries, Not in Execution</div> <span class="badge badge-accent">Power at Boundary</span></h3>
+  <p><strong><div class="i18n-zh">初学者想：</div><div class="i18n-en" hidden>Beginner thinks: </div></strong><div class="i18n-zh">LangGraph 的核心价值在节点里。</div><div class="i18n-en" hidden>LangGraph's core value is inside the nodes.</div></p>
+  <p><strong><div class="i18n-zh">专家想：</div><div class="i18n-en" hidden>Expert thinks: </div></strong><div class="i18n-zh">节点里只是普通 Python。真正的控制力在节点之间——条件边、interrupt、retry、checkpoint、stream。20% 时间写节点，80% 时间设计边。</div><div class="i18n-en" hidden>Inside a node is just plain Python. The real control lies between nodes — conditional edges, interrupt, retry, checkpoint, stream. 20% of time writing nodes, 80% of time designing edges.</div></p>
+  <div class="alert alert-info"><strong><div class="i18n-zh">自检：</div><div class="i18n-en" hidden>Self-Check: </div></strong><div class="i18n-zh">你最近写的 Agent，节点间逻辑比节点内逻辑更复杂吗？</div><div class="i18n-en" hidden>In your most recent Agent, is the inter-node logic more complex than the intra-node logic?</div></div>
 </div>
 
 <div class="card accent-left">
-  <h3>模型 5：持久化是默认，不是附加 <span class="badge badge-accent">Persistence by Default</span></h3>
-  <p><strong>初学者想：</strong>先写好 Agent，需要时再加"保存"功能。</p>
-  <p><strong>专家想：</strong>每个 super-step 都自动存档。程序崩溃不丢状态——这是框架默认行为。用"写数据库应用"而非"写脚本"的思维来设计。</p>
-  <div class="alert alert-info"><strong>自检：</strong>你写 node 时，是否默认假设"它可能在返回前被中断、再从断点恢复"？</div>
+  <h3><div class="i18n-zh">模型 5：持久化是默认，不是附加</div><div class="i18n-en" hidden>Model 5: Persistence is the Default, Not an Add-On</div> <span class="badge badge-accent">Persistence by Default</span></h3>
+  <p><strong><div class="i18n-zh">初学者想：</div><div class="i18n-en" hidden>Beginner thinks: </div></strong><div class="i18n-zh">先写好 Agent，需要时再加"保存"功能。</div><div class="i18n-en" hidden>Build the Agent first, add "save" functionality later if needed.</div></p>
+  <p><strong><div class="i18n-zh">专家想：</div><div class="i18n-en" hidden>Expert thinks: </div></strong><div class="i18n-zh">每个 super-step 都自动存档。程序崩溃不丢状态——这是框架默认行为。用"写数据库应用"而非"写脚本"的思维来设计。</div><div class="i18n-en" hidden>Every super-step is auto-saved. Crash without losing state — this is framework-default behavior. Design with the mindset of "writing a database application" not "writing a script."</div></p>
+  <div class="alert alert-info"><strong><div class="i18n-zh">自检：</div><div class="i18n-en" hidden>Self-Check: </div></strong><div class="i18n-zh">你写 node 时，是否默认假设"它可能在返回前被中断、再从断点恢复"？</div><div class="i18n-en" hidden>When writing a node, do you assume it "might be interrupted before returning, then resumed from the breakpoint"?</div></div>
 </div>
 
 <div class="card" style="border-color:var(--accent);margin-top:28px;">
-  <h3>🔗 面试官的评估框架（第一性原理）— 五个模型如何映射到面试</h3>
-  <p>面试官只需要验证三件事，恰好对应你学的五个模型：</p>
+  <h3><div class="i18n-zh">🔗 面试官的评估框架（第一性原理）— 五个模型如何映射到面试</div><div class="i18n-en" hidden>🔗 The Interviewer's Evaluation Framework (First Principles) — How the Five Models Map to Interviews</div></h3>
+  <p><div class="i18n-zh">面试官只需要验证三件事，恰好对应你学的五个模型：</div><div class="i18n-en" hidden>The interviewer only needs to verify three things, which precisely map to the five models you're learning:</div></p>
   <ol>
-    <li><strong>你能 BUILD 吗？</strong> — 代码实现、API 设计 → 模型 1(图即程序) + 模型 2(State 设计)</li>
-    <li><strong>你能 REASON 吗？</strong> — 架构选型、对比分析 → 模型 3(确定/非确定二象性) + 模型 4(控制力在边界)</li>
-    <li><strong>你能 SHIP 吗？</strong> — 部署、监控、安全 → 模型 5(持久化默认)</li>
+    <li><strong><div class="i18n-zh">你能 BUILD 吗？</div><div class="i18n-en" hidden>Can you BUILD?</div></strong> — <div class="i18n-zh">代码实现、API 设计 → 模型 1(图即程序) + 模型 2(State 设计)</div><div class="i18n-en" hidden">Code implementation, API design → Model 1 (Graph as Program) + Model 2 (State Design)</div></li>
+    <li><strong><div class="i18n-zh">你能 REASON 吗？</div><div class="i18n-en" hidden>Can you REASON?</div></strong> — <div class="i18n-zh">架构选型、对比分析 → 模型 3(确定/非确定二象性) + 模型 4(控制力在边界)</div><div class="i18n-en" hidden">Architecture decisions, comparative analysis → Model 3 (Deterministic/Non-deterministic Duality) + Model 4 (Power at Boundary)</div></li>
+    <li><strong><div class="i18n-zh">你能 SHIP 吗？</div><div class="i18n-en" hidden>Can you SHIP?</div></strong> — <div class="i18n-zh">部署、监控、安全 → 模型 5(持久化默认)</div><div class="i18n-en" hidden">Deployment, monitoring, security → Model 5 (Persistence by Default)</div></li>
   </ol>
-  <p>每一道面试题都在测试这三个维度之一。详见 <a href="interview-bank.html">🏔️ 面试题库</a>（100 题按金字塔结构从 BUILD→REASON→SHIP 排列）。</p>
+  <p><div class="i18n-zh">每一道面试题都在测试这三个维度之一。详见 <a href="interview-bank.html">🏔️ 面试题库</a>（100 题按金字塔结构从 BUILD→REASON→SHIP 排列）。</div><div class="i18n-en" hidden">Every interview question tests one of these three dimensions. See details in <a href="interview-bank.html">🏔️ Interview Bank</a> (100 questions arranged in a pyramid from BUILD→REASON→SHIP).</div></p>
 </div>
 
 <div class="card accent-left" style="margin-top:16px;">
   </div>
 <div class="locked-content" data-require-stage="expert">
-<h3>模型 6：面试即架构对话 <span class="badge badge-red">Interview as Architecture Review</span></h3>
-  <p><strong>初学者想：</strong>面试就是八股文背诵 + 手写代码。</p>
-  <p><strong>专家想：</strong>面试是 45 分钟的架构评审。面试官给你一个模糊需求（"设计一个客服 Agent"），你在白板上画 Graph、定义 State、讨论 checkpoint 选型和错误处理——整个过程就是你和同事设计一个新系统的对话。</p>
-  <div class="alert alert-info"><strong>自检：</strong>你能不翻文档，在 5 分钟内画出一个 Multi-Agent 系统的完整 Graph 结构吗？</div>
+<h3><div class="i18n-zh">模型 6：面试即架构对话</div><div class="i18n-en" hidden>Model 6: The Interview is an Architecture Review</div> <span class="badge badge-red">Interview as Architecture Review</span></h3>
+  <p><strong><div class="i18n-zh">初学者想：</div><div class="i18n-en" hidden>Beginner thinks: </div></strong><div class="i18n-zh">面试就是八股文背诵 + 手写代码。</div><div class="i18n-en" hidden>Interviews are about rote memorization + whiteboard coding.</div></p>
+  <p><strong><div class="i18n-zh">专家想：</div><div class="i18n-en" hidden>Expert thinks: </div></strong><div class="i18n-zh">面试是 45 分钟的架构评审。面试官给你一个模糊需求（"设计一个客服 Agent"），你在白板上画 Graph、定义 State、讨论 checkpoint 选型和错误处理——整个过程就是你和同事设计一个新系统的对话。</div><div class="i18n-en" hidden>An interview is a 45-minute architecture review. The interviewer gives you a vague requirement ("design a customer service Agent"), and you draw the Graph on the whiteboard, define the State, discuss checkpoint choices and error handling — the whole process is exactly the conversation you'd have with a colleague designing a new system.</div></p>
+  <div class="alert alert-info"><strong><div class="i18n-zh">自检：</div><div class="i18n-en" hidden>Self-Check: </div></strong><div class="i18n-zh">你能不翻文档，在 5 分钟内画出一个 Multi-Agent 系统的完整 Graph 结构吗？</div><div class="i18n-en" hidden>Can you sketch a complete Graph structure for a Multi-Agent system in 5 minutes without referencing docs?</div></div>
 </div>
 
 </div>
 <!-- ════════════════ LANDSCAPE ════════════════ -->
-<h2>🗺 二、领域全貌（2026 年 6 月）</h2>
+<h2><div class="i18n-zh">🗺 二、领域全貌（2026 年 6 月）</div><div class="i18n-en" hidden>🗺 2. Landscape Overview (June 2026)</div></h2>
 
-<h3>✅ 行业共识</h3>
+<h3><div class="i18n-zh">✅ 行业共识</div><div class="i18n-en" hidden>✅ Industry Consensus</div></h3>
 <table>
-  <tr><th>共识</th><th>含义</th></tr>
-  <tr><td>Agent 需要编排框架</td><td>裸调 LLM API 无法处理 3 步以上的复杂任务</td></tr>
-  <tr><td>State 设计是第一要素</td><td>烂的 State 设计 → 怎么优化节点都没用</td></tr>
-  <tr><td>Checkpoint 是底线</td><td>没有持久化的 Agent 不能上生产</td></tr>
-  <tr><td>HITL 不可省略</td><td>付费、删除、发送等关键操作必须有人的确认</td></tr>
-  <tr><td>工具可靠性 &gt; LLM 聪明度</td><td>好工具比好 prompt 更影响 Agent 质量</td></tr>
-  <tr><div class="locked-content" data-require-stage="professional"><td><strong>MCP 是工具集成标准 🆕</strong></td><td>97M+ 下载，Anthropic→Linux Foundation，所有主流厂商支持</td></tr>
-  <tr><td><strong>A2A 是 Agent 间通信标准 🆕</strong></td><td>Google 推动，50+ 合作伙伴，已捐给 Linux Foundation</td></tr>
-  <tr><td><strong>Middleware 是扩展首选</td></tr></div> 🆕</strong></td><td>LangChain v1.0 起，用 Middleware 替代手动干预 Agent 循环</td></tr>
+  <tr><th><div class="i18n-zh">共识</div><div class="i18n-en" hidden>Consensus</div></th><th><div class="i18n-zh">含义</div><div class="i18n-en" hidden>Meaning</div></th></tr>
+  <tr><td><div class="i18n-zh">Agent 需要编排框架</div><div class="i18n-en" hidden>Agents need an orchestration framework</div></td><td><div class="i18n-zh">裸调 LLM API 无法处理 3 步以上的复杂任务</div><div class="i18n-en" hidden>Raw LLM API calls cannot handle tasks with more than 3 steps</div></td></tr>
+  <tr><td><div class="i18n-zh">State 设计是第一要素</div><div class="i18n-en" hidden>State design is the first priority</div></td><td><div class="i18n-zh">烂的 State 设计 → 怎么优化节点都没用</div><div class="i18n-en" hidden>Poor State design → no amount of node optimization can save it</div></td></tr>
+  <tr><td><div class="i18n-zh">Checkpoint 是底线</div><div class="i18n-en" hidden>Checkpoint is the baseline</div></td><td><div class="i18n-zh">没有持久化的 Agent 不能上生产</div><div class="i18n-en" hidden>An Agent without persistence cannot go to production</div></td></tr>
+  <tr><td><div class="i18n-zh">HITL 不可省略</div><div class="i18n-en" hidden>HITL is non-negotiable</div></td><td><div class="i18n-zh">付费、删除、发送等关键操作必须有人的确认</div><div class="i18n-en" hidden>Critical operations — payments, deletions, sending — must have human confirmation</div></td></tr>
+  <tr><td><div class="i18n-zh">工具可靠性 &gt; LLM 聪明度</div><div class="i18n-en" hidden>Tool reliability &gt; LLM intelligence</div></td><td><div class="i18n-zh">好工具比好 prompt 更影响 Agent 质量</div><div class="i18n-en" hidden>Good tools impact Agent quality more than good prompts</div></td></tr>
+  <tr><div class="locked-content" data-require-stage="professional"><td><strong><div class="i18n-zh">MCP 是工具集成标准 🆕</div><div class="i18n-en" hidden>MCP is the tool integration standard 🆕</div></strong></td><td><div class="i18n-zh">97M+ 下载，Anthropic→Linux Foundation，所有主流厂商支持</div><div class="i18n-en" hidden>97M+ downloads, Anthropic→Linux Foundation, all major vendors support it</div></td></tr>
+  <tr><td><strong><div class="i18n-zh">A2A 是 Agent 间通信标准 🆕</div><div class="i18n-en" hidden>A2A is the Agent-to-Agent communication standard 🆕</div></strong></td><td><div class="i18n-zh">Google 推动，50+ 合作伙伴，已捐给 Linux Foundation</div><div class="i18n-en" hidden>Driven by Google, 50+ partners, donated to Linux Foundation</div></td></tr>
+  <tr><td><strong><div class="i18n-zh">Middleware 是扩展首选</td></tr></div> 🆕</div><div class="i18n-en" hidden>Middleware is the preferred extension method</td></tr></div> 🆕</div></strong></td><td><div class="i18n-zh">LangChain v1.0 起，用 Middleware 替代手动干预 Agent 循环</div><div class="i18n-en" hidden">Since LangChain v1.0, use Middleware instead of manually intervening in Agent loops</div></td></tr>
 </table>
 
-<h3>🔥 专家在吵什么</h3>
+<h3><div class="i18n-zh">🔥 专家在吵什么</div><div class="i18n-en" hidden>🔥 What the Experts Are Debating</div></h3>
 <div class="card-grid">
   <div class="card red-left">
     <h4>Graph API vs Functional API</h4>
-    <p>声明式便于可视化、团队协作 vs 命令式更自然、代码更少。官方说"混着用"，但实际团队往往选一边。</p>
+    <p><div class="i18n-zh">声明式便于可视化、团队协作 vs 命令式更自然、代码更少。官方说"混着用"，但实际团队往往选一边。</div><div class="i18n-en" hidden>Declarative is better for visualization and team collaboration vs imperative is more natural with less code. Official stance says "mix them," but teams in practice tend to pick a side.</div></p>
   </div>
   <div class="card red-left">
-    <h4>多 Agent 是否必要</h4>
-    <p>分工协作各展所长 vs 一个大模型就够了，多 Agent 增加延迟和复杂度。</p>
+    <h4><div class="i18n-zh">多 Agent 是否必要</div><div class="i18n-en" hidden>Are Multi-Agent Systems Necessary?</div></h4>
+    <p><div class="i18n-zh">分工协作各展所长 vs 一个大模型就够了，多 Agent 增加延迟和复杂度。</div><div class="i18n-en" hidden>Division of labor, each playing to its strengths vs one large model is enough; multi-Agent adds latency and complexity.</div></p>
   </div>
   <div class="card red-left">
-    <h4>LangGraph 是否过度抽象</h4>
-    <p>提供了恰好需要的原语 vs FastAPI + 消息队列也能做到，还更灵活。</p>
+    <h4><div class="i18n-zh">LangGraph 是否过度抽象</div><div class="i18n-en" hidden>Is LangGraph Over-Abstracted?</div></h4>
+    <p><div class="i18n-zh">提供了恰好需要的原语 vs FastAPI + 消息队列也能做到，还更灵活。</div><div class="i18n-en" hidden>Provides exactly the right primitives vs FastAPI + message queues can do it too, and with more flexibility.</div></p>
   </div>
   <div class="card red-left">
-    <div class="locked-content" data-require-stage="expert"><h4>MCP vs A2A 边界在哪 🆕</h4>
-    <p>MCP 管 Agent↔Tool，A2A 管 Agent↔Agent。但实践中两个 Agent 通过 MCP 互调能替代 A2A 吗？社区争议：MCP 是为被动工具设计的，不适合有自主推理的 Agent 间协作。</p>
+    <div class="locked-content" data-require-stage="expert"><h4><div class="i18n-zh">MCP vs A2A 边界在哪 🆕</div><div class="i18n-en" hidden>Where is the MCP vs A2A Boundary? 🆕</div></h4>
+    <p><div class="i18n-zh">MCP 管 Agent↔Tool，A2A 管 Agent↔Agent。但实践中两个 Agent 通过 MCP 互调能替代 A2A 吗？社区争议：MCP 是为被动工具设计的，不适合有自主推理的 Agent 间协作。</div><div class="i18n-en" hidden>MCP handles Agent↔Tool, A2A handles Agent↔Agent. But in practice, can two Agents calling each other through MCP replace A2A? Community debate: MCP was designed for passive tools, not suited for collaboration between Agents with autonomous reasoning.</div></p>
   </div>
   <div class="card red-left">
-    <h4>长上下文是否杀死 RAG 🆕</h4>
-    <p>1M token 上下文窗口 + Prompt Caching，是否让 RAG 变得多余？反方：成本（O(n²) Attention）、Lost in the Middle 效应、缓存失效意味着 RAG 仍有不可替代的价值。</p>
+    <h4><div class="i18n-zh">长上下文是否杀死 RAG 🆕</div><div class="i18n-en" hidden>Will Long Context Kill RAG? 🆕</div></h4>
+    <p><div class="i18n-zh">1M token 上下文窗口 + Prompt Caching，是否让 RAG 变得多余？反方：成本（O(n²) Attention）、Lost in the Middle 效应、缓存失效意味着 RAG 仍有不可替代的价值。</div><div class="i18n-en" hidden>1M token context windows + Prompt Caching — does this make RAG redundant? Counterargument: cost (O(n²) Attention), Lost in the Middle effect, cache invalidation — meaning RAG still has irreplaceable value.</div></p>
   </div>
   <div class="card red-left">
-    <h4>Deep Agents SDK vs 裸 LangGraph</p></div></div> 🆕</h4>
-    <p>Deep Agents 提供了 planning、subagents、filesystem 开箱即用，但增加了一层抽象。直接写 LangGraph StateGraph 更灵活但更繁琐。选哪个取决于任务复杂度。</p>
+    <h4><div class="i18n-zh">Deep Agents SDK vs 裸 LangGraph</p></div></div> 🆕</div><div class="i18n-en" hidden>Deep Agents SDK vs Bare LangGraph</p></div></div> 🆕</div></h4>
+    <p><div class="i18n-zh">Deep Agents 提供了 planning、subagents、filesystem 开箱即用，但增加了一层抽象。直接写 LangGraph StateGraph 更灵活但更繁琐。选哪个取决于任务复杂度。</div><div class="i18n-en" hidden>Deep Agents provides planning, subagents, and filesystem out of the box, but adds a layer of abstraction. Writing raw LangGraph StateGraph is more flexible but more tedious. The choice depends on task complexity.</div></p>
   </div>
 </div>
 
-<h3>❓ 尚未解决的开放问题</h3>
+<h3><div class="i18n-zh">❓ 尚未解决的开放问题</div><div class="i18n-en" hidden>❓ Unsolved Open Questions</div></h3>
 <ol>
-  <li><strong>Agent 评估方法不成熟</strong> — 如何量化评估 10 步 Agent 循环的质量？</li>
-  <li><strong>长期记忆最佳实践未定</strong> — Store API 已出，社区还没形成公认的好用法</li>
-  <li><strong>子图边界模糊</strong> — 父子图 checkpoint 隔离在复杂嵌套时行为难预测</li>
-  <li><strong>极端并发性能未知</strong> — 1000 个并行 worker 时 State 合并的瓶颈在哪？</li>
-  <div class="locked-content" data-require-stage="expert"><li><strong>Agent 安全链不完整 🆕</strong> — 2026 年 3 月披露的 LangChain/LangGraph CVE 表明 agent 框架本身存在安全漏洞。Prompt injection 通过 MCP tool chain 传播的防御方案仍不成熟</li>
-  <li><strong>Observability vs Privacy</strong> — 全链路追踪很好，但敏感数据怎么办？</li>
-  <li><strong>Agent-to-Agent 协议碎片化 🆕</strong> — MCP/A2A/ACP/ANP 四种协议共存（类比 HTTP/WebSocket/gRPC），互操作性标准尚未统一</li>
-  <li><strong>1M Token 时代的 Agent 架构</li></ol></div> 🆕</strong> — 当上下文窗口超过大多数知识库时，Agent 的记忆策略需要根本性重思</li>
+  <li><strong><div class="i18n-zh">Agent 评估方法不成熟</div><div class="i18n-en" hidden>Agent evaluation methods are immature</div></strong> — <div class="i18n-zh">如何量化评估 10 步 Agent 循环的质量？</div><div class="i18n-en" hidden>How to quantitatively evaluate the quality of a 10-step Agent loop?</div></li>
+  <li><strong><div class="i18n-zh">长期记忆最佳实践未定</div><div class="i18n-en" hidden>Long-term memory best practices are unsettled</div></strong> — <div class="i18n-zh">Store API 已出，社区还没形成公认的好用法</div><div class="i18n-en" hidden>Store API is out, but the community hasn't formed accepted best practices yet</div></li>
+  <li><strong><div class="i18n-zh">子图边界模糊</div><div class="i18n-en" hidden>Subgraph boundaries are fuzzy</div></strong> — <div class="i18n-zh">父子图 checkpoint 隔离在复杂嵌套时行为难预测</div><div class="i18n-en" hidden>Parent-child checkpoint isolation has unpredictable behavior under complex nesting</div></li>
+  <li><strong><div class="i18n-zh">极端并发性能未知</div><div class="i18n-en" hidden>Extreme concurrency performance is unknown</div></strong> — <div class="i18n-zh">1000 个并行 worker 时 State 合并的瓶颈在哪？</div><div class="i18n-en" hidden>Where is the bottleneck in State merging with 1000 parallel workers?</div></li>
+  <div class="locked-content" data-require-stage="expert"><li><strong><div class="i18n-zh">Agent 安全链不完整 🆕</div><div class="i18n-en" hidden>Agent security chain is incomplete 🆕</div></strong> — <div class="i18n-zh">2026 年 3 月披露的 LangChain/LangGraph CVE 表明 agent 框架本身存在安全漏洞。Prompt injection 通过 MCP tool chain 传播的防御方案仍不成熟</div><div class="i18n-en" hidden>The March 2026 LangChain/LangGraph CVE disclosures show that Agent frameworks themselves have security vulnerabilities. Defenses against prompt injection propagating through MCP tool chains remain immature</div></li>
+  <li><strong>Observability vs Privacy</strong> — <div class="i18n-zh">全链路追踪很好，但敏感数据怎么办？</div><div class="i18n-en" hidden>Full tracing is great, but what about sensitive data?</div></li>
+  <li><strong><div class="i18n-zh">Agent-to-Agent 协议碎片化 🆕</div><div class="i18n-en" hidden>Agent-to-Agent protocol fragmentation 🆕</div></strong> — <div class="i18n-zh">MCP/A2A/ACP/ANP 四种协议共存（类比 HTTP/WebSocket/gRPC），互操作性标准尚未统一</div><div class="i18n-en" hidden">Four protocols coexist — MCP/A2A/ACP/ANP (analogous to HTTP/WebSocket/gRPC) — interoperability standards are not yet unified</div></li>
+  <li><strong><div class="i18n-zh">1M Token 时代的 Agent 架构</li></ol></div> 🆕</div><div class="i18n-en" hidden">Agent Architecture in the 1M Token Era</li></ol></div> 🆕</div></strong> — <div class="i18n-zh">当上下文窗口超过大多数知识库时，Agent 的记忆策略需要根本性重思</div><div class="i18n-en" hidden>When context windows exceed most knowledge bases, Agent memory strategies need fundamental rethinking</div></li>
 </ol>
 
 <!-- ════════════════ BLIND SPOTS ════════════════ -->
-<h2>🎯 三、知识盲区排查 & 面试准备</h2>
-<p>每题设计目标：区分"我会复制代码"和"我真的理解了"。<strong>答不上来 = 回炉重学对应课程。</strong></p>
+<h2><div class="i18n-zh">🎯 三、知识盲区排查 & 面试准备</div><div class="i18n-en" hidden>🎯 3. Knowledge Blind Spot Diagnosis & Interview Preparation</div></h2>
+<p><div class="i18n-zh">每题设计目标：区分"我会复制代码"和"我真的理解了"。<strong>答不上来 = 回炉重学对应课程。</strong></div><div class="i18n-en" hidden>Each question is designed to distinguish "I can copy code" from "I truly understand." <strong>Can't answer = go back and relearn the corresponding lesson.</strong></div></p>
 
 <div class="card" style="border-color:var(--accent);margin-bottom:28px;">
-  <h3>📋 题库使用策略</h3>
+  <h3><div class="i18n-zh">📋 题库使用策略</div><div class="i18n-en" hidden>📋 Question Bank Usage Strategy</div></h3>
   <ol>
-    <li><strong>学前一题</strong>：每课开始前读一遍对应面试题（不看答案）→ 知道"学完这个我要能回答什么"</li>
-    <li><strong>学后自测</strong>：每课完成后口头回答（录音 2 分钟）→ 对比 <a href="answer-bank.html">答案库</a> 评分标准</li>
-    <li><strong>交叉复习</strong>：每 3 课完成后随机抽 5 题做"闪电问答"（每题 30 秒）— 模拟面试压力</li>
-    <li><strong>金字塔攀登</strong>：能流畅回答某一层 80% 的题目才算"掌握"。不要跳层——L3 需要 L2，L5 需要 L1-L4 全部积累</li>
+    <li><strong><div class="i18n-zh">学前一题</div><div class="i18n-en" hidden>Pre-Lesson One Question</div></strong><div class="i18n-zh">：每课开始前读一遍对应面试题（不看答案）→ 知道"学完这个我要能回答什么"</div><div class="i18n-en" hidden">: Before each lesson, read the corresponding interview question (without looking at the answer) → know "what should I be able to answer after learning this"</div></li>
+    <li><strong><div class="i18n-zh">学后自测</div><div class="i18n-en" hidden>Post-Lesson Self-Test</div></strong><div class="i18n-zh">：每课完成后口头回答（录音 2 分钟）→ 对比 <a href="answer-bank.html">答案库</a> 评分标准</div><div class="i18n-en" hidden">: After each lesson, answer verbally (record 2 minutes) → compare against <a href="answer-bank.html">Answer Bank</a> scoring rubric</div></li>
+    <li><strong><div class="i18n-zh">交叉复习</div><div class="i18n-en" hidden>Cross Review</div></strong><div class="i18n-zh">：每 3 课完成后随机抽 5 题做"闪电问答"（每题 30 秒）— 模拟面试压力</div><div class="i18n-en" hidden">: After every 3 lessons, randomly pick 5 questions for "lightning round" (30 seconds each) — simulate interview pressure</div></li>
+    <li><strong><div class="i18n-zh">金字塔攀登</div><div class="i18n-en" hidden>Pyramid Ascent</div></strong><div class="i18n-zh">：能流畅回答某一层 80% 的题目才算"掌握"。不要跳层——L3 需要 L2，L5 需要 L1-L4 全部积累</div><div class="i18n-en" hidden">: You've only "mastered" a tier when you can fluently answer 80% of its questions. Don't skip tiers — L3 requires L2, L5 requires accumulated knowledge from L1-L4</div></li>
   </ol>
-  <p style="margin-top:12px;text-align:center;"><a href="interview-bank.html" style="font-weight:700;">→ 进入完整面试题库（100 题金字塔）</a></p>
+  <p style="margin-top:12px;text-align:center;"><a href="interview-bank.html" style="font-weight:700;"><div class="i18n-zh">→ 进入完整面试题库（100 题金字塔）</div><div class="i18n-en" hidden">→ Enter Complete Interview Bank (100-Question Pyramid)</div></a></p>
 </div>
 
 <div class="alert alert-info" style="margin-bottom:28px;">
-  <strong>面试官的"5 分钟定级法"：</strong>L1 基础题答得肤浅 → 初级；L3 核心题答得流畅 → 中级；L5 架构题能从容讨论 trade-off → 高级。金字塔底部最宽——基础不牢，整个评估崩塌。
+  <strong><div class="i18n-zh">面试官的"5 分钟定级法"：</div><div class="i18n-en" hidden">The Interviewer's "5-Minute Leveling Method": </div></strong><div class="i18n-zh">L1 基础题答得肤浅 → 初级；L3 核心题答得流畅 → 中级；L5 架构题能从容讨论 trade-off → 高级。金字塔底部最宽——基础不牢，整个评估崩塌。</div><div class="i18n-en" hidden">L1 foundation questions answered superficially → Junior. L3 core questions answered fluently → Mid-level. L5 architecture questions discussed with calm trade-off analysis → Senior. The base of the pyramid is the widest — weak foundations, and the entire evaluation collapses.</div>
 </div>
 
-<p>以下 17 道盲区题是面试题库的"快速筛选器"——面试官最爱用这类题目在 3 分钟内判断你的水平。</p>
+<p><div class="i18n-zh">以下 17 道盲区题是面试题库的"快速筛选器"——面试官最爱用这类题目在 3 分钟内判断你的水平。</div><div class="i18n-en" hidden>The following 17 blind-spot questions are the interview bank's "rapid filter" — interviewers love using these to gauge your level within 3 minutes.</div></p>
 
-<h3>🟢 基础篇测试（L01-L04 结束后）</h3>
+<h3><div class="i18n-zh">🟢 基础篇测试（L01-L04 结束后）</div><div class="i18n-en" hidden>🟢 Foundation Test (After L01-L04)</div></h3>
 
 <div class="card">
-  <h4>Q1：节点函数没有 return 语句时会怎样？</h4>
-  <details><summary>点击查看答案</summary>
-    <p>不会报错。隐式返回 None，LangGraph 将其解释为"无状态更新"，State 保持不变。但如果你依赖这个节点的输出来更新 State，后面的节点可能拿到意料之外的值。</p>
+  <h4><div class="i18n-zh">Q1：节点函数没有 return 语句时会怎样？</div><div class="i18n-en" hidden>Q1: What happens when a node function has no return statement?</div></h4>
+  <details><summary><div class="i18n-zh">点击查看答案</div><div class="i18n-en" hidden>Click to View Answer</div></summary>
+    <p><div class="i18n-zh">不会报错。隐式返回 None，LangGraph 将其解释为"无状态更新"，State 保持不变。但如果你依赖这个节点的输出来更新 State，后面的节点可能拿到意料之外的值。</div><div class="i18n-en" hidden>No error occurs. It implicitly returns None, which LangGraph interprets as "no state update" — State remains unchanged. But if you depend on this node's output to update State, downstream nodes may receive unexpected values.</div></p>
   </details>
 </div>
 
 <div class="card">
-  <h4>Q2：<code>Annotated[list, operator.add]</code> 和普通 <code>list</code> 在并行节点场景下有什么区别？</h4>
-  <details><summary>点击查看答案</summary>
-    <p>普通 list：后完成的节点覆盖先完成的节点的值（替换）。<br>
-    Annotated + operator.add：两个节点的输出自动合并（追加）。并行时多个节点同时返回列表，reducer 决定如何合并而非覆盖。</p>
+  <h4><div class="i18n-zh">Q2：<code>Annotated[list, operator.add]</code> 和普通 <code>list</code> 在并行节点场景下有什么区别？</div><div class="i18n-en" hidden>Q2: What is the difference between <code>Annotated[list, operator.add]</code> and a plain <code>list</code> in a parallel node scenario?</div></h4>
+  <details><summary><div class="i18n-zh">点击查看答案</div><div class="i18n-en" hidden>Click to View Answer</div></summary>
+    <p><div class="i18n-zh">普通 list：后完成的节点覆盖先完成的节点的值（替换）。<br>
+    Annotated + operator.add：两个节点的输出自动合并（追加）。并行时多个节点同时返回列表，reducer 决定如何合并而非覆盖。</div><div class="i18n-en" hidden>Plain list: the later-completing node overwrites the earlier node's value (replacement).<br>
+    Annotated + operator.add: both node outputs auto-merge (append). When parallel nodes return lists simultaneously, the reducer decides how to merge rather than overwrite.</div></p>
   </details>
 </div>
 
 <div class="card">
-  <h4>Q3：条件边路由函数返回了一个未在映射字典中列出的值，图会怎么处理？</h4>
-  <details><summary>点击查看答案</summary>
-    <p>抛出 <code>ValueError</code>。映射字典必须是穷尽的——每个可能的返回值都要有对应目标节点。这也是为什么建议在条件边函数中设兜底分支（else → 默认节点）。</p>
+  <h4><div class="i18n-zh">Q3：条件边路由函数返回了一个未在映射字典中列出的值，图会怎么处理？</div><div class="i18n-en" hidden>Q3: What happens when a conditional edge routing function returns a value not listed in the mapping dictionary?</div></h4>
+  <details><summary><div class="i18n-zh">点击查看答案</div><div class="i18n-en" hidden>Click to View Answer</div></summary>
+    <p><div class="i18n-zh">抛出 <code>ValueError</code>。映射字典必须是穷尽的——每个可能的返回值都要有对应目标节点。这也是为什么建议在条件边函数中设兜底分支（else → 默认节点）。</div><div class="i18n-en" hidden>Throws a <code>ValueError</code>. The mapping dictionary must be exhaustive — every possible return value must have a corresponding target node. This is why it's recommended to include a fallback branch (else → default node) in conditional edge functions.</div></p>
   </details>
 </div>
 
 <div class="card">
-  <h4>Q4：<code>bind_tools</code> 之后，LLM 收到的 API 请求里多了什么？</h4>
-  <details><summary>点击查看答案</summary>
-    <p>多了 <code>tools</code> 字段，包含每个工具的 JSON Schema：name、description、parameters（类型+描述）。LLM 据此决定是否调用工具——它不是"看到" Python 函数，而是看到一份"工具说明书"。</p>
+  <h4><div class="i18n-zh">Q4：<code>bind_tools</code> 之后，LLM 收到的 API 请求里多了什么？</div><div class="i18n-en" hidden>Q4: After <code>bind_tools</code>, what extra content appears in the LLM's API request?</div></h4>
+  <details><summary><div class="i18n-zh">点击查看答案</div><div class="i18n-en" hidden>Click to View Answer</div></summary>
+    <p><div class="i18n-zh">多了 <code>tools</code> 字段，包含每个工具的 JSON Schema：name、description、parameters（类型+描述）。LLM 据此决定是否调用工具——它不是"看到" Python 函数，而是看到一份"工具说明书"。</div><div class="i18n-en" hidden>An additional <code>tools</code> field appears, containing the JSON Schema for each tool: name, description, parameters (types + descriptions). The LLM uses this to decide whether to call a tool — it doesn't "see" the Python function, it sees a "tool manual."</div></p>
   </details>
 </div>
 
 <div class="card">
-  <h4>Q5：为什么 <code>state["messages"][-1]</code> 就能判断是否需要调用工具？</h4>
-  <details><summary>点击查看答案</summary>
-    <p>因为 LangGraph 的消息流是线性的——最后一条消息一定是上一步产生的。如果上一步是 LLM，最后一条就是 AIMessage，它的 <code>tool_calls</code> 属性说明 LLM 决定调工具。如果是 ToolMessage（工具返回结果），则 <code>tool_calls</code> 为 None，应该再给 LLM 处理。</p>
+  <h4><div class="i18n-zh">Q5：为什么 <code>state["messages"][-1]</code> 就能判断是否需要调用工具？</div><div class="i18n-en" hidden>Q5: Why can <code>state["messages"][-1]</code> determine whether a tool call is needed?</div></h4>
+  <details><summary><div class="i18n-zh">点击查看答案</div><div class="i18n-en" hidden>Click to View Answer</div></summary>
+    <p><div class="i18n-zh">因为 LangGraph 的消息流是线性的——最后一条消息一定是上一步产生的。如果上一步是 LLM，最后一条就是 AIMessage，它的 <code>tool_calls</code> 属性说明 LLM 决定调工具。如果是 ToolMessage（工具返回结果），则 <code>tool_calls</code> 为 None，应该再给 LLM 处理。</div><div class="i18n-en" hidden>Because LangGraph's message flow is linear — the last message is always the one produced by the previous step. If the previous step was the LLM, the last message is an AIMessage, and its <code>tool_calls</code> attribute indicates the LLM decided to call a tool. If it's a ToolMessage (tool result), then <code>tool_calls</code> is None, and it should be fed back to the LLM for processing.</div></p>
   </details>
 </div>
 
 <div class="locked-content" data-require-stage="professional">
-<h3>🟡 专业篇测试（L05-L08 结束后）</h3>
+<h3><div class="i18n-zh">🟡 专业篇测试（L05-L08 结束后）</div><div class="i18n-en" hidden>🟡 Professional Test (After L05-L08)</div></h3>
 
 <div class="card">
-  <h4>Q6：同一个 thread_id 调两次 invoke()，第二次的消息是追加还是替换？</h4>
-  <details><summary>点击查看答案</summary>
-    <p>追加。因为 State 中的 messages 使用了 <code>operator.add</code> reducer。每次 invoke 的消息会追加到同一个 thread 的消息历史后面。如果换一个新的 thread_id，则从空列表开始。</p>
+  <h4><div class="i18n-zh">Q6：同一个 thread_id 调两次 invoke()，第二次的消息是追加还是替换？</div><div class="i18n-en" hidden>Q6: If you call invoke() twice with the same thread_id, are the second call's messages appended or do they replace?</div></h4>
+  <details><summary><div class="i18n-zh">点击查看答案</div><div class="i18n-en" hidden>Click to View Answer</div></summary>
+    <p><div class="i18n-zh">追加。因为 State 中的 messages 使用了 <code>operator.add</code> reducer。每次 invoke 的消息会追加到同一个 thread 的消息历史后面。如果换一个新的 thread_id，则从空列表开始。</div><div class="i18n-en" hidden>Appended. Because the messages field in State uses the <code>operator.add</code> reducer. Each invoke's messages are appended to the same thread's message history. If you use a new thread_id, it starts from an empty list.</div></p>
   </details>
 </div>
 
 <div class="card">
-  <h4>Q7：interrupt() 和 retry_policy 的区别？什么场景需要两个一起用？</h4>
-  <details><summary>点击查看答案</summary>
-    <p>retry_policy 是给机器用的（网络超时自动重试），interrupt() 是给人用的（等待人工决策）。两者可以配合：先 retry 3 次，如果全失败，进 interrupt() 让人决定是继续重试还是放弃。</p>
+  <h4><div class="i18n-zh">Q7：interrupt() 和 retry_policy 的区别？什么场景需要两个一起用？</div><div class="i18n-en" hidden>Q7: What's the difference between interrupt() and retry_policy? When should you use both together?</div></h4>
+  <details><summary><div class="i18n-zh">点击查看答案</div><div class="i18n-en" hidden>Click to View Answer</div></summary>
+    <p><div class="i18n-zh">retry_policy 是给机器用的（网络超时自动重试），interrupt() 是给人用的（等待人工决策）。两者可以配合：先 retry 3 次，如果全失败，进 interrupt() 让人决定是继续重试还是放弃。</div><div class="i18n-en" hidden>retry_policy is for machines (auto-retry on network timeouts); interrupt() is for humans (await human decision). They can work together: retry 3 times first; if all fail, enter interrupt() to let a human decide whether to keep retrying or give up.</div></p>
   </details>
 </div>
 
 <div class="card">
-  <h4>Q8：子图的 token 流在哪里？</h4>
-  <details><summary>点击查看答案</summary>
-    <p>在 <code>stream.subgraphs[*].messages</code> 中。v3 的 typed projections 把子图的消息流隔离在独立的 subgraph 命名空间下，不会和父图的消息混在一起。</p>
+  <h4><div class="i18n-zh">Q8：子图的 token 流在哪里？</div><div class="i18n-en" hidden>Q8: Where is the subgraph's token stream?</div></h4>
+  <details><summary><div class="i18n-zh">点击查看答案</div><div class="i18n-en" hidden>Click to View Answer</div></summary>
+    <p><div class="i18n-zh">在 <code>stream.subgraphs[*].messages</code> 中。v3 的 typed projections 把子图的消息流隔离在独立的 subgraph 命名空间下，不会和父图的消息混在一起。</div><div class="i18n-en" hidden>In <code>stream.subgraphs[*].messages</code>. v3's typed projections isolate the subgraph's message stream under an independent subgraph namespace, preventing it from mixing with the parent graph's messages.</div></p>
   </details>
 </div>
 
 <div class="card">
-  <h4>Q9：interrupt() 暂停后重启进程，能用原 thread_id 恢复吗？</h4>
-  <details><summary>点击查看答案</summary>
-    <p>取决于用的是什么 checkpointer。InMemorySaver → 不行（内存丢失）。SqliteSaver / PostgresSaver → 可以（持久化到磁盘/数据库，进程重启后从 checkpoint 恢复）。这就是为什么生产环境必须用持久化 checkpointer。</p>
-  </details>
-</div>
-
-</div>
-<div class="locked-content" data-require-stage="expert">
-<h3>🔴 专家篇测试（L09-L12 结束后）</h3>
-
-<div class="card">
-  <h4>Q10：父子 State 有同名字段但子图直接 add_node 挂载，消息怎么合并？</h4>
-  <details><summary>点击查看答案</summary>
-    <p>子图共享父图的 State 通道。如果子图的 messages 也用了 <code>operator.add</code> reducer，子图中产生的消息会自动追加到父图的 messages 列表中。这是因为底层 Pregel 运行时共享同一个 State 实例。</p>
-  </details>
-</div>
-
-<div class="card">
-  <h4>Q11：Supervisor 模式和 Swarm 模式的根本区别？</h4>
-  <details><summary>点击查看答案</summary>
-    <p><strong>Supervisor：</strong>有一个中央调度节点决定下一步（条件边返回 worker 名）。<strong>Swarm：</strong>每个 Agent 自己决定下一步交给谁（节点内 return Command(goto=...)）。区别在于"路由决策权在谁手里"。</p>
-  </details>
-</div>
-
-<div class="card">
-  <h4>Q12：Send 创建的 5 个并行 worker，一个 interrupt() 暂停了，其他会怎样？</h4>
-  <details><summary>点击查看答案</summary>
-    <p>所有 worker 会等那个暂停的（因为同一个 super-step 必须全部完成才进入下一步）。父图也会暂停。你需要对所有中断的 worker 逐个 resume。这是 Send + interrupt 的一个复杂场景——建议避免在并行 Send 中使用 interrupt。</p>
-  </details>
-</div>
-
-<div class="card">
-  <h4>Q13：InMemorySaver → PostgresSaver 需要改几行代码？</h4>
-  <details><summary>点击查看答案</summary>
-    <p>理论上 2 行——改 import 和连接字符串。因为所有 Checkpointer 实现同一个接口。但实际生产中你可能还需要处理连接池、迁移脚本、SSL 配置等。官方说"一行不改"指的是图定义代码不变。</p>
+  <h4><div class="i18n-zh">Q9：interrupt() 暂停后重启进程，能用原 thread_id 恢复吗？</div><div class="i18n-en" hidden>Q9: After interrupt() pauses and the process restarts, can you resume with the original thread_id?</div></h4>
+  <details><summary><div class="i18n-zh">点击查看答案</div><div class="i18n-en" hidden>Click to View Answer</div></summary>
+    <p><div class="i18n-zh">取决于用的是什么 checkpointer。InMemorySaver → 不行（内存丢失）。SqliteSaver / PostgresSaver → 可以（持久化到磁盘/数据库，进程重启后从 checkpoint 恢复）。这就是为什么生产环境必须用持久化 checkpointer。</div><div class="i18n-en" hidden>Depends on which checkpointer is used. InMemorySaver → no (memory is lost). SqliteSaver / PostgresSaver → yes (persisted to disk/database, restored from checkpoint after process restart). This is why production environments must use persistent checkpointers.</div></p>
   </details>
 </div>
 
 </div>
 <div class="locked-content" data-require-stage="expert">
-<h3>🆕 2026 前沿测试（学完全部课程后）</h3>
+<h3><div class="i18n-zh">🔴 专家篇测试（L09-L12 结束后）</div><div class="i18n-en" hidden>🔴 Expert Test (After L09-L12)</div></h3>
 
 <div class="card">
-  <h4>Q14：MCP 和 A2A 都是 Agent 协议，面试官问"什么时候用 MCP，什么时候用 A2A？"——你怎么回答？</h4>
-  <details><summary>点击查看答案</summary>
-    <p><strong>MCP</strong>（Model Context Protocol）：Agent 需要调用工具/数据源时。它是一个 Agent 和它的工具之间的"USB-C 接口"——标准化工具接入。<br>
+  <h4><div class="i18n-zh">Q10：父子 State 有同名字段但子图直接 add_node 挂载，消息怎么合并？</div><div class="i18n-en" hidden>Q10: Parent and child State share a same-named field, but the subgraph is mounted via add_node — how do messages merge?</div></h4>
+  <details><summary><div class="i18n-zh">点击查看答案</div><div class="i18n-en" hidden>Click to View Answer</div></summary>
+    <p><div class="i18n-zh">子图共享父图的 State 通道。如果子图的 messages 也用了 <code>operator.add</code> reducer，子图中产生的消息会自动追加到父图的 messages 列表中。这是因为底层 Pregel 运行时共享同一个 State 实例。</div><div class="i18n-en" hidden>The subgraph shares the parent graph's State channel. If the subgraph's messages also use the <code>operator.add</code> reducer, messages produced in the subgraph are automatically appended to the parent graph's messages list. This is because the underlying Pregel runtime shares the same State instance.</div></p>
+  </details>
+</div>
+
+<div class="card">
+  <h4><div class="i18n-zh">Q11：Supervisor 模式和 Swarm 模式的根本区别？</div><div class="i18n-en" hidden>Q11: What is the fundamental difference between Supervisor and Swarm patterns?</div></h4>
+  <details><summary><div class="i18n-zh">点击查看答案</div><div class="i18n-en" hidden>Click to View Answer</div></summary>
+    <p><strong><div class="i18n-zh">Supervisor：</div><div class="i18n-en" hidden>Supervisor: </div></strong><div class="i18n-zh">有一个中央调度节点决定下一步（条件边返回 worker 名）。<strong>Swarm：</strong>每个 Agent 自己决定下一步交给谁（节点内 return Command(goto=...)）。区别在于"路由决策权在谁手里"。</div><div class="i18n-en" hidden>There is a central dispatch node that decides the next step (conditional edge returns worker name). <strong>Swarm:</strong> Each Agent decides for itself who to hand off to next (within the node: return Command(goto=...)). The difference lies in "who holds the routing decision authority."</div></p>
+  </details>
+</div>
+
+<div class="card">
+  <h4><div class="i18n-zh">Q12：Send 创建的 5 个并行 worker，一个 interrupt() 暂停了，其他会怎样？</div><div class="i18n-en" hidden>Q12: If one of 5 parallel workers created by Send hits interrupt(), what happens to the others?</div></h4>
+  <details><summary><div class="i18n-zh">点击查看答案</div><div class="i18n-en" hidden>Click to View Answer</div></summary>
+    <p><div class="i18n-zh">所有 worker 会等那个暂停的（因为同一个 super-step 必须全部完成才进入下一步）。父图也会暂停。你需要对所有中断的 worker 逐个 resume。这是 Send + interrupt 的一个复杂场景——建议避免在并行 Send 中使用 interrupt。</div><div class="i18n-en" hidden>All workers will wait for the paused one (because the same super-step must fully complete before advancing). The parent graph also pauses. You need to resume each interrupted worker one by one. This is a complex Send + interrupt scenario — it's recommended to avoid using interrupt inside parallel Send operations.</div></p>
+  </details>
+</div>
+
+<div class="card">
+  <h4><div class="i18n-zh">Q13：InMemorySaver → PostgresSaver 需要改几行代码？</div><div class="i18n-en" hidden>Q13: How many lines of code change from InMemorySaver to PostgresSaver?</div></h4>
+  <details><summary><div class="i18n-zh">点击查看答案</div><div class="i18n-en" hidden>Click to View Answer</div></summary>
+    <p><div class="i18n-zh">理论上 2 行——改 import 和连接字符串。因为所有 Checkpointer 实现同一个接口。但实际生产中你可能还需要处理连接池、迁移脚本、SSL 配置等。官方说"一行不改"指的是图定义代码不变。</div><div class="i18n-en" hidden>Theoretically 2 lines — change the import and the connection string. Because all Checkpointer implementations share the same interface. But in real production, you may also need to handle connection pools, migration scripts, SSL configuration, etc. The official claim of "zero-line change" refers to the graph definition code remaining unchanged.</div></p>
+  </details>
+</div>
+
+</div>
+<div class="locked-content" data-require-stage="expert">
+<h3><div class="i18n-zh">🆕 2026 前沿测试（学完全部课程后）</div><div class="i18n-en" hidden>🆕 2026 Cutting-Edge Test (After Completing All Lessons)</div></h3>
+
+<div class="card">
+  <h4><div class="i18n-zh">Q14：MCP 和 A2A 都是 Agent 协议，面试官问"什么时候用 MCP，什么时候用 A2A？"——你怎么回答？</div><div class="i18n-en" hidden>Q14: Both MCP and A2A are Agent protocols. The interviewer asks, "When do you use MCP vs A2A?" — how do you answer?</div></h4>
+  <details><summary><div class="i18n-zh">点击查看答案</div><div class="i18n-en" hidden>Click to View Answer</div></summary>
+    <p><strong><div class="i18n-zh">MCP</div><div class="i18n-en" hidden>MCP</div></strong><div class="i18n-zh">（Model Context Protocol）：Agent 需要调用工具/数据源时。它是一个 Agent 和它的工具之间的"USB-C 接口"——标准化工具接入。<br>
     <strong>A2A</strong>（Agent-to-Agent）：多个 Agent 需要互相委派任务时。它是 Agent 之间的"通讯协议"——标准化 Agent 协作。<br>
-    <strong>关键判断：</strong>对方有没有自主推理能力？工具没有（MCP 够用），另一个 Agent 有（用 A2A）。面试官想听到的是这个区分逻辑，而不是背定义。</p>
+    <strong>关键判断：</strong>对方有没有自主推理能力？工具没有（MCP 够用），另一个 Agent 有（用 A2A）。面试官想听到的是这个区分逻辑，而不是背定义。</div><div class="i18n-en" hidden><strong>MCP</strong> (Model Context Protocol): When an Agent needs to call tools/data sources. It's the "USB-C interface" between an Agent and its tools — standardized tool integration.<br>
+    <strong>A2A</strong> (Agent-to-Agent): When multiple Agents need to delegate tasks to each other. It's the "communication protocol" between Agents — standardized Agent collaboration.<br>
+    <strong>Key distinction:</strong> Does the other party have autonomous reasoning capability? A tool doesn't (MCP is sufficient); another Agent does (use A2A). The interviewer wants to hear this distinction logic, not recited definitions.</div></p>
   </details>
 </div>
 
 <div class="card">
-  <h4>Q15：<code>create_agent</code> 的 Middleware 和直接在 LangGraph 里写 interrupt 有什么区别？面试官问这个在考什么？</h4>
-  <details><summary>点击查看答案</summary>
-    <p>面试官在考：<strong>你知道什么时候该用高层抽象，什么时候该用底层原语。</strong><br>
+  <h4><div class="i18n-zh">Q15：<code>create_agent</code> 的 Middleware 和直接在 LangGraph 里写 interrupt 有什么区别？面试官问这个在考什么？</div><div class="i18n-en" hidden>Q15: What is the difference between <code>create_agent</code> Middleware and writing interrupt directly in LangGraph? What is the interviewer testing?</div></h4>
+  <details><summary><div class="i18n-zh">点击查看答案</div><div class="i18n-en" hidden>Click to View Answer</div></summary>
+    <p><div class="i18n-zh">面试官在考：<strong>你知道什么时候该用高层抽象，什么时候该用底层原语。</strong><br>
     Middleware：横切关注点（日志、HITL、错误处理）的标准化 hook，写一次到处复用。适合团队有统一的 Agent 行为规范。<br>
     裸 interrupt：更灵活，适合需要定制化暂停逻辑的场景。适合原型阶段。<br>
-    最佳实践：用 Middleware 覆盖 80% 场景，剩下的 20% 用裸 LangGraph 原语。</p>
+    最佳实践：用 Middleware 覆盖 80% 场景，剩下的 20% 用裸 LangGraph 原语。</div><div class="i18n-en" hidden>The interviewer is testing: <strong>Do you know when to use high-level abstractions vs low-level primitives?</strong><br>
+    Middleware: standardized hooks for cross-cutting concerns (logging, HITL, error handling) — write once, reuse everywhere. Suitable for teams with uniform Agent behavior standards.<br>
+    Bare interrupt: more flexible, suitable for scenarios needing custom pause logic. Good for prototyping.<br>
+    Best practice: cover 80% of scenarios with Middleware; the remaining 20% use raw LangGraph primitives.</div></p>
   </details>
 </div>
 
 <div class="card">
-  <h4>Q16：2026 年面试官问"Agent 安全怎么做？"——你至少要说出哪三层防御？</h4>
-  <details><summary>点击查看答案</summary>
-    <p>至少三层：<br>
-    <strong>① 输入层</strong>：Prompt Injection 检测 + 用户输入与系统指令分离（不同 message role）<br>
-    <strong>② 工具层</strong>：权限分级（只读/读写/管理）+ MCP Server 来源审查 + 高风险操作 HITL 审批<br>
-    <strong>③ 基础设施层</strong>：API Key 用 Secrets Manager 管理、审计日志全记录、网络隔离<br>
-    如果还能提到 2026 年 3 月的 LangChain CVE 案例，面试官会认为你真正关注生产安全。</p>
+  <h4><div class="i18n-zh">Q16：2026 年面试官问"Agent 安全怎么做？"——你至少要说出哪三层防御？</div><div class="i18n-en" hidden>Q16: In 2026, the interviewer asks "How do you secure an Agent?" — what are the minimum three layers of defense you must mention?</div></h4>
+  <details><summary><div class="i18n-zh">点击查看答案</div><div class="i18n-en" hidden>Click to View Answer</div></summary>
+    <p><div class="i18n-zh">至少三层：<br>
+    ① 输入层：Prompt Injection 检测 + 用户输入与系统指令分离（不同 message role）<br>
+    ② 工具层：权限分级（只读/读写/管理）+ MCP Server 来源审查 + 高风险操作 HITL 审批<br>
+    ③ 基础设施层：API Key 用 Secrets Manager 管理、审计日志全记录、网络隔离<br>
+    如果还能提到 2026 年 3 月的 LangChain CVE 案例，面试官会认为你真正关注生产安全。</div><div class="i18n-en" hidden>At least three layers:<br>
+    ① Input layer: Prompt Injection detection + separating user input from system instructions (different message roles)<br>
+    ② Tool layer: Permission tiers (read-only/read-write/admin) + MCP Server source vetting + HITL approval for high-risk operations<br>
+    ③ Infrastructure layer: API Keys managed via Secrets Manager, full audit logging, network isolation<br>
+    If you can also reference the March 2026 LangChain CVE cases, the interviewer will recognize that you genuinely care about production security.</div></p>
   </details>
 </div>
 
 <div class="card">
-  <h4>Q17：为什么说"长上下文不能替代 RAG"？给出 3 个面试官无法反驳的理由。</h4>
-  <details><summary>点击查看答案</summary>
-    <p>① <strong>成本</strong>：1M token 的 Attention 是 O(n²)，成本是 4K 的数百倍。Prompt Caching 只能缓解，不能消除。<br>
-    ② <strong>Lost in the Middle</strong>：实验证明 LLM 对长文本中间部分的 recall 率显著低于开头和结尾。塞得越多，检索越差。<br>
-    ③ <strong>更新频率</strong>：知识库内容频繁更新时，每次都重新打包进 context 无法利用缓存，而 RAG 只更新变化的文档即可。</p>
+  <h4><div class="i18n-zh">Q17：为什么说"长上下文不能替代 RAG"？给出 3 个面试官无法反驳的理由。</div><div class="i18n-en" hidden>Q17: Why do we say "long context cannot replace RAG"? Give 3 reasons that an interviewer cannot refute.</div></h4>
+  <details><summary><div class="i18n-zh">点击查看答案</div><div class="i18n-en" hidden>Click to View Answer</div></summary>
+    <p><div class="i18n-zh">① 成本：1M token 的 Attention 是 O(n²)，成本是 4K 的数百倍。Prompt Caching 只能缓解，不能消除。<br>
+    ② Lost in the Middle：实验证明 LLM 对长文本中间部分的 recall 率显著低于开头和结尾。塞得越多，检索越差。<br>
+    ③ 更新频率：知识库内容频繁更新时，每次都重新打包进 context 无法利用缓存，而 RAG 只更新变化的文档即可。</div><div class="i18n-en" hidden>① Cost: Attention for 1M tokens is O(n²), costing hundreds of times more than 4K. Prompt Caching only mitigates, it doesn't eliminate.<br>
+    ② Lost in the Middle: Experiments show LLM recall of middle sections in long texts is significantly lower than for beginnings and endings. The more you cram in, the worse the retrieval.<br>
+    ③ Update frequency: When knowledge base content changes frequently, repacking everything into context each time can't leverage caching, whereas RAG only needs to update the changed documents.</div></p>
   </details>
 </div>
 
 <hr style="border-color:var(--border);margin:36px 0;">
 
 </div>
-<h2>📖 补充方法论：Amanda Askell 寓言教学法</h2>
+<h2><div class="i18n-zh">📖 补充方法论：Amanda Askell 寓言教学法</div><div class="i18n-en" hidden>📖 Supplementary Methodology: Amanda Askell's Fable Pedagogy</div></h2>
 
 <div class="card" style="border-color:var(--purple);">
-  <h3>为什么寓言比直接解释更有效？</h3>
-  <p>Anthropic 专家 Amanda Askell 在 2025 年 4 月访谈中指出：<strong>人类用故事传递知识已经有一万年了。</strong>当你在听一个故事时，大脑中多个区域同时激活——画面、情绪、因果关系——形成了一个比"背诵定义"丰富得多的记忆网络。过一周，你忘了技术定义，但忘不了故事。故事中隐含的逻辑会自动触发概念回忆。</p>
+  <h3><div class="i18n-zh">为什么寓言比直接解释更有效？</div><div class="i18n-en" hidden>Why Are Fables More Effective Than Direct Explanation?</div></h3>
+  <p><div class="i18n-zh">Anthropic 专家 Amanda Askell 在 2025 年 4 月访谈中指出：<strong>人类用故事传递知识已经有一万年了。</strong>当你在听一个故事时，大脑中多个区域同时激活——画面、情绪、因果关系——形成了一个比"背诵定义"丰富得多的记忆网络。过一周，你忘了技术定义，但忘不了故事。故事中隐含的逻辑会自动触发概念回忆。</div><div class="i18n-en" hidden>Anthropic expert Amanda Askell pointed out in her April 2025 interview: <strong>Humans have been passing down knowledge through stories for ten thousand years.</strong> When you listen to a story, multiple brain regions activate simultaneously — imagery, emotion, causality — forming a memory network far richer than "reciting a definition." A week later, you'll forget the technical definition, but you won't forget the story. The logic embedded in the story automatically triggers concept recall.</div></p>
 
   <div class="scenario">
-    <div class="role">Askell 的原始 Prompt</div>
+    <div class="role"><div class="i18n-zh">Askell 的原始 Prompt</div><div class="i18n-en" hidden>Askell's Original Prompt</div></div>
     <p class="quote" style="font-style:normal;color:var(--text);">
-      "我希望你从「某某」领域里选一个大概研究生水平的概念。然后通过写一个寓言的方式，间接地把这个概念完整讲出来。最好一直到快结尾时，人才会慢慢意识到这个概念究竟是什么。然后解释。"
+      <div class="i18n-zh">"我希望你从「某某」领域里选一个大概研究生水平的概念。然后通过写一个寓言的方式，间接地把这个概念完整讲出来。最好一直到快结尾时，人才会慢慢意识到这个概念究竟是什么。然后解释。"</div>
+      <div class="i18n-en" hidden>"I'd like you to pick a roughly graduate-level concept from a specific field. Then, through writing a fable, indirectly convey this concept in full. Ideally, the reader only gradually realizes what the concept is near the end. Then explain it."</div>
     </p>
   </div>
 
-  <p style="margin-top:16px;"><strong>本课程中的应用：</strong>每个 LangGraph 核心概念都配有专属寓言（共 12 篇），集成在 <a href="fables.html">📖 寓言集</a> 和每课的 Phase 1。读故事时不要猜术语——沉浸其中，让概念在潜意识中扎根。</p>
+  <p style="margin-top:16px;"><strong><div class="i18n-zh">本课程中的应用：</div><div class="i18n-en" hidden>Application in this course: </div></strong><div class="i18n-zh">每个 LangGraph 核心概念都配有专属寓言（共 12 篇），集成在 <a href="fables.html">📖 寓言集</a> 和每课的 Phase 1。读故事时不要猜术语——沉浸其中，让概念在潜意识中扎根。</div><div class="i18n-en" hidden">Every LangGraph core concept has a dedicated fable (12 in total), integrated into <a href="fables.html">📖 Fables</a> and Phase 1 of each lesson. When reading the stories, don't try to guess the term — immerse yourself and let the concept take root in your subconscious.</div></p>
 </div>
 
 <p style="margin-top:48px; padding-top:20px; border-top:1px solid var(--border); color:var(--text-2); font-size:0.85em;">
-  元学习指南 · 记忆不是学习的门槛，提问才是 · 2026-06-02 · 更新 2026-06-03（面试题库集成 + 2026 领域全貌更新）
+  <div class="i18n-zh">元学习指南 · 记忆不是学习的门槛，提问才是 · 2026-06-02 · 更新 2026-06-03（面试题库集成 + 2026 领域全貌更新）</div><div class="i18n-en" hidden>Meta-Learning Guide · Memorization is not the barrier to learning, asking questions is · 2026-06-02 · Updated 2026-06-03 (Interview Bank Integration + 2026 Landscape Update)</div>
 </p>
 
 <script src="../js/i18n-data.js"></script>
