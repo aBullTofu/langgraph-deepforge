@@ -24,10 +24,5 @@ Thumbs.db
 *.local
 *.log
 
-# Claude Code
+# Claude Code (includes internal planning files)
 .claude/
-
-# Internal planning files
-task_plan.md
-progress.md
-findings.md
