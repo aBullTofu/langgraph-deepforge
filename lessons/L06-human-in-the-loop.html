@@ -1,14 +1,14 @@
 <!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L06 · Human-in-the-Loop — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head>
 <body>
 <nav class="nav-bar"><div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
-<div class="i18n-en" hidden><a href="../index.html">🏠 总览</a></div><div class="i18n-zh"><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div>
+<div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div><div class="i18n-zh"><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div>
 <div class="i18n-en" hidden><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div><div class="i18n-zh"><a href="../reference/fables.html">📖 寓言集</a></div>
 <div class="i18n-en" hidden><a href="../reference/fables.html">📖 Fable Collection</a></div><div class="i18n-zh"><a href="../reference/pitfalls.html">⚠️ 避坑</a></div>
-<div class="i18n-en" hidden><a href="../reference/pitfalls.html">⚠️ 避坑</a></div><a href="L05-memory-persistence.html">L05</a><a href="L06-human-in-the-loop.html" class="active">L06</a><a href="L07-streaming.html">L07</a></nav>
+<div class="i18n-en" hidden><a href="../reference/pitfalls.html">⚠️ Pitfall</a></div><a href="L05-memory-persistence.html">L05</a><a href="L06-human-in-the-loop.html" class="active">L06</a><a href="L07-streaming.html">L07</a></nav>
 
 
 <div class="phase" data-phase="ignition"><span class="phase-num">Phase 0 · Ignition</span><div class="i18n-zh"><h3>⚡ 认知点火</h3></div>
-<div class="i18n-en" hidden><h3>⚡ 认知点火</h3></div>
+<div class="i18n-en" hidden><h3>⚡ Cognitive Ignition</h3></div>
 
 <div class="scenario"><div class="role">🔥 点火问题</div>
 <p class="quote">"L05 的 Agent 记住了你——但它<strong>完全自主</strong>。你建了一个 <code>delete_database</code> 工具，Agent 说删就删。<strong>你敢让它直接执行吗？</strong>"</p>
@@ -17,25 +17,25 @@
 
 
 <div class="phase" data-phase="fable"><span class="phase-num">Phase 1 · Fable</span><div class="i18n-zh"><h3>📖 寓言：桥上的收费站</h3></div>
-<div class="i18n-en" hidden><h3>📖 寓言：桥上的收费站</h3></div>
+<div class="i18n-en" hidden><h3>📖 Fable: The Tollbooth on the Bridge</h3></div>
 
 <div class="card" style="border-color:var(--purple)"><p style="font-family:Georgia,serif;line-height:1.9">有一座桥，桥中间设了收费站。不是每辆车都要停——空车直接过，普通货车自动扣费，但运输火药、运送囚犯、装载金银的车<strong>必须在收费站停下</strong>，由守桥官亲自检查货物清单，签字盖章后才能放行。有人问为什么不自动通过所有车？守桥官说："三个月前，一辆声称'运输粮食'的车过桥时爆炸了。"</p>
 <div class="reveal">🔮 揭示：interrupt() 就是收费站栏杆——敏感操作暂停，等人签字才放行。</div>
 <div class="i18n-zh"><a href="../reference/fables.html#fable-6">📖 完整寓言 →</a></div>
-<div class="i18n-en" hidden><a href="../reference/fables.html#fable-6">📖 完整寓言 →</a></div></div>
+<div class="i18n-en" hidden><a href="../reference/fables.html#fable-6">📖 Full Fable →</a></div></div>
 </div>
 
 
 <div class="phase" data-phase="godview"><span class="phase-num">Phase 1 · GodView</span><div class="i18n-zh"><h3>🗺 上帝视角</h3></div>
-<div class="i18n-en" hidden><h3>🗺 上帝视角</h3></div>
+<div class="i18n-en" hidden><h3>🗺 God View</h3></div>
 
 <div class="card accent-left"><div class="i18n-zh"><h3>📋 通关条件</h3></div>
-<div class="i18n-en" hidden><h3>📋 通关条件</h3></div>
+<div class="i18n-en" hidden><h3>📋 Clear Condition</h3></div>
 <p>构建<strong>审批工作流</strong>：敏感操作前暂停，等待人类批准/拒绝后才继续。</p>
 </div>
 
 <div class="card green-left"><div class="i18n-zh"><h3>🧠 心智模型：interrupt() = 塞车在收费站</h3></div>
-<div class="i18n-en" hidden><h3>🧠 心智模型：interrupt() = 塞车在收费站</h3></div>
+<div class="i18n-en" hidden><h3>🧠 Mental Model: interrupt() = Traffic Jam at the Tollbooth</h3></div>
 <div class="i18n-zh"><p>执行到 interrupt() → state 自动保存到 checkpointer → 返回 payload 给外部 → 等待 Command(resume=...) → 恢复执行。</p></div>
 <div class="i18n-en" hidden><p>执行到 interrupt() → state 自动保存到 checkpointer → 返回 payload 给外部 → 等待 Command(resume=...) → 恢复执行。</p></div>
 </div>
@@ -63,14 +63,14 @@ result = graph.invoke(input, config)
     result = graph.invoke(Command(resume=(decision == <span class="str">"y"</span>)), config)</code></pre>
 
 <div class="alert alert-warn"><div class="i18n-zh"><strong>⚠️ 避坑：</strong></div>
-<div class="i18n-en" hidden><strong>⚠️ 避坑：</strong></div>interrupt() 必须配合 checkpointer。没有 checkpointer → 行为不可预测。进程重启后能否恢复取决于 checkpointer 类型（InMemory 不行，Sqlite/Postgres 可以）。</div>
+<div class="i18n-en" hidden><strong>⚠️ Pitfall：</strong></div>interrupt() 必须配合 checkpointer。没有 checkpointer → 行为不可预测。进程重启后能否恢复取决于 checkpointer 类型（InMemory 不行，Sqlite/Postgres 可以）。</div>
 </div>
 
 
 <div class="phase" data-phase="forge"><span class="phase-num">Phase 3 · Forge</span><div class="i18n-zh"><h3>🔨 知识淬炼</h3></div>
-<div class="i18n-en" hidden><h3>🔨 知识淬炼</h3></div>
+<div class="i18n-en" hidden><h3>🔨 Knowledge Forging</h3></div>
 <div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
-<div class="i18n-en" hidden><h4>🏗 你的挑战</h4></div>
+<div class="i18n-en" hidden><h4>🏗 Your Challenge</h4></div>
 <ol><div class="i18n-zh"><li>实现"修改后批准"：审批时不只是 y/n，允许人类修改后才能通过</li></div>
 <div class="i18n-en" hidden><li>实现"修改后批准"：审批时不只是 y/n，允许人类修改后才能通过</li></div>
 <div class="i18n-zh"><li>实现 30 秒超时自动拒绝</li></div>
@@ -88,7 +88,7 @@ result = graph.invoke(input, config)
 </div>
 
 <div class="i18n-zh"><h2>📝 速查卡</h2></div>
-<div class="i18n-en" hidden><h2>📝 速查卡</h2></div>
+<div class="i18n-en" hidden><h2>📝 Quick Reference Card</h2></div>
 
 <div class="card accent-left"><pre><code>interrupt(payload)  <span class="i18n-zh" style="display:inline"><span class="cmt"># 暂停，返回 payload</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Pause, return payload</span></span>
 Command(resume=value)  <span class="i18n-zh" style="display:inline"><span class="cmt"># 恢复，value 成为 interrupt() 的返回值</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Resume, value becomes the return value of interrupt()</span></span>

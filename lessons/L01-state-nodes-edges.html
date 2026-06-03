@@ -11,7 +11,7 @@
 
 <nav class="nav-bar">
   <div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
-<div class="i18n-en" hidden><a href="../index.html">🏠 总览</a></div>
+<div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div>
   <div class="i18n-zh"><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div>
 <div class="i18n-en" hidden><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div>
   <a href="L01-state-nodes-edges.html" class="active">L01</a>
@@ -37,7 +37,7 @@
   </div>
 
   <div class="i18n-zh"><p>如果你只能想到"多写几个 if/else 在节点里"，那你即将在 30 分钟后获得一种全新的思维方式。</p></div>
-<div class="i18n-en" hidden><p>如果你只能想到"多写几个 if/else 在节点里"，那你即将在 30 分钟后获得一种全新的思维方式。</p></div>
+<div class="i18n-en" hidden><p>If your only answer is "add more if/else inside the node", then in 30 minutes you'll gain a completely new way of thinking.</p></div>
 
 </div>
 
@@ -50,7 +50,7 @@
 
   <div class="card accent-left">
     <div class="i18n-zh"><h3>📋 通关条件</h3></div>
-<div class="i18n-en" hidden><h3>📋 通关条件</h3></div>
+<div class="i18n-en" hidden><h3>📋 Clear Condition</h3></div>
 
     <p>构建一个<strong>多分支内容处理管道</strong>：输入文本 → 统计字数 → 判断长短 → 走不同路径 → 输出结果。</p>
 
@@ -77,7 +77,7 @@
 
   <div class="card green-left">
     <div class="i18n-zh"><h3>🧠 核心心智模型：工厂流水线</h3></div>
-<div class="i18n-en" hidden><h3>🧠 核心心智模型：工厂流水线</h3></div>
+<div class="i18n-en" hidden><h3>🧠 Core Mental Model: Factory Assembly Line</h3></div>
 
     <pre style="background:none;border:none;padding:0;font-family:var(--mono);font-size:0.9em;">
 [原材料] ─→ [工位A] ─→ [质检台]
@@ -119,7 +119,7 @@
 
   <div class="card yellow-left">
     <div class="i18n-zh"><h3>🗺 本节课的技能解锁</h3></div>
-<div class="i18n-en" hidden><h3>🗺 本节课的技能解锁</h3></div>
+<div class="i18n-en" hidden><h3>🗺 Skills Unlocked in This Lesson</h3></div>
 
     <div class="skill-tree">
       <div class="skill-node">
@@ -175,7 +175,7 @@
 
 
   <div class="i18n-zh"><h4>Step 1：定义 State（物料篮）</h4></div>
-<div class="i18n-en" hidden><h4>Step 1：定义 State（物料篮）</h4></div>
+<div class="i18n-en" hidden><h4>Step 1: Define State (Material Basket)</h4></div>
 
   <pre><code><span class="kw">from</span> typing <span class="kw">import</span> TypedDict
 <span class="kw">from</span> langgraph.graph <span class="kw">import</span> StateGraph, START, END
@@ -188,7 +188,7 @@
 
 
   <div class="i18n-zh"><h4>Step 2：计数工位</h4></div>
-<div class="i18n-en" hidden><h4>Step 2：计数工位</h4></div>
+<div class="i18n-en" hidden><h4>Step 2: Count Workstation</h4></div>
 
   <pre><code><span class="kw">def</span> <span class="fn">count_words</span>(state: PipelineState) -> dict:
     <span class="cmt">"""节点函数的铁律：</span>
@@ -201,7 +201,7 @@
 
 
   <div class="i18n-zh"><h4>Step 3：分类工位（质检台）</h4></div>
-<div class="i18n-en" hidden><h4>Step 3：分类工位（质检台）</h4></div>
+<div class="i18n-en" hidden><h4>Step 3: Classification Workstation (Inspector)</h4></div>
 
   <pre><code><span class="kw">def</span> <span class="fn">classify</span>(state: PipelineState) -> dict:
     count = state[<span class="str">"word_count"</span>]  <span class="cmt"># 读取上一个节点写入的数据</span>
@@ -212,7 +212,7 @@
 
 
   <div class="i18n-zh"><h4>Step 4：两个处理分支</h4></div>
-<div class="i18n-en" hidden><h4>Step 4：两个处理分支</h4></div>
+<div class="i18n-en" hidden><h4>Step 4: Two Processing Branches</h4></div>
 
   <pre><code><span class="kw">def</span> <span class="fn">handle_short</span>(state: PipelineState) -> dict:
     <span class="kw">return</span> {<span class="str">"result"</span>: <span class="str">f"[快速通道] {state['text']}"</span>}
@@ -222,7 +222,7 @@
 
 
   <div class="i18n-zh"><h4>Step 5：⭐ 条件边函数（传送带分岔器）</h4></div>
-<div class="i18n-en" hidden><h4>Step 5：⭐ 条件边函数（传送带分岔器）</h4></div>
+<div class="i18n-en" hidden><h4>Step 5: ⭐ Conditional Edge Function (Conveyor Diverter)</h4></div>
 
   <pre><code><span class="cmt"># 条件边函数的签名：(state) → str</span>
 <span class="i18n-zh" style="display:inline"><span class="cmt"># 返回值必须是 add_node 时注册的名字</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Return value must be the name registered during add_node</span></span>
@@ -234,7 +234,7 @@
 
 
   <div class="i18n-zh"><h4>Step 6：组装图</h4></div>
-<div class="i18n-en" hidden><h4>Step 6：组装图</h4></div>
+<div class="i18n-en" hidden><h4>Step 6: Assemble the Graph</h4></div>
 
   <pre><code>builder = StateGraph(PipelineState)
 
@@ -264,7 +264,7 @@ graph = builder.compile()</code></pre>
 
 
   <div class="i18n-zh"><h4>Step 7：运行测试</h4></div>
-<div class="i18n-en" hidden><h4>Step 7：运行测试</h4></div>
+<div class="i18n-en" hidden><h4>Step 7: Run Tests</h4></div>
 
   <pre><code><span class="i18n-zh" style="display:inline"><span class="cmt"># 短文本</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Short text</span></span>
 r1 = graph.invoke({<span class="str">"text"</span>: <span class="str">"你好"</span>})
@@ -291,7 +291,7 @@ r2 = graph.invoke({<span class="str">"text"</span>: <span class="str">"今天天
   <!-- ═══ Mode B: Debug ═══ -->
   <div class="card yellow-left" style="margin-top:24px;">
     <div class="i18n-zh"><h4>🔍 模式 B：Debug 挑战</h4></div>
-<div class="i18n-en" hidden><h4>🔍 模式 B：Debug 挑战</h4></div>
+<div class="i18n-en" hidden><h4>🔍 Mode B: Debug Challenge</h4></div>
 
     <p>下面这段代码有 <strong>3 个 bug</strong>。找出并修复它们：</p>
 
@@ -312,7 +312,7 @@ builder.add_edge(<span class="str">"a"</span>, END)
 graph = builder.compile()</code></pre>
 
     <details><div class="i18n-zh"><summary>点击查看答案</summary></div>
-<div class="i18n-en" hidden><summary>点击查看答案</summary></div>
+<div class="i18n-en" hidden><summary>Click to reveal answer</summary></div>
 
       <p><strong>Bug 1：</strong><code>state.value</code> 应该是 <code>state["value"]</code> — State 是 dict-like，不是对象属性。</p>
 
@@ -334,11 +334,11 @@ graph = builder.compile()</code></pre>
 
 
   <div class="i18n-zh"><h4>🔧 你的挑战</h4></div>
-<div class="i18n-en" hidden><h4>🔧 你的挑战</h4></div>
+<div class="i18n-en" hidden><h4>🔧 Your Challenge</h4></div>
 
   <div class="card orange-left">
     <div class="i18n-zh"><h4>🏗 模式 C：三路分类</h4></div>
-<div class="i18n-en" hidden><h4>🏗 模式 C：三路分类</h4></div>
+<div class="i18n-en" hidden><h4>🏗 Mode C: Three-Way Classification</h4></div>
 
     <p>修改 <code>l01_pipeline.py</code>，增加第三种分类：</p>
 
@@ -417,7 +417,7 @@ graph = builder.compile()</code></pre>
 
 <!-- ════════════════ CHEAT SHEET ════════════════ -->
 <div class="i18n-zh"><h2>📝 速查卡</h2></div>
-<div class="i18n-en" hidden><h2>📝 速查卡</h2></div>
+<div class="i18n-en" hidden><h2>📝 Quick Reference Card</h2></div>
 
 
 <div class="card accent-left">

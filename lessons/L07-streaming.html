@@ -1,17 +1,17 @@
 <!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L07 · 流式输出 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head>
 <body>
 <nav class="nav-bar"><div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
-<div class="i18n-en" hidden><a href="../index.html">🏠 总览</a></div><a href="L06-human-in-the-loop.html">L06</a><a href="L07-streaming.html" class="active">L07</a><a href="L08-error-handling.html">L08</a></nav>
+<div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div><a href="L06-human-in-the-loop.html">L06</a><a href="L07-streaming.html" class="active">L07</a><a href="L08-error-handling.html">L08</a></nav>
 
 <div class="phase" data-phase="ignition"><span class="phase-num">Phase 0</span><div class="i18n-zh"><h3>⚡ 认知点火</h3></div>
-<div class="i18n-en" hidden><h3>⚡ 认知点火</h3></div>
+<div class="i18n-en" hidden><h3>⚡ Cognitive Ignition</h3></div>
 <div class="scenario"><div class="role">🔥 点火</div>
 <p class="quote">"L05 的 <code>graph.invoke()</code> 是阻塞的——Agent 执行完所有步骤后一次性返回。用户等了 5 秒看着黑屏，然后刷出一大段文本。ChatGPT 为什么能做到'边想边显示'？"</p>
 </div>
 </div>
 
 <div class="phase" data-phase="fable"><span class="phase-num">Phase 1 · Fable</span><div class="i18n-zh"><h3>📖 寓言：信使与碎片</h3></div>
-<div class="i18n-en" hidden><h3>📖 寓言：信使与碎片</h3></div>
+<div class="i18n-en" hidden><h3>📖 Fable: The Messenger and the Fragments</h3></div>
 
 <div class="card" style="border-color:var(--purple)"><p style="font-family:Georgia,serif;line-height:1.9">两个国王通信。起初，书记官写完一整封信，封好，骑马三天送到。国王 B 急得跳脚。后来发明了新方法：<strong>写一句，信使送一句；写第二句，第二个信使出发……</strong>虽然总时间没变短，但国王 B 第一天就能看到开头，先知道大意。</p>
 <p><a href="../reference/fables.html#fable-7">📖 完整寓言 →</a></p>
@@ -21,7 +21,7 @@
 <div class="phase" data-phase="godview"><span class="phase-num">Phase 1 · GodView</span><h3>🗺 上帝视角 <span class="timer"><span class="clock">⏱</span> 7 分钟</span></h3>
 
 <div class="card accent-left"><div class="i18n-zh"><h3>📋 通关条件</h3></div>
-<div class="i18n-en" hidden><h3>📋 通关条件</h3></div>
+<div class="i18n-en" hidden><h3>📋 Clear Condition</h3></div>
 <p>给 Agent 加上<strong>实时流式输出</strong>——用户能看到逐 token 生成的回复。</p>
 </div>
 </div>
@@ -57,10 +57,10 @@ writer = get_stream_writer(); writer({<span class="str">"status"</span>: <span c
 </div>
 
 <div class="phase" data-phase="forge"><span class="phase-num">Phase 3 · Forge</span><div class="i18n-zh"><h3>🔨 知识淬炼</h3></div>
-<div class="i18n-en" hidden><h3>🔨 知识淬炼</h3></div>
+<div class="i18n-en" hidden><h3>🔨 Knowledge Forging</h3></div>
 
 <div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
-<div class="i18n-en" hidden><h4>🏗 你的挑战</h4></div>
+<div class="i18n-en" hidden><h4>🏗 Your Challenge</h4></div>
 <ol><div class="i18n-zh"><li>把 L05 的 Agent 改成流式输出（只改 invoke → stream_events）</li></div>
 <div class="i18n-en" hidden><li>把 L05 的 Agent 改成流式输出（只改 invoke → stream_events）</li></div>
 <div class="i18n-zh"><li>用 custom mode 在工具执行节点输出进度信息</li></div>
@@ -76,7 +76,7 @@ writer = get_stream_writer(); writer({<span class="str">"status"</span>: <span c
 </div>
 
 <div class="i18n-zh"><h2>📝 速查卡</h2></div>
-<div class="i18n-en" hidden><h2>📝 速查卡</h2></div>
+<div class="i18n-en" hidden><h2>📝 Quick Reference Card</h2></div>
 
 <div class="card accent-left"><pre><code>stream = graph.stream_events(input, config, version=<span class="str">"v3"</span>)
 <span class="kw">for</span> msg <span class="kw">in</span> stream.messages: ...  <span class="cmt"># token 流</span>

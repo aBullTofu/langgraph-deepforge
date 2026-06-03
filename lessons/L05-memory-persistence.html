@@ -1,10 +1,10 @@
 <!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L05 · 记忆与持久化 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head>
 <body>
 <nav class="nav-bar"><div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
-<div class="i18n-en" hidden><a href="../index.html">🏠 总览</a></div><div class="i18n-zh"><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div>
+<div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div><div class="i18n-zh"><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div>
 <div class="i18n-en" hidden><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div><div class="i18n-zh"><a href="../reference/fables.html">📖 寓言集</a></div>
 <div class="i18n-en" hidden><a href="../reference/fables.html">📖 Fable Collection</a></div><div class="i18n-zh"><a href="../reference/pitfalls.html">⚠️ 避坑</a></div>
-<div class="i18n-en" hidden><a href="../reference/pitfalls.html">⚠️ 避坑</a></div><a href="L04-agent-loop.html">L04</a><a href="L05-memory-persistence.html" class="active">L05</a><a href="L06-human-in-the-loop.html">L06</a></nav>
+<div class="i18n-en" hidden><a href="../reference/pitfalls.html">⚠️ Pitfall</a></div><a href="L04-agent-loop.html">L04</a><a href="L05-memory-persistence.html" class="active">L05</a><a href="L06-human-in-the-loop.html">L06</a></nav>
 
 
 <div class="phase" data-phase="ignition"><span class="phase-num">Phase 0 · Ignition</span><h3>⚡ 认知点火 <span class="timer"><span class="clock">⏱</span> 2 分钟</span></h3>
@@ -16,24 +16,24 @@
 
 
 <div class="phase" data-phase="fable"><span class="phase-num">Phase 1 · Fable</span><div class="i18n-zh"><h3>📖 寓言：书记官的账本</h3></div>
-<div class="i18n-en" hidden><h3>📖 寓言：书记官的账本</h3></div>
+<div class="i18n-en" hidden><h3>📖 Fable: The Scribe's Ledger</h3></div>
 
 <div class="card" style="border-color:var(--purple)"><p style="font-family:Georgia,serif;line-height:1.9">古罗马元老院有一规矩：每一场辩论，书记官必须在<strong>每个人发言结束后</strong>立即把发言记在羊皮纸上。如果辩论被地震打断，下次开会翻开羊皮纸，从断点继续。千年之后，一个叫 LangGraph 的程序继承了书记官的智慧：<strong>每一个 super-step 都是一条新记录。</strong></p>
 <div class="reveal">🔮 揭示：Checkpoint 持久化。每个 super-step 自动存档，用 thread_id 区分不同"辩论"。</div>
 <div class="i18n-zh"><a href="../reference/fables.html#fable-5">📖 完整寓言 →</a></div>
-<div class="i18n-en" hidden><a href="../reference/fables.html#fable-5">📖 完整寓言 →</a></div></div>
+<div class="i18n-en" hidden><a href="../reference/fables.html#fable-5">📖 Full Fable →</a></div></div>
 </div>
 
 
 <div class="phase" data-phase="godview"><span class="phase-num">Phase 1 · GodView</span><h3>🗺 上帝视角 <span class="timer"><span class="clock">⏱</span> 7 分钟</span></h3>
 
 <div class="card accent-left"><div class="i18n-zh"><h3>📋 通关条件</h3></div>
-<div class="i18n-en" hidden><h3>📋 通关条件</h3></div>
+<div class="i18n-en" hidden><h3>📋 Clear Condition</h3></div>
 <p>给 L04 的 Agent 加上<strong>持久化记忆</strong>——对话结束后 Agent 记住上下文，下次对话继续。</p>
 </div>
 
 <div class="card green-left"><div class="i18n-zh"><h3>🧠 心智模型：Checkpoint = 游戏存档</h3></div>
-<div class="i18n-en" hidden><h3>🧠 心智模型：Checkpoint = 游戏存档</h3></div>
+<div class="i18n-en" hidden><h3>🧠 Mental Model: Checkpoint = Game Save</h3></div>
 <div class="i18n-zh"><p>每个 super-step 自动存档。thread_id = 存档文件名。get_state_history() = 查看所有存档。</p></div>
 <div class="i18n-en" hidden><p>每个 super-step 自动存档。thread_id = 存档文件名。get_state_history() = 查看所有存档。</p></div>
 </div>
@@ -78,19 +78,19 @@ r = graph.invoke({<span class="str">"messages"</span>: [HumanMessage(<span class
 
 
 <div class="alert alert-warn"><div class="i18n-zh"><strong>⚠️ 避坑 MISSING_CHECKPOINTER：</strong></div>
-<div class="i18n-en" hidden><strong>⚠️ 避坑 MISSING_CHECKPOINTER：</strong></div>用了 interrupt() 或想用 get_state() 但没配置 checkpointer → 报错。每个需要持久化的图都必须 compile(checkpointer=...)。</div>
+<div class="i18n-en" hidden><strong>⚠️ Pitfall MISSING_CHECKPOINTER：</strong></div>用了 interrupt() 或想用 get_state() 但没配置 checkpointer → 报错。每个需要持久化的图都必须 compile(checkpointer=...)。</div>
 </div>
 
 
 <div class="phase" data-phase="forge"><span class="phase-num">Phase 3 · Forge</span><div class="i18n-zh"><h3>🔨 知识淬炼</h3></div>
-<div class="i18n-en" hidden><h3>🔨 知识淬炼</h3></div>
+<div class="i18n-en" hidden><h3>🔨 Knowledge Forging</h3></div>
 
 <div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
-<div class="i18n-en" hidden><h4>🏗 你的挑战</h4></div>
+<div class="i18n-en" hidden><h4>🏗 Your Challenge</h4></div>
 <ol><div class="i18n-zh"><li>用 SqliteSaver 替换 InMemorySaver，重启 Python 后验证记忆是否还在</li></div>
 <div class="i18n-en" hidden><li>用 SqliteSaver 替换 InMemorySaver，重启 Python 后验证记忆是否还在</li></div>
 <div class="i18n-zh"><li>创建两个不同 thread_id 的会话，验证它们的记忆完全隔离</li></div>
-<div class="i18n-en" hidden><li>创建两个不同 thread_id 的会话，验证它们的记忆完全隔离</li></div>
+<div class="i18n-en" hidden><li>Create两个不同 thread_id 的会话，验证它们的记忆完全隔离</li></div>
 <div class="i18n-zh"><li>用 get_state_history() 打印某一会话的全部历史检查点</li></div>
 <div class="i18n-en" hidden><li>用 get_state_history() 打印某一会话的全部历史检查点</li></div>
 </ol>
@@ -108,7 +108,7 @@ r = graph.invoke({<span class="str">"messages"</span>: [HumanMessage(<span class
 </div>
 
 <div class="i18n-zh"><h2>📝 速查卡</h2></div>
-<div class="i18n-en" hidden><h2>📝 速查卡</h2></div>
+<div class="i18n-en" hidden><h2>📝 Quick Reference Card</h2></div>
 
 <div class="card accent-left"><pre><code><span class="kw">from</span> langgraph.checkpoint.memory <span class="kw">import</span> InMemorySaver
 graph = builder.compile(checkpointer=InMemorySaver())

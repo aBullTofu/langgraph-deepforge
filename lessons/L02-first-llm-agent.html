@@ -1,10 +1,10 @@
 <!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L02 · 接入 LLM + 条件边 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head>
 <body>
 <nav class="nav-bar"><div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
-<div class="i18n-en" hidden><a href="../index.html">🏠 总览</a></div><div class="i18n-zh"><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div>
+<div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div><div class="i18n-zh"><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div>
 <div class="i18n-en" hidden><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div><div class="i18n-zh"><a href="../reference/fables.html">📖 寓言集</a></div>
 <div class="i18n-en" hidden><a href="../reference/fables.html">📖 Fable Collection</a></div><div class="i18n-zh"><a href="../reference/pitfalls.html">⚠️ 避坑</a></div>
-<div class="i18n-en" hidden><a href="../reference/pitfalls.html">⚠️ 避坑</a></div><a href="L01-state-nodes-edges.html">L01</a><a href="L02-first-llm-agent.html" class="active">L02</a><a href="L03-tools.html">L03</a><a href="L04-agent-loop.html">L04</a></nav>
+<div class="i18n-en" hidden><a href="../reference/pitfalls.html">⚠️ Pitfall</a></div><a href="L01-state-nodes-edges.html">L01</a><a href="L02-first-llm-agent.html" class="active">L02</a><a href="L03-tools.html">L03</a><a href="L04-agent-loop.html">L04</a></nav>
 
 
 <div class="phase" data-phase="ignition"><span class="phase-num">Phase 0 · Ignition</span><h3>⚡ 认知点火 <span class="timer"><span class="clock">⏱</span> 2 分钟</span></h3>
@@ -19,7 +19,7 @@
 </div>
 
 <div class="i18n-zh"><p>如果你只能想到"多加几个关键词匹配的 if/else"，那你即将获得一种让 AI 帮你做判断的能力。</p></div>
-<div class="i18n-en" hidden><p>如果你只能想到"多加几个关键词匹配的 if/else"，那你即将获得一种让 AI 帮你做判断的能力。</p></div>
+<div class="i18n-en" hidden><p>If all you can think of is "add a few more if/else keyword checks," you're about to gain the ability to let AI do the judging for you.</p></div>
 </div>
 
 
@@ -35,12 +35,12 @@
 <div class="phase" data-phase="godview"><span class="phase-num">Phase 1 · GodView</span><h3>🗺 上帝视角 <span class="timer"><span class="clock">⏱</span> 7 分钟</span></h3>
 
 <div class="card accent-left"><div class="i18n-zh"><h3>📋 通关条件</h3></div>
-<div class="i18n-en" hidden><h3>📋 通关条件</h3></div>
+<div class="i18n-en" hidden><h3>📋 Clear Condition</h3></div>
 <p>构建<strong>意图路由器</strong>：用户输入一句话 → DeepSeek 判断意图（闲聊/查资料/投诉）→ 走不同分支处理。</p>
 </div>
 
 <div class="card green-left"><div class="i18n-zh"><h3>🧠 心智模型：LLM 是图中的决策引擎</h3></div>
-<div class="i18n-en" hidden><h3>🧠 心智模型：LLM 是图中的决策引擎</h3></div>
+<div class="i18n-en" hidden><h3>🧠 Mental Model: LLM as the Decision Engine</h3></div>
 <table><tr><div class="i18n-zh"><th>之前的 L01</th></div>
 <div class="i18n-en" hidden><th>之前的 L01</th></div><div class="i18n-zh"><th>现在的 L02</th></div>
 <div class="i18n-en" hidden><th>现在的 L02</th></div></tr>
@@ -64,7 +64,7 @@
 
 
 <div class="i18n-zh"><h4>Step 1：初始化 DeepSeek</h4></div>
-<div class="i18n-en" hidden><h4>Step 1：初始化 DeepSeek</h4></div>
+<div class="i18n-en" hidden><h4>Step 1: Initialize DeepSeek</h4></div>
 
 <pre><code><span class="kw">from</span> langchain.chat_models <span class="kw">import</span> init_chat_model
 <span class="cmt"># init_chat_model 自动从 DEEPSEEK_API_KEY 环境变量读取 Key</span>
@@ -72,7 +72,7 @@ model = init_chat_model(<span class="str">"deepseek-chat"</span>, temperature=0)
 
 
 <div class="i18n-zh"><h4>Step 2：定义 State + LLM 分类节点</h4></div>
-<div class="i18n-en" hidden><h4>Step 2：定义 State + LLM 分类节点</h4></div>
+<div class="i18n-en" hidden><h4>Step 2: Define State + LLM Classification Node</h4></div>
 
 <pre><code><span class="kw">class</span> <span class="type">RouterState</span>(TypedDict):
     user_input: str
@@ -124,7 +124,7 @@ tests = [<span class="str">"你好呀"</span>, <span class="str">"Python怎么�
 
 
 <div class="i18n-zh"><h4>⚠️ 避坑：LLM 返回意外值</h4></div>
-<div class="i18n-en" hidden><h4>⚠️ 避坑：LLM 返回意外值</h4></div>
+<div class="i18n-en" hidden><h4>⚠️ Pitfall：LLM 返回意外值</h4></div>
 
 <div class="alert alert-warn"><div class="i18n-zh"><strong>常见问题：</strong></div>
 <div class="i18n-en" hidden><strong>常见问题：</strong></div>LLM 返回了 <code>"Chat"</code>（大写）或 <code>"闲聊"</code>（中文），条件边映射字典里没有 → 图静默停止。解决：① prompt 中强调格式 ② router 函数中加 else 兜底 ③ 调用 <code>.strip().lower()</code> 做归一化。</div>
@@ -132,10 +132,10 @@ tests = [<span class="str">"你好呀"</span>, <span class="str">"Python怎么�
 
 
 <div class="phase" data-phase="forge"><span class="phase-num">Phase 3 · Forge</span><div class="i18n-zh"><h3>🔨 知识淬炼</h3></div>
-<div class="i18n-en" hidden><h3>🔨 知识淬炼</h3></div>
+<div class="i18n-en" hidden><h3>🔨 Knowledge Forging</h3></div>
 
 <div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
-<div class="i18n-en" hidden><h4>🏗 你的挑战</h4></div>
+<div class="i18n-en" hidden><h4>🏗 Your Challenge</h4></div>
 <ol><li>增加第 4 种意图 <code>order</code>（下单请求）和对应分支</li>
 <li>让 LLM 返回 JSON 格式 <code>{"intent":"chat","confidence":0.95}</code>，低置信度(<0.7)走 <code>handle_uncertain</code> 请用户澄清</li>
 </ol>
@@ -157,7 +157,7 @@ tests = [<span class="str">"你好呀"</span>, <span class="str">"Python怎么�
 
 
 <div class="i18n-zh"><h2>📝 速查卡</h2></div>
-<div class="i18n-en" hidden><h2>📝 速查卡</h2></div>
+<div class="i18n-en" hidden><h2>📝 Quick Reference Card</h2></div>
 
 <div class="card accent-left"><pre><code><span class="i18n-zh" style="display:inline"><span class="cmt"># 初始化模型</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Initialize model</span></span>
 model = init_chat_model(<span class="str">"deepseek-chat"</span>, temperature=0)

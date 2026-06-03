@@ -1,10 +1,10 @@
 <!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L03 · 工具调用 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head>
 <body>
 <nav class="nav-bar"><div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
-<div class="i18n-en" hidden><a href="../index.html">🏠 总览</a></div><div class="i18n-zh"><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div>
+<div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div><div class="i18n-zh"><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div>
 <div class="i18n-en" hidden><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div><div class="i18n-zh"><a href="../reference/fables.html">📖 寓言集</a></div>
 <div class="i18n-en" hidden><a href="../reference/fables.html">📖 Fable Collection</a></div><div class="i18n-zh"><a href="../reference/pitfalls.html">⚠️ 避坑</a></div>
-<div class="i18n-en" hidden><a href="../reference/pitfalls.html">⚠️ 避坑</a></div><a href="L01-state-nodes-edges.html">L01</a><a href="L02-first-llm-agent.html">L02</a><a href="L03-tools.html" class="active">L03</a><a href="L04-agent-loop.html">L04</a></nav>
+<div class="i18n-en" hidden><a href="../reference/pitfalls.html">⚠️ Pitfall</a></div><a href="L01-state-nodes-edges.html">L01</a><a href="L02-first-llm-agent.html">L02</a><a href="L03-tools.html" class="active">L03</a><a href="L04-agent-loop.html">L04</a></nav>
 
 
 <div class="phase" data-phase="ignition"><span class="phase-num">Phase 0 · Ignition</span><h3>⚡ 认知点火 <span class="timer"><span class="clock">⏱</span> 2 分钟</span></h3>
@@ -21,24 +21,24 @@
 
 
 <div class="phase" data-phase="fable"><span class="phase-num">Phase 1 · Fable</span><div class="i18n-zh"><h3>📖 寓言：学徒的工具箱</h3></div>
-<div class="i18n-en" hidden><h3>📖 寓言：学徒的工具箱</h3></div>
+<div class="i18n-en" hidden><h3>📖 Fable: The Apprentice's Toolbox</h3></div>
 
 <div class="card" style="border-color:var(--purple)"><p style="font-family:Georgia,serif;line-height:1.9">老锁匠给了徒弟一个上锁的铁盒。徒弟用手掰、用牙咬、用石头砸——纹丝不动。第二天，老锁匠拿出一串钥匙，一把一把教徒弟："这把开挂锁，这把开暗锁，这把是万能钥匙但有些锁打不开会卡住。"后来徒弟成了名匠，他对弟子说："<strong>一个锁匠的水平，不取决于他的手有多巧，而取决于他的钥匙串上挂了多少把钥匙，以及他是否知道每把钥匙能开什么锁。</strong>"</p>
 <div class="reveal">🔮 揭示：Tool 就是 LLM 的钥匙串。LLM 不"会"计算——但它知道什么时候该调用计算器工具，传什么参数，怎么解读结果。</div>
 <div class="i18n-zh"><a href="../reference/fables.html#fable-3">📖 完整寓言 →</a></div>
-<div class="i18n-en" hidden><a href="../reference/fables.html#fable-3">📖 完整寓言 →</a></div></div>
+<div class="i18n-en" hidden><a href="../reference/fables.html#fable-3">📖 Full Fable →</a></div></div>
 </div>
 
 
 <div class="phase" data-phase="godview"><span class="phase-num">Phase 1 · GodView</span><h3>🗺 上帝视角 <span class="timer"><span class="clock">⏱</span> 7 分钟</span></h3>
 
 <div class="card accent-left"><div class="i18n-zh"><h3>📋 通关条件</h3></div>
-<div class="i18n-en" hidden><h3>📋 通关条件</h3></div>
+<div class="i18n-en" hidden><h3>📋 Clear Condition</h3></div>
 <p>构建能<strong>真正调用函数</strong>的 Agent：用户说"3+5"，Agent 调用 add 工具计算，返回精确结果。</p>
 </div>
 
 <div class="card green-left"><div class="i18n-zh"><h3>🧠 心智模型：Tool = 函数 + 说明书</h3></div>
-<div class="i18n-en" hidden><h3>🧠 心智模型：Tool = 函数 + 说明书</h3></div>
+<div class="i18n-en" hidden><h3>🧠 Mental Model: Tool = Function + Manual</h3></div>
 <p><code>@tool</code> 装饰器做了两件事：① 保留函数可执行  ② 自动生成一段 JSON Schema（工具名、描述、参数类型）嵌入 LLM 请求中。LLM 看到说明书后决定"要不要调、调哪个、传什么参数"。<strong>LLM 不执行工具——它只输出一个 tool_calls 列表，由 ToolNode 执行。</strong></p>
 
 <pre><code><span class="cmt"># @tool 等价于给函数贴了一张"说明书"给 LLM 看</span>
@@ -56,7 +56,7 @@
 
 
 <div class="i18n-zh"><h4>Step 1：定义工具 + 绑定到模型</h4></div>
-<div class="i18n-en" hidden><h4>Step 1：定义工具 + 绑定到模型</h4></div>
+<div class="i18n-en" hidden><h4>Step 1: Define Tools + Bind to Model</h4></div>
 
 <pre><code><span class="kw">from</span> langchain.tools <span class="kw">import</span> tool
 <span class="kw">from</span> langgraph.prebuilt <span class="kw">import</span> ToolNode
@@ -79,7 +79,7 @@ model_with_tools = model.bind_tools(tools)  <span class="i18n-zh" style="display
 
 
 <div class="i18n-zh"><h4>Step 2：定义 State（⚠️ 必须用 add_messages reducer！）</h4></div>
-<div class="i18n-en" hidden><h4>Step 2：定义 State（⚠️ 必须用 add_messages reducer！）</h4></div>
+<div class="i18n-en" hidden><h4>Step 2: Define State (⚠️ Must use add_messages reducer!)</h4></div>
 
 <pre><code><span class="kw">class</span> <span class="type">AgentState</span>(TypedDict):
     messages: Annotated[list[AnyMessage], add_messages]  <span class="cmt"># ⭐ 追加而非覆盖！
@@ -104,7 +104,7 @@ tool_node = ToolNode(tools)  <span class="i18n-zh" style="display:inline"><span 
 
 
 <div class="i18n-zh"><h4>Step 4：组装（LLM ↔ Tools 循环）</h4></div>
-<div class="i18n-en" hidden><h4>Step 4：组装（LLM ↔ Tools 循环）</h4></div>
+<div class="i18n-en" hidden><h4>Step 4: Assemble (LLM ↔ Tools Loop)</h4></div>
 
 <pre><code>builder = StateGraph(AgentState)
 builder.add_node(<span class="str">"llm"</span>, llm_node); builder.add_node(<span class="str">"tools"</span>, tool_node)
@@ -115,7 +115,7 @@ graph = builder.compile()</code></pre>
 
 
 <div class="i18n-zh"><h4>Step 5：测试</h4></div>
-<div class="i18n-en" hidden><h4>Step 5：测试</h4></div>
+<div class="i18n-en" hidden><h4>Step 5: Test</h4></div>
 
 <pre><code><span class="kw">for</span> q <span class="kw">in</span> [<span class="str">"3+5=?"</span>, <span class="str">"7*8=?"</span>, <span class="str">"北京天气？"</span>, <span class="str">"你好"</span>]:
     r = graph.invoke({<span class="str">"messages"</span>: [HumanMessage(q)]})
@@ -123,15 +123,15 @@ graph = builder.compile()</code></pre>
 
 
 <div class="alert alert-warn" style="margin-top:16px"><div class="i18n-zh"><strong>⚠️ 避坑 INVALID_CHAT_HISTORY：</strong></div>
-<div class="i18n-en" hidden><strong>⚠️ 避坑 INVALID_CHAT_HISTORY：</strong></div>这是 #1 社区报错。原因：State 中 messages 没用 <code>add_messages</code> reducer → ToolNode 的输出覆盖了 LLM 的输出 → 对话历史缺失。解决方案见上方 Step 2。</div>
+<div class="i18n-en" hidden><strong>⚠️ Pitfall INVALID_CHAT_HISTORY：</strong></div>这是 #1 社区报错。原因：State 中 messages 没用 <code>add_messages</code> reducer → ToolNode 的输出覆盖了 LLM 的输出 → 对话历史缺失。解决方案见上方 Step 2。</div>
 </div>
 
 
 <div class="phase" data-phase="forge"><span class="phase-num">Phase 3 · Forge</span><div class="i18n-zh"><h3>🔨 知识淬炼</h3></div>
-<div class="i18n-en" hidden><h3>🔨 知识淬炼</h3></div>
+<div class="i18n-en" hidden><h3>🔨 Knowledge Forging</h3></div>
 
 <div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
-<div class="i18n-en" hidden><h4>🏗 你的挑战</h4></div>
+<div class="i18n-en" hidden><h4>🏗 Your Challenge</h4></div>
 <ol><li>添加 <code>subtract</code> 和 <code>divide</code> 工具（除零返回友好错误）</li>
 <li>用 <code>requests</code> 或 <code>httpx</code> 实现一个真实的网络搜索工具</li>
 <div class="i18n-zh"><li>在 llm_node 中打印 LLM 的 tool_calls，观察它决定调了哪些工具、传了什么参数</li></div>
@@ -155,7 +155,7 @@ graph = builder.compile()</code></pre>
 </div>
 
 <div class="i18n-zh"><h2>📝 速查卡</h2></div>
-<div class="i18n-en" hidden><h2>📝 速查卡</h2></div>
+<div class="i18n-en" hidden><h2>📝 Quick Reference Card</h2></div>
 
 <div class="card accent-left"><pre><code><span class="decorator">@tool</span>
 <span class="kw">def</span> <span class="fn">my_tool</span>(param: type) -> type: <span class="str">"""LLM 看到的描述"""</span>

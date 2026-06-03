@@ -1,17 +1,17 @@
 <!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L08 · 容错与重试 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head>
 <body>
 <nav class="nav-bar"><div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
-<div class="i18n-en" hidden><a href="../index.html">🏠 总览</a></div><a href="L07-streaming.html">L07</a><a href="L08-error-handling.html" class="active">L08</a><a href="L09-subgraphs.html">L09</a></nav>
+<div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div><a href="L07-streaming.html">L07</a><a href="L08-error-handling.html" class="active">L08</a><a href="L09-subgraphs.html">L09</a></nav>
 
 <div class="phase"><span class="phase-num">Phase 0</span><div class="i18n-zh"><h3>⚡ 认知点火</h3></div>
-<div class="i18n-en" hidden><h3>⚡ 认知点火</h3></div>
+<div class="i18n-en" hidden><h3>⚡ Cognitive Ignition</h3></div>
 <div class="scenario"><div class="role">🔥 点火</div>
 <p class="quote">"你的 Agent 调用一个外部天气 API，结果 API 返回 429 Too Many Requests。<strong>Agent 崩溃了。</strong>你重启它，它从零开始——之前的对话全丢了。你希望它：① 等几秒自动重试  ② 重试三次还不行就降级回复  ③ 永远不丢状态。"</p>
 </div>
 </div>
 
 <div class="phase" data-phase="fable"><span class="phase-num">Phase 1 · Fable</span><div class="i18n-zh"><h3>📖 寓言：城墙上的四道门</h3></div>
-<div class="i18n-en" hidden><h3>📖 寓言：城墙上的四道门</h3></div>
+<div class="i18n-en" hidden><h3>📖 Fable: The Four Gates on the City Wall</h3></div>
 
 <div class="card" style="border-color:var(--purple)"><p style="font-family:Georgia,serif;line-height:1.9">一座要塞修了四道城墙。第一道：弓箭手射三箭（自动重试）。第二道：陷阱，但守军喊话"投降，给你吊上来"（LLM 感知错误自行调整）。第三道：信鸽求援，等友军指令（interrupt 等人工决策）。第四道：撤退前刻一句话："下次修墙，记住今天为什么被攻破"（降级回复 + 记录日志）。<strong>要塞从未被攻陷。不是因为坚不可摧，而是因为四道门的设计——大部分问题在前两道就解决了。</strong></p>
 <p><a href="../reference/fables.html#fable-8">📖 完整寓言 →</a></p>
@@ -19,7 +19,7 @@
 </div>
 
 <div class="phase" data-phase="godview"><span class="phase-num">Phase 1 · GodView</span><div class="i18n-zh"><h3>🗺 上帝视角</h3></div>
-<div class="i18n-en" hidden><h3>🗺 上帝视角</h3></div>
+<div class="i18n-en" hidden><h3>🗺 God View</h3></div>
 
 <div class="card green-left"><div class="i18n-zh"><h3>🧠 四层防御体系</h3></div>
 <div class="i18n-en" hidden><h3>🧠 四层防御体系</h3></div>
@@ -71,14 +71,14 @@ builder.add_node(<span class="str">"api_call"</span>, call_external_api, retry_p
 builder.add_node(<span class="str">"critical_action"</span>, critical_action, retry_policy=RetryPolicy(max_attempts=3))</code></pre>
 
 <div class="alert alert-warn"><div class="i18n-zh"><strong>⚠️ 避坑：</strong></div>
-<div class="i18n-en" hidden><strong>⚠️ 避坑：</strong></div>RetryPolicy 只对瞬时故障（网络超时）有效。如果 API 返回"参数错误"，重试 100 次也没用——应该走第 2 层（错误传给 LLM 让它改参数）。</div>
+<div class="i18n-en" hidden><strong>⚠️ Pitfall：</strong></div>RetryPolicy 只对瞬时故障（网络超时）有效。如果 API 返回"参数错误"，重试 100 次也没用——应该走第 2 层（错误传给 LLM 让它改参数）。</div>
 </div>
 
 <div class="phase" data-phase="forge"><span class="phase-num">Phase 3 · Forge</span><div class="i18n-zh"><h3>🔨 知识淬炼</h3></div>
-<div class="i18n-en" hidden><h3>🔨 知识淬炼</h3></div>
+<div class="i18n-en" hidden><h3>🔨 Knowledge Forging</h3></div>
 
 <div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
-<div class="i18n-en" hidden><h4>🏗 你的挑战</h4></div>
+<div class="i18n-en" hidden><h4>🏗 Your Challenge</h4></div>
 <ol><div class="i18n-zh"><li>给 L05 的 Agent 的 LLM 节点加上 RetryPolicy</li></div>
 <div class="i18n-en" hidden><li>给 L05 的 Agent 的 LLM 节点加上 RetryPolicy</li></div>
 <div class="i18n-zh"><li>让 act() 区分"可重试错误"（网络）和"不可重试错误"（参数格式不对）</li></div>
@@ -94,7 +94,7 @@ builder.add_node(<span class="str">"critical_action"</span>, critical_action, re
 </div>
 
 <div class="i18n-zh"><h2>📝 速查卡</h2></div>
-<div class="i18n-en" hidden><h2>📝 速查卡</h2></div>
+<div class="i18n-en" hidden><h2>📝 Quick Reference Card</h2></div>
 
 <div class="card accent-left"><pre><code>RetryPolicy(max_attempts=3, initial_interval=1.0, backoff_factor=2.0)
 <span class="cmt"># act() 中返回错误给 LLM</span>

@@ -1,12 +1,12 @@
 <!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L09 · 子图 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head>
 <body>
 <nav class="nav-bar"><div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
-<div class="i18n-en" hidden><a href="../index.html">🏠 总览</a></div><a href="L08-error-handling.html">L08</a><a href="L09-subgraphs.html" class="active">L09</a><a href="L10-multi-agent.html">L10</a><a href="L11-parallel-send.html">L11</a><a href="L12-production.html">L12</a></nav>
+<div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div><a href="L08-error-handling.html">L08</a><a href="L09-subgraphs.html" class="active">L09</a><a href="L10-multi-agent.html">L10</a><a href="L11-parallel-send.html">L11</a><a href="L12-production.html">L12</a></nav>
 
 <div class="hero"><div class="i18n-zh"><h1>L09 · 子图</h1></div>
 <div class="i18n-en" hidden><h1>L09 · 子图</h1></div>
 <div class="i18n-zh"><p class="subtitle">把复杂 Agent 拆成可管理的模块</p></div>
-<div class="i18n-en" hidden><p class="subtitle">把复杂 Agent 拆成可管理的模块</p></div>
+<div class="i18n-en" hidden><p class="subtitle">Break complex Agents into manageable modules</p></div>
 </div>
 
 <div class="phase" data-phase="ignition"><span class="phase-num">Phase 0 · Ignition</span><div class="scenario"><div class="role">🔥 点火</div>
@@ -15,7 +15,7 @@
 </div>
 
 <div class="phase" data-phase="fable"><span class="phase-num">Phase 1 · Fable</span><div class="i18n-zh"><h3>📖 寓言：城中之城</h3></div>
-<div class="i18n-en" hidden><h3>📖 寓言：城中之城</h3></div>
+<div class="i18n-en" hidden><h3>📖 Fable: A City Within a City</h3></div>
 
 <div class="card" style="border-color:var(--purple)"><p style="font-family:Georgia,serif;line-height:1.9">长安城分一百零八坊，每坊有自己的坊正。坊内事务坊正自理，坊间通过城门街道连接。最巧妙的是：<strong>每坊内部管理可以完全不同</strong>——东市日出开市，西市按货物分区，胡人聚居坊有自己规矩。京兆尹不需要知道东市几点开门——他只需要知道给东市的税收指标。</p>
 <p><a href="../reference/fables.html#fable-9">📖 完整寓言 →</a></p>
@@ -23,7 +23,7 @@
 </div>
 
 <div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><div class="i18n-zh"><h3>⚔️ 实战编码</h3></div>
-<div class="i18n-en" hidden><h3>⚔️ 实战编码</h3></div>
+<div class="i18n-en" hidden><h3>⚔️ Combat Coding</h3></div>
 
 <div class="i18n-zh"><h4>模式一：不同 State Schema（推荐，解耦）</h4></div>
 <div class="i18n-en" hidden><h4>模式一：不同 State Schema（推荐，解耦）</h4></div>
@@ -53,18 +53,18 @@ subgraph = sub_builder.compile()
     ns = config[<span class="str">"configurable"</span>][<span class="str">"checkpoint_ns"</span>]  <span class="cmt"># 子图独立命名空间</span></code></pre>
 
 <div class="alert alert-warn"><div class="i18n-zh"><strong>⚠️ 避坑 MULTIPLE_SUBGRAPHS：</strong></div>
-<div class="i18n-en" hidden><strong>⚠️ 避坑 MULTIPLE_SUBGRAPHS：</strong></div>多个子图使用相同 checkpoint 命名空间导致冲突。确保每个子图的节点名唯一。</div>
+<div class="i18n-en" hidden><strong>⚠️ Pitfall MULTIPLE_SUBGRAPHS：</strong></div>多个子图使用相同 checkpoint 命名空间导致冲突。确保每个子图的节点名唯一。</div>
 </div>
 
 <div class="phase" data-phase="forge"><span class="phase-num">Phase 3 · Forge</span><div class="i18n-zh"><h3>🔨 知识淬炼</h3></div>
-<div class="i18n-en" hidden><h3>🔨 知识淬炼</h3></div>
+<div class="i18n-en" hidden><h3>🔨 Knowledge Forging</h3></div>
 
 <div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
-<div class="i18n-en" hidden><h4>🏗 你的挑战</h4></div>
+<div class="i18n-en" hidden><h4>🏗 Your Challenge</h4></div>
 <ol><div class="i18n-zh"><li>把 L04 的手动 ReAct Agent 拆成子图：think + act 打包为一个 Agent 子图</li></div>
 <div class="i18n-en" hidden><li>把 L04 的手动 ReAct Agent 拆成子图：think + act 打包为一个 Agent 子图</li></div>
 <div class="i18n-zh"><li>创建两个不同 Agent 子图（数学 Agent + 天气 Agent），父图负责路由</li></div>
-<div class="i18n-en" hidden><li>创建两个不同 Agent 子图（数学 Agent + 天气 Agent），父图负责路由</li></div>
+<div class="i18n-en" hidden><li>Create两个不同 Agent 子图（数学 Agent + 天气 Agent），父图负责路由</li></div>
 </ol>
 </div>
 
@@ -76,7 +76,7 @@ subgraph = sub_builder.compile()
 </div>
 
 <div class="i18n-zh"><h2>📝 速查卡</h2></div>
-<div class="i18n-en" hidden><h2>📝 速查卡</h2></div>
+<div class="i18n-en" hidden><h2>📝 Quick Reference Card</h2></div>
 
 <div class="card accent-left"><pre><code><span class="cmt"># 包装调用（不同 Schema）</span>
 <span class="kw">def</span> <span class="fn">wrapper</span>(parent_state): sub_out = subgraph.invoke(map(parent_state)); <span class="kw">return</span> unmap(sub_out)
