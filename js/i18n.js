@@ -1,6 +1,7 @@
 /* ============================================================
    LangGraph DeepForge — i18n.js
-   Internationalization engine: language switching, DOM updates
+   Internationalization engine: language switching, DOM updates,
+   text-node content translation
    ============================================================ */
 
 var I18N = (function() {
@@ -8,6 +9,7 @@ var I18N = (function() {
 
   var STORAGE_KEY = 'langgraph_lang';
   var DATA = window.__I18N_DATA || {};
+  var CONTENT = window.__I18N_CONTENT || {};
 
   var lang = localStorage.getItem(STORAGE_KEY) || 'zh';
 
@@ -30,7 +32,6 @@ var I18N = (function() {
     localStorage.setItem(STORAGE_KEY, lang);
     applyToDOM();
     updateSwitcherUI();
-    /* Notify other components */
     if (window.onLangChange) window.onLangChange(lang);
   }
 
@@ -38,10 +39,95 @@ var I18N = (function() {
     return lang;
   }
 
+  /* ── Content Translation (text-node level) ── */
+
+  function translateTextNodes(root) {
+    if (!CONTENT || Object.keys(CONTENT).length === 0) return;
+
+    var walker = document.createTreeWalker(
+      root || document.body,
+      NodeFilter.SHOW_TEXT,
+      {
+        acceptNode: function(node) {
+          // Skip script, style, pre, code, textarea
+          var parent = node.parentElement;
+          if (!parent) return NodeFilter.FILTER_REJECT;
+          var tag = parent.tagName;
+          if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'PRE' ||
+              tag === 'CODE' || tag === 'TEXTAREA' || tag === 'NOSCRIPT') {
+            return NodeFilter.FILTER_REJECT;
+          }
+          // Skip if inside i18n block (already handled)
+          if (parent.closest && (parent.closest('.i18n-zh') || parent.closest('.i18n-en'))) {
+            return NodeFilter.FILTER_REJECT;
+          }
+          // Skip if parent has data-i18n (handled separately)
+          if (parent.hasAttribute && parent.hasAttribute('data-i18n')) {
+            return NodeFilter.FILTER_REJECT;
+          }
+          // Only accept text with content
+          var text = node.textContent.trim();
+          if (!text || text.length < 1) return NodeFilter.FILTER_REJECT;
+
+          // In en mode: accept nodes containing Chinese (to translate them)
+          // In zh mode: accept nodes that were previously translated (to restore)
+          // We detect "previously translated" by checking if the parent
+          // has a data-original-zh attribute
+          if (lang === 'zh') {
+            return parent.hasAttribute && parent.hasAttribute('data-original-zh')
+              ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+          } else {
+            // In en mode, accept nodes that contain Chinese characters
+            return /[一-鿿]/.test(node.textContent)
+              ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+          }
+        }
+      }
+    );
+
+    var node;
+    while (node = walker.nextNode()) {
+      if (lang === 'en') {
+        _translateToEn(node);
+      } else {
+        _restoreToZh(node);
+      }
+    }
+  }
+
+  function _translateToEn(node) {
+    var text = node.textContent;
+    var parent = node.parentElement;
+    if (!parent) return;
+
+    // Try exact match first
+    var translated = CONTENT[text];
+    if (!translated) {
+      // Try trimmed match
+      translated = CONTENT[text.trim()];
+    }
+    if (translated) {
+      // Save original Chinese for restoration
+      parent.setAttribute('data-original-zh', text);
+      node.textContent = translated;
+    }
+    // If no match, leave as-is (shows Chinese)
+  }
+
+  function _restoreToZh(node) {
+    var parent = node.parentElement;
+    if (!parent) return;
+    var original = parent.getAttribute('data-original-zh');
+    if (original) {
+      node.textContent = original;
+      parent.removeAttribute('data-original-zh');
+    }
+  }
+
   /* ── DOM Application ── */
 
   function applyToDOM() {
-    /* 1. data-i18n attributes — replace textContent */
+    /* 1. data-i18n attributes */
     var elements = document.querySelectorAll('[data-i18n]');
     for (var i = 0; i < elements.length; i++) {
       var el = elements[i];
@@ -52,8 +138,7 @@ var I18N = (function() {
     /* 2. data-i18n-placeholder */
     var phs = document.querySelectorAll('[data-i18n-placeholder]');
     for (var j = 0; j < phs.length; j++) {
-      var ph = phs[j];
-      ph.placeholder = t(ph.getAttribute('data-i18n-placeholder'));
+      phs[j].placeholder = t(phs[j].getAttribute('data-i18n-placeholder'));
     }
 
     /* 3. data-i18n-title */
@@ -72,13 +157,16 @@ var I18N = (function() {
     for (var n = 0; n < enBlocks.length; n++) {
       enBlocks[n].hidden = (lang !== 'en');
     }
+
+    /* 5. Content-level text translation */
+    translateTextNodes();
   }
 
   /* ── Language Switcher ── */
 
   function renderSwitcher() {
     var el = document.getElementById('i18n-switcher');
-    if (el) return; // already rendered
+    if (el) return;
 
     el = document.createElement('button');
     el.id = 'i18n-switcher';
@@ -118,6 +206,7 @@ var I18N = (function() {
     setLang: setLang,
     getLang: getLang,
     applyToDOM: applyToDOM,
+    translateTextNodes: translateTextNodes,
     renderSwitcher: renderSwitcher
   };
 })();
