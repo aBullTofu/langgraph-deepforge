@@ -1,68 +1,141 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L05 · 记忆与持久化 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head><body>
-<nav class="nav-bar"><a href="../index.html">🏠 总览</a><a href="../reference/meta-learning-guide.html">🧠 元学习</a><a href="../reference/fables.html">📖 寓言集</a><a href="../reference/pitfalls.html">⚠️ 避坑</a><a href="L04-agent-loop.html">L04</a><a href="L05-memory-persistence.html" class="active">L05</a><a href="L06-human-in-the-loop.html">L06</a></nav>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L05 · 记忆与持久化 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head>
+<body>
+<nav class="nav-bar"><div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
+<div class="i18n-en" hidden><a href="../index.html">🏠 总览</a></div><div class="i18n-zh"><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div>
+<div class="i18n-en" hidden><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div><div class="i18n-zh"><a href="../reference/fables.html">📖 寓言集</a></div>
+<div class="i18n-en" hidden><a href="../reference/fables.html">📖 Fable Collection</a></div><div class="i18n-zh"><a href="../reference/pitfalls.html">⚠️ 避坑</a></div>
+<div class="i18n-en" hidden><a href="../reference/pitfalls.html">⚠️ 避坑</a></div><a href="L04-agent-loop.html">L04</a><a href="L05-memory-persistence.html" class="active">L05</a><a href="L06-human-in-the-loop.html">L06</a></nav>
+
 
 <div class="phase" data-phase="ignition"><span class="phase-num">Phase 0 · Ignition</span><h3>⚡ 认知点火 <span class="timer"><span class="clock">⏱</span> 2 分钟</span></h3>
-<div class="scenario"><div class="role">🔥 点火问题</div><p class="quote">"L04 的 Agent 完成了一次对话。第二次调用时，你传了新的消息——但 Agent 完全忘了刚才聊了什么。<strong>每次 graph.invoke() 都是从零开始。</strong>这和 ChatGPT 的行为完全不同。怎么让 Agent 记住上下文？"</p></div></div>
 
-<div class="phase" data-phase="fable"><span class="phase-num">Phase 1 · Fable</span><h3>📖 寓言：书记官的账本</h3>
-<div class="card" style="border-color:var(--purple)"><p style="font-family:Georgia,serif;line-height:1.9">古罗马元老院有一规矩：每一场辩论，书记官必须在<strong>每个人发言结束后</strong>立即把发言记在羊皮纸上。如果辩论被地震打断，下次开会翻开羊皮纸，从断点继续。千年之后，一个叫 LangGraph 的程序继承了书记官的智慧：<strong>每一个 super-step 都是一条新记录。</strong></p><div class="reveal">🔮 揭示：Checkpoint 持久化。每个 super-step 自动存档，用 thread_id 区分不同"辩论"。</div><a href="../reference/fables.html#fable-5">📖 完整寓言 →</a></div></div>
+<div class="scenario"><div class="role">🔥 点火问题</div>
+<p class="quote">"L04 的 Agent 完成了一次对话。第二次调用时，你传了新的消息——但 Agent 完全忘了刚才聊了什么。<strong>每次 graph.invoke() 都是从零开始。</strong>这和 ChatGPT 的行为完全不同。怎么让 Agent 记住上下文？"</p>
+</div>
+</div>
+
+
+<div class="phase" data-phase="fable"><span class="phase-num">Phase 1 · Fable</span><div class="i18n-zh"><h3>📖 寓言：书记官的账本</h3></div>
+<div class="i18n-en" hidden><h3>📖 寓言：书记官的账本</h3></div>
+
+<div class="card" style="border-color:var(--purple)"><p style="font-family:Georgia,serif;line-height:1.9">古罗马元老院有一规矩：每一场辩论，书记官必须在<strong>每个人发言结束后</strong>立即把发言记在羊皮纸上。如果辩论被地震打断，下次开会翻开羊皮纸，从断点继续。千年之后，一个叫 LangGraph 的程序继承了书记官的智慧：<strong>每一个 super-step 都是一条新记录。</strong></p>
+<div class="reveal">🔮 揭示：Checkpoint 持久化。每个 super-step 自动存档，用 thread_id 区分不同"辩论"。</div>
+<div class="i18n-zh"><a href="../reference/fables.html#fable-5">📖 完整寓言 →</a></div>
+<div class="i18n-en" hidden><a href="../reference/fables.html#fable-5">📖 完整寓言 →</a></div></div>
+</div>
+
 
 <div class="phase" data-phase="godview"><span class="phase-num">Phase 1 · GodView</span><h3>🗺 上帝视角 <span class="timer"><span class="clock">⏱</span> 7 分钟</span></h3>
-<div class="card accent-left"><h3>📋 通关条件</h3><p>给 L04 的 Agent 加上<strong>持久化记忆</strong>——对话结束后 Agent 记住上下文，下次对话继续。</p></div>
-<div class="card green-left"><h3>🧠 心智模型：Checkpoint = 游戏存档</h3><p>每个 super-step 自动存档。thread_id = 存档文件名。get_state_history() = 查看所有存档。</p></div></div>
+
+<div class="card accent-left"><div class="i18n-zh"><h3>📋 通关条件</h3></div>
+<div class="i18n-en" hidden><h3>📋 通关条件</h3></div>
+<p>给 L04 的 Agent 加上<strong>持久化记忆</strong>——对话结束后 Agent 记住上下文，下次对话继续。</p>
+</div>
+
+<div class="card green-left"><div class="i18n-zh"><h3>🧠 心智模型：Checkpoint = 游戏存档</h3></div>
+<div class="i18n-en" hidden><h3>🧠 心智模型：Checkpoint = 游戏存档</h3></div>
+<div class="i18n-zh"><p>每个 super-step 自动存档。thread_id = 存档文件名。get_state_history() = 查看所有存档。</p></div>
+<div class="i18n-en" hidden><p>每个 super-step 自动存档。thread_id = 存档文件名。get_state_history() = 查看所有存档。</p></div>
+</div>
+</div>
+
 
 <div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><h3>⚔️ 实战编码 <span class="timer"><span class="clock">⏱</span> 30 分钟</span></h3>
+
 <p>创建 <code>l05_memory_agent.py</code>。改 L04 的代码只需三行：</p>
+
 <pre><code><span class="cmt"># 1. 创建 checkpointer</span>
 <span class="kw">from</span> langgraph.checkpoint.memory <span class="kw">import</span> InMemorySaver
 <span class="kw">from</span> langgraph.checkpoint.sqlite <span class="kw">import</span> SqliteSaver
 <span class="kw">import</span> sqlite3
-checkpointer = InMemorySaver()  <span class="cmt"># 开发用（重启丢失）</span>
-<span class="cmt"># 或 checkpointer = SqliteSaver(sqlite3.connect("agent.db"))  # 持久化</span>
+checkpointer = InMemorySaver()  <span class="i18n-zh" style="display:inline"><span class="cmt"># 开发用（重启丢失）</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># For development (lost on restart)</span></span>
+<span class="i18n-zh" style="display:inline"><span class="cmt"># 或 checkpointer = SqliteSaver(sqlite3.connect("agent.db"))  # 持久化</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># or checkpointer = SqliteSaver(sqlite3.connect("agent.db"))  # Persistent</span></span>
 
 <span class="cmt"># 2. 编译时注入</span>
 graph = builder.compile(checkpointer=checkpointer)  <span class="cmt"># 改这一行</span>
 
 <span class="cmt"># 3. invoke 时传 config（改这一行）</span>
 config = {<span class="str">"configurable"</span>: {<span class="str">"thread_id"</span>: <span class="str">"user-bob"</span>}}
-result = graph.invoke(input, config)  <span class="cmt"># 同一 thread_id = 同一会话</span></code></pre>
+result = graph.invoke(input, config)  <span class="i18n-zh" style="display:inline"><span class="cmt"># 同一 thread_id = 同一会话</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Same thread_id = same conversation</span></span></code></pre>
 
-<h4>时间旅行</h4>
-<pre><code>snapshot = graph.get_state(config)  <span class="cmt"># 最新状态</span>
-history = <span class="fn">list</span>(graph.get_state_history(config))  <span class="cmt"># 全部历史</span>
-<span class="cmt"># 回到某个历史检查点</span>
+
+<div class="i18n-zh"><h4>时间旅行</h4></div>
+<div class="i18n-en" hidden><h4>Time Travel</h4></div>
+
+<pre><code>snapshot = graph.get_state(config)  <span class="i18n-zh" style="display:inline"><span class="cmt"># 最新状态</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Latest state</span></span>
+history = <span class="fn">list</span>(graph.get_state_history(config))  <span class="i18n-zh" style="display:inline"><span class="cmt"># 全部历史</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Full history</span></span>
+<span class="i18n-zh" style="display:inline"><span class="cmt"># 回到某个历史检查点</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Go back to a historical checkpoint</span></span>
 old = history[3].config[<span class="str">"configurable"</span>][<span class="str">"checkpoint_id"</span>]
 old_state = graph.get_state({<span class="str">"configurable"</span>: {<span class="str">"thread_id"</span>: <span class="str">"user-bob"</span>, <span class="str">"checkpoint_id"</span>: old}})</code></pre>
 
-<h4>记忆测试</h4>
+
+<div class="i18n-zh"><h4>记忆测试</h4></div>
+<div class="i18n-en" hidden><h4>Memory Test</h4></div>
+
 <pre><code>graph.invoke({<span class="str">"messages"</span>: [HumanMessage(<span class="str">"我叫小明"</span>)]}, config)
 r = graph.invoke({<span class="str">"messages"</span>: [HumanMessage(<span class="str">"我叫什么？"</span>)]}, config)
 <span class="kw">print</span>(r[<span class="str">"messages"</span>][-1].content)  <span class="cmt"># "你叫小明！" ✅ 记住了</span></code></pre>
 
-<div class="alert alert-warn"><strong>⚠️ 避坑 MISSING_CHECKPOINTER：</strong>用了 interrupt() 或想用 get_state() 但没配置 checkpointer → 报错。每个需要持久化的图都必须 compile(checkpointer=...)。</div></div>
 
-<div class="phase" data-phase="forge"><span class="phase-num">Phase 3 · Forge</span><h3>🔨 知识淬炼</h3>
-<div class="card orange-left"><h4>🏗 你的挑战</h4><ol><li>用 SqliteSaver 替换 InMemorySaver，重启 Python 后验证记忆是否还在</li><li>创建两个不同 thread_id 的会话，验证它们的记忆完全隔离</li><li>用 get_state_history() 打印某一会话的全部历史检查点</li></ol></div>
-<div class="review-321"><div class="box"><div class="num">3</div><p style="font-size:0.8em">① checkpointer 管持久化  ② thread_id 是会话指针  ③ InMemory 开发 / Sqlite 持久</p></div><div class="box"><div class="num">2</div><p style="font-size:0.8em">• 多轮对话客服 • 会话保持</p></div></div></div>
-<h2>📝 速查卡</h2>
+<div class="alert alert-warn"><div class="i18n-zh"><strong>⚠️ 避坑 MISSING_CHECKPOINTER：</strong></div>
+<div class="i18n-en" hidden><strong>⚠️ 避坑 MISSING_CHECKPOINTER：</strong></div>用了 interrupt() 或想用 get_state() 但没配置 checkpointer → 报错。每个需要持久化的图都必须 compile(checkpointer=...)。</div>
+</div>
+
+
+<div class="phase" data-phase="forge"><span class="phase-num">Phase 3 · Forge</span><div class="i18n-zh"><h3>🔨 知识淬炼</h3></div>
+<div class="i18n-en" hidden><h3>🔨 知识淬炼</h3></div>
+
+<div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
+<div class="i18n-en" hidden><h4>🏗 你的挑战</h4></div>
+<ol><div class="i18n-zh"><li>用 SqliteSaver 替换 InMemorySaver，重启 Python 后验证记忆是否还在</li></div>
+<div class="i18n-en" hidden><li>用 SqliteSaver 替换 InMemorySaver，重启 Python 后验证记忆是否还在</li></div>
+<div class="i18n-zh"><li>创建两个不同 thread_id 的会话，验证它们的记忆完全隔离</li></div>
+<div class="i18n-en" hidden><li>创建两个不同 thread_id 的会话，验证它们的记忆完全隔离</li></div>
+<div class="i18n-zh"><li>用 get_state_history() 打印某一会话的全部历史检查点</li></div>
+<div class="i18n-en" hidden><li>用 get_state_history() 打印某一会话的全部历史检查点</li></div>
+</ol>
+</div>
+
+<div class="review-321"><div class="box"><div class="num">3</div>
+<div class="i18n-zh"><p style="font-size:0.8em">① checkpointer 管持久化  ② thread_id 是会话指针  ③ InMemory 开发 / Sqlite 持久</p></div>
+<div class="i18n-en" hidden><p style="font-size:0.8em">① checkpointer 管持久化  ② thread_id 是会话指针  ③ InMemory 开发 / Sqlite 持久</p></div>
+</div>
+<div class="box"><div class="num">2</div>
+<div class="i18n-zh"><p style="font-size:0.8em">• 多轮对话客服 • 会话保持</p></div>
+<div class="i18n-en" hidden><p style="font-size:0.8em">• 多轮对话客服 • 会话保持</p></div>
+</div>
+</div>
+</div>
+
+<div class="i18n-zh"><h2>📝 速查卡</h2></div>
+<div class="i18n-en" hidden><h2>📝 速查卡</h2></div>
+
 <div class="card accent-left"><pre><code><span class="kw">from</span> langgraph.checkpoint.memory <span class="kw">import</span> InMemorySaver
 graph = builder.compile(checkpointer=InMemorySaver())
 config = {<span class="str">"configurable"</span>: {<span class="str">"thread_id"</span>: <span class="str">"xxx"</span>}}
-graph.get_state(config)  <span class="cmt"># 查看</span>
-graph.get_state_history(config)  <span class="cmt"># 回溯</span></code></pre></div>
+graph.get_state(config)  <span class="i18n-zh" style="display:inline"><span class="cmt"># 查看</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># View</span></span>
+graph.get_state_history(config)  <span class="i18n-zh" style="display:inline"><span class="cmt"># 回溯</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Trace back</span></span></code></pre>
+</div>
+
 <p style="margin-top:48px;text-align:center"><span id="next-lesson-link"><a href="L06-human-in-the-loop.html">L06 人工介入 →</a></span></p>
+
 
 <div class="lesson-actions">
   <div id="complete-section"></div>
+
   <details class="notes-panel">
     <summary>📝 学习笔记</summary>
+
     <textarea id="lesson-notes" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
     <div class="notes-actions">
       <button onclick="_exportNotes()">💾 保存到文件</button>
       <button onclick="_importNotes()">📂 加载文件</button>
     </div>
+
   </details>
+
 </div>
+
 
 <script src="../js/i18n-data.js"></script>
 <script src="../js/i18n.js"></script>
@@ -70,4 +143,5 @@ graph.get_state_history(config)  <span class="cmt"># 回溯</span></code></pre><
 <script src="../js/app.js"></script>
 
 <script src="../js/pomodoro.js"></script>
-</body></html>
+</body>
+</html>

@@ -6,111 +6,190 @@
 <title>L01 · State / Node / Edge 深度解析 — LangGraph DeepForge</title>
 <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
 
 <nav class="nav-bar">
-  <a href="../index.html">🏠 总览</a>
-  <a href="../reference/meta-learning-guide.html">🧠 元学习</a>
+  <div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
+<div class="i18n-en" hidden><a href="../index.html">🏠 总览</a></div>
+  <div class="i18n-zh"><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div>
+<div class="i18n-en" hidden><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div>
   <a href="L01-state-nodes-edges.html" class="active">L01</a>
   <a href="L02-first-llm-agent.html">L02</a>
   <a href="L03-tools.html">L03</a>
   <a href="L04-agent-loop.html">L04</a>
 </nav>
 
+
 <!-- ════════════════ IGNITION ════════════════ -->
 <div class="phase" data-phase="ignition">
   <span class="phase-num">Phase 0 · Ignition</span>
   <h3>⚡ 认知点火 <span class="timer"><span class="clock">⏱</span> 2 分钟</span></h3>
+
   <p>打开 <code>hello_graph.py</code>。你写完了一个简单的 A→B 图。现在试着回答：</p>
+
   <div class="scenario">
     <div class="role">🔥 点火问题</div>
-    <p class="quote">"如果我想根据输入内容的不同，走完全不同的处理路径——比如空文本报错、短文本快速通道、长文本深度处理——hello_graph.py 需要改哪些地方？"</p>
+
+    <div class="i18n-zh"><p class="quote">"如果我想根据输入内容的不同，走完全不同的处理路径——比如空文本报错、短文本快速通道、长文本深度处理——hello_graph.py 需要改哪些地方？"</p></div>
+<div class="i18n-en" hidden><p class="quote">"如果我想根据输入内容的不同，走完全不同的处理路径——比如空文本报错、短文本快速通道、长文本深度处理——hello_graph.py 需要改哪些地方？"</p></div>
+
   </div>
-  <p>如果你只能想到"多写几个 if/else 在节点里"，那你即将在 30 分钟后获得一种全新的思维方式。</p>
+
+  <div class="i18n-zh"><p>如果你只能想到"多写几个 if/else 在节点里"，那你即将在 30 分钟后获得一种全新的思维方式。</p></div>
+<div class="i18n-en" hidden><p>如果你只能想到"多写几个 if/else 在节点里"，那你即将在 30 分钟后获得一种全新的思维方式。</p></div>
+
 </div>
+
 
 <!-- ════════════════ GOD VIEW ════════════════ -->
 <div class="phase" data-phase="godview">
   <span class="phase-num">Phase 1 · God View</span>
   <h3>🗺 上帝视角 <span class="timer"><span class="clock">⏱</span> 10 分钟</span></h3>
 
+
   <div class="card accent-left">
-    <h3>📋 通关条件</h3>
+    <div class="i18n-zh"><h3>📋 通关条件</h3></div>
+<div class="i18n-en" hidden><h3>📋 通关条件</h3></div>
+
     <p>构建一个<strong>多分支内容处理管道</strong>：输入文本 → 统计字数 → 判断长短 → 走不同路径 → 输出结果。</p>
+
     <p><strong>通关标准：</strong>输入三个不同长度的文本，得到三条不同的处理结果，且能看到图的执行路径。</p>
+
   </div>
+
 
   <div class="card" style="border-color:var(--purple);">
     <h3>📖 寓言：水渠与磨坊 <span style="font-size:0.8em;color:var(--text-2);">— Amanda Askell 式寓言教学</span></h3>
+
     <p style="font-family:Georgia,serif;line-height:1.9;font-size:0.95em;">
       古时有一个王国，国王下令沿河修建一条水渠，让河水依次流过五座磨坊。每座磨坊从水渠中取水，完成自己的活计——第一座磨面，第二座织布，第三座榨油，第四座打铁，第五座造纸——然后将水排回水渠，流向下游。国王颁布法令：<strong>每座磨坊必须在排水口挂一块木牌，写明自己往水里加了什么、去掉了什么。</strong>多年后，国王的孙子修了一座<strong>分水闸</strong>，闸口守卫根据木牌上的信息决定水流去向……
     </p>
+
     <div class="reveal" style="margin-top:12px;padding-top:10px;border-top:1px dashed rgba(167,139,250,0.3);color:var(--purple);font-weight:700;font-family:var(--font);">
       🔮 读到一半你就意识到——这不是水利工程。这是 State 的数据流 + Conditional Edge 的路由。
     </div>
+
     <p style="margin-top:8px;font-size:0.85em;"><a href="../reference/fables.html#fable-1">📖 阅读完整寓言 →</a>&nbsp;&nbsp;<span style="color:var(--text-2);">全部 12 篇见</span> <a href="../reference/fables.html">寓言集</a></p>
+
   </div>
 
+
   <div class="card green-left">
-    <h3>🧠 核心心智模型：工厂流水线</h3>
+    <div class="i18n-zh"><h3>🧠 核心心智模型：工厂流水线</h3></div>
+<div class="i18n-en" hidden><h3>🧠 核心心智模型：工厂流水线</h3></div>
+
     <pre style="background:none;border:none;padding:0;font-family:var(--mono);font-size:0.9em;">
 [原材料] ─→ [工位A] ─→ [质检台]
                          ├── 合格 ─→ [包装] ─→ 出口
                          └── 不合格 → [返工] ─→ [质检台]
     </pre>
+
     <table>
-      <tr><th>LangGraph 概念</th><th>工厂类比</th><th>职责</th></tr>
-      <tr><td><strong>State</strong></td><td>物料篮</td><td>共享数据，随传送带流转</td></tr>
-      <tr><td><strong>Node</strong></td><td>工位</td><td>读物料 → 加工 → 写回物料篮</td></tr>
-      <tr><td><strong>Edge</strong></td><td>传送带</td><td>物料从哪来、到哪去</td></tr>
-      <tr><td><strong>Conditional Edge</strong></td><td>质检台</td><td>根据检测结果分岔传送带方向</td></tr>
+      <tr><div class="i18n-zh"><th>LangGraph 概念</th></div>
+<div class="i18n-en" hidden><th>LangGraph 概念</th></div><div class="i18n-zh"><th>工厂类比</th></div>
+<div class="i18n-en" hidden><th>工厂类比</th></div><div class="i18n-zh"><th>职责</th></div>
+<div class="i18n-en" hidden><th>Responsibility</th></div></tr>
+
+      <tr><td><strong>State</strong></td><div class="i18n-zh"><td>物料篮</td></div>
+<div class="i18n-en" hidden><td>Material Basket</td></div><div class="i18n-zh"><td>共享数据，随传送带流转</td></div>
+<div class="i18n-en" hidden><td>共享数据，随传送带流转</td></div></tr>
+
+      <tr><td><strong>Node</strong></td><div class="i18n-zh"><td>工位</td></div>
+<div class="i18n-en" hidden><td>Workstation</td></div><div class="i18n-zh"><td>读物料 → 加工 → 写回物料篮</td></div>
+<div class="i18n-en" hidden><td>读物料 → 加工 → 写回物料篮</td></div></tr>
+
+      <tr><td><strong>Edge</strong></td><div class="i18n-zh"><td>传送带</td></div>
+<div class="i18n-en" hidden><td>Conveyor Belt</td></div><div class="i18n-zh"><td>物料从哪来、到哪去</td></div>
+<div class="i18n-en" hidden><td>物料从哪来、到哪去</td></div></tr>
+
+      <tr><td><strong>Conditional Edge</strong></td><div class="i18n-zh"><td>质检台</td></div>
+<div class="i18n-en" hidden><td>Inspection Station</td></div><div class="i18n-zh"><td>根据检测结果分岔传送带方向</td></div>
+<div class="i18n-en" hidden><td>根据检测结果分岔传送带方向</td></div></tr>
+
     </table>
+
     <div class="alert alert-warn">
-      <strong>关键约束：</strong>工位之间不直接对话。工位A 把结果放进物料篮，工位B 从物料篮里拿——State 是唯一的通信媒介。
+      <div class="i18n-zh"><strong>关键约束：</strong></div>
+<div class="i18n-en" hidden><strong>Key Constraint: </strong></div>工位之间不直接对话。工位A 把结果放进物料篮，工位B 从物料篮里拿——State 是唯一的通信媒介。
     </div>
+
   </div>
 
+
   <div class="card yellow-left">
-    <h3>🗺 本节课的技能解锁</h3>
+    <div class="i18n-zh"><h3>🗺 本节课的技能解锁</h3></div>
+<div class="i18n-en" hidden><h3>🗺 本节课的技能解锁</h3></div>
+
     <div class="skill-tree">
       <div class="skill-node">
         <div class="icon unlocked">⏺</div>
-        <div class="info"><div class="name">State 定义</div><div class="desc">TypedDict 声明共享数据结构</div></div>
-      </div>
-      <div class="skill-node">
-        <div class="icon unlocked">⏺</div>
-        <div class="info"><div class="name">Node 函数</div><div class="desc">读 State，返回部分更新 dict</div></div>
-      </div>
-      <div class="skill-node">
-        <div class="icon unlocked">⏺</div>
-        <div class="info"><div class="name">固定边</div><div class="desc">add_edge(from, to)</div></div>
-      </div>
-      <div class="skill-node">
-        <div class="icon unlocked">⏺</div>
-        <div class="info"><div class="name">条件边</div><div class="desc">add_conditional_edges + 路由函数</div></div>
-      </div>
-    </div>
-  </div>
+
+        <div class="info"><div class="name">State 定义</div>
+<div class="desc">TypedDict 声明共享数据结构</div>
 </div>
+
+      </div>
+
+      <div class="skill-node">
+        <div class="icon unlocked">⏺</div>
+
+        <div class="info"><div class="name">Node 函数</div>
+<div class="desc">读 State，返回部分更新 dict</div>
+</div>
+
+      </div>
+
+      <div class="skill-node">
+        <div class="icon unlocked">⏺</div>
+
+        <div class="info"><div class="name">固定边</div>
+<div class="desc">add_edge(from, to)</div>
+</div>
+
+      </div>
+
+      <div class="skill-node">
+        <div class="icon unlocked">⏺</div>
+
+        <div class="info"><div class="name">条件边</div>
+<div class="desc">add_conditional_edges + 路由函数</div>
+</div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
 
 <!-- ════════════════ COMBAT ════════════════ -->
 <div class="phase" data-phase="combat">
   <span class="phase-num">Phase 2 · Combat</span>
   <h3>⚔️ 实战编码 <span class="timer"><span class="clock">⏱</span> 30 分钟</span></h3>
 
+
   <p>创建 <code>l01_pipeline.py</code>，跟着写：</p>
 
-  <h4>Step 1：定义 State（物料篮）</h4>
+
+  <div class="i18n-zh"><h4>Step 1：定义 State（物料篮）</h4></div>
+<div class="i18n-en" hidden><h4>Step 1：定义 State（物料篮）</h4></div>
+
   <pre><code><span class="kw">from</span> typing <span class="kw">import</span> TypedDict
 <span class="kw">from</span> langgraph.graph <span class="kw">import</span> StateGraph, START, END
 
 <span class="kw">class</span> <span class="type">PipelineState</span>(TypedDict):
-    text: <span class="type">str</span>            <span class="cmt"># 原始输入</span>
-    word_count: <span class="type">int</span>      <span class="cmt"># 字数统计结果</span>
+    text: <span class="type">str</span>            <span class="i18n-zh" style="display:inline"><span class="cmt"># 原始输入</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># original input</span></span>
+    word_count: <span class="type">int</span>      <span class="i18n-zh" style="display:inline"><span class="cmt"># 字数统计结果</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># character count result</span></span>
     category: <span class="type">str</span>        <span class="cmt"># short / long</span>
-    result: <span class="type">str</span>          <span class="cmt"># 最终处理结果</span></code></pre>
+    result: <span class="type">str</span>          <span class="i18n-zh" style="display:inline"><span class="cmt"># 最终处理结果</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># final processing result</span></span></code></pre>
 
-  <h4>Step 2：计数工位</h4>
+
+  <div class="i18n-zh"><h4>Step 2：计数工位</h4></div>
+<div class="i18n-en" hidden><h4>Step 2：计数工位</h4></div>
+
   <pre><code><span class="kw">def</span> <span class="fn">count_words</span>(state: PipelineState) -> dict:
     <span class="cmt">"""节点函数的铁律：</span>
 <span class="cmt">    1. 第一个参数是 state（LangGraph 自动传入）</span>
@@ -120,7 +199,10 @@
     text = state[<span class="str">"text"</span>]
     <span class="kw">return</span> {<span class="str">"word_count"</span>: <span class="fn">len</span>(text)}</code></pre>
 
-  <h4>Step 3：分类工位（质检台）</h4>
+
+  <div class="i18n-zh"><h4>Step 3：分类工位（质检台）</h4></div>
+<div class="i18n-en" hidden><h4>Step 3：分类工位（质检台）</h4></div>
+
   <pre><code><span class="kw">def</span> <span class="fn">classify</span>(state: PipelineState) -> dict:
     count = state[<span class="str">"word_count"</span>]  <span class="cmt"># 读取上一个节点写入的数据</span>
     <span class="kw">if</span> count &lt; 20:
@@ -128,23 +210,32 @@
     <span class="kw">else</span>:
         <span class="kw">return</span> {<span class="str">"category"</span>: <span class="str">"long"</span>}</code></pre>
 
-  <h4>Step 4：两个处理分支</h4>
+
+  <div class="i18n-zh"><h4>Step 4：两个处理分支</h4></div>
+<div class="i18n-en" hidden><h4>Step 4：两个处理分支</h4></div>
+
   <pre><code><span class="kw">def</span> <span class="fn">handle_short</span>(state: PipelineState) -> dict:
     <span class="kw">return</span> {<span class="str">"result"</span>: <span class="str">f"[快速通道] {state['text']}"</span>}
 
 <span class="kw">def</span> <span class="fn">handle_long</span>(state: PipelineState) -> dict:
     <span class="kw">return</span> {<span class="str">"result"</span>: <span class="str">f"[深度处理] {state['text'][:20]}..."</span>}</code></pre>
 
-  <h4>Step 5：⭐ 条件边函数（传送带分岔器）</h4>
+
+  <div class="i18n-zh"><h4>Step 5：⭐ 条件边函数（传送带分岔器）</h4></div>
+<div class="i18n-en" hidden><h4>Step 5：⭐ 条件边函数（传送带分岔器）</h4></div>
+
   <pre><code><span class="cmt"># 条件边函数的签名：(state) → str</span>
-<span class="cmt"># 返回值必须是 add_node 时注册的名字</span>
+<span class="i18n-zh" style="display:inline"><span class="cmt"># 返回值必须是 add_node 时注册的名字</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Return value must be the name registered during add_node</span></span>
 <span class="kw">def</span> <span class="fn">route_by_length</span>(state: PipelineState) -> str:
     <span class="kw">if</span> state[<span class="str">"category"</span>] == <span class="str">"short"</span>:
         <span class="kw">return</span> <span class="str">"handle_short"</span>
     <span class="kw">else</span>:
         <span class="kw">return</span> <span class="str">"handle_long"</span></code></pre>
 
-  <h4>Step 6：组装图</h4>
+
+  <div class="i18n-zh"><h4>Step 6：组装图</h4></div>
+<div class="i18n-en" hidden><h4>Step 6：组装图</h4></div>
+
   <pre><code>builder = StateGraph(PipelineState)
 
 builder.add_node(<span class="str">"count_words"</span>, count_words)
@@ -152,15 +243,15 @@ builder.add_node(<span class="str">"classify"</span>, classify)
 builder.add_node(<span class="str">"handle_short"</span>, handle_short)
 builder.add_node(<span class="str">"handle_long"</span>, handle_long)
 
-<span class="cmt"># 固定边</span>
+<span class="i18n-zh" style="display:inline"><span class="cmt"># 固定边</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Fixed edge</span></span>
 builder.add_edge(START, <span class="str">"count_words"</span>)
 builder.add_edge(<span class="str">"count_words"</span>, <span class="str">"classify"</span>)
 
-<span class="cmt"># ⭐ 条件边 — 本课核心</span>
+<span class="i18n-zh" style="display:inline"><span class="cmt"># ⭐ 条件边 — 本课核心</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Conditional edge — core of this lesson</span></span>
 builder.add_conditional_edges(
-    <span class="str">"classify"</span>,         <span class="cmt"># 从哪个节点出发</span>
-    route_by_length,      <span class="cmt"># 路由函数</span>
-    {                     <span class="cmt"># 返回值 → 目标节点 映射</span>
+    <span class="str">"classify"</span>,         <span class="i18n-zh" style="display:inline"><span class="cmt"># 从哪个节点出发</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Which node to start from</span></span>
+    route_by_length,      <span class="i18n-zh" style="display:inline"><span class="cmt"># 路由函数</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Routing function</span></span>
+    {                     <span class="i18n-zh" style="display:inline"><span class="cmt"># 返回值 → 目标节点 映射</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Return value → target node mapping</span></span>
         <span class="str">"handle_short"</span>: <span class="str">"handle_short"</span>,
         <span class="str">"handle_long"</span>: <span class="str">"handle_long"</span>,
     }
@@ -171,27 +262,39 @@ builder.add_edge(<span class="str">"handle_long"</span>, END)
 
 graph = builder.compile()</code></pre>
 
-  <h4>Step 7：运行测试</h4>
-  <pre><code><span class="cmt"># 短文本</span>
+
+  <div class="i18n-zh"><h4>Step 7：运行测试</h4></div>
+<div class="i18n-en" hidden><h4>Step 7：运行测试</h4></div>
+
+  <pre><code><span class="i18n-zh" style="display:inline"><span class="cmt"># 短文本</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Short text</span></span>
 r1 = graph.invoke({<span class="str">"text"</span>: <span class="str">"你好"</span>})
 <span class="fn">print</span>(<span class="str">f"字数: {r1['word_count']}, 分类: {r1['category']}, 结果: {r1['result']}"</span>)
 
-<span class="cmt"># 长文本</span>
+<span class="i18n-zh" style="display:inline"><span class="cmt"># 长文本</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Long text</span></span>
 r2 = graph.invoke({<span class="str">"text"</span>: <span class="str">"今天天气真好我们去公园散步吧顺便买个冰淇淋吃"</span>})
 <span class="fn">print</span>(<span class="str">f"字数: {r2['word_count']}, 分类: {r2['category']}, 结果: {r2['result']}"</span>)</code></pre>
 
-  <p>预期输出：</p>
+
+  <div class="i18n-zh"><p>预期输出：</p></div>
+<div class="i18n-en" hidden><p>Expected output: </p></div>
+
   <pre><code>字数: 2, 分类: short, 结果: [快速通道] 你好
 字数: 22, 分类: long, 结果: [深度处理] 今天天气真好我们去公园散步吧顺便买...</code></pre>
 
+
   <div class="alert alert-green">
-    <strong>运行命令：</strong><code>uv run python l01_pipeline.py</code>
+    <div class="i18n-zh"><strong>运行命令：</strong></div>
+<div class="i18n-en" hidden><strong>Run command: </strong></div><code>uv run python l01_pipeline.py</code>
   </div>
+
 
   <!-- ═══ Mode B: Debug ═══ -->
   <div class="card yellow-left" style="margin-top:24px;">
-    <h4>🔍 模式 B：Debug 挑战</h4>
+    <div class="i18n-zh"><h4>🔍 模式 B：Debug 挑战</h4></div>
+<div class="i18n-en" hidden><h4>🔍 模式 B：Debug 挑战</h4></div>
+
     <p>下面这段代码有 <strong>3 个 bug</strong>。找出并修复它们：</p>
+
     <pre><code><span class="kw">class</span> <span class="type">State</span>(TypedDict):
     value: str
 
@@ -207,75 +310,122 @@ builder.add_node(<span class="str">"b"</span>, step_b)
 builder.add_edge(START, <span class="str">"b"</span>)  <span class="cmt"># bug 3</span>
 builder.add_edge(<span class="str">"a"</span>, END)
 graph = builder.compile()</code></pre>
-    <details><summary>点击查看答案</summary>
+
+    <details><div class="i18n-zh"><summary>点击查看答案</summary></div>
+<div class="i18n-en" hidden><summary>点击查看答案</summary></div>
+
       <p><strong>Bug 1：</strong><code>state.value</code> 应该是 <code>state["value"]</code> — State 是 dict-like，不是对象属性。</p>
+
       <p><strong>Bug 2：</strong>返回了 <code>"result"</code> 字段，但 State 中没有定义这个字段 — 要么先在 State 中声明 <code>result: str</code>，要么返回已有字段。</p>
+
       <p><strong>Bug 3：</strong>边连接了 START → b，但 a 被孤立了（没有入口）。应该 START → a，a → b，b → END。</p>
+
     </details>
+
   </div>
+
 </div>
+
 
 <!-- ════════════════ FORGE ════════════════ -->
 <div class="phase" data-phase="forge">
   <span class="phase-num">Phase 3 · Forge</span>
   <h3>🔨 知识淬炼 <span class="timer"><span class="clock">⏱</span> 8 分钟</span></h3>
 
-  <h4>🔧 你的挑战</h4>
+
+  <div class="i18n-zh"><h4>🔧 你的挑战</h4></div>
+<div class="i18n-en" hidden><h4>🔧 你的挑战</h4></div>
+
   <div class="card orange-left">
-    <h4>🏗 模式 C：三路分类</h4>
+    <div class="i18n-zh"><h4>🏗 模式 C：三路分类</h4></div>
+<div class="i18n-en" hidden><h4>🏗 模式 C：三路分类</h4></div>
+
     <p>修改 <code>l01_pipeline.py</code>，增加第三种分类：</p>
+
     <ol>
       <li><strong>0 字（空文本）</strong> → 走 <code>handle_empty</code>，返回 <code>[错误] 输入为空</code></li>
+
       <li><strong>1-10 字（短文本）</strong> → 走 <code>handle_short</code></li>
+
       <li><strong>10 字以上（长文本）</strong> → 走 <code>handle_long</code></li>
+
     </ol>
+
     <p>需要修改的地方：<code>classify</code>、<code>route_by_length</code>、<code>add_conditional_edges</code> 的映射字典、新增 <code>handle_empty</code> 节点和对应边。</p>
+
     <div class="alert alert-warn">
-      <strong>不要怕改坏！</strong>跑起来看报错就是学习的一部分。
+      <div class="i18n-zh"><strong>不要怕改坏！</strong></div>
+<div class="i18n-en" hidden><strong>Don't be afraid to break things!</strong></div>跑起来看报错就是学习的一部分。
     </div>
+
   </div>
+
 
   <div class="review-321">
     <div class="box">
       <div class="num">3</div>
-      <p style="color:var(--text-2);font-size:0.85em">句必须牢记</p>
+
+      <div class="i18n-zh"><p style="color:var(--text-2);font-size:0.85em">句必须牢记</p></div>
+<div class="i18n-en" hidden><p style="color:var(--text-2);font-size:0.85em">Sentences to Memorize</p></div>
+
       <p style="font-size:0.85em;text-align:left;margin-top:8px;">
         ① State 是 dict，不是对象<br>
         ② 节点返回 dict 只含要更新的字段<br>
         ③ 条件边返回节点名字符串
       </p>
+
     </div>
+
     <div class="box">
       <div class="num">2</div>
-      <p style="color:var(--text-2);font-size:0.85em">个应用场景</p>
+
+      <div class="i18n-zh"><p style="color:var(--text-2);font-size:0.85em">个应用场景</p></div>
+<div class="i18n-en" hidden><p style="color:var(--text-2);font-size:0.85em">Application Scenarios</p></div>
+
       <p style="font-size:0.85em;text-align:left;margin-top:8px;">
         • 审批流程（同意→发布 / 拒绝→退回）<br>
         • 内容分类器（不同内容走不同 AI 模型）
       </p>
+
     </div>
+
     <div class="box">
       <div class="num">1</div>
-      <p style="color:var(--text-2);font-size:0.85em">个尚存的疑问</p>
-      <p style="font-size:0.85em;text-align:left;margin-top:8px;">
+
+      <div class="i18n-zh"><p style="color:var(--text-2);font-size:0.85em">个尚存的疑问</p></div>
+<div class="i18n-en" hidden><p style="color:var(--text-2);font-size:0.85em">Remaining Question</p></div>
+
+      <div class="i18n-zh"><p style="font-size:0.85em;text-align:left;margin-top:8px;">
         条件边函数如果返回了映射字典中没有的值会怎样？（答案在盲区测试 Q3）
-      </p>
+      </p></div>
+<div class="i18n-en" hidden><p style="font-size:0.85em;text-align:left;margin-top:8px;">
+        条件边函数如果返回了映射字典中没有的值会怎样？（答案在盲区测试 Q3）
+      </p></div>
+
     </div>
+
   </div>
+
 
   <div class="alert alert-green">
-    <strong>明日第一个任务：</strong>不看文档，默写一个 StateGraph 构建流程（State → Node → Edge → compile → invoke）。用时 &lt; 5 分钟。
+    <div class="i18n-zh"><strong>明日第一个任务：</strong></div>
+<div class="i18n-en" hidden><strong>First task for tomorrow: </strong></div>不看文档，默写一个 StateGraph 构建流程（State → Node → Edge → compile → invoke）。用时 &lt; 5 分钟。
   </div>
+
 </div>
 
+
 <!-- ════════════════ CHEAT SHEET ════════════════ -->
-<h2>📝 速查卡</h2>
+<div class="i18n-zh"><h2>📝 速查卡</h2></div>
+<div class="i18n-en" hidden><h2>📝 速查卡</h2></div>
+
 
 <div class="card accent-left">
   <pre><code><span class="cmt"># State 定义</span>
 <span class="kw">class</span> <span class="type">State</span>(TypedDict):
     field: type
 
-<span class="cmt"># 固定边</span>
+<span class="i18n-zh" style="display:inline"><span class="cmt"># 固定边</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Fixed edge</span></span>
 builder.add_edge(<span class="str">"from"</span>, <span class="str">"to"</span>)
 
 <span class="cmt"># 条件边</span>
@@ -293,35 +443,50 @@ END    <span class="cmt"># 出口</span>
 <span class="cmt"># 节点函数</span>
 <span class="kw">def</span> <span class="fn">my_node</span>(state: State) -> dict:
     <span class="kw">return</span> {<span class="str">"field"</span>: new_value}  <span class="cmt"># 只返回要更新的字段</span></code></pre>
+
 </div>
+
 
 <!-- ════════════════ ECHO ════════════════ -->
 <div class="phase">
   <span class="phase-num">Phase 4 · Echo</span>
   <h3>🔄 间隔回响 <span class="timer"><span class="clock">⏱</span> 下次课开头 2 分钟</span></h3>
+
   <p>下次课（L02）开始时：</p>
+
   <ol>
     <li>默写 L01 的三句话</li>
+
     <li>口头解释"条件边函数返回值未在映射字典中时会怎样"</li>
+
     <li>打开 L02 的 Ignition 热身</li>
+
   </ol>
+
 </div>
+
 
 <p style="margin-top:48px; padding-top:20px; border-top:1px solid var(--border); color:var(--text-2); font-size:0.85em; text-align:center;">
   L01 · State / Node / Edge 深度解析 · <span id="next-lesson-link"><a href="L02-first-llm-agent.html">下一课：LLM 节点 + 条件边 →</a></span>
 </p>
 
+
 <div class="lesson-actions">
   <div id="complete-section"></div>
+
   <details class="notes-panel">
     <summary>📝 学习笔记</summary>
+
     <textarea id="lesson-notes" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- Reducer 的合并语义我原来理解错了...&#10;- 条件边返回未映射的值会导致 ValueError&#10;- 我用 StateGraph 类比了工作流引擎..."></textarea>
     <div class="notes-actions">
       <button onclick="_exportNotes()">💾 保存到文件</button>
       <button onclick="_importNotes()">📂 加载文件</button>
     </div>
+
   </details>
+
 </div>
+
 
 <script src="../js/i18n-data.js"></script>
 <script src="../js/i18n.js"></script>
@@ -330,4 +495,5 @@ END    <span class="cmt"># 出口</span>
 
 <script src="../js/pomodoro.js"></script>
 </body>
+
 </html>

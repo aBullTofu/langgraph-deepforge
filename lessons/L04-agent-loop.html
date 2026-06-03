@@ -1,24 +1,60 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L04 · ReAct 循环 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head><body>
-<nav class="nav-bar"><a href="../index.html">🏠 总览</a><a href="../reference/meta-learning-guide.html">🧠 元学习</a><a href="../reference/fables.html">📖 寓言集</a><a href="../reference/pitfalls.html">⚠️ 避坑</a><a href="L01-state-nodes-edges.html">L01</a><a href="L02-first-llm-agent.html">L02</a><a href="L03-tools.html">L03</a><a href="L04-agent-loop.html" class="active">L04</a><a href="L05-memory-persistence.html">L05</a></nav>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L04 · ReAct 循环 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head>
+<body>
+<nav class="nav-bar"><div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
+<div class="i18n-en" hidden><a href="../index.html">🏠 总览</a></div><div class="i18n-zh"><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div>
+<div class="i18n-en" hidden><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div><div class="i18n-zh"><a href="../reference/fables.html">📖 寓言集</a></div>
+<div class="i18n-en" hidden><a href="../reference/fables.html">📖 Fable Collection</a></div><div class="i18n-zh"><a href="../reference/pitfalls.html">⚠️ 避坑</a></div>
+<div class="i18n-en" hidden><a href="../reference/pitfalls.html">⚠️ 避坑</a></div><a href="L01-state-nodes-edges.html">L01</a><a href="L02-first-llm-agent.html">L02</a><a href="L03-tools.html">L03</a><a href="L04-agent-loop.html" class="active">L04</a><a href="L05-memory-persistence.html">L05</a></nav>
+
 
 <div class="phase" data-phase="ignition"><span class="phase-num">Phase 0 · Ignition</span><h3>⚡ 认知点火 <span class="timer"><span class="clock">⏱</span> 2 分钟</span></h3>
-<p>L03 用了 <code>ToolNode</code>——便利，但是黑盒。试着回答：</p>
-<div class="scenario"><div class="role">🔥 点火问题</div><p class="quote">"如果工具调用失败（网络超时/参数错误），ToolNode 会怎么做？如果你想在执行工具前加权限检查、记录每次调用耗时、或者对大结果截断——你能改 ToolNode 的行为吗？"</p></div>
-<p>ToolNode 对简单场景足够，但当你需要<strong>完全控制</strong>时，必须手动实现。</p></div>
 
-<div class="phase" data-phase="fable"><span class="phase-num">Phase 1 · Fable</span><h3>📖 寓言：侦探的方法</h3>
-<div class="card" style="border-color:var(--purple)"><p style="font-family:Georgia,serif;line-height:1.9">福尔摩斯每接一个案子，不会直接给答案。他先<strong>推理</strong>："脚印说明凶手身高六尺；窗台上的烟灰是印度雪茄。"然后<strong>行动</strong>：派人去码头查乘客名单。然后<strong>观察</strong>：拿到名单，发现名字和线索对上了。然后<strong>继续推理</strong>……这样一直循环，直到他站起来说："华生，我知道凶手是谁了。"华生问他为什么不凭直觉办案。福尔摩斯说："直觉只能解决你已经见过一百遍的案子。对于真正的谜题，你需要一套方法。"</p><div class="reveal">🔮 揭示：ReAct = Reasoning + Acting。思考→行动→观察→再思考，是 Agent 的核心执行模式。</div><a href="../reference/fables.html#fable-4">📖 完整寓言 →</a></div></div>
+<p>L03 用了 <code>ToolNode</code>——便利，但是黑盒。试着回答：</p>
+
+<div class="scenario"><div class="role">🔥 点火问题</div>
+<div class="i18n-zh"><p class="quote">"如果工具调用失败（网络超时/参数错误），ToolNode 会怎么做？如果你想在执行工具前加权限检查、记录每次调用耗时、或者对大结果截断——你能改 ToolNode 的行为吗？"</p></div>
+<div class="i18n-en" hidden><p class="quote">"如果工具调用失败（网络超时/参数错误），ToolNode 会怎么做？如果你想在执行工具前加权限检查、记录每次调用耗时、或者对大结果截断——你能改 ToolNode 的行为吗？"</p></div>
+</div>
+
+<p>ToolNode 对简单场景足够，但当你需要<strong>完全控制</strong>时，必须手动实现。</p>
+</div>
+
+
+<div class="phase" data-phase="fable"><span class="phase-num">Phase 1 · Fable</span><div class="i18n-zh"><h3>📖 寓言：侦探的方法</h3></div>
+<div class="i18n-en" hidden><h3>📖 寓言：侦探的方法</h3></div>
+
+<div class="card" style="border-color:var(--purple)"><p style="font-family:Georgia,serif;line-height:1.9">福尔摩斯每接一个案子，不会直接给答案。他先<strong>推理</strong>："脚印说明凶手身高六尺；窗台上的烟灰是印度雪茄。"然后<strong>行动</strong>：派人去码头查乘客名单。然后<strong>观察</strong>：拿到名单，发现名字和线索对上了。然后<strong>继续推理</strong>……这样一直循环，直到他站起来说："华生，我知道凶手是谁了。"华生问他为什么不凭直觉办案。福尔摩斯说："直觉只能解决你已经见过一百遍的案子。对于真正的谜题，你需要一套方法。"</p>
+<div class="reveal">🔮 揭示：ReAct = Reasoning + Acting。思考→行动→观察→再思考，是 Agent 的核心执行模式。</div>
+<div class="i18n-zh"><a href="../reference/fables.html#fable-4">📖 完整寓言 →</a></div>
+<div class="i18n-en" hidden><a href="../reference/fables.html#fable-4">📖 完整寓言 →</a></div></div>
+</div>
+
 
 <div class="phase" data-phase="godview"><span class="phase-num">Phase 1 · GodView</span><h3>🗺 上帝视角 <span class="timer"><span class="clock">⏱</span> 7 分钟</span></h3>
-<div class="card accent-left"><h3>📋 通关条件</h3><p><strong>手动实现</strong>完整的 ReAct 循环——不依赖 ToolNode，手写 think→act→observe 循环，包含防死循环和完整错误处理。</p></div>
-<div class="card green-left"><h3>🧠 心智模型：三拍子循环</h3>
+
+<div class="card accent-left"><div class="i18n-zh"><h3>📋 通关条件</h3></div>
+<div class="i18n-en" hidden><h3>📋 通关条件</h3></div>
+<p><strong>手动实现</strong>完整的 ReAct 循环——不依赖 ToolNode，手写 think→act→observe 循环，包含防死循环和完整错误处理。</p>
+</div>
+
+<div class="card green-left"><div class="i18n-zh"><h3>🧠 心智模型：三拍子循环</h3></div>
+<div class="i18n-en" hidden><h3>🧠 心智模型：三拍子循环</h3></div>
+
 <pre style="background:none;border:none;font-family:var(--mono)">[LLM 思考: 需要查天气] → [执行工具: weather("上海")] → [观察: "28°C"] → [再思考: 可以回复了]</pre>
-<p><strong>vs 普通代码：</strong>顺序执行 A→B→C→结束。ReAct：执行到 B 时可能回到 A，循环到条件满足为止。</p></div></div>
+
+<p><strong>vs 普通代码：</strong>顺序执行 A→B→C→结束。ReAct：执行到 B 时可能回到 A，循环到条件满足为止。</p>
+</div>
+</div>
+
 
 <div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><h3>⚔️ 实战编码 <span class="timer"><span class="clock">⏱</span> 30 分钟</span></h3>
+
 <p>创建 <code>l04_react_agent.py</code>：</p>
 
-<h4>核心：手写 act() 替代 ToolNode</h4>
+
+<div class="i18n-zh"><h4>核心：手写 act() 替代 ToolNode</h4></div>
+<div class="i18n-en" hidden><h4>核心：手写 act() 替代 ToolNode</h4></div>
+
 <pre><code><span class="kw">def</span> <span class="fn">act</span>(state: AgentState) -> dict:
     <span class="cmt">"""手动执行工具——可以加日志、权限检查、结果截断"""</span>
     last_msg = state[<span class="str">"messages"</span>][-1]
@@ -29,12 +65,15 @@
             tool = tools_by_name.get(tc[<span class="str">"name"</span>])
             result = tool.invoke(tc[<span class="str">"args"</span>]) <span class="kw">if</span> tool <span class="kw">else</span> <span class="str">f"错误：未找到工具"</span>
         <span class="kw">except</span> Exception <span class="kw">as</span> e:
-            result = <span class="str">f"工具失败：{e}。请调整参数后重试。"</span>  <span class="cmt"># ⭐ 错误返回给 LLM</span>
+            result = <span class="str">f"工具失败：{e}。请调整参数后重试。"</span>  <span class="i18n-zh" style="display:inline"><span class="cmt"># ⭐ 错误返回给 LLM</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Return error to LLM</span></span>
         <span class="kw">print</span>(<span class="str">f"[观察] {result}"</span>)
         tool_msgs.append(ToolMessage(str(result), tool_call_id=tc[<span class="str">"id"</span>]))
     <span class="kw">return</span> {<span class="str">"messages"</span>: tool_msgs, <span class="str">"tool_calls"</span>: state.get(<span class="str">"tool_calls"</span>, 0) + <span class="fn">len</span>(tool_msgs)}</code></pre>
 
-<h4>防死循环</h4>
+
+<div class="i18n-zh"><h4>防死循环</h4></div>
+<div class="i18n-en" hidden><h4>Preventing Infinite Loops</h4></div>
+
 <pre><code>MAX_CALLS = 5
 <span class="kw">def</span> <span class="fn">should_continue</span>(state) -> str:
     <span class="kw">if</span> state.get(<span class="str">"tool_calls"</span>, 0) >= MAX_CALLS: <span class="kw">return</span> END
@@ -42,7 +81,10 @@
     <span class="kw">if</span> <span class="kw">hasattr</span>(last, <span class="str">"tool_calls"</span>) <span class="kw">and</span> last.tool_calls: <span class="kw">return</span> <span class="str">"act"</span>
     <span class="kw">return</span> END</code></pre>
 
-<h4>组装</h4>
+
+<div class="i18n-zh"><h4>组装</h4></div>
+<div class="i18n-en" hidden><h4>Assembly</h4></div>
+
 <pre><code>builder = StateGraph(AgentState)
 builder.add_node(<span class="str">"think"</span>, llm_node); builder.add_node(<span class="str">"act"</span>, act)
 builder.add_edge(START, <span class="str">"think"</span>)
@@ -50,7 +92,10 @@ builder.add_conditional_edges(<span class="str">"think"</span>, should_continue,
 builder.add_edge(<span class="str">"act"</span>, <span class="str">"think"</span>)
 graph = builder.compile()</code></pre>
 
-<h4>🔍 LangSmith 可观测性</h4>
+
+<div class="i18n-zh"><h4>🔍 LangSmith 可观测性</h4></div>
+<div class="i18n-en" hidden><h4>🔍 LangSmith 可观测性</h4></div>
+
 <pre><code><span class="cmt"># 在终端设置（CMD）：</span>
 <span class="cmt"># set LANGSMITH_TRACING=true</span>
 <span class="cmt"># set LANGSMITH_API_KEY=你的key</span>
@@ -58,31 +103,69 @@ graph = builder.compile()</code></pre>
 <span class="cmt"># 然后正常运行 uv run python l04_react_agent.py</span>
 <span class="cmt"># 打开 https://smith.langchain.com 查看每一步的 trace</span></code></pre>
 
-<div class="alert alert-warn"><strong>⚠️ 避坑 GRAPH_RECURSION_LIMIT：</strong>Agent 一直循环不停？检查：① MAX_CALLS 限制是否生效 ② should_continue 是否正确处理了 ToolMessage（工具返回后 tool_calls 为 None）③ 默认递归上限 25，可在 compile(recursion_limit=50) 调整。</div></div>
 
-<div class="phase" data-phase="forge"><span class="phase-num">Phase 3 · Forge</span><h3>🔨 知识淬炼</h3>
-<div class="card orange-left"><h4>🏗 你的挑战</h4><ol><li>给 act() 加入<strong>结果截断</strong>：超过 1000 字符只保留前 500</li><li>给 act() 加入<strong>权限检查</strong>：创建一个 <code>delete_database</code> 的 mock 工具，执行前打印"⚠️ 危险操作！"</li><li>设置 LangSmith 并运行一次，观察 trace 中的每一步</li></ol></div>
-<div class="review-321"><div class="box"><div class="num">3</div><p style="font-size:0.8em">① think→act→observe 是循环  ② 手动 act 让你完全控错  ③ MAX_CALLS 防死循环</p></div><div class="box"><div class="num">2</div><p style="font-size:0.8em">• 智能客服自动查询 • 数据分析流水线</p></div><div class="box"><div class="num">1</div><p style="font-size:0.8em">act() 中 try/except 返回错误字符串 vs 直接 raise——哪种更好？</p></div></div></div>
-<h2>📝 速查卡</h2>
-<div class="card accent-left"><pre><code><span class="cmt"># ReAct 四类消息</span>
+<div class="alert alert-warn"><div class="i18n-zh"><strong>⚠️ 避坑 GRAPH_RECURSION_LIMIT：</strong></div>
+<div class="i18n-en" hidden><strong>⚠️ 避坑 GRAPH_RECURSION_LIMIT：</strong></div>Agent 一直循环不停？检查：① MAX_CALLS 限制是否生效 ② should_continue 是否正确处理了 ToolMessage（工具返回后 tool_calls 为 None）③ 默认递归上限 25，可在 compile(recursion_limit=50) 调整。</div>
+</div>
+
+
+<div class="phase" data-phase="forge"><span class="phase-num">Phase 3 · Forge</span><div class="i18n-zh"><h3>🔨 知识淬炼</h3></div>
+<div class="i18n-en" hidden><h3>🔨 知识淬炼</h3></div>
+
+<div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
+<div class="i18n-en" hidden><h4>🏗 你的挑战</h4></div>
+<ol><li>给 act() 加入<strong>结果截断</strong>：超过 1000 字符只保留前 500</li>
+<li>给 act() 加入<strong>权限检查</strong>：创建一个 <code>delete_database</code> 的 mock 工具，执行前打印"⚠️ 危险操作！"</li>
+<div class="i18n-zh"><li>设置 LangSmith 并运行一次，观察 trace 中的每一步</li></div>
+<div class="i18n-en" hidden><li>设置 LangSmith 并运行一次，观察 trace 中的每一步</li></div>
+</ol>
+</div>
+
+<div class="review-321"><div class="box"><div class="num">3</div>
+<div class="i18n-zh"><p style="font-size:0.8em">① think→act→observe 是循环  ② 手动 act 让你完全控错  ③ MAX_CALLS 防死循环</p></div>
+<div class="i18n-en" hidden><p style="font-size:0.8em">① think→act→observe 是循环  ② 手动 act 让你完全控错  ③ MAX_CALLS 防死循环</p></div>
+</div>
+<div class="box"><div class="num">2</div>
+<div class="i18n-zh"><p style="font-size:0.8em">• 智能客服自动查询 • 数据分析流水线</p></div>
+<div class="i18n-en" hidden><p style="font-size:0.8em">• 智能客服自动查询 • 数据分析流水线</p></div>
+</div>
+<div class="box"><div class="num">1</div>
+<div class="i18n-zh"><p style="font-size:0.8em">act() 中 try/except 返回错误字符串 vs 直接 raise——哪种更好？</p></div>
+<div class="i18n-en" hidden><p style="font-size:0.8em">act() 中 try/except 返回错误字符串 vs 直接 raise——哪种更好？</p></div>
+</div>
+</div>
+</div>
+
+<div class="i18n-zh"><h2>📝 速查卡</h2></div>
+<div class="i18n-en" hidden><h2>📝 速查卡</h2></div>
+
+<div class="card accent-left"><pre><code><span class="i18n-zh" style="display:inline"><span class="cmt"># ReAct 四类消息</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># ReAct four message types</span></span>
 HumanMessage → AIMessage(tool_calls=[...]) → ToolMessage(content, id) → AIMessage(回复)
-<span class="cmt"># 检测 tool_calls</span>
+<span class="i18n-zh" style="display:inline"><span class="cmt"># 检测 tool_calls</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Detect tool_calls</span></span>
 <span class="kw">if</span> <span class="kw">hasattr</span>(msg, <span class="str">"tool_calls"</span>) <span class="kw">and</span> msg.tool_calls: ...
-<span class="cmt"># 防死循环</span>
-graph = builder.compile()  <span class="cmt"># 默认 recursion_limit=25</span></code></pre></div>
+<span class="i18n-zh" style="display:inline"><span class="cmt"># 防死循环</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Prevent infinite loops</span></span>
+graph = builder.compile()  <span class="i18n-zh" style="display:inline"><span class="cmt"># 默认 recursion_limit=25</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># default recursion_limit=25</span></span></code></pre>
+</div>
+
 <p style="margin-top:48px;text-align:center;color:var(--text-2)">🏆 <strong>基础篇完成！</strong>做<a href="../reference/meta-learning-guide.html">盲区测试 Q1-Q5</a> → <span id="next-lesson-link"><a href="L05-memory-persistence.html">L05 记忆与持久化 →</a></span></p>
+
 
 <div class="lesson-actions">
   <div id="complete-section"></div>
+
   <details class="notes-panel">
     <summary>📝 学习笔记</summary>
+
     <textarea id="lesson-notes" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
     <div class="notes-actions">
       <button onclick="_exportNotes()">💾 保存到文件</button>
       <button onclick="_importNotes()">📂 加载文件</button>
     </div>
+
   </details>
+
 </div>
+
 
 <script src="../js/i18n-data.js"></script>
 <script src="../js/i18n.js"></script>
@@ -90,4 +173,5 @@ graph = builder.compile()  <span class="cmt"># 默认 recursion_limit=25</span><
 <script src="../js/app.js"></script>
 
 <script src="../js/pomodoro.js"></script>
-</body></html>
+</body>
+</html>

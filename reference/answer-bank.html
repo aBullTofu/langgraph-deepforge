@@ -57,17 +57,22 @@ pre code { background: none; }
 .answer-nav a { margin: 0 6px; font-size: 0.85em; }
 </style>
 </head>
+
 <body>
 
 <div class="hero">
   <h1>📖 面试答案库</h1>
+
   <p class="subtitle">100 道题目 · 完整答案 · 代码示例 · 面试官评分标准</p>
+
   <div class="badge-row">
     <span class="badge badge-green">含完整代码</span>
     <span class="badge badge-yellow">评分标准</span>
     <span class="badge badge-red">面试官视角</span>
   </div>
+
 </div>
+
 
 <!-- Quick nav -->
 <div class="answer-nav">
@@ -79,44 +84,82 @@ pre code { background: none; }
   L5: <a href="#A86">A86</a> <a href="#A87">A87</a> <a href="#A88">A88</a> <a href="#A89">A89</a> <a href="#A90">A90</a> <a href="#A91">A91</a> <a href="#A92">A92</a> <a href="#A93">A93</a> <a href="#A94">A94</a> <a href="#A95">A95</a> <a href="#A96">A96</a> <a href="#A97">A97</a> <a href="#A98">A98</a> <a href="#A99">A99</a> <a href="#A100">A100</a>
 </div>
 
+
 <!-- ============ L1 ANSWERS ============ -->
 <div class="answer-card" id="A1">
   <h2>A1 · Self-Attention 机制</h2>
 
+
   <h3>核心答案</h3>
+
   <p>Self-Attention 的核心思想是：<strong>让序列中的每个 token 都能直接"看到"序列中的所有其他 token，并根据相关性加权聚合信息</strong>。公式为：</p>
+
   <pre><code>Attention(Q, K, V) = softmax(QK^T / √d_k) × V</code></pre>
+
   <p><strong>直觉理解：</strong></p>
+
   <ul>
     <li><strong>Q (Query)</strong>：当前 token 在"问"："哪些 token 和我相关？"</li>
+
     <li><strong>K (Key)</strong>：每个 token 在"答"："我是这种类型的 token"</li>
+
     <li><strong>V (Value)</strong>：每个 token 的"实际内容"，被提取和聚合</li>
+
     <li><strong>QK^T</strong>：计算注意力分数（相关性矩阵）</li>
+
     <li><strong>softmax</strong>：归一化为概率分布</li>
+
     <li><strong>× V</strong>：按注意力权重加权聚合</li>
+
   </ul>
+
   <p><strong>"Attention Is All You Need"</strong> 的含义：Transformer 完全抛弃了 RNN/LSTM 的循环结构，仅用 Attention 机制就实现了序列建模，带来了三个革命性优势：</p>
+
   <ol>
     <li><strong>并行计算</strong>：所有 token 同时处理，无需像 RNN 那样串行</li>
+
     <li><strong>长距离依赖</strong>：O(1) 的路径长度，任意两个 token 之间直接交互</li>
+
     <li><strong>可解释性</strong>：注意力权重可视化了模型"关注"的位置</li>
+
   </ol>
+
 
   <div class="rubric">
     <div class="title">面试官评分标准</div>
+
     <table>
-      <tr><td>⭐ 初级</td><td>能说出 Q/K/V 三个矩阵，给出公式</td></tr>
-      <tr><td>⭐⭐ 中级</td><td>能解释除以 √d_k 的原因（防止梯度消失），理解 Multi-Head 的动机（多子空间建模）</td></tr>
-      <tr><td>⭐⭐⭐ 高级</td><td>能讨论复杂度 O(n²) 及优化方案（Flash Attention, MQA, GQA），能徒手写出 NumPy 实现</td></tr>
-      <tr><td>🏆 专家</td><td>能讨论 Attention 的变体演进（MHA→MQA→GQA→MLA），理解 DeepSeek MLA 的 KV cache 压缩原理</td></tr>
+      <tr><div class="i18n-zh"><td>⭐ 初级</td></div>
+<div class="i18n-en" hidden><td>⭐ 初级</td></div><div class="i18n-zh"><td>能说出 Q/K/V 三个矩阵，给出公式</td></div>
+<div class="i18n-en" hidden><td>能说出 Q/K/V 三个矩阵，给出公式</td></div></tr>
+
+      <tr><div class="i18n-zh"><td>⭐⭐ 中级</td></div>
+<div class="i18n-en" hidden><td>⭐⭐ 中级</td></div><div class="i18n-zh"><td>能解释除以 √d_k 的原因（防止梯度消失），理解 Multi-Head 的动机（多子空间建模）</td></div>
+<div class="i18n-en" hidden><td>能解释除以 √d_k 的原因（防止梯度消失），理解 Multi-Head 的动机（多子空间建模）</td></div></tr>
+
+      <tr><div class="i18n-zh"><td>⭐⭐⭐ 高级</td></div>
+<div class="i18n-en" hidden><td>⭐⭐⭐ 高级</td></div><div class="i18n-zh"><td>能讨论复杂度 O(n²) 及优化方案（Flash Attention, MQA, GQA），能徒手写出 NumPy 实现</td></div>
+<div class="i18n-en" hidden><td>能讨论复杂度 O(n²) 及优化方案（Flash Attention, MQA, GQA），能徒手写出 NumPy 实现</td></div></tr>
+
+      <tr><div class="i18n-zh"><td>🏆 专家</td></div>
+<div class="i18n-en" hidden><td>🏆 专家</td></div><div class="i18n-zh"><td>能讨论 Attention 的变体演进（MHA→MQA→GQA→MLA），理解 DeepSeek MLA 的 KV cache 压缩原理</td></div>
+<div class="i18n-en" hidden><td>能讨论 Attention 的变体演进（MHA→MQA→GQA→MLA），理解 DeepSeek MLA 的 KV cache 压缩原理</td></div></tr>
+
     </table>
+
   </div>
+
 </div>
 
-<div class="answer-card" id="A2">
-  <h2>A2 · NumPy 实现 Scaled Dot-Product Attention</h2>
 
-  <h3>标准实现</h3>
+<div class="answer-card" id="A2">
+  <div class="i18n-zh"><h2>A2 · NumPy 实现 Scaled Dot-Product Attention</h2></div>
+<div class="i18n-en" hidden><h2>A2 · NumPy 实现 Scaled Dot-Product Attention</h2></div>
+
+
+  <div class="i18n-zh"><h3>标准实现</h3></div>
+<div class="i18n-en" hidden><h3>Standard Implementation</h3></div>
+
   <pre><code>import numpy as np
 
 def scaled_dot_product_attention(Q, K, V, mask=None):
@@ -147,187 +190,343 @@ def scaled_dot_product_attention(Q, K, V, mask=None):
 
     return output, attention_weights</code></pre>
 
-  <h3>面试要点</h3>
+
+  <div class="i18n-zh"><h3>面试要点</h3></div>
+<div class="i18n-en" hidden><h3>Interview Key Points</h3></div>
+
   <ul>
     <li>必须做 <code>scores - scores_max</code> 保证数值稳定性，直接用 <code>np.exp(scores)</code> 会在 scores 较大时溢出</li>
+
     <li>mask 中 padding 位置填 <code>-1e9</code> 而非 <code>-np.inf</code>，因为 softmax 遇到 NaN 会传播</li>
-    <li>能讨论 batch matrix multiplication 的维度变换是加分项</li>
+
+    <div class="i18n-zh"><li>能讨论 batch matrix multiplication 的维度变换是加分项</li></div>
+<div class="i18n-en" hidden><li>能讨论 batch matrix multiplication 的维度变换是加分项</li></div>
+
   </ul>
+
 
   <div class="rubric">
     <div class="title">面试官评分标准</div>
+
     <table>
-      <tr><td>⭐ 初级</td><td>能写出基本的矩阵运算，但可能忽略维度细节</td></tr>
-      <tr><td>⭐⭐ 高级</td><td>数值稳定版（subtract max）、正确处理 mask、正确的 batch 维度</td></tr>
-      <tr><td>🏆 专家</td><td>讨论 Flash Attention 原理（tiling + recomputation），或写出 causal self-attention 变体</td></tr>
+      <tr><div class="i18n-zh"><td>⭐ 初级</td></div>
+<div class="i18n-en" hidden><td>⭐ 初级</td></div><div class="i18n-zh"><td>能写出基本的矩阵运算，但可能忽略维度细节</td></div>
+<div class="i18n-en" hidden><td>能写出基本的矩阵运算，但可能忽略维度细节</td></div></tr>
+
+      <tr><div class="i18n-zh"><td>⭐⭐ 高级</td></div>
+<div class="i18n-en" hidden><td>⭐⭐ 高级</td></div><div class="i18n-zh"><td>数值稳定版（subtract max）、正确处理 mask、正确的 batch 维度</td></div>
+<div class="i18n-en" hidden><td>数值稳定版（subtract max）、正确处理 mask、正确的 batch 维度</td></div></tr>
+
+      <tr><div class="i18n-zh"><td>🏆 专家</td></div>
+<div class="i18n-en" hidden><td>🏆 专家</td></div><div class="i18n-zh"><td>讨论 Flash Attention 原理（tiling + recomputation），或写出 causal self-attention 变体</td></div>
+<div class="i18n-en" hidden><td>讨论 Flash Attention 原理（tiling + recomputation），或写出 causal self-attention 变体</td></div></tr>
+
     </table>
+
   </div>
+
 </div>
+
 
 <div class="answer-card" id="A3">
-  <h2>A3 · 为什么除以 √d_k？</h2>
+  <div class="i18n-zh"><h2>A3 · 为什么除以 √d_k？</h2></div>
+<div class="i18n-en" hidden><h2>A3 · 为什么除以 √d_k？</h2></div>
 
-  <h3>核心答案</h3>
+
+  <div class="i18n-zh"><h3>核心答案</h3></div>
+<div class="i18n-en" hidden><h3>Core Answer</h3></div>
+
   <p><strong>原因：防止点积方差随维度增大而增大，导致 softmax 梯度消失。</strong></p>
+
   <p><strong>数学推导：</strong></p>
+
   <ul>
-    <li>假设 Q 和 K 的每个元素是独立同分布的，均值为 0，方差为 1</li>
+    <div class="i18n-zh"><li>假设 Q 和 K 的每个元素是独立同分布的，均值为 0，方差为 1</li></div>
+<div class="i18n-en" hidden><li>假设 Q 和 K 的每个元素是独立同分布的，均值为 0，方差为 1</li></div>
+
     <li>QK^T 是 d_k 个独立随机变量的点积和，其<strong>方差为 d_k</strong></li>
-    <li>如果不缩放，当 d_k 很大时（如 64 或 128），QK^T 的值会很大</li>
-    <li>大的值经过 softmax 后，分布变得极度尖锐（接近 one-hot）</li>
+
+    <div class="i18n-zh"><li>如果不缩放，当 d_k 很大时（如 64 或 128），QK^T 的值会很大</li></div>
+<div class="i18n-en" hidden><li>如果不缩放，当 d_k 很大时（如 64 或 128），QK^T 的值会很大</li></div>
+
+    <div class="i18n-zh"><li>大的值经过 softmax 后，分布变得极度尖锐（接近 one-hot）</li></div>
+<div class="i18n-en" hidden><li>大的值经过 softmax 后，分布变得极度尖锐（接近 one-hot）</li></div>
+
     <li>softmax 的梯度在尖锐分布下几乎为零 → <strong>梯度消失</strong></li>
-    <li>除以 √d_k 将方差缩放回 1，使 softmax 输出保持平滑，梯度可以有效传播</li>
+
+    <div class="i18n-zh"><li>除以 √d_k 将方差缩放回 1，使 softmax 输出保持平滑，梯度可以有效传播</li></div>
+<div class="i18n-en" hidden><li>除以 √d_k 将方差缩放回 1，使 softmax 输出保持平滑，梯度可以有效传播</li></div>
+
   </ul>
+
   <p><strong>如果是 d_k 而不是 √d_k？</strong>除以 d_k 会导致方差变为 1/d_k，softmax 过于平滑（接近均匀分布），信息丢失。</p>
 
+
   <div class="rubric">
     <div class="title">面试官评分标准</div>
+
     <table>
-      <tr><td>⭐ 初级</td><td>"防止内积太大"——知道结果，不知道原因</td></tr>
-      <tr><td>⭐⭐ 中级</td><td>能解释方差增大的原因（独立同分布点积）和梯度消失的机制</td></tr>
-      <tr><td>🏆 高级</td><td>能推导数学过程，并讨论为什么是 √d_k 而不是 d_k 或其他</td></tr>
+      <tr><div class="i18n-zh"><td>⭐ 初级</td></div>
+<div class="i18n-en" hidden><td>⭐ 初级</td></div><div class="i18n-zh"><td>"防止内积太大"——知道结果，不知道原因</td></div>
+<div class="i18n-en" hidden><td>"防止内积太大"——知道结果，不知道原因</td></div></tr>
+
+      <tr><div class="i18n-zh"><td>⭐⭐ 中级</td></div>
+<div class="i18n-en" hidden><td>⭐⭐ 中级</td></div><div class="i18n-zh"><td>能解释方差增大的原因（独立同分布点积）和梯度消失的机制</td></div>
+<div class="i18n-en" hidden><td>能解释方差增大的原因（独立同分布点积）和梯度消失的机制</td></div></tr>
+
+      <tr><div class="i18n-zh"><td>🏆 高级</td></div>
+<div class="i18n-en" hidden><td>🏆 高级</td></div><div class="i18n-zh"><td>能推导数学过程，并讨论为什么是 √d_k 而不是 d_k 或其他</td></div>
+<div class="i18n-en" hidden><td>能推导数学过程，并讨论为什么是 √d_k 而不是 d_k 或其他</td></div></tr>
+
     </table>
+
   </div>
+
 </div>
+
 
 <div class="answer-card" id="A4">
-  <h2>A4 · 位置编码（Sinusoidal vs RoPE）</h2>
+  <div class="i18n-zh"><h2>A4 · 位置编码（Sinusoidal vs RoPE）</h2></div>
+<div class="i18n-en" hidden><h2>A4 · 位置编码（Sinusoidal vs RoPE）</h2></div>
 
-  <h3>核心答案</h3>
+
+  <div class="i18n-zh"><h3>核心答案</h3></div>
+<div class="i18n-en" hidden><h3>Core Answer</h3></div>
+
   <p><strong>Sinusoidal Positional Encoding</strong>（Transformer 原始论文）：</p>
+
   <pre><code>PE(pos, 2i)   = sin(pos / 10000^(2i/d_model))
 PE(pos, 2i+1) = cos(pos / 10000^(2i/d_model))</code></pre>
+
   <p>优点：可以外推到训练时未见过的序列长度。缺点：绝对位置编码，不直接建模 token 间的<strong>相对位置关系</strong>。</p>
 
+
   <p><strong>RoPE (Rotary Position Embedding)</strong>（LLaMA, Qwen, DeepSeek 等主流模型使用）：</p>
+
   <ul>
     <li><strong>核心思想</strong>：通过旋转矩阵对 Q 和 K 进行编码，使得 QK^T 的结果自然包含相对位置信息</li>
+
     <li><strong>数学本质</strong>：对 Q 和 K 的每对维度施加一个旋转，旋转角度与位置 m 成正比</li>
+
     <li><strong>关键性质</strong>：RoPE(Q_m, m) · RoPE(K_n, n) = f(Q_m, K_n, m-n)，注意力分数只依赖于<strong>相对位置 m-n</strong></li>
+
   </ul>
+
   <p><strong>RoPE 的优势：</strong></p>
+
   <ol>
     <li><strong>相对位置建模</strong>：天然编码相对位置，符合语言的平移不变性</li>
+
     <li><strong>外推性好</strong>：配合 NTK-aware scaling 或 YaRN 可以很好地外推到更长序列</li>
+
     <li><strong>与 Attention 优雅结合</strong>：旋转变换可以直接融入 QK 计算，不增加额外参数</li>
+
     <li><strong>递减的远程衰减</strong>：相对距离越大，注意力分数自然衰减</li>
+
   </ol>
+
 
   <div class="rubric">
     <div class="title">面试官评分标准</div>
+
     <table>
-      <tr><td>⭐ 初级</td><td>知道 Sinusoidal PE 公式，知道 RoPE 是"旋转位置编码"</td></tr>
-      <tr><td>⭐⭐ 中级</td><td>能解释 RoPE 的旋转矩阵形式，理解"相对位置"的含义</td></tr>
-      <tr><td>🏆 高级</td><td>讨论 NTK-aware / YaRN 外推，知道 MLA (DeepSeek-V2) 如何处理位置编码</td></tr>
+      <tr><div class="i18n-zh"><td>⭐ 初级</td></div>
+<div class="i18n-en" hidden><td>⭐ 初级</td></div><div class="i18n-zh"><td>知道 Sinusoidal PE 公式，知道 RoPE 是"旋转位置编码"</td></div>
+<div class="i18n-en" hidden><td>知道 Sinusoidal PE 公式，知道 RoPE 是"旋转位置编码"</td></div></tr>
+
+      <tr><div class="i18n-zh"><td>⭐⭐ 中级</td></div>
+<div class="i18n-en" hidden><td>⭐⭐ 中级</td></div><div class="i18n-zh"><td>能解释 RoPE 的旋转矩阵形式，理解"相对位置"的含义</td></div>
+<div class="i18n-en" hidden><td>能解释 RoPE 的旋转矩阵形式，理解"相对位置"的含义</td></div></tr>
+
+      <tr><div class="i18n-zh"><td>🏆 高级</td></div>
+<div class="i18n-en" hidden><td>🏆 高级</td></div><div class="i18n-zh"><td>讨论 NTK-aware / YaRN 外推，知道 MLA (DeepSeek-V2) 如何处理位置编码</td></div>
+<div class="i18n-en" hidden><td>讨论 NTK-aware / YaRN 外推，知道 MLA (DeepSeek-V2) 如何处理位置编码</td></div></tr>
+
     </table>
+
   </div>
+
 </div>
+
 
 <div class="answer-card" id="A5">
-  <h2>A5 · LLM 幻觉的分析与治理</h2>
+  <div class="i18n-zh"><h2>A5 · LLM 幻觉的分析与治理</h2></div>
+<div class="i18n-en" hidden><h2>A5 · LLM 幻觉的分析与治理</h2></div>
 
-  <h3>根本原因</h3>
+
+  <div class="i18n-zh"><h3>根本原因</h3></div>
+<div class="i18n-en" hidden><h3>根本原因</h3></div>
+
   <ol>
     <li><strong>训练数据截止</strong>：模型知识有截止日期，无法回答训练后的事件</li>
+
     <li><strong>概率采样本质</strong>：LLM 是 next-token predictor，不是事实数据库。在不确定时仍会"编造"最可能的 token</li>
+
     <li><strong>缺乏 Grounding</strong>：模型没有真实世界的验证机制，无法区分"记忆中的事实"和"生成的错觉"</li>
+
     <li><strong>训练数据噪声</strong>：训练语料本身包含错误信息，模型学习了这些错误</li>
+
     <li><strong>过度泛化</strong>：模型将学到的模式过度应用到不匹配的场景</li>
+
   </ol>
 
-  <h3>工程化解决方案</h3>
+
+  <div class="i18n-zh"><h3>工程化解决方案</h3></div>
+<div class="i18n-en" hidden><h3>工程化解决方案</h3></div>
+
   <ol>
     <li><strong>RAG (Retrieval-Augmented Generation)</strong>：外挂知识库，检索真实文档作为生成依据。核心：检索到的文档作为 Ground Truth 约束生成</li>
+
     <li><strong>Function Calling + 实时数据</strong>：通过 API 获取最新数据（如 Google Search API），而非依赖模型内部知识</li>
+
     <li><strong>Constrained Decoding</strong>：使用 grammar/guidance 约束输出格式（如必须从给定选项中选择），从根本上杜绝编造</li>
+
     <li><strong>LLM-as-Judge + Self-Reflection</strong>：让 Agent 自我检查输出的 factual consistency，标记可疑内容</li>
+
     <li><strong>Citation/Attribution</strong>：要求模型对每个事实声明提供来源引用，无来源的声明标记为"推测"</li>
+
   </ol>
+
 
   <div class="rubric">
     <div class="title">面试官评分标准</div>
+
     <table>
-      <tr><td>⭐ 初级</td><td>只说"用 RAG"</td></tr>
-      <tr><td>⭐⭐ 中级</td><td>区分原因类型（截止/采样/噪声），给出 2-3 种方案</td></tr>
-      <tr><td>🏆 高级</td><td>系统工程视角：检测→溯源→修复→预防的闭环，讨论幻觉率量化</td></tr>
+      <tr><div class="i18n-zh"><td>⭐ 初级</td></div>
+<div class="i18n-en" hidden><td>⭐ 初级</td></div><div class="i18n-zh"><td>只说"用 RAG"</td></div>
+<div class="i18n-en" hidden><td>只说"用 RAG"</td></div></tr>
+
+      <tr><div class="i18n-zh"><td>⭐⭐ 中级</td></div>
+<div class="i18n-en" hidden><td>⭐⭐ 中级</td></div><div class="i18n-zh"><td>区分原因类型（截止/采样/噪声），给出 2-3 种方案</td></div>
+<div class="i18n-en" hidden><td>区分原因类型（截止/采样/噪声），给出 2-3 种方案</td></div></tr>
+
+      <tr><div class="i18n-zh"><td>🏆 高级</td></div>
+<div class="i18n-en" hidden><td>🏆 高级</td></div><div class="i18n-zh"><td>系统工程视角：检测→溯源→修复→预防的闭环，讨论幻觉率量化</td></div>
+<div class="i18n-en" hidden><td>系统工程视角：检测→溯源→修复→预防的闭环，讨论幻觉率量化</td></div></tr>
+
     </table>
+
   </div>
+
 </div>
+
 
 <div class="answer-card" id="A6">
   <h2>A6 · Temperature / Top-p / Top-k</h2>
 
-  <h3>核心答案</h3>
+
+  <div class="i18n-zh"><h3>核心答案</h3></div>
+<div class="i18n-en" hidden><h3>Core Answer</h3></div>
+
   <table style="width:100%; border-collapse:collapse;">
     <tr style="background:var(--surface-2);">
-      <th style="padding:8px; text-align:left;">参数</th>
-      <th style="padding:8px; text-align:left;">机制</th>
-      <th style="padding:8px; text-align:left;">效果</th>
-      <th style="padding:8px; text-align:left;">适用场景</th>
+      <div class="i18n-zh"><th style="padding:8px; text-align:left;">参数</th></div>
+<div class="i18n-en" hidden><th style="padding:8px; text-align:left;">Parameters</th></div>
+      <div class="i18n-zh"><th style="padding:8px; text-align:left;">机制</th></div>
+<div class="i18n-en" hidden><th style="padding:8px; text-align:left;">Mechanism</th></div>
+      <div class="i18n-zh"><th style="padding:8px; text-align:left;">效果</th></div>
+<div class="i18n-en" hidden><th style="padding:8px; text-align:left;">Effect</th></div>
+      <div class="i18n-zh"><th style="padding:8px; text-align:left;">适用场景</th></div>
+<div class="i18n-en" hidden><th style="padding:8px; text-align:left;">适用场景</th></div>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>Temperature</strong></td>
-      <td style="padding:8px;">在 softmax 前对 logits 除以 T</td>
+      <div class="i18n-zh"><td style="padding:8px;">在 softmax 前对 logits 除以 T</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">在 softmax 前对 logits 除以 T</td></div>
       <td style="padding:8px;">T→0：确定性输出<br>T=1：原始分布<br>T>1：更随机</td>
       <td style="padding:8px;">事实回答 T=0~0.3<br>创意写作 T=0.7~1.0</td>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>Top-k</strong></td>
-      <td style="padding:8px;">只保留概率最高的 k 个 token</td>
+      <div class="i18n-zh"><td style="padding:8px;">只保留概率最高的 k 个 token</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">只保留概率最高的 k 个 token</td></div>
       <td style="padding:8px;">k 小：更保守<br>k 大：更多样</td>
       <td style="padding:8px;">k=40~50 常用<br>固定截断</td>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>Top-p (nucleus)</strong></td>
-      <td style="padding:8px;">保留累积概率达到 p 的最小 token 集合</td>
+      <div class="i18n-zh"><td style="padding:8px;">保留累积概率达到 p 的最小 token 集合</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">保留累积概率达到 p 的最小 token 集合</td></div>
       <td style="padding:8px;">p 小：更保守<br>动态候选集</td>
       <td style="padding:8px;">p=0.9~0.95<br>比 Top-k 更灵活</td>
     </tr>
+
   </table>
+
   <p><strong>关键区别</strong>：Top-k 是固定数量截断，Top-p 是动态集合（高置信度时候选少，低置信度时候选多），Top-p 通常更优。实际使用时常组合：先 Top-p 再 Temperature。</p>
+
 </div>
 
-<div class="answer-card" id="A7">
-  <h2>A7 · GPT vs BERT vs T5 架构差异</h2>
 
-  <h3>核心对比</h3>
+<div class="answer-card" id="A7">
+  <div class="i18n-zh"><h2>A7 · GPT vs BERT vs T5 架构差异</h2></div>
+<div class="i18n-en" hidden><h2>A7 · GPT vs BERT vs T5 架构差异</h2></div>
+
+
+  <div class="i18n-zh"><h3>核心对比</h3></div>
+<div class="i18n-en" hidden><h3>核心对比</h3></div>
+
   <table style="width:100%; border-collapse:collapse;">
     <tr style="background:var(--surface-2);">
-      <th style="padding:8px;">特性</th><th style="padding:8px;">GPT (Decoder-only)</th><th style="padding:8px;">BERT (Encoder-only)</th><th style="padding:8px;">T5 (Encoder-Decoder)</th>
+      <div class="i18n-zh"><th style="padding:8px;">特性</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">Features</th></div><th style="padding:8px;">GPT (Decoder-only)</th><th style="padding:8px;">BERT (Encoder-only)</th><th style="padding:8px;">T5 (Encoder-Decoder)</th>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>Attention</strong></td>
       <td style="padding:8px;">Causal (masked) self-attention</td>
       <td style="padding:8px;">Bidirectional self-attention</td>
       <td style="padding:8px;">Bidirectional encoder + Causal decoder + Cross-attention</td>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>训练目标</strong></td>
-      <td style="padding:8px;">Next token prediction (自回归)</td>
+      <div class="i18n-zh"><td style="padding:8px;">Next token prediction (自回归)</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">Next token prediction (自回归)</td></div>
       <td style="padding:8px;">MLM (Masked Language Modeling) + NSP</td>
       <td style="padding:8px;">Span corruption (denoising)</td>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>擅长任务</strong></td>
-      <td style="padding:8px;">文本生成、对话、代码生成</td>
-      <td style="padding:8px;">文本理解、分类、NER、QA</td>
-      <td style="padding:8px;">翻译、摘要、改写（seq2seq）</td>
+      <div class="i18n-zh"><td style="padding:8px;">文本生成、对话、代码生成</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">文本生成、对话、代码生成</td></div>
+      <div class="i18n-zh"><td style="padding:8px;">文本理解、分类、NER、QA</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">文本理解、分类、NER、QA</td></div>
+      <div class="i18n-zh"><td style="padding:8px;">翻译、摘要、改写（seq2seq）</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">翻译、摘要、改写（seq2seq）</td></div>
     </tr>
+
   </table>
 
+
   <p><strong>为什么当前 LLM 都是 Decoder-only？</strong></p>
+
   <ol>
     <li><strong>统一序列建模</strong>：所有任务（分类、生成、对话）都可以格式化为"给定前缀预测下一个 token"，一个架构解决所有问题</li>
+
     <li><strong>Scaling Law 友好</strong>：自回归目标的数据利用率最高（每个 token 都是训练信号），scaling 行为更好</li>
+
     <li><strong>上下文学习 (ICL)</strong>：Decoder-only 模型的 in-context learning 能力优于 Encoder-Decoder 模型</li>
+
     <li><strong>工程简单</strong>：不需要 Encoder-Decoder 之间的 cross-attention 对齐，实现和优化更简单</li>
+
   </ol>
+
 </div>
 
-<div class="answer-card" id="A8">
-  <h2>A8 · System Prompt 设计</h2>
 
-  <h3>参考答案</h3>
+<div class="answer-card" id="A8">
+  <div class="i18n-zh"><h2>A8 · System Prompt 设计</h2></div>
+<div class="i18n-en" hidden><h2>A8 · System Prompt 设计</h2></div>
+
+
+  <div class="i18n-zh"><h3>参考答案</h3></div>
+<div class="i18n-en" hidden><h3>参考答案</h3></div>
+
   <pre><code>system_prompt = """你是一个严格的编程助手，只回答编程和技术相关的问题。
 
 ## 你的职责
@@ -348,90 +547,167 @@ PE(pos, 2i+1) = cos(pos / 10000^(2i/d_model))</code></pre>
 - 解释简洁清晰，先给结论再展开
 """</code></pre>
 
-  <h3>设计要点</h3>
+
+  <div class="i18n-zh"><h3>设计要点</h3></div>
+<div class="i18n-en" hidden><h3>Design Points</h3></div>
+
   <ol>
     <li><strong>角色定义</strong>："是什么"（严格的编程助手），明确身份</li>
+
     <li><strong>正向约束</strong>：列出应该做的事，给模型正向行为指引</li>
+
     <li><strong>边界/排除</strong>：明确列出不应做的事，用反面例子防止越界</li>
+
     <li><strong>Fallback 策略</strong>：给出越界时的标准化回复模板，确保行为一致</li>
+
     <li><strong>输出格式</strong>：具体的格式要求，减少输出歧义</li>
+
   </ol>
+
 </div>
+
 
 <div class="answer-card" id="A9">
-  <h2>A9 · Tokenization 和 BPE</h2>
+  <div class="i18n-zh"><h2>A9 · Tokenization 和 BPE</h2></div>
+<div class="i18n-en" hidden><h2>A9 · Tokenization 和 BPE</h2></div>
 
-  <h3>BPE (Byte-Pair Encoding) 原理</h3>
+
+  <div class="i18n-zh"><h3>BPE (Byte-Pair Encoding) 原理</h3></div>
+<div class="i18n-en" hidden><h3>BPE (Byte-Pair Encoding) 原理</h3></div>
+
   <ol>
-    <li>从字符级别开始，每个字符是一个 token</li>
-    <li>统计所有相邻 token pair 的出现频率</li>
-    <li>将最高频的 pair 合并为一个新 token</li>
-    <li>重复 2-3 直到达到目标词汇量（如 50,000）</li>
+    <div class="i18n-zh"><li>从字符级别开始，每个字符是一个 token</li></div>
+<div class="i18n-en" hidden><li>从字符级别开始，每个字符是一个 token</li></div>
+
+    <div class="i18n-zh"><li>统计所有相邻 token pair 的出现频率</li></div>
+<div class="i18n-en" hidden><li>统计所有相邻 token pair 的出现频率</li></div>
+
+    <div class="i18n-zh"><li>将最高频的 pair 合并为一个新 token</li></div>
+<div class="i18n-en" hidden><li>将最高频的 pair 合并为一个新 token</li></div>
+
+    <div class="i18n-zh"><li>重复 2-3 直到达到目标词汇量（如 50,000）</li></div>
+<div class="i18n-en" hidden><li>重复 2-3 直到达到目标词汇量（如 50,000）</li></div>
+
   </ol>
+
   <p>例如：<code>"low" "lower" "newest" "widest"</code> → 统计发现 <code>("e","s")</code> 高频 → 合并成 <code>"es"</code> → 再发现 <code>("es","t")</code> 高频 → <code>"est"</code>...</p>
 
-  <h3>中文 Tokenization 为什么更难？</h3>
+
+  <div class="i18n-zh"><h3>中文 Tokenization 为什么更难？</h3></div>
+<div class="i18n-en" hidden><h3>中文 Tokenization 为什么更难？</h3></div>
+
   <ol>
     <li><strong>无天然分隔符</strong>：英文有空格分词，中文是连续字符串，需要先分词</li>
+
     <li><strong>字符集巨大</strong>：常用汉字 6000+，总数数万，远大于英文字母的 26 个</li>
+
     <li><strong>粒度问题</strong>：一个中文词可以由 1-N 个字组成，subword 切分边界不直观</li>
+
     <li><strong>Token 效率低</strong>：同样的语义内容，中文所需 token 数通常少于英文（因为一个字密度更高），但更容易出现 OOV</li>
+
   </ol>
+
 </div>
+
 
 <div class="answer-card" id="A10">
-  <h2>A10 · LLM 输出截断问题排查</h2>
+  <div class="i18n-zh"><h2>A10 · LLM 输出截断问题排查</h2></div>
+<div class="i18n-en" hidden><h2>A10 · LLM 输出截断问题排查</h2></div>
 
-  <h3>诊断框架（从最常见到最罕见）</h3>
+
+  <div class="i18n-zh"><h3>诊断框架（从最常见到最罕见）</h3></div>
+<div class="i18n-en" hidden><h3>诊断框架（从最常见到最罕见）</h3></div>
+
   <ol>
     <li><strong>max_tokens 设置太小</strong>：最直接的原因。检查 API 调用的 max_tokens/max_output_tokens 参数</li>
+
     <li><strong>Context Window 超限</strong>：输入+输出超出模型的 context window，输出空间被压缩。统计输入 token 数</li>
+
     <li><strong>finish_reason = "length"</strong>：检查 API 返回的 finish_reason，确认是因为 token 限制而非自然结束</li>
+
     <li><strong>Output Parser 截断</strong>：如果用了自定义 Parser，检查是否在输出未完成时就终止了</li>
+
     <li><strong>前端截断</strong>：模型实际输出了完整内容，但前端/UI 做了截断显示</li>
+
     <li><strong>Streaming 中断</strong>：流式传输中连接断开或超时，只展示了部分内容</li>
+
   </ol>
 
-  <h3>解决方案</h3>
+
+  <div class="i18n-zh"><h3>解决方案</h3></div>
+<div class="i18n-en" hidden><h3>解决方案</h3></div>
+
   <ul>
-    <li>增大 max_tokens（注意成本）</li>
-    <li>使用 streaming 模式，token 级别输出</li>
-    <li>实现续写机制：检测到 length 截断后，发送 continuation 请求</li>
-    <li>压缩输入：摘要历史对话、裁剪无关上下文</li>
+    <div class="i18n-zh"><li>增大 max_tokens（注意成本）</li></div>
+<div class="i18n-en" hidden><li>增大 max_tokens（注意成本）</li></div>
+
+    <div class="i18n-zh"><li>使用 streaming 模式，token 级别输出</li></div>
+<div class="i18n-en" hidden><li>使用 streaming 模式，token 级别输出</li></div>
+
+    <div class="i18n-zh"><li>实现续写机制：检测到 length 截断后，发送 continuation 请求</li></div>
+<div class="i18n-en" hidden><li>实现续写机制：检测到 length 截断后，发送 continuation 请求</li></div>
+
+    <div class="i18n-zh"><li>压缩输入：摘要历史对话、裁剪无关上下文</li></div>
+<div class="i18n-en" hidden><li>压缩输入：摘要历史对话、裁剪无关上下文</li></div>
+
   </ul>
+
 </div>
 
-<div class="answer-card" id="A11">
-  <h2>A11 · API vs 开源模型选型</h2>
 
-  <h3>四维度对比</h3>
+<div class="answer-card" id="A11">
+  <div class="i18n-zh"><h2>A11 · API vs 开源模型选型</h2></div>
+<div class="i18n-en" hidden><h2>A11 · API vs 开源模型选型</h2></div>
+
+
+  <div class="i18n-zh"><h3>四维度对比</h3></div>
+<div class="i18n-en" hidden><h3>四维度对比</h3></div>
+
   <table style="width:100%; border-collapse:collapse;">
     <tr style="background:var(--surface-2);">
-      <th style="padding:8px;">维度</th><th style="padding:8px;">API (OpenAI/Anthropic)</th><th style="padding:8px;">开源 (LLaMA/Qwen/DeepSeek)</th>
+      <div class="i18n-zh"><th style="padding:8px;">维度</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">Dimension</th></div><th style="padding:8px;">API (OpenAI/Anthropic)</th><div class="i18n-zh"><th style="padding:8px;">开源 (LLaMA/Qwen/DeepSeek)</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">开源 (LLaMA/Qwen/DeepSeek)</th></div>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>成本</strong></td>
-      <td style="padding:8px;">按 token 付费，高并发时昂贵</td>
-      <td style="padding:8px;">固定 GPU 成本，高并发时更经济</td>
+      <div class="i18n-zh"><td style="padding:8px;">按 token 付费，高并发时昂贵</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">按 token 付费，高并发时昂贵</td></div>
+      <div class="i18n-zh"><td style="padding:8px;">固定 GPU 成本，高并发时更经济</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">固定 GPU 成本，高并发时更经济</td></div>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>隐私</strong></td>
-      <td style="padding:8px;">数据离开本地，有合规风险</td>
-      <td style="padding:8px;">本地部署，数据不出域</td>
+      <div class="i18n-zh"><td style="padding:8px;">数据离开本地，有合规风险</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">数据离开本地，有合规风险</td></div>
+      <div class="i18n-zh"><td style="padding:8px;">本地部署，数据不出域</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">本地部署，数据不出域</td></div>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>可控性</strong></td>
-      <td style="padding:8px;">无法修改模型、无法定制</td>
-      <td style="padding:8px;">可 fine-tune、量化、修改推理逻辑</td>
+      <div class="i18n-zh"><td style="padding:8px;">无法修改模型、无法定制</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">无法修改模型、无法定制</td></div>
+      <div class="i18n-zh"><td style="padding:8px;">可 fine-tune、量化、修改推理逻辑</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">可 fine-tune、量化、修改推理逻辑</td></div>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>效果</strong></td>
-      <td style="padding:8px;">顶尖水平，持续更新</td>
-      <td style="padding:8px;">快速追赶，某些领域已持平</td>
+      <div class="i18n-zh"><td style="padding:8px;">顶尖水平，持续更新</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">顶尖水平，持续更新</td></div>
+      <div class="i18n-zh"><td style="padding:8px;">快速追赶，某些领域已持平</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">快速追赶，某些领域已持平</td></div>
     </tr>
+
   </table>
 
-  <h3>选型决策树</h3>
+
+  <div class="i18n-zh"><h3>选型决策树</h3></div>
+<div class="i18n-en" hidden><h3>选型决策树</h3></div>
+
   <pre><code>if 涉及敏感数据（金融/医疗/政府）:
     → 开源模型 + 本地部署
 elif 需要 SOTA 效果 且 预算充足:
@@ -442,147 +718,274 @@ elif 快速原型验证:
     → API (开发效率最高)
 else:
     → 混合架构：API 做复杂推理，开源模型做简单任务</code></pre>
+
 </div>
+
 
 <div class="answer-card" id="A12">
-  <h2>A12 · LLM 输出结构化 JSON</h2>
+  <div class="i18n-zh"><h2>A12 · LLM 输出结构化 JSON</h2></div>
+<div class="i18n-en" hidden><h2>A12 · LLM 输出结构化 JSON</h2></div>
 
-  <h3>方案对比</h3>
+
+  <div class="i18n-zh"><h3>方案对比</h3></div>
+<div class="i18n-en" hidden><h3>方案对比</h3></div>
+
   <table style="width:100%; border-collapse:collapse;">
     <tr style="background:var(--surface-2);">
-      <th style="padding:8px;">方案</th><th style="padding:8px;">优点</th><th style="padding:8px;">缺点</th>
+      <div class="i18n-zh"><th style="padding:8px;">方案</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">Solution</th></div><div class="i18n-zh"><th style="padding:8px;">优点</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">优点</th></div><div class="i18n-zh"><th style="padding:8px;">缺点</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">Disadvantages</th></div>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>Prompt 约束</strong></td>
-      <td style="padding:8px;">最简单，无需特殊 API</td>
-      <td style="padding:8px;">不可靠，约 5-10% 失败率</td>
+      <div class="i18n-zh"><td style="padding:8px;">最简单，无需特殊 API</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">最简单，无需特殊 API</td></div>
+      <div class="i18n-zh"><td style="padding:8px;">不可靠，约 5-10% 失败率</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">不可靠，约 5-10% 失败率</td></div>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>JSON Mode</strong></td>
-      <td style="padding:8px;">API 原生支持，可靠性 >99%</td>
-      <td style="padding:8px;">只能保证 JSON 语法，不能保证 Schema</td>
+      <div class="i18n-zh"><td style="padding:8px;">API 原生支持，可靠性 >99%</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">API 原生支持，可靠性 >99%</td></div>
+      <div class="i18n-zh"><td style="padding:8px;">只能保证 JSON 语法，不能保证 Schema</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">只能保证 JSON 语法，不能保证 Schema</td></div>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>Function Calling / Structured Output</strong></td>
-      <td style="padding:8px;">严格的 Schema 约束，可靠性极高</td>
-      <td style="padding:8px;">需要设置 JSON Schema，较复杂</td>
+      <div class="i18n-zh"><td style="padding:8px;">严格的 Schema 约束，可靠性极高</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">严格的 Schema 约束，可靠性极高</td></div>
+      <div class="i18n-zh"><td style="padding:8px;">需要设置 JSON Schema，较复杂</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">需要设置 JSON Schema，较复杂</td></div>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>Grammar-Guided (llama.cpp/Outlines)</strong></td>
-      <td style="padding:8px;">100% 符合格式，开源方案</td>
-      <td style="padding:8px;">部署复杂，推理速度可能受影响</td>
+      <div class="i18n-zh"><td style="padding:8px;">100% 符合格式，开源方案</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">100% 符合格式，开源方案</td></div>
+      <div class="i18n-zh"><td style="padding:8px;">部署复杂，推理速度可能受影响</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">部署复杂，推理速度可能受影响</td></div>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>Retry + 修正</strong></td>
-      <td style="padding:8px;">容错性好</td>
-      <td style="padding:8px;">增加延迟和成本</td>
+      <div class="i18n-zh"><td style="padding:8px;">容错性好</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">容错性好</td></div>
+      <div class="i18n-zh"><td style="padding:8px;">增加延迟和成本</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">增加延迟和成本</td></div>
     </tr>
+
   </table>
 
+
   <p><strong>推荐策略</strong>：优先使用 API 的 Structured Output / Function Calling（如有），配合 Retry + 修正作为 fallback。</p>
+
 </div>
+
 
 <div class="answer-card" id="A13">
-  <h2>A13 · Embedding 基础</h2>
+  <div class="i18n-zh"><h2>A13 · Embedding 基础</h2></div>
+<div class="i18n-en" hidden><h2>A13 · Embedding 基础</h2></div>
 
-  <h3>核心答案</h3>
+
+  <div class="i18n-zh"><h3>核心答案</h3></div>
+<div class="i18n-en" hidden><h3>Core Answer</h3></div>
+
   <p><strong>Embedding</strong> 是将文本映射到高维向量空间（通常 768-4096 维），使得语义相似的文本在向量空间中距离接近。</p>
 
+
   <p><strong>语义空间的特性：</strong></p>
+
   <ul>
     <li><strong>语义聚集</strong>：相似含义的文本向量彼此靠近</li>
+
     <li><strong>方向编码</strong>：向量方向编码语义特征（如 "king - man + woman ≈ queen"）</li>
+
     <li><strong>线性结构</strong>：向量运算在一定程度上对应语义运算</li>
+
   </ul>
 
+
   <p><strong>为什么 Cosine Similarity 更常用？</strong></p>
+
   <ul>
     <li><strong>方向敏感，长度不敏感</strong>：两个文本的语义相似性更多取决于方向而非向量长度。长文档和短文档如果语义相同，cosine 相似度很高</li>
+
     <li><strong>归一化友好</strong>：cosine 相似度范围在 [-1, 1]，容易设定阈值</li>
+
     <li><strong>训练目标对齐</strong>：许多 embedding 模型在训练时使用了 cosine similarity 作为损失函数</li>
+
   </ul>
+
 </div>
+
 
 <div class="answer-card" id="A14">
   <h2>A14 · 128K Context Window vs RAG</h2>
 
-  <h3>核心答案：长上下文不能替代 RAG</h3>
+
+  <div class="i18n-zh"><h3>核心答案：长上下文不能替代 RAG</h3></div>
+<div class="i18n-en" hidden><h3>核心答案：长上下文不能替代 RAG</h3></div>
+
 
   <p><strong>原因：</strong></p>
+
   <ol>
     <li><strong>成本</strong>：128K token 的推理成本是 4K 的 32 倍，且输入 token 通常比输出 token 更贵</li>
+
     <li><strong>延迟</strong>：处理 128K token 的 Attention 计算量是 O(n²)，延迟显著增加</li>
+
     <li><strong>Lost in the Middle</strong>：研究表明 LLM 对输入中间部分的信息利用效率远低于开头和结尾。长上下文中，中间的内容几乎被"忽略"</li>
+
     <li><strong>注意力稀释</strong>：无关内容越多，模型越难聚焦到真正相关的信息</li>
+
     <li><strong>幻觉风险</strong>：大量上下文增加了模型混淆不同来源信息的风险</li>
+
   </ol>
 
+
   <p><strong>正确的策略</strong>：RAG + 适度上下文长度。用 RAG 精确检索相关内容（几百到几千 token），用 LLM 的上下文窗口（8K-32K 足够）处理检索到的内容。</p>
+
 </div>
+
 
 <div class="answer-card" id="A15">
   <h2>A15 · Prompt Caching</h2>
 
-  <h3>核心答案</h3>
+
+  <div class="i18n-zh"><h3>核心答案</h3></div>
+<div class="i18n-en" hidden><h3>Core Answer</h3></div>
+
   <p><strong>Prompt Caching</strong> 是 LLM API 提供的一种优化机制：当多个请求共享相同的前缀（如 system prompt、few-shot examples、工具定义）时，API 提供方会缓存这些前缀的 KV cache，后续请求无需重新计算。</p>
 
-  <h3>工作原理</h3>
+
+  <div class="i18n-zh"><h3>工作原理</h3></div>
+<div class="i18n-en" hidden><h3>工作原理</h3></div>
+
   <ol>
-    <li>第一个请求处理完整 prompt，API 缓存前缀部分的 KV cache</li>
-    <li>后续相同前缀的请求直接从缓存读取 KV cache，只计算差异部分</li>
-    <li>缓存命中时，这部分 token 的计费大幅降低（如 Anthropic 打 90% 折扣）</li>
-    <li>缓存通常在几分钟到几小时内有效</li>
+    <div class="i18n-zh"><li>第一个请求处理完整 prompt，API 缓存前缀部分的 KV cache</li></div>
+<div class="i18n-en" hidden><li>第一个请求处理完整 prompt，API 缓存前缀部分的 KV cache</li></div>
+
+    <div class="i18n-zh"><li>后续相同前缀的请求直接从缓存读取 KV cache，只计算差异部分</li></div>
+<div class="i18n-en" hidden><li>后续相同前缀的请求直接从缓存读取 KV cache，只计算差异部分</li></div>
+
+    <div class="i18n-zh"><li>缓存命中时，这部分 token 的计费大幅降低（如 Anthropic 打 90% 折扣）</li></div>
+<div class="i18n-en" hidden><li>缓存命中时，这部分 token 的计费大幅降低（如 Anthropic 打 90% 折扣）</li></div>
+
+    <div class="i18n-zh"><li>缓存通常在几分钟到几小时内有效</li></div>
+<div class="i18n-en" hidden><li>缓存通常在几分钟到几小时内有效</li></div>
+
   </ol>
 
-  <h3>最有效的场景</h3>
+
+  <div class="i18n-zh"><h3>最有效的场景</h3></div>
+<div class="i18n-en" hidden><h3>最有效的场景</h3></div>
+
   <ul>
-    <li>长的 System Prompt + 短的用户问题（客服、教育、代码助手）</li>
-    <li>大量 Few-shot examples 放在 prompt 前缀</li>
-    <li>工具定义（function schemas）放在 system prompt 中</li>
-    <li>静态的 RAG 检索上下文（知识库很少变化）</li>
+    <div class="i18n-zh"><li>长的 System Prompt + 短的用户问题（客服、教育、代码助手）</li></div>
+<div class="i18n-en" hidden><li>长的 System Prompt + 短的用户问题（客服、教育、代码助手）</li></div>
+
+    <div class="i18n-zh"><li>大量 Few-shot examples 放在 prompt 前缀</li></div>
+<div class="i18n-en" hidden><li>大量 Few-shot examples 放在 prompt 前缀</li></div>
+
+    <div class="i18n-zh"><li>工具定义（function schemas）放在 system prompt 中</li></div>
+<div class="i18n-en" hidden><li>工具定义（function schemas）放在 system prompt 中</li></div>
+
+    <div class="i18n-zh"><li>静态的 RAG 检索上下文（知识库很少变化）</li></div>
+<div class="i18n-en" hidden><li>静态的 RAG 检索上下文（知识库很少变化）</li></div>
+
   </ul>
 
-  <h3>设计建议</h3>
+
+  <div class="i18n-zh"><h3>设计建议</h3></div>
+<div class="i18n-en" hidden><h3>设计建议</h3></div>
+
   <ul>
-    <li>把静态内容放在 prompt 前面（system prompt + tools）</li>
-    <li>把动态内容放在 prompt 后面（user message, search results）</li>
-    <li>使用固定的 breakpoint 标记缓存边界</li>
+    <div class="i18n-zh"><li>把静态内容放在 prompt 前面（system prompt + tools）</li></div>
+<div class="i18n-en" hidden><li>把静态内容放在 prompt 前面（system prompt + tools）</li></div>
+
+    <div class="i18n-zh"><li>把动态内容放在 prompt 后面（user message, search results）</li></div>
+<div class="i18n-en" hidden><li>把动态内容放在 prompt 后面（user message, search results）</li></div>
+
+    <div class="i18n-zh"><li>使用固定的 breakpoint 标记缓存边界</li></div>
+<div class="i18n-en" hidden><li>使用固定的 breakpoint 标记缓存边界</li></div>
+
   </ul>
+
 </div>
+
 
 <!-- ============ L2 ANSWERS ============ -->
 <div class="answer-card" id="A16">
-  <h2>A16 · LangChain 是什么？Chain vs Agent</h2>
+  <div class="i18n-zh"><h2>A16 · LangChain 是什么？Chain vs Agent</h2></div>
+<div class="i18n-en" hidden><h2>A16 · LangChain 是什么？Chain vs Agent</h2></div>
 
-  <h3>核心答案</h3>
+
+  <div class="i18n-zh"><h3>核心答案</h3></div>
+<div class="i18n-en" hidden><h3>Core Answer</h3></div>
+
   <p><strong>LangChain</strong> 是一个用于构建 LLM 应用的开源框架，提供了标准化的组件和抽象来简化 LLM 应用的开发。</p>
 
+
   <p><strong>五大核心模块：</strong></p>
+
   <ol>
     <li><strong>Model I/O</strong>：统一的 LLM/Chat Model 接口、Prompt Template、Output Parser</li>
+
     <li><strong>Retrieval</strong>：Document Loader、Text Splitter、Embeddings、Vector Store、Retriever</li>
+
     <li><strong>Chains</strong>：将多个组件串联成流水线（LCEL - LangChain Expression Language）</li>
+
     <li><strong>Agents</strong>：LLM 动态决策调用哪些工具、以什么顺序调用</li>
+
     <li><strong>Memory</strong>：在多次交互间保持状态</li>
+
   </ol>
 
+
   <p><strong>Chain vs Agent 的核心区别：</strong></p>
+
   <table style="width:100%; border-collapse:collapse;">
     <tr style="background:var(--surface-2);">
       <th style="padding:8px;">Chain</th><th style="padding:8px;">Agent</th>
     </tr>
-    <tr><td style="padding:8px;">预定义的固定步骤</td><td style="padding:8px;">LLM 动态决定步骤</td></tr>
-    <tr><td style="padding:8px;">确定性执行路径</td><td style="padding:8px;">非确定性，基于推理</td></tr>
-    <tr><td style="padding:8px;">适合已知、重复任务</td><td style="padding:8px;">适合开放、探索性任务</td></tr>
-    <tr><td style="padding:8px;">低延迟、可预测</td><td style="padding:8px;">高延迟、需要监控</td></tr>
-    <tr><td style="padding:8px;">示例：RAG 问答流水线</td><td style="padding:8px;">示例：研究助手、客服 Agent</td></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">预定义的固定步骤</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">预定义的固定步骤</td></div><div class="i18n-zh"><td style="padding:8px;">LLM 动态决定步骤</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">LLM 动态决定步骤</td></div></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">确定性执行路径</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">确定性执行路径</td></div><div class="i18n-zh"><td style="padding:8px;">非确定性，基于推理</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">非确定性，基于推理</td></div></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">适合已知、重复任务</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">适合已知、重复任务</td></div><div class="i18n-zh"><td style="padding:8px;">适合开放、探索性任务</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">适合开放、探索性任务</td></div></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">低延迟、可预测</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">低延迟、可预测</td></div><div class="i18n-zh"><td style="padding:8px;">高延迟、需要监控</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">高延迟、需要监控</td></div></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">示例：RAG 问答流水线</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">示例：RAG 问答流水线</td></div><div class="i18n-zh"><td style="padding:8px;">示例：研究助手、客服 Agent</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">示例：研究助手、客服 Agent</td></div></tr>
+
   </table>
+
 </div>
 
-<div class="answer-card" id="A17">
-  <h2>A17 · RAG Pipeline 全过程</h2>
 
-  <h3>完整链路</h3>
+<div class="answer-card" id="A17">
+  <div class="i18n-zh"><h2>A17 · RAG Pipeline 全过程</h2></div>
+<div class="i18n-en" hidden><h2>A17 · RAG Pipeline 全过程</h2></div>
+
+
+  <div class="i18n-zh"><h3>完整链路</h3></div>
+<div class="i18n-en" hidden><h3>完整链路</h3></div>
+
   <pre><code>Ingestion (离线):
   Documents → [Document Loader] → Text
   Text → [Text Splitter / Chunking] → Chunks
@@ -598,58 +1001,99 @@ Retrieval + Generation (在线):
     → [Prompt Template: System + Context + Query] → Full Prompt
     → [LLM] → Answer</code></pre>
 
-  <h3>各阶段关键设计决策</h3>
+
+  <div class="i18n-zh"><h3>各阶段关键设计决策</h3></div>
+<div class="i18n-en" hidden><h3>各阶段关键设计决策</h3></div>
+
   <ul>
     <li><strong>Document Loader</strong>：选型取决于文档格式（PDF, HTML, Markdown, DB...）</li>
+
     <li><strong>Chunking</strong>：决定检索粒度的最关键环节。考虑 chunk_size 和 overlap</li>
+
     <li><strong>Embedding Model</strong>：通用场景用 text-embedding-3-large，中文优先考虑 BGE/M3E</li>
+
     <li><strong>Vector Store</strong>：开发用 Chroma/FAISS，生产考虑 Pinecone/Weaviate/Milvus</li>
+
     <li><strong>Re-Ranker</strong>：Cross-Encoder 模型（如 Cohere Rerank, BGE-Reranker）提升检索精度</li>
+
   </ul>
+
 </div>
+
 
 <div class="answer-card" id="A18">
   <h2>A18 · Naive vs Advanced vs Agentic RAG</h2>
 
+
   <table style="width:100%; border-collapse:collapse;">
     <tr style="background:var(--surface-2);">
-      <th style="padding:8px;">类型</th><th style="padding:8px;">特点</th><th style="padding:8px;">适用场景</th>
+      <div class="i18n-zh"><th style="padding:8px;">类型</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">Type</th></div><div class="i18n-zh"><th style="padding:8px;">特点</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">特点</th></div><div class="i18n-zh"><th style="padding:8px;">适用场景</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">适用场景</th></div>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>Naive RAG</strong></td>
-      <td style="padding:8px;">检索→拼接→生成。没有质量控制</td>
-      <td style="padding:8px;">简单 QA，对质量要求不高的场景</td>
+      <div class="i18n-zh"><td style="padding:8px;">检索→拼接→生成。没有质量控制</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">检索→拼接→生成。没有质量控制</td></div>
+      <div class="i18n-zh"><td style="padding:8px;">简单 QA，对质量要求不高的场景</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">简单 QA，对质量要求不高的场景</td></div>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>Advanced RAG</strong></td>
-      <td style="padding:8px;">+ Query Rewriting + Hybrid Search + Re-Ranking + 来源引用</td>
-      <td style="padding:8px;">企业知识库、客服系统</td>
+      <div class="i18n-zh"><td style="padding:8px;">+ Query Rewriting + Hybrid Search + Re-Ranking + 来源引用</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">+ Query Rewriting + Hybrid Search + Re-Ranking + 来源引用</td></div>
+      <div class="i18n-zh"><td style="padding:8px;">企业知识库、客服系统</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">企业知识库、客服系统</td></div>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>Agentic RAG</strong></td>
-      <td style="padding:8px;">Agent 自主决定何时检索、检索什么、怎么用检索结果。可多轮检索、自我修正</td>
-      <td style="padding:8px;">复杂研究任务、需要多源综合的场景</td>
+      <div class="i18n-zh"><td style="padding:8px;">Agent 自主决定何时检索、检索什么、怎么用检索结果。可多轮检索、自我修正</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">Agent 自主决定何时检索、检索什么、怎么用检索结果。可多轮检索、自我修正</td></div>
+      <div class="i18n-zh"><td style="padding:8px;">复杂研究任务、需要多源综合的场景</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">复杂研究任务、需要多源综合的场景</td></div>
     </tr>
+
   </table>
 
+
   <p><strong>关键升级点</strong>：Agentic RAG 不只是"检索+生成"，而是把 RAG 作为一个工具交给 Agent 使用。Agent 可以：判断是否需要检索、选择检索策略、评估检索质量、决定是否重新检索、综合多次检索结果。</p>
+
 </div>
 
-<div class="answer-card" id="A19">
-  <h2>A19 · RAG 检索不相关的排查</h2>
 
-  <h3>排查清单（按概率排序）</h3>
+<div class="answer-card" id="A19">
+  <div class="i18n-zh"><h2>A19 · RAG 检索不相关的排查</h2></div>
+<div class="i18n-en" hidden><h2>A19 · RAG 检索不相关的排查</h2></div>
+
+
+  <div class="i18n-zh"><h3>排查清单（按概率排序）</h3></div>
+<div class="i18n-en" hidden><h3>排查清单（按概率排序）</h3></div>
+
   <ol>
     <li><strong>Chunk Size 不当</strong>：太小（失去上下文）或太大（噪音多）。调整 chunk_size 和 overlap</li>
+
     <li><strong>Embedding Model 不匹配</strong>：通用 embedding 在专业领域表现差。换领域 fine-tune 的 embedding</li>
+
     <li><strong>Query-Document Gap</strong>：用户的查询用词和文档中的用词不同。添加 Query Rewriting（用 LLM 改写/扩展查询）</li>
+
     <li><strong>检索方式单一</strong>：纯向量检索漏掉精确匹配。引入 Hybrid Search（向量+BM25 关键词）</li>
+
     <li><strong>缺少 Re-Ranker</strong>：Top-K 检索召回了一些不太相关的文档。加 Re-Ranker 精细排序</li>
+
     <li><strong>文档预处理差</strong>：PDF 解析乱码、表格被破坏。改进文档解析管道</li>
+
     <li><strong>Metadata 过滤缺失</strong>：没有利用文档元数据（时间、来源、类别）做预过滤</li>
+
   </ol>
 
-  <h3>调试策略</h3>
+
+  <div class="i18n-zh"><h3>调试策略</h3></div>
+<div class="i18n-en" hidden><h3>调试策略</h3></div>
+
   <pre><code># 1. 检查检索结果
 retrieved_docs = vector_store.similarity_search(query, k=5)
 for i, doc in enumerate(retrieved_docs):
@@ -662,93 +1106,174 @@ cosine_similarities = [np.dot(query_vec, dv) for dv in doc_vecs]
 print(f"Similarity scores: {cosine_similarities}")
 
 # 3. 开启 LangSmith 追踪，在 trace 中查看检索步骤</code></pre>
+
 </div>
+
 
 <div class="answer-card" id="A20">
-  <h2>A20 · Chunking 策略</h2>
+  <div class="i18n-zh"><h2>A20 · Chunking 策略</h2></div>
+<div class="i18n-en" hidden><h2>A20 · Chunking 策略</h2></div>
 
-  <h3>Chunk Size 的影响</h3>
+
+  <div class="i18n-zh"><h3>Chunk Size 的影响</h3></div>
+<div class="i18n-en" hidden><h3>Chunk Size 的影响</h3></div>
+
   <ul>
     <li><strong>太小（如 100 字符）</strong>：语义不完整，"主轴故障"和"更换方法"被分到不同 chunk，检索时只拿到一半信息</li>
+
     <li><strong>太大（如 2000 字符）</strong>：包含过多噪音，干扰 LLM 注意力（Lost in the Middle），且容易超出 context window</li>
+
     <li><strong>最佳实践</strong>：通常 500-1000 字符，overlap 100-200 字符。具体取决于文档类型</li>
+
   </ul>
+
 
   <h3>Semantic Chunking</h3>
-  <p>不按固定长度切分，而是按<strong>语义边界</strong>切分。方法：</p>
-  <ol>
-    <li>计算相邻句子的 embedding 相似度</li>
-    <li>当相似度骤降（低于阈值）时，标记为语义边界</li>
-    <li>在边界处切分</li>
-  </ol>
-  <p>优势：每个 chunk 内部语义连贯，避免在段落中间截断。</p>
 
-  <h3>其他 Chunking 策略</h3>
+  <p>不按固定长度切分，而是按<strong>语义边界</strong>切分。方法：</p>
+
+  <ol>
+    <div class="i18n-zh"><li>计算相邻句子的 embedding 相似度</li></div>
+<div class="i18n-en" hidden><li>计算相邻句子的 embedding 相似度</li></div>
+
+    <div class="i18n-zh"><li>当相似度骤降（低于阈值）时，标记为语义边界</li></div>
+<div class="i18n-en" hidden><li>当相似度骤降（低于阈值）时，标记为语义边界</li></div>
+
+    <div class="i18n-zh"><li>在边界处切分</li></div>
+<div class="i18n-en" hidden><li>在边界处切分</li></div>
+
+  </ol>
+
+  <div class="i18n-zh"><p>优势：每个 chunk 内部语义连贯，避免在段落中间截断。</p></div>
+<div class="i18n-en" hidden><p>优势：每个 chunk 内部语义连贯，避免在段落中间截断。</p></div>
+
+
+  <div class="i18n-zh"><h3>其他 Chunking 策略</h3></div>
+<div class="i18n-en" hidden><h3>其他 Chunking 策略</h3></div>
+
   <ul>
     <li><strong>Recursive Character Splitting</strong>：按段落→句子→词的优先级递归切分（LangChain 默认）</li>
+
     <li><strong>Document-based Splitting</strong>：按文档的自然结构（Markdown 标题、HTML 标签）切分</li>
+
     <li><strong>Agentic Chunking</strong>：用 LLM 决定最佳切分点</li>
+
   </ul>
+
 </div>
+
 
 <div class="answer-card" id="A21">
-  <h2>A21 · 向量数据库选型</h2>
+  <div class="i18n-zh"><h2>A21 · 向量数据库选型</h2></div>
+<div class="i18n-en" hidden><h2>A21 · 向量数据库选型</h2></div>
+
 
   <table style="width:100%; border-collapse:collapse;">
     <tr style="background:var(--surface-2);">
-      <th style="padding:8px;">数据库</th><th style="padding:8px;">特点</th><th style="padding:8px;">适用场景</th>
+      <div class="i18n-zh"><th style="padding:8px;">数据库</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">数据库</th></div><div class="i18n-zh"><th style="padding:8px;">特点</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">特点</th></div><div class="i18n-zh"><th style="padding:8px;">适用场景</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">适用场景</th></div>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>FAISS</strong></td>
-      <td style="padding:8px;">Meta 开源，纯本地，极高性能，C++ 实现</td>
-      <td style="padding:8px;">百万级向量的本地搜索，研究/原型</td>
+      <div class="i18n-zh"><td style="padding:8px;">Meta 开源，纯本地，极高性能，C++ 实现</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">Meta 开源，纯本地，极高性能，C++ 实现</td></div>
+      <div class="i18n-zh"><td style="padding:8px;">百万级向量的本地搜索，研究/原型</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">百万级向量的本地搜索，研究/原型</td></div>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>Chroma</strong></td>
-      <td style="padding:8px;">轻量级，Python 原生，API 简洁</td>
-      <td style="padding:8px;">开发阶段，小规模应用</td>
+      <div class="i18n-zh"><td style="padding:8px;">轻量级，Python 原生，API 简洁</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">轻量级，Python 原生，API 简洁</td></div>
+      <div class="i18n-zh"><td style="padding:8px;">开发阶段，小规模应用</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">开发阶段，小规模应用</td></div>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>Pinecone</strong></td>
-      <td style="padding:8px;">全托管，自动扩展，企业级 SLA</td>
-      <td style="padding:8px;">生产环境，不想管理基础设施</td>
+      <div class="i18n-zh"><td style="padding:8px;">全托管，自动扩展，企业级 SLA</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">全托管，自动扩展，企业级 SLA</td></div>
+      <div class="i18n-zh"><td style="padding:8px;">生产环境，不想管理基础设施</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">生产环境，不想管理基础设施</td></div>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>Weaviate</strong></td>
-      <td style="padding:8px;">自带向量化+混合搜索，GraphQL API</td>
-      <td style="padding:8px;">需要 Hybrid Search 的企业应用</td>
+      <div class="i18n-zh"><td style="padding:8px;">自带向量化+混合搜索，GraphQL API</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">自带向量化+混合搜索，GraphQL API</td></div>
+      <div class="i18n-zh"><td style="padding:8px;">需要 Hybrid Search 的企业应用</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">需要 Hybrid Search 的企业应用</td></div>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>Milvus</strong></td>
-      <td style="padding:8px;">云原生，分布式，支持十亿级向量</td>
-      <td style="padding:8px;">大规模图像/视频检索</td>
+      <div class="i18n-zh"><td style="padding:8px;">云原生，分布式，支持十亿级向量</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">云原生，分布式，支持十亿级向量</td></div>
+      <div class="i18n-zh"><td style="padding:8px;">大规模图像/视频检索</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">大规模图像/视频检索</td></div>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>pgvector</strong></td>
-      <td style="padding:8px;">PostgreSQL 扩展，向量+关系数据共存</td>
-      <td style="padding:8px;">已有 Postgres 基础设施的团队</td>
+      <div class="i18n-zh"><td style="padding:8px;">PostgreSQL 扩展，向量+关系数据共存</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">PostgreSQL 扩展，向量+关系数据共存</td></div>
+      <div class="i18n-zh"><td style="padding:8px;">已有 Postgres 基础设施的团队</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">已有 Postgres 基础设施的团队</td></div>
     </tr>
+
   </table>
+
 </div>
 
+
 <div class="answer-card" id="A22">
-  <h2>A22 · 语义搜索 vs 关键词搜索</h2>
+  <div class="i18n-zh"><h2>A22 · 语义搜索 vs 关键词搜索</h2></div>
+<div class="i18n-en" hidden><h2>A22 · 语义搜索 vs 关键词搜索</h2></div>
+
 
   <table style="width:100%; border-collapse:collapse;">
     <tr style="background:var(--surface-2);">
-      <th style="padding:8px;">维度</th><th style="padding:8px;">语义搜索 (Dense)</th><th style="padding:8px;">关键词搜索 (Sparse/BM25)</th>
+      <div class="i18n-zh"><th style="padding:8px;">维度</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">Dimension</th></div><div class="i18n-zh"><th style="padding:8px;">语义搜索 (Dense)</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">语义搜索 (Dense)</th></div><div class="i18n-zh"><th style="padding:8px;">关键词搜索 (Sparse/BM25)</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">关键词搜索 (Sparse/BM25)</th></div>
     </tr>
-    <tr><td style="padding:8px;">原理</td><td style="padding:8px;">向量 embedding 的语义相似度</td><td style="padding:8px;">词频-逆文档频率统计匹配</td></tr>
-    <tr><td style="padding:8px;">优势</td><td style="padding:8px;">理解同义词/近义表达</td><td style="padding:8px;">精确匹配型号、代码、专有名词</td></tr>
-    <tr><td style="padding:8px;">劣势</td><td style="padding:8px;">对专有名词和精确匹配不敏感</td><td style="padding:8px;">无法理解语义变化</td></tr>
-    <tr><td style="padding:8px;">示例</td><td style="padding:8px;">"机器坏了"能搜到"设备故障"</td><td style="padding:8px;">搜"A860-T301"精确找到该型号</td></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">原理</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">Principle</td></div><div class="i18n-zh"><td style="padding:8px;">向量 embedding 的语义相似度</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">向量 embedding 的语义相似度</td></div><div class="i18n-zh"><td style="padding:8px;">词频-逆文档频率统计匹配</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">词频-逆文档频率统计匹配</td></div></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">优势</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">Advantages</td></div><div class="i18n-zh"><td style="padding:8px;">理解同义词/近义表达</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">理解同义词/近义表达</td></div><div class="i18n-zh"><td style="padding:8px;">精确匹配型号、代码、专有名词</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">精确匹配型号、代码、专有名词</td></div></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">劣势</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">Disadvantages</td></div><div class="i18n-zh"><td style="padding:8px;">对专有名词和精确匹配不敏感</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">对专有名词和精确匹配不敏感</td></div><div class="i18n-zh"><td style="padding:8px;">无法理解语义变化</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">无法理解语义变化</td></div></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">示例</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">Example</td></div><div class="i18n-zh"><td style="padding:8px;">"机器坏了"能搜到"设备故障"</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">"机器坏了"能搜到"设备故障"</td></div><div class="i18n-zh"><td style="padding:8px;">搜"A860-T301"精确找到该型号</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">搜"A860-T301"精确找到该型号</td></div></tr>
+
   </table>
 
+
   <p><strong>Hybrid Search 的实现</strong>：同时执行语义搜索和关键词搜索，将两者的结果通过 RRF (Reciprocal Rank Fusion) 合并：<code>score = α × dense_score + (1-α) × sparse_score</code>。</p>
+
 </div>
 
+
 <div class="answer-card" id="A23">
-  <h2>A23 · LangChain RAG 完整代码实现</h2>
+  <div class="i18n-zh"><h2>A23 · LangChain RAG 完整代码实现</h2></div>
+<div class="i18n-en" hidden><h2>A23 · LangChain RAG 完整代码实现</h2></div>
+
 
   <pre><code>from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -800,44 +1325,86 @@ result = rag_chain.invoke({"input": "What is LangGraph?"})
 print(result["answer"])
 for i, doc in enumerate(result["context"]):
     print(f"Source {i+1}: {doc.metadata['source']}, page {doc.metadata['page']}")</code></pre>
+
 </div>
+
 
 <div class="answer-card" id="A24">
   <h2>A24 · RAG vs Fine-tuning vs Prompt Engineering</h2>
 
+
   <table style="width:100%; border-collapse:collapse;">
     <tr style="background:var(--surface-2);">
-      <th style="padding:8px;">维度</th><th style="padding:8px;">Prompt Engineering</th><th style="padding:8px;">RAG</th><th style="padding:8px;">Fine-tuning</th>
+      <div class="i18n-zh"><th style="padding:8px;">维度</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">Dimension</th></div><th style="padding:8px;">Prompt Engineering</th><th style="padding:8px;">RAG</th><th style="padding:8px;">Fine-tuning</th>
     </tr>
-    <tr><td style="padding:8px;">做什么</td><td style="padding:8px;">优化指令格式</td><td style="padding:8px;">注入外部知识</td><td style="padding:8px;">内化行为/风格</td></tr>
-    <tr><td style="padding:8px;">成本</td><td style="padding:8px;">几乎为零</td><td style="padding:8px;">中等（检索基础设施）</td><td style="padding:8px;">高（GPU + 数据标注）</td></tr>
-    <tr><td style="padding:8px;">迭代速度</td><td style="padding:8px;">分钟级</td><td style="padding:8px;">小时级</td><td style="padding:8px;">天/周级</td></tr>
-    <tr><td style="padding:8px;">知识更新</td><td style="padding:8px;">N/A</td><td style="padding:8px;">实时（更新向量库）</td><td style="padding:8px;">需重新训练</td></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">做什么</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">做什么</td></div><div class="i18n-zh"><td style="padding:8px;">优化指令格式</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">优化指令格式</td></div><div class="i18n-zh"><td style="padding:8px;">注入外部知识</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">注入外部知识</td></div><div class="i18n-zh"><td style="padding:8px;">内化行为/风格</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">内化行为/风格</td></div></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">成本</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">Cost</td></div><div class="i18n-zh"><td style="padding:8px;">几乎为零</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">几乎为零</td></div><div class="i18n-zh"><td style="padding:8px;">中等（检索基础设施）</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">中等（检索基础设施）</td></div><div class="i18n-zh"><td style="padding:8px;">高（GPU + 数据标注）</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">高（GPU + 数据标注）</td></div></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">迭代速度</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">迭代速度</td></div><div class="i18n-zh"><td style="padding:8px;">分钟级</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">分钟级</td></div><div class="i18n-zh"><td style="padding:8px;">小时级</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">小时级</td></div><div class="i18n-zh"><td style="padding:8px;">天/周级</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">天/周级</td></div></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">知识更新</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">知识更新</td></div><td style="padding:8px;">N/A</td><div class="i18n-zh"><td style="padding:8px;">实时（更新向量库）</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">实时（更新向量库）</td></div><div class="i18n-zh"><td style="padding:8px;">需重新训练</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">需重新训练</td></div></tr>
+
   </table>
 
+
   <p><strong>决策原则</strong>：Prompt Engineering → RAG → Fine-tuning 是递进关系。先试 PE，不够再加 RAG，实在不行才 Fine-tune。Fine-tune 的典型场景：需要特定输出格式（如 JSON Schema）、领域术语风格固化、cost per token 需要大幅降低（用小模型 fine-tune 替代大模型）。</p>
+
 </div>
+
 
 <div class="answer-card" id="A25">
-  <h2>A25 · LangChain Memory 类型</h2>
+  <div class="i18n-zh"><h2>A25 · LangChain Memory 类型</h2></div>
+<div class="i18n-en" hidden><h2>A25 · LangChain Memory 类型</h2></div>
+
 
   <p><strong>主要 Memory 类型：</strong></p>
+
   <ul>
     <li><strong>ConversationBufferMemory</strong>：存储完整对话历史。简单但 token 消耗随对话增长</li>
+
     <li><strong>ConversationBufferWindowMemory</strong>：只保留最近 K 轮对话。滑动窗口策略</li>
+
     <li><strong>ConversationSummaryMemory</strong>：用 LLM 对历史对话做摘要。省 token 但可能丢失细节</li>
+
     <li><strong>ConversationSummaryBufferMemory</strong>：混合策略——保留最近 K 轮完整对话，更早的做摘要</li>
+
     <li><strong>ConversationTokenBufferMemory</strong>：按 token 数量限制，而非轮数</li>
+
   </ul>
 
+
   <p><strong>LangGraph 的替代方案</strong>：在生产中，LangChain 的 Memory 组件逐渐被 LangGraph 的 Checkpointing 替代。Checkpoint 在每个 super-step 自动保存 State，支持更精细的状态管理、时间旅行、持久化。LangGraph 还提供 Store API 处理长期跨会话记忆。</p>
+
 </div>
+
 
 <div class="locked-content" data-require-stage="professional">
 <div class="answer-card" id="A26">
-  <h2>A26 · "不知道"处理策略</h2>
+  <div class="i18n-zh"><h2>A26 · "不知道"处理策略</h2></div>
+<div class="i18n-en" hidden><h2>A26 · "不知道"处理策略</h2></div>
 
-  <h3>设计策略</h3>
+
+  <div class="i18n-zh"><h3>设计策略</h3></div>
+<div class="i18n-en" hidden><h3>设计策略</h3></div>
+
   <pre><code># 1. 检索时获取置信度分数
 docs_with_scores = vector_store.similarity_search_with_relevance_scores(query, k=5)
 
@@ -856,63 +1423,99 @@ if not relevant_docs:
         "needs_escalation": True
     }</code></pre>
 
+
   <p><strong>关键设计点</strong>：</p>
+
   <ol>
     <li><strong>阈值分级</strong>：高置信度直接回答、中置信度标注"以下信息可能不完整"、低置信度触发"不知道"流程</li>
+
     <li><strong>有用的拒绝</strong>：不只说"不知道"，给出替代建议</li>
+
     <li><strong>升级路径</strong>：人工客服、联网搜索、建议换个问法</li>
+
   </ol>
+
 </div>
+
 
 <div class="answer-card" id="A27">
   <h2>A27 · Re-Ranking</h2>
 
-  <h3>核心答案</h3>
+
+  <div class="i18n-zh"><h3>核心答案</h3></div>
+<div class="i18n-en" hidden><h3>Core Answer</h3></div>
+
   <p><strong>Re-Ranking</strong>：在向量检索返回 Top-K 候选文档后，使用更精确（但更慢）的模型对候选文档重新排序。</p>
+
 
   <p><strong>为什么需要？</strong>向量检索用的 Bi-Encoder（query 和 document 分别编码）速度快但精度有限。Re-Ranker 用 Cross-Encoder（query 和 document 一起输入）计算相关性分数，精度更高但速度慢。两者组合：Bi-Encoder 粗筛（从百万中召回 Top-50），Cross-Encoder 精排（从 50 中选出 Top-5）。</p>
 
+
   <p><strong>常用 Re-Ranker：</strong></p>
+
   <ul>
     <li><strong>Cohere Rerank</strong>：商业 API，效果好，支持多语言</li>
+
     <li><strong>BGE-Reranker (BAAI)</strong>：开源，中文友好</li>
+
     <li><strong>Cross-Encoder (SBERT)</strong>：通用方案，可自定义训练</li>
+
     <li><strong>ColBERT</strong>：Late-interaction，在精度和速度间取平衡</li>
+
   </ul>
+
 </div>
 
-<div class="answer-card" id="A28">
-  <h2>A28 · RAG 评估体系</h2>
 
-  <h3>三维度评估</h3>
+<div class="answer-card" id="A28">
+  <div class="i18n-zh"><h2>A28 · RAG 评估体系</h2></div>
+<div class="i18n-en" hidden><h2>A28 · RAG 评估体系</h2></div>
+
+
+  <div class="i18n-zh"><h3>三维度评估</h3></div>
+<div class="i18n-en" hidden><h3>三维度评估</h3></div>
+
 
   <table style="width:100%; border-collapse:collapse;">
     <tr style="background:var(--surface-2);">
-      <th style="padding:8px;">维度</th><th style="padding:8px;">指标</th><th style="padding:8px;">说明</th>
+      <div class="i18n-zh"><th style="padding:8px;">维度</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">Dimension</th></div><div class="i18n-zh"><th style="padding:8px;">指标</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">Metric</th></div><div class="i18n-zh"><th style="padding:8px;">说明</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">Description</th></div>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>检索质量</strong></td>
       <td style="padding:8px;">Recall@K<br>MRR<br>NDCG</td>
       <td style="padding:8px;">相关文档被检索到的比例<br>第一个相关文档的平均排名倒数<br>考虑排序位置的归一化指标</td>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>生成质量</strong></td>
       <td style="padding:8px;">Faithfulness<br>Answer Relevance<br>Context Precision</td>
       <td style="padding:8px;">回答是否忠于检索到的文档<br>回答是否切题<br>检索到的文档中相关比例</td>
     </tr>
+
     <tr>
       <td style="padding:8px;"><strong>端到端</strong></td>
       <td style="padding:8px;">Answer Correctness<br>User Satisfaction</td>
       <td style="padding:8px;">最终答案是否正确<br>用户满意度评分</td>
     </tr>
+
   </table>
 
+
   <p><strong>推荐工具</strong>：<a href="https://docs.ragas.io/">Ragas</a> — RAG 专用评估框架，一行代码计算上述所有指标。</p>
+
 </div>
 
+
 <div class="answer-card" id="A29">
-  <h2>A29 · LangChain create_agent 工具调用 Agent (v1.0+)</h2>
+  <div class="i18n-zh"><h2>A29 · LangChain create_agent 工具调用 Agent (v1.0+)</h2></div>
+<div class="i18n-en" hidden><h2>A29 · LangChain create_agent 工具调用 Agent (v1.0+)</h2></div>
+
   <p><strong>⚠️ API 更新：</strong><code>create_react_agent</code>（langgraph.prebuilt）已废弃，LangChain v1.0 起统一使用 <code>create_agent</code>（langchain.agents）。</p>
+
 
   <pre><code>from langchain.agents import create_agent
 from langchain_community.tools import DuckDuckGoSearchRun
@@ -950,30 +1553,63 @@ result = agent.invoke({
     "messages": [{"role": "user", "content": "What's the population of Tokyo divided by 1000?"}]
 })
 print(result["messages"][-1].content)</code></pre>
+
 </div>
 
+
 <div class="answer-card" id="A30">
-  <h2>A30 · AI 框架全景对比</h2>
+  <div class="i18n-zh"><h2>A30 · AI 框架全景对比</h2></div>
+<div class="i18n-en" hidden><h2>A30 · AI 框架全景对比</h2></div>
+
 
   <table style="width:100%; border-collapse:collapse;">
     <tr style="background:var(--surface-2);">
-      <th style="padding:8px;">框架</th><th style="padding:8px;">定位</th><th style="padding:8px;">最适合</th>
+      <div class="i18n-zh"><th style="padding:8px;">框架</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">Framework</th></div><div class="i18n-zh"><th style="padding:8px;">定位</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">定位</th></div><div class="i18n-zh"><th style="padding:8px;">最适合</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">最适合</th></div>
     </tr>
-    <tr><td style="padding:8px;"><strong>LangChain</strong></td><td style="padding:8px;">通用 LLM 应用框架</td><td style="padding:8px;">需要与多种工具/模型集成的应用</td></tr>
-    <tr><td style="padding:8px;"><strong>LangGraph</strong></td><td style="padding:8px;">图结构工作流/Agent 编排</td><td style="padding:8px;">复杂多步骤 Agent、Multi-Agent 系统</td></tr>
-    <tr><td style="padding:8px;"><strong>LlamaIndex</strong></td><td style="padding:8px;">数据索引和检索框架</td><td style="padding:8px;">以 RAG 为核心的数据密集型应用</td></tr>
-    <tr><td style="padding:8px;"><strong>Haystack</strong></td><td style="padding:8px;">NLP Pipeline 框架</td><td style="padding:8px;">传统 NLP + LLM 混合流水线</td></tr>
-    <tr><td style="padding:8px;"><strong>DSPy</strong></td><td style="padding:8px;">编程式 Prompt 优化</td><td style="padding:8px;">自动优化 prompt 和 few-shot 示例</td></tr>
-    <tr><td style="padding:8px;"><strong>CrewAI</strong></td><td style="padding:8px;">角色驱动的 Multi-Agent</td><td style="padding:8px;">快速搭建多角色协作 Agent</td></tr>
+
+    <tr><td style="padding:8px;"><strong>LangChain</strong></td><div class="i18n-zh"><td style="padding:8px;">通用 LLM 应用框架</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">通用 LLM 应用框架</td></div><div class="i18n-zh"><td style="padding:8px;">需要与多种工具/模型集成的应用</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">需要与多种工具/模型集成的应用</td></div></tr>
+
+    <tr><td style="padding:8px;"><strong>LangGraph</strong></td><div class="i18n-zh"><td style="padding:8px;">图结构工作流/Agent 编排</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">图结构工作流/Agent 编排</td></div><div class="i18n-zh"><td style="padding:8px;">复杂多步骤 Agent、Multi-Agent 系统</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">复杂多步骤 Agent、Multi-Agent 系统</td></div></tr>
+
+    <tr><td style="padding:8px;"><strong>LlamaIndex</strong></td><div class="i18n-zh"><td style="padding:8px;">数据索引和检索框架</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">数据索引和检索框架</td></div><div class="i18n-zh"><td style="padding:8px;">以 RAG 为核心的数据密集型应用</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">以 RAG 为核心的数据密集型应用</td></div></tr>
+
+    <tr><td style="padding:8px;"><strong>Haystack</strong></td><div class="i18n-zh"><td style="padding:8px;">NLP Pipeline 框架</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">NLP Pipeline 框架</td></div><div class="i18n-zh"><td style="padding:8px;">传统 NLP + LLM 混合流水线</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">传统 NLP + LLM 混合流水线</td></div></tr>
+
+    <tr><td style="padding:8px;"><strong>DSPy</strong></td><div class="i18n-zh"><td style="padding:8px;">编程式 Prompt 优化</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">编程式 Prompt 优化</td></div><div class="i18n-zh"><td style="padding:8px;">自动优化 prompt 和 few-shot 示例</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">自动优化 prompt 和 few-shot 示例</td></div></tr>
+
+    <tr><td style="padding:8px;"><strong>CrewAI</strong></td><div class="i18n-zh"><td style="padding:8px;">角色驱动的 Multi-Agent</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">角色驱动的 Multi-Agent</td></div><div class="i18n-zh"><td style="padding:8px;">快速搭建多角色协作 Agent</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">快速搭建多角色协作 Agent</td></div></tr>
+
   </table>
 
+
   <p><strong>选型建议</strong>：新项目默认从 <strong>LangChain + LangGraph</strong> 组合开始（生态最完善）。数据密集型 RAG 考虑 <strong>LlamaIndex</strong>。需要自动优化 prompt 时引入 <strong>DSPy</strong>。</p>
+
 </div>
 
-<div class="answer-card" id="A31">
-  <h2>A31 · Rate Limit & Token 超限处理</h2>
 
-  <h3>健壮的调用策略</h3>
+<div class="answer-card" id="A31">
+  <div class="i18n-zh"><h2>A31 · Rate Limit & Token 超限处理</h2></div>
+<div class="i18n-en" hidden><h2>A31 · Rate Limit & Token 超限处理</h2></div>
+
+
+  <div class="i18n-zh"><h3>健壮的调用策略</h3></div>
+<div class="i18n-en" hidden><h3>健壮的调用策略</h3></div>
+
   <pre><code>from tenacity import retry, stop_after_attempt, wait_exponential
 from langchain_openai import ChatOpenAI
 
@@ -1006,69 +1642,116 @@ primary_llm = ChatOpenAI(model="gpt-4o")
 fallback_llm = ChatOpenAI(model="gpt-4o-mini")  # cheaper fallback
 
 llm = primary_llm.with_fallbacks([fallback_llm])</code></pre>
+
 </div>
+
 
 <div class="answer-card" id="A32">
   <h2>A32 · MCP (Model Context Protocol)</h2>
 
-  <h3>核心答案</h3>
+
+  <div class="i18n-zh"><h3>核心答案</h3></div>
+<div class="i18n-en" hidden><h3>Core Answer</h3></div>
+
 
   <p><strong>MCP</strong> 是由 Anthropic 提出的开放协议，标准化了 LLM 应用与外部工具/数据源之间的通信接口。它定义了三个原语：</p>
+
   <ul>
     <li><strong>Tools</strong>：LLM 可调用的函数（类似 Function Calling，但接口标准化）</li>
+
     <li><strong>Resources</strong>：LLM 可读取的数据（文件、数据库记录、API 响应）</li>
+
     <li><strong>Prompts</strong>：预定义的 prompt 模板</li>
+
   </ul>
+
 
   <p><strong>与 Function Calling 的关键区别：</strong></p>
+
   <ul>
     <li><strong>Function Calling</strong>：每个 LLM 提供商有自己的 tool schema 格式（OpenAI vs Anthropic 不兼容）</li>
+
     <li><strong>MCP</strong>：统一的协议标准，一次定义工具，所有支持 MCP 的 LLM 都可使用</li>
+
     <li><strong>MCP 是 Client-Server 架构</strong>：MCP Server 暴露工具/资源，MCP Client（LangChain/LangGraph Agent）调用它们</li>
+
     <li><strong>解耦</strong>：工具开发者不需要知道最终使用哪个 LLM，LLM 开发者不需要适配每个工具的接口</li>
+
   </ul>
+
 </div>
 
-<div class="answer-card" id="A33">
-  <h2>A33 · LangChain 缓存策略</h2>
 
-  <h3>缓存层级</h3>
+<div class="answer-card" id="A33">
+  <div class="i18n-zh"><h2>A33 · LangChain 缓存策略</h2></div>
+<div class="i18n-en" hidden><h2>A33 · LangChain 缓存策略</h2></div>
+
+
+  <div class="i18n-zh"><h3>缓存层级</h3></div>
+<div class="i18n-en" hidden><h3>缓存层级</h3></div>
+
   <ol>
     <li><strong>LLM 调用缓存</strong>：相同 prompt → 相同结果。LangChain 内置 InMemoryCache / SQLiteCache</li>
+
     <li><strong>Embedding 缓存</strong>：相同文本 → 相同向量。对静态知识库极其有效</li>
+
     <li><strong>检索结果缓存</strong>：相同 query → 相同检索结果</li>
+
   </ol>
+
 
   <pre><code>from langchain.globals import set_llm_cache
 from langchain.cache import SQLiteCache
 
 set_llm_cache(SQLiteCache(database_path=".langchain.db"))</code></pre>
 
+
   <p><strong>不适合缓存的场景</strong>：需要实时性（股票价格）、需要随机性（创意生成）、用户个性化内容、包含时间敏感信息的查询。</p>
+
 </div>
+
 
 <div class="answer-card" id="A34">
   <h2>A34 · Output Parser</h2>
 
-  <h3>常见 Parser</h3>
+
+  <div class="i18n-zh"><h3>常见 Parser</h3></div>
+<div class="i18n-en" hidden><h3>常见 Parser</h3></div>
+
   <ul>
     <li><strong>StrOutputParser</strong>：直接返回字符串</li>
+
     <li><strong>JsonOutputParser</strong>：解析 JSON。配合 Pydantic schema 使用</li>
+
     <li><strong>PydanticOutputParser</strong>：解析为 Pydantic 模型实例</li>
+
     <li><strong>CommaSeparatedListOutputParser</strong>：解析逗号分隔列表</li>
+
     <li><strong>StructuredOutputParser</strong>：解析为结构化字典</li>
+
   </ul>
 
+
   <p><strong>格式不符时的处理</strong>：使用 OutputFixingParser 或 RetryOutputParser，让 LLM 在看到解析错误后重新生成。更好的方案是使用 API 原生的 Structured Output（如 OpenAI 的 response_format）。</p>
+
 </div>
 
+
 <div class="answer-card" id="A35">
-  <h2>A35 · 多轮对话 RAG 的指代消解</h2>
+  <div class="i18n-zh"><h2>A35 · 多轮对话 RAG 的指代消解</h2></div>
+<div class="i18n-en" hidden><h2>A35 · 多轮对话 RAG 的指代消解</h2></div>
 
-  <h3>问题示例</h3>
-  <p>用户："iPhone 15 Pro 多少钱？" → 机器人回答后 → 用户："它的续航怎么样？" —— "它"指什么？</p>
 
-  <h3>解决方案：Query Rewriting with LLM</h3>
+  <div class="i18n-zh"><h3>问题示例</h3></div>
+<div class="i18n-en" hidden><h3>问题示例</h3></div>
+
+  <div class="i18n-zh"><p>用户："iPhone 15 Pro 多少钱？" → 机器人回答后 → 用户："它的续航怎么样？" —— "它"指什么？</p></div>
+<div class="i18n-en" hidden><p>用户："iPhone 15 Pro 多少钱？" → 机器人回答后 → 用户："它的续航怎么样？" —— "它"指什么？</p></div>
+
+
+  <div class="i18n-zh"><h3>解决方案：Query Rewriting with LLM</h3></div>
+<div class="i18n-en" hidden><h3>解决方案：Query Rewriting with LLM</h3></div>
+
   <pre><code>def rewrite_query_with_history(query: str, history: list) -> str:
     """使用 LLM 将依赖上下文的查询改写为独立查询"""
     rewrite_prompt = f"""Given conversation history and the latest user query,
@@ -1095,30 +1778,57 @@ standalone = rewrite_query_with_history(query, history)
 
 # Now use standalone query for RAG retrieval
 docs = retriever.invoke(standalone)</code></pre>
-  <p>关键：改写后再做检索，而不是把模糊查询直接发给向量数据库。</p>
+
+  <div class="i18n-zh"><p>关键：改写后再做检索，而不是把模糊查询直接发给向量数据库。</p></div>
+<div class="i18n-en" hidden><p>关键：改写后再做检索，而不是把模糊查询直接发给向量数据库。</p></div>
+
 </div>
+
 
 <!-- ============ L3 ANSWERS ============ -->
 <div class="answer-card" id="A36">
-  <h2>A36 · LangGraph 核心概念</h2>
+  <div class="i18n-zh"><h2>A36 · LangGraph 核心概念</h2></div>
+<div class="i18n-en" hidden><h2>A36 · LangGraph 核心概念</h2></div>
+
   <p><strong>LangGraph</strong> 是 LangChain 生态中的图结构 Agent 编排框架。它把 LLM 工作流建模为<strong>有向图</strong>（Directed Graph），其中：</p>
+
   <ul>
     <li><strong>State</strong>：图执行过程中共享的数据对象（TypedDict），所有节点可读写</li>
+
     <li><strong>Node</strong>：计算单元（Python 函数），接收 State，返回 State 的部分更新</li>
+
     <li><strong>Edge</strong>：控制流——固定边（确定性）、条件边（动态路由，由函数决定下一个节点）</li>
+
   </ul>
+
   <p><strong>LangGraph vs LangChain 的核心差异：</strong>LangChain 的 Chain 是线性的 A→B→C，LangGraph 支持循环、条件分支、并行执行、状态持久化、人类审批中断——这些都是构建 Agent 的必需品。</p>
+
   <div class="rubric"><div class="title">面试官评分标准</div>
+
     <table>
-      <tr><td>⭐ 初级</td><td>能说出 State/Node/Edge 三个概念</td></tr>
-      <tr><td>⭐⭐ 中级</td><td>能解释为什么 LangChain 的线性 Chain 不够用（循环、分支、HITL）</td></tr>
-      <tr><td>🏆 高级</td><td>能画出图结构示例，讨论 StateGraph vs Functional API 的选型</td></tr>
+      <tr><div class="i18n-zh"><td>⭐ 初级</td></div>
+<div class="i18n-en" hidden><td>⭐ 初级</td></div><div class="i18n-zh"><td>能说出 State/Node/Edge 三个概念</td></div>
+<div class="i18n-en" hidden><td>能说出 State/Node/Edge 三个概念</td></div></tr>
+
+      <tr><div class="i18n-zh"><td>⭐⭐ 中级</td></div>
+<div class="i18n-en" hidden><td>⭐⭐ 中级</td></div><div class="i18n-zh"><td>能解释为什么 LangChain 的线性 Chain 不够用（循环、分支、HITL）</td></div>
+<div class="i18n-en" hidden><td>能解释为什么 LangChain 的线性 Chain 不够用（循环、分支、HITL）</td></div></tr>
+
+      <tr><div class="i18n-zh"><td>🏆 高级</td></div>
+<div class="i18n-en" hidden><td>🏆 高级</td></div><div class="i18n-zh"><td>能画出图结构示例，讨论 StateGraph vs Functional API 的选型</td></div>
+<div class="i18n-en" hidden><td>能画出图结构示例，讨论 StateGraph vs Functional API 的选型</td></div></tr>
+
     </table>
+
   </div>
+
 </div>
 
+
 <div class="answer-card" id="A37">
-  <h2>A37 · StateGraph 最小 Agent 实现</h2>
+  <div class="i18n-zh"><h2>A37 · StateGraph 最小 Agent 实现</h2></div>
+<div class="i18n-en" hidden><h2>A37 · StateGraph 最小 Agent 实现</h2></div>
+
   <pre><code>from typing import Annotated, TypedDict
 from langgraph.graph import StateGraph, START, END
 from langgraph.graph.message import add_messages
@@ -1151,31 +1861,46 @@ graph.add_edge("tools", "chatbot")
 app = graph.compile()
 result = app.invoke({"messages": [{"role": "user", "content": "What's the weather in Tokyo?"}]})
 print(result["messages"][-1].content)</code></pre>
+
   <p><strong>关键点：</strong><code>add_messages</code> reducer 确保新消息追加到 messages 列表而非覆盖；<code>tools_condition</code> 检查 LLM 响应是否包含 tool_call；ToolNode 自动执行工具并返回 ToolMessage。</p>
+
 </div>
 
+
 <div class="answer-card" id="A38">
-  <h2>A38 · add_messages 缺失导致消息覆盖</h2>
+  <div class="i18n-zh"><h2>A38 · add_messages 缺失导致消息覆盖</h2></div>
+<div class="i18n-en" hidden><h2>A38 · add_messages 缺失导致消息覆盖</h2></div>
+
   <p><strong>问题代码：</strong></p>
+
   <pre><code># ❌ 错误：没有 add_messages reducer
 class State(TypedDict):
     messages: list  # 默认覆盖写！
 
 def chatbot(state: State):
     return {"messages": [AIMessage(content="Hello")]}  # 覆盖了之前的所有消息</code></pre>
+
   <p><strong>修复：</strong></p>
+
   <pre><code>from langgraph.graph.message import add_messages
 from typing import Annotated
 
 class State(TypedDict):
     messages: Annotated[list[BaseMessage], add_messages]  # ✅ 追加模式</code></pre>
+
   <p><strong>add_messages 做了什么：</strong>自动合并消息列表（非覆盖）、智能去重（相同 ID 的消息替换）、支持 RemoveMessage（用 RemoveMessage 对象删除消息）。</p>
+
   <p>这是 LangChain 社区 <strong>#1 高频报错</strong>，面试中必须能识别并修复。</p>
+
 </div>
 
+
 <div class="answer-card" id="A39">
-  <h2>A39 · Reducer 机制</h2>
+  <div class="i18n-zh"><h2>A39 · Reducer 机制</h2></div>
+<div class="i18n-en" hidden><h2>A39 · Reducer 机制</h2></div>
+
   <p><strong>Reducer</strong> 定义了 State 的某个 key 如何合并多个更新。不指定 Reducer 时，默认行为是<strong>覆盖</strong>。</p>
+
   <pre><code>from typing import Annotated
 from operator import add
 
@@ -1184,28 +1909,48 @@ class State(TypedDict):
     items: Annotated[list, add]                    # 列表拼接
     messages: Annotated[list, add_messages]         # 消息智能合并
     name: str                                       # 无 reducer → 覆盖</code></pre>
+
   <p><strong>自定义 Reducer：</strong></p>
+
   <pre><code>def merge_dicts(a: dict, b: dict) -> dict:
     """合并两个字典，保留最新的值"""
     return {**a, **b}
 
 class State(TypedDict):
     metadata: Annotated[dict, merge_dicts]</code></pre>
+
 </div>
 
+
 <div class="answer-card" id="A40">
-  <h2>A40 · LangGraph 三种边</h2>
+  <div class="i18n-zh"><h2>A40 · LangGraph 三种边</h2></div>
+<div class="i18n-en" hidden><h2>A40 · LangGraph 三种边</h2></div>
+
   <table style="width:100%; border-collapse:collapse;">
-    <tr style="background:var(--surface-2);"><th style="padding:8px;">类型</th><th style="padding:8px;">写法</th><th style="padding:8px;">场景</th></tr>
-    <tr><td style="padding:8px;"><strong>固定边</strong></td><td style="padding:8px;"><code>graph.add_edge("A", "B")</code></td><td style="padding:8px;">确定性的顺序执行</td></tr>
-    <tr><td style="padding:8px;"><strong>条件边</strong></td><td style="padding:8px;"><code>graph.add_conditional_edges("A", router_fn, path_map)</code></td><td style="padding:8px;">LLM 决策路由、分支逻辑</td></tr>
-    <tr><td style="padding:8px;"><strong>Command</strong></td><td style="padding:8px;"><code>return Command(goto="B", update={"key": val})</code></td><td style="padding:8px;">节点内动态路由+状态更新、跨图跳转</td></tr>
+    <tr style="background:var(--surface-2);"><div class="i18n-zh"><th style="padding:8px;">类型</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">Type</th></div><div class="i18n-zh"><th style="padding:8px;">写法</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">写法</th></div><div class="i18n-zh"><th style="padding:8px;">场景</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">Scenario</th></div></tr>
+
+    <tr><td style="padding:8px;"><strong>固定边</strong></td><td style="padding:8px;"><code>graph.add_edge("A", "B")</code></td><div class="i18n-zh"><td style="padding:8px;">确定性的顺序执行</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">确定性的顺序执行</td></div></tr>
+
+    <tr><td style="padding:8px;"><strong>条件边</strong></td><td style="padding:8px;"><code>graph.add_conditional_edges("A", router_fn, path_map)</code></td><div class="i18n-zh"><td style="padding:8px;">LLM 决策路由、分支逻辑</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">LLM 决策路由、分支逻辑</td></div></tr>
+
+    <tr><td style="padding:8px;"><strong>Command</strong></td><td style="padding:8px;"><code>return Command(goto="B", update={"key": val})</code></td><div class="i18n-zh"><td style="padding:8px;">节点内动态路由+状态更新、跨图跳转</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">节点内动态路由+状态更新、跨图跳转</td></div></tr>
+
   </table>
+
   <p><strong>选型建议：</strong>简单路由用条件边，需要同时更新状态和跳转用 Command，跨子图跳转必须用 Command。</p>
+
 </div>
+
 
 <div class="answer-card" id="A41">
   <h2>A41 · Customer Support Graph</h2>
+
   <pre><code>def intent_classifier(state: State) -> dict:
     """Classify user intent and route accordingly"""
     prompt = f"Classify intent: {state['messages'][-1].content}. Reply with: sales, support, or technical."
@@ -1230,52 +1975,85 @@ graph.add_conditional_edges("classify", route_by_intent, {
 graph.add_edge("sales_agent", END)
 graph.add_edge("support_agent", END)
 graph.add_edge("technical_agent", END)</code></pre>
+
 </div>
 
+
 <div class="answer-card" id="A42">
-  <h2>A42 · tools_condition 不工作</h2>
+  <div class="i18n-zh"><h2>A42 · tools_condition 不工作</h2></div>
+<div class="i18n-en" hidden><h2>A42 · tools_condition 不工作</h2></div>
+
   <p><strong>常见原因：</strong></p>
+
   <ol>
     <li><strong>path_map 不匹配</strong>：条件函数返回 "tools" 但 path_map 中写的是 "tool_node"</li>
+
     <li><strong>忘记添加 END 路径</strong>：没有处理非工具调用的情况</li>
+
     <li><strong>LLM 没有 bind_tools</strong>：LLM 不知道有工具可用，从不返回 tool_call</li>
+
     <li><strong>ToolMessage 返回后 State 没有正确更新</strong>：ToolNode 返回的消息被覆盖而非追加</li>
+
   </ol>
+
   <p><strong>标准模板：</strong></p>
+
   <pre><code>graph.add_conditional_edges(
     "chatbot",
     tools_condition,  # 内置函数：检查 AIMessage.tool_calls
     {"tools": "tools", END: END}  # 确保 key 名匹配！
 )</code></pre>
+
 </div>
+
 
 <div class="answer-card" id="A43">
   <h2>A43 · LangGraph Agent Loop (ReAct)</h2>
+
   <p><strong>ReAct 循环 = Reasoning + Acting 的交替执行。</strong></p>
-  <p>在 LangGraph 中体现为：</p>
+
+  <div class="i18n-zh"><p>在 LangGraph 中体现为：</p></div>
+<div class="i18n-en" hidden><p>在 LangGraph 中体现为：</p></div>
+
   <pre><code>START → chatbot (Reason: LLM 决定是否使用工具)
           ↓ tools_condition
        ┌─ tools (Act: 执行工具) → 返回 chatbot (Observe: LLM 看到工具结果)
        │
        └─ END (没有工具调用，最终回复)</code></pre>
+
   <p>这是通过 <code>tools_condition</code> 的闭环实现的——只要 LLM 持续返回 tool_call，就会在 chatbot 和 tools 之间循环，直到 LLM 输出纯文本回复。</p>
+
 </div>
+
 
 <div class="answer-card" id="A44">
-  <h2>A44 · Graph 静默退出 5 种原因</h2>
+  <div class="i18n-zh"><h2>A44 · Graph 静默退出 5 种原因</h2></div>
+<div class="i18n-en" hidden><h2>A44 · Graph 静默退出 5 种原因</h2></div>
+
   <ol>
     <li><strong>条件边返回 END</strong>：tools_condition 或自定义路由函数返回了 END，没有后续节点</li>
+
     <li><strong>条件边返回值无匹配</strong>：路由函数返回了 path_map 中不存在的值，LangGraph 默认行为是停止</li>
+
     <li><strong>节点返回了不存在的 State key</strong>：节点写入了一个未在 State schema 中定义的 key，更新被静默丢弃</li>
+
     <li><strong>Recursion Limit 触发</strong>：图执行步数超过 recursion_limit（默认 25），抛出 GRAPH_RECURSION_LIMIT 错误（但可能被静默捕获）</li>
+
     <li><strong>未配置 checkpointer 时使用 interrupt</strong>：interrupt() 需要 checkpointer，否则行为异常</li>
+
   </ol>
+
   <p><strong>调试方法：</strong>开启 LangSmith 追踪，检查每个节点的输入/输出 State。</p>
+
 </div>
 
+
 <div class="answer-card" id="A45">
-  <h2>A45 · State 部分更新铁律</h2>
+  <div class="i18n-zh"><h2>A45 · State 部分更新铁律</h2></div>
+<div class="i18n-en" hidden><h2>A45 · State 部分更新铁律</h2></div>
+
   <p><strong>铁律：节点只返回自己负责的 key</strong>，不需要返回完整 State。</p>
+
   <pre><code>def my_node(state: State) -> dict:
     # ✅ 正确：只返回自己更新的 key
     return {"messages": [AIMessage(content="Hi")]}
@@ -1283,11 +2061,16 @@ graph.add_edge("technical_agent", END)</code></pre>
 def my_node(state: State) -> dict:
     # ❌ 错误：返回了完整 State（可能覆盖其他节点并行写入的值）
     return dict(state) | {"messages": state["messages"] + [AIMessage(content="Hi")]}</code></pre>
-  <p>框架会根据 Reducer 自动将 Partial Update 合并到当前 State 中。</p>
+
+  <div class="i18n-zh"><p>框架会根据 Reducer 自动将 Partial Update 合并到当前 State 中。</p></div>
+<div class="i18n-en" hidden><p>框架会根据 Reducer 自动将 Partial Update 合并到当前 State 中。</p></div>
+
 </div>
+
 
 <div class="answer-card" id="A46">
   <h2>A46 · Self-Reflection Agent</h2>
+
   <pre><code>class ReflectionState(TypedDict):
     messages: Annotated[list, add_messages]
     draft: str
@@ -1322,10 +2105,13 @@ graph.add_edge(START, "generate")
 graph.add_edge("generate", "reflect")
 graph.add_conditional_edges("reflect", should_continue, {"refine": "refine", "finalize": END})
 graph.add_edge("refine", "reflect")</code></pre>
+
 </div>
+
 
 <div class="answer-card" id="A47">
   <h2>A47 · Functional API</h2>
+
   <pre><code>from langgraph.func import entrypoint, task
 from langchain_core.messages import HumanMessage
 
@@ -1349,12 +2135,18 @@ def self_reflection_agent(question: str):
         answer = generate_answer(f"Improve based on: {reflection['critique']}\nOriginal: {question}").result()
         reflection = reflect_on_answer(answer).result()
     return answer</code></pre>
+
   <p><strong>对比：</strong>Functional API 更 Pythonic（像写普通函数），适合数据处理流水线。StateGraph API 更适合需要 checkpointing、HITL、复杂控制流的场景。</p>
+
 </div>
 
+
 <div class="answer-card" id="A48">
-  <h2>A48 · Recursion Limit 防护</h2>
+  <div class="i18n-zh"><h2>A48 · Recursion Limit 防护</h2></div>
+<div class="i18n-en" hidden><h2>A48 · Recursion Limit 防护</h2></div>
+
   <p>LangGraph 提供 <code>recursion_limit</code> 参数控制图的最大执行步数（super-steps）。</p>
+
   <pre><code>app = graph.compile(
     checkpointer=MemorySaver(),
     # max 25 steps (default), raise GraphRecursionError if exceeded
@@ -1367,13 +2159,20 @@ try:
     result = app.invoke(input_data, {"recursion_limit": 10})
 except GraphRecursionError:
     print("Agent loop exceeded max iterations")</code></pre>
+
   <p><strong>设计建议：</strong>生产环境设置为合理上限（如 50-100），配合超时机制，防止 Agent 无限循环消耗 Token。</p>
+
 </div>
 
+
 <div class="answer-card" id="A49">
-  <h2>A49 · Super-Step 和 Send API</h2>
+  <div class="i18n-zh"><h2>A49 · Super-Step 和 Send API</h2></div>
+<div class="i18n-en" hidden><h2>A49 · Super-Step 和 Send API</h2></div>
+
   <p><strong>Super-Step</strong>：LangGraph 的一个执行"滴答"。当条件边返回多个目标节点时，这些节点在同一个 super-step 内<strong>并行执行</strong>。所有并行节点完成后，才进入下一个 super-step。</p>
+
   <p><strong>Send API</strong>：实现 map-reduce 模式的动态扇出。</p>
+
   <pre><code>from langgraph.types import Send
 
 def continue_to_jokes(state):
@@ -1383,10 +2182,14 @@ def continue_to_jokes(state):
 graph.add_conditional_edges("planner", continue_to_jokes)
 # generate_joke 会并行执行多次（每个 topic 一次），
 # 所有执行完成后，聚合到 finalizer 节点</code></pre>
+
 </div>
 
+
 <div class="answer-card" id="A50">
-  <h2>A50 · 三节点审查流程</h2>
+  <div class="i18n-zh"><h2>A50 · 三节点审查流程</h2></div>
+<div class="i18n-en" hidden><h2>A50 · 三节点审查流程</h2></div>
+
   <pre><code>class ReviewState(TypedDict):
     draft: str
     approved: bool
@@ -1414,44 +2217,72 @@ graph.add_edge("writer", "reviewer")
 graph.add_conditional_edges("reviewer", route_after_review, {
     "publish": END, "rewrite": "writer", "force_publish": END
 })</code></pre>
+
 </div>
 
+
 <div class="answer-card" id="A51">
-  <h2>A51 · MessagesState vs 自定义 State</h2>
+  <div class="i18n-zh"><h2>A51 · MessagesState vs 自定义 State</h2></div>
+<div class="i18n-en" hidden><h2>A51 · MessagesState vs 自定义 State</h2></div>
+
   <p><strong>MessagesState</strong> 是 LangGraph 内置的预定义 State，包含 <code>messages: Annotated[list, add_messages]</code>。适用场景：纯对话型 Agent，只需管理消息历史。</p>
+
   <p><strong>自定义 State</strong> 在 MessagesState 基础上添加额外字段：</p>
+
   <pre><code>class CustomState(MessagesState):
     user_id: str
     retrieved_docs: list[str]
     tool_call_count: int
     needs_escalation: bool</code></pre>
-  <p>当 Agent 需要追踪非消息的状态（文档、计数、标记）时，继承 MessagesState 并添加自定义 key。</p>
+
+  <div class="i18n-zh"><p>当 Agent 需要追踪非消息的状态（文档、计数、标记）时，继承 MessagesState 并添加自定义 key。</p></div>
+<div class="i18n-en" hidden><p>当 Agent 需要追踪非消息的状态（文档、计数、标记）时，继承 MessagesState 并添加自定义 key。</p></div>
+
 </div>
+
 
 <div class="answer-card" id="A52">
-  <h2>A52 · 并行 Reducer 重复问题</h2>
-  <p>多个并行节点同时读取 State，各自基于相同的旧 State 做了 append，然后各自写回——Reducer 看到两"批次"更新，每批都包含了"旧数据+新数据"，导致旧数据被重复追加。</p>
+  <div class="i18n-zh"><h2>A52 · 并行 Reducer 重复问题</h2></div>
+<div class="i18n-en" hidden><h2>A52 · 并行 Reducer 重复问题</h2></div>
+
+  <div class="i18n-zh"><p>多个并行节点同时读取 State，各自基于相同的旧 State 做了 append，然后各自写回——Reducer 看到两"批次"更新，每批都包含了"旧数据+新数据"，导致旧数据被重复追加。</p></div>
+<div class="i18n-en" hidden><p>多个并行节点同时读取 State，各自基于相同的旧 State 做了 append，然后各自写回——Reducer 看到两"批次"更新，每批都包含了"旧数据+新数据"，导致旧数据被重复追加。</p></div>
+
   <p><strong>解决：</strong>使用只追加新增部分的 Reducer，或确保并行节点操作不同的 State key。</p>
+
 </div>
 
+
 <div class="answer-card" id="A53">
-  <h2>A53 · 研究助手 Agent</h2>
+  <div class="i18n-zh"><h2>A53 · 研究助手 Agent</h2></div>
+<div class="i18n-en" hidden><h2>A53 · 研究助手 Agent</h2></div>
+
   <pre><code># Graph structure:
 # search → (parallel: extract_from_URL_1, extract_from_URL_2, ...) → synthesize → review → finalize
 # 关键：search 返回 URL 列表 → Send API 为每个 URL 创建并行的 extract 任务 → synthesize 聚合所有提取结果</code></pre>
+
 </div>
+
 
 <div class="answer-card" id="A54">
   <h2>A54 · invoke vs ainvoke vs astream_events</h2>
+
   <ul>
     <li><strong>invoke()</strong>：同步执行，返回最终 State</li>
+
     <li><strong>ainvoke()</strong>：异步执行，适合 FastAPI/async 上下文</li>
+
     <li><strong>astream_events(version="v2")</strong>：流式输出 token 级事件（on_chat_model_stream, on_tool_start, on_tool_end 等），适合构建实时 UI</li>
+
   </ul>
+
 </div>
 
+
 <div class="answer-card" id="A55">
-  <h2>A55 · SQL 查询 Agent</h2>
+  <div class="i18n-zh"><h2>A55 · SQL 查询 Agent</h2></div>
+<div class="i18n-en" hidden><h2>A55 · SQL 查询 Agent</h2></div>
+
   <pre><code>def text2sql(state: State) -> dict:
     sql = llm.invoke(f"Generate SQL for: {state['messages'][-1]}. Schema: {SCHEMA}").content
     return {"sql": sql}
@@ -1473,32 +2304,65 @@ def fix_sql(state: State) -> dict:
 def explain_result(state: State) -> dict:
     explanation = llm.invoke(f"Explain: {state['query_result']} for: {state['messages'][-1]}").content
     return {"messages": [AIMessage(content=explanation)]}</code></pre>
+
 </div>
 
+
 <div class="answer-card" id="A56">
-  <h2>A56 · State 设计最佳实践</h2>
+  <div class="i18n-zh"><h2>A56 · State 设计最佳实践</h2></div>
+<div class="i18n-en" hidden><h2>A56 · State 设计最佳实践</h2></div>
+
   <p><strong>Small State Principle</strong>：State 只存图执行必要的共享数据。原因：</p>
+
   <ol>
-    <li>每次 checkpoint 都会序列化完整 State → State 越大 checkpoint 越慢</li>
-    <li>并行节点共享 State → State 越大竞争越激烈</li>
-    <li>State 通过 checkpoint 持久化 → 大 State 占用更多存储</li>
+    <div class="i18n-zh"><li>每次 checkpoint 都会序列化完整 State → State 越大 checkpoint 越慢</li></div>
+<div class="i18n-en" hidden><li>每次 checkpoint 都会序列化完整 State → State 越大 checkpoint 越慢</li></div>
+
+    <div class="i18n-zh"><li>并行节点共享 State → State 越大竞争越激烈</li></div>
+<div class="i18n-en" hidden><li>并行节点共享 State → State 越大竞争越激烈</li></div>
+
+    <div class="i18n-zh"><li>State 通过 checkpoint 持久化 → 大 State 占用更多存储</li></div>
+<div class="i18n-en" hidden><li>State 通过 checkpoint 持久化 → 大 State 占用更多存储</li></div>
+
   </ol>
-  <p>大对象（如整个知识库）应放在外部存储，State 中只存引用（如 doc_id）。</p>
+
+  <div class="i18n-zh"><p>大对象（如整个知识库）应放在外部存储，State 中只存引用（如 doc_id）。</p></div>
+<div class="i18n-en" hidden><p>大对象（如整个知识库）应放在外部存储，State 中只存引用（如 doc_id）。</p></div>
+
 </div>
+
 
 <div class="answer-card" id="A57">
   <h2>A57 · StateGraph API vs Functional API</h2>
+
   <table style="width:100%; border-collapse:collapse;">
     <tr style="background:var(--surface-2);"><th style="padding:8px;">StateGraph API</th><th style="padding:8px;">Functional API (@entrypoint/@task)</th></tr>
-    <tr><td style="padding:8px;">显式定义节点和边</td><td style="padding:8px;">隐式的调用依赖图</td></tr>
-    <tr><td style="padding:8px;">完整的 checkpointing/HITL/streaming 支持</td><td style="padding:8px;">有限的 checkpointing（v1 仍在完善）</td></tr>
-    <tr><td style="padding:8px;">适合复杂控制流（循环、分支）</td><td style="padding:8px;">适合数据处理流水线</td></tr>
-    <tr><td style="padding:8px;">学习曲线较陡</td><td style="padding:8px;">更 Pythonic，上手快</td></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">显式定义节点和边</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">显式定义节点和边</td></div><div class="i18n-zh"><td style="padding:8px;">隐式的调用依赖图</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">隐式的调用依赖图</td></div></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">完整的 checkpointing/HITL/streaming 支持</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">完整的 checkpointing/HITL/streaming 支持</td></div><div class="i18n-zh"><td style="padding:8px;">有限的 checkpointing（v1 仍在完善）</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">有限的 checkpointing（v1 仍在完善）</td></div></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">适合复杂控制流（循环、分支）</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">适合复杂控制流（循环、分支）</td></div><div class="i18n-zh"><td style="padding:8px;">适合数据处理流水线</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">适合数据处理流水线</td></div></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">学习曲线较陡</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">学习曲线较陡</td></div><div class="i18n-zh"><td style="padding:8px;">更 Pythonic，上手快</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">更 Pythonic，上手快</td></div></tr>
+
   </table>
+
 </div>
 
+
 <div class="answer-card" id="A58">
-  <h2>A58 · SELF-RAG 简化版</h2>
+  <div class="i18n-zh"><h2>A58 · SELF-RAG 简化版</h2></div>
+<div class="i18n-en" hidden><h2>A58 · SELF-RAG 简化版</h2></div>
+
   <pre><code>def retrieve(state: State) -> dict:
     docs = vector_store.similarity_search(state["query"], k=5)
     return {"retrieved_docs": docs}
@@ -1523,21 +2387,35 @@ graph.add_edge(START, "retrieve")
 graph.add_conditional_edges("retrieve", grade_relevance, {"generate": "generate", "rewrite": "rewrite"})
 graph.add_edge("rewrite", "retrieve")  # back to retrieve with new query
 graph.add_edge("generate", END)</code></pre>
+
 </div>
+
 
 <div class="answer-card" id="A59">
-  <h2>A59 · ToolNode 与 bind_tools</h2>
+  <div class="i18n-zh"><h2>A59 · ToolNode 与 bind_tools</h2></div>
+<div class="i18n-en" hidden><h2>A59 · ToolNode 与 bind_tools</h2></div>
+
   <p><strong>bind_tools()</strong>：将工具定义（name, description, parameters JSON Schema）注入 LLM 的 API 调用，使 LLM 在需要时返回 tool_call 而非文本。</p>
+
   <p><strong>ToolNode</strong>：接收 LLM 返回的 AIMessage（含 tool_calls），解析 tool_call 参数，执行对应的 Python 函数，返回 ToolMessage。</p>
-  <p>它们是协作关系：bind_tools 让 LLM"知道"工具有什么能力并"请求"使用；ToolNode 负责"执行"请求并"返回"结果给 LLM。</p>
+
+  <div class="i18n-zh"><p>它们是协作关系：bind_tools 让 LLM"知道"工具有什么能力并"请求"使用；ToolNode 负责"执行"请求并"返回"结果给 LLM。</p></div>
+<div class="i18n-en" hidden><p>它们是协作关系：bind_tools 让 LLM"知道"工具有什么能力并"请求"使用；ToolNode 负责"执行"请求并"返回"结果给 LLM。</p></div>
+
 </div>
 
+
 <div class="answer-card" id="A60">
-  <h2>A60 · 用户偏好记忆</h2>
+  <div class="i18n-zh"><h2>A60 · 用户偏好记忆</h2></div>
+<div class="i18n-en" hidden><h2>A60 · 用户偏好记忆</h2></div>
+
   <p><strong>短会话内：</strong></p>
+
   <pre><code>class State(MessagesState):
     language_preference: str  # "zh" or "en"</code></pre>
+
   <p><strong>长期跨会话（Store API）：</strong></p>
+
   <pre><code>from langgraph.store.memory import InMemoryStore
 store = InMemoryStore()
 user_ns = (f"user-{user_id}", "preferences")
@@ -1546,25 +2424,40 @@ store.put(user_ns, "language", {"preferred": "zh", "level": "technical"})
 # 在节点中读取
 prefs = store.get(user_ns, "language")
 system_prompt = f"Respond in {prefs.value['preferred']} with {prefs.value['level']} level"</code></pre>
+
 </div>
+
 
 <!-- ============ L4 ANSWERS ============ -->
 </div>
+
 <div class="locked-content" data-require-stage="expert">
 <div class="answer-card" id="A61">
-  <h2>A61 · Checkpointing 机制</h2>
+  <div class="i18n-zh"><h2>A61 · Checkpointing 机制</h2></div>
+<div class="i18n-en" hidden><h2>A61 · Checkpointing 机制</h2></div>
+
   <p><strong>Checkpointing</strong> 在每个 super-step 完成后自动保存 State 的快照。它解决了：</p>
+
   <ol>
     <li><strong>暂停/恢复</strong>：Human-in-the-Loop 场景，图可以无限期暂停等待人类</li>
+
     <li><strong>时间旅行</strong>：回退到任意历史 checkpoint 重新执行</li>
+
     <li><strong>错误恢复</strong>：图执行中断后从最近的 checkpoint 继续</li>
+
     <li><strong>多会话隔离</strong>：通过 thread_id 隔离不同用户的状态</li>
+
     <li><strong>可观测性</strong>：完整的状态变更历史用于调试和审计</li>
+
   </ol>
+
 </div>
 
+
 <div class="answer-card" id="A62">
-  <h2>A62 · Checkpointer 演进路径</h2>
+  <div class="i18n-zh"><h2>A62 · Checkpointer 演进路径</h2></div>
+<div class="i18n-en" hidden><h2>A62 · Checkpointer 演进路径</h2></div>
+
   <pre><code># Phase 1: Dev/Testing — InMemorySaver
 from langgraph.checkpoint.memory import MemorySaver
 checkpointer = MemorySaver()
@@ -1582,17 +2475,28 @@ checkpointer = PostgresSaver.from_conn_string("postgresql://user:pass@host:5432/
 graph = builder.compile(checkpointer=checkpointer)
 config = {"configurable": {"thread_id": "session-123"}}
 result = graph.invoke(initial_state, config)</code></pre>
+
   <p><strong>设计原则：</strong>graph 代码完全不变，只换 checkpointer 实现。这就是接口抽象的价值。</p>
+
 </div>
+
 
 <div class="answer-card" id="A63">
-  <h2>A63 · thread_id 作用</h2>
+  <div class="i18n-zh"><h2>A63 · thread_id 作用</h2></div>
+<div class="i18n-en" hidden><h2>A63 · thread_id 作用</h2></div>
+
   <p><strong>thread_id</strong> 是 checkpoint 的命名空间标识符。每个 thread_id 拥有独立的状态历史和 checkpoint 链。</p>
-  <p>如果两个用户共用同一个 thread_id：它们会互相覆盖对方的状态，A 用户的 checkpoint 被 B 用户的执行更新，导致状态混乱。因此必须为每个用户/会话分配唯一 thread_id。</p>
+
+  <div class="i18n-zh"><p>如果两个用户共用同一个 thread_id：它们会互相覆盖对方的状态，A 用户的 checkpoint 被 B 用户的执行更新，导致状态混乱。因此必须为每个用户/会话分配唯一 thread_id。</p></div>
+<div class="i18n-en" hidden><p>如果两个用户共用同一个 thread_id：它们会互相覆盖对方的状态，A 用户的 checkpoint 被 B 用户的执行更新，导致状态混乱。因此必须为每个用户/会话分配唯一 thread_id。</p></div>
+
 </div>
 
+
 <div class="answer-card" id="A64">
-  <h2>A64 · Time Travel（时间旅行）</h2>
+  <div class="i18n-zh"><h2>A64 · Time Travel（时间旅行）</h2></div>
+<div class="i18n-en" hidden><h2>A64 · Time Travel（时间旅行）</h2></div>
+
   <pre><code># 1. 查看历史
 history = list(graph.get_state_history(config))
 for checkpoint in history:
@@ -1609,24 +2513,51 @@ result = graph.invoke(None, {
         "checkpoint_id": target_checkpoint_id
     }
 })</code></pre>
+
 </div>
+
 
 <div class="answer-card" id="A65">
   <h2>A65 · Streaming Modes</h2>
+
   <table style="width:100%; border-collapse:collapse;">
-    <tr style="background:var(--surface-2);"><th style="padding:8px;">Mode</th><th style="padding:8px;">输出</th><th style="padding:8px;">用途</th></tr>
-    <tr><td style="padding:8px;"><strong>values</strong></td><td style="padding:8px;">每步后的完整 State</td><td style="padding:8px;">调试、状态检查</td></tr>
-    <tr><td style="padding:8px;"><strong>updates</strong></td><td style="padding:8px;">每步的 State 变化量</td><td style="padding:8px;">生产 UI — 轻量，显示哪个节点执行了</td></tr>
-    <tr><td style="padding:8px;"><strong>messages</strong></td><td style="padding:8px;">LLM token 流 + 元数据</td><td style="padding:8px;">聊天 UI — token 级别展示</td></tr>
-    <tr><td style="padding:8px;"><strong>custom</strong></td><td style="padding:8px;">自定义事件 (get_stream_writer)</td><td style="padding:8px;">进度条、状态消息</td></tr>
-    <tr><td style="padding:8px;"><strong>debug</strong></td><td style="padding:8px;">所有内部执行信息</td><td style="padding:8px;">仅开发阶段</td></tr>
+    <tr style="background:var(--surface-2);"><th style="padding:8px;">Mode</th><div class="i18n-zh"><th style="padding:8px;">输出</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">Output</th></div><div class="i18n-zh"><th style="padding:8px;">用途</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">Purpose</th></div></tr>
+
+    <tr><td style="padding:8px;"><strong>values</strong></td><div class="i18n-zh"><td style="padding:8px;">每步后的完整 State</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">每步后的完整 State</td></div><div class="i18n-zh"><td style="padding:8px;">调试、状态检查</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">调试、状态检查</td></div></tr>
+
+    <tr><td style="padding:8px;"><strong>updates</strong></td><div class="i18n-zh"><td style="padding:8px;">每步的 State 变化量</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">每步的 State 变化量</td></div><div class="i18n-zh"><td style="padding:8px;">生产 UI — 轻量，显示哪个节点执行了</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">生产 UI — 轻量，显示哪个节点执行了</td></div></tr>
+
+    <tr><td style="padding:8px;"><strong>messages</strong></td><div class="i18n-zh"><td style="padding:8px;">LLM token 流 + 元数据</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">LLM token 流 + 元数据</td></div><div class="i18n-zh"><td style="padding:8px;">聊天 UI — token 级别展示</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">聊天 UI — token 级别展示</td></div></tr>
+
+    <tr><td style="padding:8px;"><strong>custom</strong></td><div class="i18n-zh"><td style="padding:8px;">自定义事件 (get_stream_writer)</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">自定义事件 (get_stream_writer)</td></div><div class="i18n-zh"><td style="padding:8px;">进度条、状态消息</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">进度条、状态消息</td></div></tr>
+
+    <tr><td style="padding:8px;"><strong>debug</strong></td><div class="i18n-zh"><td style="padding:8px;">所有内部执行信息</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">所有内部执行信息</td></div><div class="i18n-zh"><td style="padding:8px;">仅开发阶段</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">仅开发阶段</td></div></tr>
+
   </table>
+
   <p>生产推荐组合：<code>stream_mode=["updates", "custom", "messages"]</code></p>
+
   <p><strong>⚠️ 2026 更新：</strong>LangGraph v1.2.0 引入了 v3 事件模型（<code>stream_events(version="v3")</code>），新的事件类型包括 <code>run.values</code>、<code>run.messages</code>、<code>run.lifecycle</code>、<code>run.subgraphs</code>。v2 仍为推荐稳定版本，v3 适合需要更细粒度控制的新项目。</p>
+
 </div>
 
+
 <div class="answer-card" id="A66">
-  <h2>A66 · 多模式 Streaming Agent</h2>
+  <div class="i18n-zh"><h2>A66 · 多模式 Streaming Agent</h2></div>
+<div class="i18n-en" hidden><h2>A66 · 多模式 Streaming Agent</h2></div>
+
   <pre><code>from langgraph.types import StreamWriter
 
 def research_node(state: State, writer: StreamWriter) -> dict:
@@ -1647,15 +2578,23 @@ for mode, chunk in graph.stream(
         print(f"Progress: {chunk['message']}")
     elif mode == "messages":
         print(f"Token: {chunk.content}", end="", flush=True)</code></pre>
+
 </div>
 
+
 <div class="answer-card" id="A67">
-  <h2>A67 · HITL 实现方式</h2>
+  <div class="i18n-zh"><h2>A67 · HITL 实现方式</h2></div>
+<div class="i18n-en" hidden><h2>A67 · HITL 实现方式</h2></div>
+
   <ul>
     <li><strong>interrupt()</strong>：在节点函数内部调用，暂停执行并返回数据给前端。最灵活，适合动态审批流</li>
+
     <li><strong>interrupt_before=["node_name"]</strong>：在指定节点执行前暂停</li>
+
     <li><strong>interrupt_after=["node_name"]</strong>：在指定节点执行后暂停</li>
+
   </ul>
+
   <pre><code># interrupt() 示例
 def approval_node(state: State):
     result = interrupt({
@@ -1666,10 +2605,14 @@ def approval_node(state: State):
 
 # 恢复执行
 graph.invoke(Command(resume={"approved": True}), config)</code></pre>
+
 </div>
 
+
 <div class="answer-card" id="A68">
-  <h2>A68 · 审批工作流实现</h2>
+  <div class="i18n-zh"><h2>A68 · 审批工作流实现</h2></div>
+<div class="i18n-en" hidden><h2>A68 · 审批工作流实现</h2></div>
+
   <pre><code>class ApprovalState(TypedDict):
     plan: str
     human_approved: bool
@@ -1695,17 +2638,27 @@ def executor(state: ApprovalState) -> dict:
 
 # Human resumes via:
 graph.invoke(Command(resume={"approved": True}), config)</code></pre>
+
 </div>
+
 
 <div class="answer-card" id="A69">
-  <h2>A69 · Subgraph 概念</h2>
+  <div class="i18n-zh"><h2>A69 · Subgraph 概念</h2></div>
+<div class="i18n-en" hidden><h2>A69 · Subgraph 概念</h2></div>
+
   <p><strong>Subgraph</strong> 是一个被其他图作为节点使用的独立图。与普通节点的区别：Subgraph 内部有自己的节点、边、状态管理。</p>
+
   <p><strong>Shared State</strong>（默认）：父图和子图共享同名的 State key（如都定义了 messages），值自动传递。</p>
+
   <p><strong>Isolated State</strong>：子图使用独立的 State schema，通过 input/output 映射与父图通信。</p>
+
 </div>
 
+
 <div class="answer-card" id="A70">
-  <h2>A70 · 父图 + 子图重构</h2>
+  <div class="i18n-zh"><h2>A70 · 父图 + 子图重构</h2></div>
+<div class="i18n-en" hidden><h2>A70 · 父图 + 子图重构</h2></div>
+
   <pre><code># 定义子图
 sales_builder = StateGraph(SalesState)
 sales_builder.add_node(...)  # sales-specific nodes
@@ -1723,10 +2676,14 @@ parent.add_conditional_edges("router", route_fn, {
     "sales": "sales_agent",
     "support": "support_agent"
 })</code></pre>
+
 </div>
 
+
 <div class="answer-card" id="A71">
-  <h2>A71 · Command 用途</h2>
+  <div class="i18n-zh"><h2>A71 · Command 用途</h2></div>
+<div class="i18n-en" hidden><h2>A71 · Command 用途</h2></div>
+
   <pre><code>def decision_node(state: State):
     # Command = 动态路由 + 状态更新
     if state["urgency"] == "high":
@@ -1738,57 +2695,107 @@ parent.add_conditional_edges("router", route_fn, {
 def subgraph_node(state: SubState):
     if state["needs_parent_attention"]:
         return Command(goto="parent_escalation_node", graph=Command.PARENT)</code></pre>
+
   <p>Command 的核心优势：<strong>节点内决策</strong>——不需要在边上写路由函数，节点本身可以决定下一个目标。</p>
+
 </div>
+
 
 <div class="answer-card" id="A72">
-  <h2>A72 · 长时间运行任务</h2>
+  <div class="i18n-zh"><h2>A72 · 长时间运行任务</h2></div>
+<div class="i18n-en" hidden><h2>A72 · 长时间运行任务</h2></div>
+
   <ul>
     <li><strong>interrupt()</strong>：适合需要人类审批的暂停（数分钟到数天）。Checkpoint 持久化到数据库，可以在任何时间恢复</li>
+
     <li><strong>async node</strong>：适合 I/O 等待（API 调用、数据库查询）。不阻塞事件循环，但不能跨进程恢复</li>
+
     <li><strong>外部回调 + interrupt</strong>：对于数小时到数天的异步任务（如支付回调），使用 interrupt 暂停 + webhook 触发 resume</li>
+
   </ul>
+
 </div>
 
+
 <div class="answer-card" id="A73">
-  <h2>A73 · interrupt() 使用限制</h2>
+  <div class="i18n-zh"><h2>A73 · interrupt() 使用限制</h2></div>
+<div class="i18n-en" hidden><h2>A73 · interrupt() 使用限制</h2></div>
+
   <p>interrupt() 只能在 <strong>已编译图的节点函数内部</strong>调用。不能在以下位置调用：</p>
+
   <ul>
-    <li>图构建阶段的代码中（add_node 的参数之外）</li>
-    <li>条件边函数中</li>
-    <li>未编译的独立函数中</li>
-    <li>需要配置 checkpointer，否则 interrupt 行为未定义</li>
+    <div class="i18n-zh"><li>图构建阶段的代码中（add_node 的参数之外）</li></div>
+<div class="i18n-en" hidden><li>图构建阶段的代码中（add_node 的参数之外）</li></div>
+
+    <div class="i18n-zh"><li>条件边函数中</li></div>
+<div class="i18n-en" hidden><li>条件边函数中</li></div>
+
+    <div class="i18n-zh"><li>未编译的独立函数中</li></div>
+<div class="i18n-en" hidden><li>未编译的独立函数中</li></div>
+
+    <div class="i18n-zh"><li>需要配置 checkpointer，否则 interrupt 行为未定义</li></div>
+<div class="i18n-en" hidden><li>需要配置 checkpointer，否则 interrupt 行为未定义</li></div>
+
   </ul>
+
 </div>
+
 
 <div class="answer-card" id="A74">
   <h2>A74 · Store API vs Checkpointing</h2>
+
   <table style="width:100%; border-collapse:collapse;">
     <tr style="background:var(--surface-2);"><th style="padding:8px;">Checkpointing</th><th style="padding:8px;">Store API</th></tr>
-    <tr><td style="padding:8px;">短期会话状态</td><td style="padding:8px;">长期跨会话记忆</td></tr>
-    <tr><td style="padding:8px;">thread 级别隔离</td><td style="padding:8px;">自定义命名空间隔离</td></tr>
-    <tr><td style="padding:8px;">自动保存（每个 super-step）</td><td style="padding:8px;">手动 put/get</td></tr>
-    <tr><td style="padding:8px;">适合：对话历史、Agent 执行状态</td><td style="padding:8px;">适合：用户偏好、学习到的知识、全局配置</td></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">短期会话状态</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">短期会话状态</td></div><div class="i18n-zh"><td style="padding:8px;">长期跨会话记忆</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">长期跨会话记忆</td></div></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">thread 级别隔离</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">thread 级别隔离</td></div><div class="i18n-zh"><td style="padding:8px;">自定义命名空间隔离</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">自定义命名空间隔离</td></div></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">自动保存（每个 super-step）</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">自动保存（每个 super-step）</td></div><div class="i18n-zh"><td style="padding:8px;">手动 put/get</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">手动 put/get</td></div></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">适合：对话历史、Agent 执行状态</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">适合：对话历史、Agent 执行状态</td></div><div class="i18n-zh"><td style="padding:8px;">适合：用户偏好、学习到的知识、全局配置</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">适合：用户偏好、学习到的知识、全局配置</td></div></tr>
+
   </table>
+
 </div>
 
+
 <div class="answer-card" id="A75">
-  <h2>A75 · LangGraph 4 层错误处理</h2>
+  <div class="i18n-zh"><h2>A75 · LangGraph 4 层错误处理</h2></div>
+<div class="i18n-en" hidden><h2>A75 · LangGraph 4 层错误处理</h2></div>
+
   <ol>
     <li><strong>Node 级</strong>：try/except 在节点函数内部捕获和处理</li>
+
     <li><strong>Graph 级</strong>：RetryPolicy 配置节点自动重试（max_attempts, initial_interval, backoff_factor）</li>
+
     <li><strong>App 级</strong>：全局错误 handler，捕获未处理的异常并执行降级逻辑</li>
+
     <li><strong>Infra 级</strong>：超时、熔断、限流——在网关/基础设施层实现</li>
+
   </ol>
+
   <pre><code># Graph-level retry
 from langgraph.pregel import RetryPolicy
 graph.add_node("api_call", call_external_api, retry=RetryPolicy(
     max_attempts=3, initial_interval=2, backoff_factor=2
 ))</code></pre>
+
 </div>
 
+
 <div class="answer-card" id="A76">
-  <h2>A76 · 节点重试与 Fallback</h2>
+  <div class="i18n-zh"><h2>A76 · 节点重试与 Fallback</h2></div>
+<div class="i18n-en" hidden><h2>A76 · 节点重试与 Fallback</h2></div>
+
   <pre><code>from langgraph.pregel import RetryPolicy
 
 graph.add_node("primary_search", primary_search,
@@ -1801,30 +2808,51 @@ graph.add_node("fallback_search", backup_search)  # 降级方案
 graph.add_conditional_edges("primary_search", route_after_search, {
     "continue": "next_node", "fallback_search": "fallback_search"
 })</code></pre>
+
 </div>
 
+
 <div class="answer-card" id="A77">
-  <h2>A77 · LangSmith 可观测性</h2>
-  <p>LangSmith 提供全链路追踪：每个节点执行、LLM 调用、工具调用的时间和输入输出都被记录。配置只需一行：</p>
+  <div class="i18n-zh"><h2>A77 · LangSmith 可观测性</h2></div>
+<div class="i18n-en" hidden><h2>A77 · LangSmith 可观测性</h2></div>
+
+  <div class="i18n-zh"><p>LangSmith 提供全链路追踪：每个节点执行、LLM 调用、工具调用的时间和输入输出都被记录。配置只需一行：</p></div>
+<div class="i18n-en" hidden><p>LangSmith 提供全链路追踪：每个节点执行、LLM 调用、工具调用的时间和输入输出都被记录。配置只需一行：</p></div>
+
   <pre><code># .env
 LANGCHAIN_TRACING_V2=true
 LANGCHAIN_API_KEY=ls_...
 LANGCHAIN_PROJECT=my-project</code></pre>
-  <p>在 LangSmith UI 中可看到完整的执行树，每个 step 的 State 快照，以及每个 LLM 调用的 token 消耗和延迟。</p>
+
+  <div class="i18n-zh"><p>在 LangSmith UI 中可看到完整的执行树，每个 step 的 State 快照，以及每个 LLM 调用的 token 消耗和延迟。</p></div>
+<div class="i18n-en" hidden><p>在 LangSmith UI 中可看到完整的执行树，每个 step 的 State 快照，以及每个 LLM 调用的 token 消耗和延迟。</p></div>
+
 </div>
+
 
 <div class="answer-card" id="A78">
-  <h2>A78 · 图迁移（Graph Migration）</h2>
-  <p>图定义变更（增删节点、改 State schema）后，已有的 thread checkpoint 可能状态不兼容。LangGraph 的方案：</p>
+  <div class="i18n-zh"><h2>A78 · 图迁移（Graph Migration）</h2></div>
+<div class="i18n-en" hidden><h2>A78 · 图迁移（Graph Migration）</h2></div>
+
+  <div class="i18n-zh"><p>图定义变更（增删节点、改 State schema）后，已有的 thread checkpoint 可能状态不兼容。LangGraph 的方案：</p></div>
+<div class="i18n-en" hidden><p>图定义变更（增删节点、改 State schema）后，已有的 thread checkpoint 可能状态不兼容。LangGraph 的方案：</p></div>
+
   <ol>
     <li><strong>向前兼容</strong>：新增 key（有默认值）通常安全</li>
+
     <li><strong>破坏性变更</strong>：删除 key 或改类型 → 需要迁移函数遍历旧 checkpoint 并转换</li>
+
     <li><strong>版本标记</strong>：在 State 中加 schema_version 字段，节点执行前检查版本一致性</li>
+
   </ol>
+
 </div>
 
+
 <div class="answer-card" id="A79">
-  <h2>A79 · Token 级 Streaming Chat Agent</h2>
+  <div class="i18n-zh"><h2>A79 · Token 级 Streaming Chat Agent</h2></div>
+<div class="i18n-en" hidden><h2>A79 · Token 级 Streaming Chat Agent</h2></div>
+
   <pre><code>async for event in app.astream_events(
     {"messages": [HumanMessage(content="Explain quantum computing")]},
     config=config,
@@ -1839,20 +2867,32 @@ LANGCHAIN_PROJECT=my-project</code></pre>
         print(f"\n🔧 Calling tool: {event['name']}")
     elif kind == "on_tool_end":
         print(f"\n✅ Tool result: {event['data']['output'][:100]}...")</code></pre>
+
 </div>
+
 
 <div class="answer-card" id="A80">
-  <h2>A80 · 上下文裁剪策略</h2>
+  <div class="i18n-zh"><h2>A80 · 上下文裁剪策略</h2></div>
+<div class="i18n-en" hidden><h2>A80 · 上下文裁剪策略</h2></div>
+
   <ol>
     <li><strong>滑动窗口</strong>：保留最近 N 条消息，丢弃早期消息</li>
+
     <li><strong>智能摘要</strong>：用 LLM 将早期对话压缩为摘要，保留摘要 + 最近消息</li>
+
     <li><strong>选择性保留</strong>：保留工具调用结果（有价值），丢弃中间推理（LLM 可重新推理）</li>
+
     <li><strong>Token 预算管理</strong>：设定系统消息+工具定义+上下文+回复的总 token 上限</li>
+
   </ol>
+
 </div>
 
+
 <div class="answer-card" id="A81">
-  <h2>A81 · Model Routing（模型路由）</h2>
+  <div class="i18n-zh"><h2>A81 · Model Routing（模型路由）</h2></div>
+<div class="i18n-en" hidden><h2>A81 · Model Routing（模型路由）</h2></div>
+
   <pre><code>def smart_llm_node(state: State) -> dict:
     # Simple query → small model (cheap)
     if is_simple_query(state["messages"][-1].content):
@@ -1860,12 +2900,20 @@ LANGCHAIN_PROJECT=my-project</code></pre>
     else:
         model = ChatOpenAI(model="gpt-4o")  # complex → big model
     return {"messages": [model.invoke(state["messages"])]}</code></pre>
-  <p>可节省 50-70% 的推理成本，同时保持复杂任务的质量。</p>
+
+  <div class="i18n-zh"><p>可节省 50-70% 的推理成本，同时保持复杂任务的质量。</p></div>
+<div class="i18n-en" hidden><p>可节省 50-70% 的推理成本，同时保持复杂任务的质量。</p></div>
+
 </div>
 
+
 <div class="answer-card" id="A82">
-  <h2>A82 · 工具降级策略</h2>
-  <p>当工具不可用时，返回描述性错误而非让 Agent 崩溃：</p>
+  <div class="i18n-zh"><h2>A82 · 工具降级策略</h2></div>
+<div class="i18n-en" hidden><h2>A82 · 工具降级策略</h2></div>
+
+  <div class="i18n-zh"><p>当工具不可用时，返回描述性错误而非让 Agent 崩溃：</p></div>
+<div class="i18n-en" hidden><p>当工具不可用时，返回描述性错误而非让 Agent 崩溃：</p></div>
+
   <pre><code>@tool
 def search_web(query: str) -> str:
     try:
@@ -1873,21 +2921,34 @@ def search_web(query: str) -> str:
     except Exception:
         # 优雅降级：告知 Agent 工具不可用
         return "ERROR: Search API unavailable. Use your training knowledge or ask user for clarification."</code></pre>
-  <p>Agent 在收到失败消息后会自行调整策略：用内部知识回答、告知用户部分信息不可用、使用替代工具。</p>
+
+  <div class="i18n-zh"><p>Agent 在收到失败消息后会自行调整策略：用内部知识回答、告知用户部分信息不可用、使用替代工具。</p></div>
+<div class="i18n-en" hidden><p>Agent 在收到失败消息后会自行调整策略：用内部知识回答、告知用户部分信息不可用、使用替代工具。</p></div>
+
 </div>
+
 
 <div class="answer-card" id="A83">
   <h2>A83 · GraphRAG</h2>
+
   <p><strong>GraphRAG</strong>（微软）：将文档转换为知识图谱（实体→关系→社区），检索时使用社区摘要而非片段。相比传统 RAG：</p>
+
   <ul>
     <li><strong>优势</strong>：理解实体间的全局关系，回答"总结整个主题"类的问题更优</li>
+
     <li><strong>劣势</strong>：构建图谱成本高（LLM 提取实体+关系），延迟高</li>
+
     <li><strong>LangGraph 实现</strong>：用 LangGraph 编排 GraphRAG 的多步骤流程（实体提取→关系构建→社区检测→摘要生成→检索→回答）</li>
+
   </ul>
+
 </div>
 
+
 <div class="answer-card" id="A84">
-  <h2>A84 · Agent A/B 测试</h2>
+  <div class="i18n-zh"><h2>A84 · Agent A/B 测试</h2></div>
+<div class="i18n-en" hidden><h2>A84 · Agent A/B 测试</h2></div>
+
   <pre><code># Parallel execution of two agent strategies
 graph.add_node("agent_v1", agent_v1_node)
 graph.add_node("agent_v2", agent_v2_node)
@@ -1899,18 +2960,28 @@ def fan_out(state: State):
 graph.add_conditional_edges("start", fan_out)
 graph.add_edge("agent_v1", "evaluator")
 graph.add_edge("agent_v2", "evaluator")  # both complete → evaluator runs once</code></pre>
+
 </div>
+
 
 <div class="answer-card" id="A85">
   <h2>A85 · LangGraph Platform / LangSmith Deployment</h2>
+
   <p><strong>⚠️ 命名更新：</strong>2025 年 10 月起，LangGraph Platform 更名为 <strong>LangSmith Deployment</strong>。2026 年 3 月发布了新的 CLI：<code>langgraph deploy</code> 取代了旧的 <code>langgraph up</code>。</p>
-  <p>提供：托管部署（一键部署 LangGraph API Server）、自动 scaling、cron jobs（定时触发 Agent）、webhook 集成、revision 管理（多版本切换）、内置监控仪表板。支持自托管 Docker 和云部署两种模式。</p>
+
+  <div class="i18n-zh"><p>提供：托管部署（一键部署 LangGraph API Server）、自动 scaling、cron jobs（定时触发 Agent）、webhook 集成、revision 管理（多版本切换）、内置监控仪表板。支持自托管 Docker 和云部署两种模式。</p></div>
+<div class="i18n-en" hidden><p>提供：托管部署（一键部署 LangGraph API Server）、自动 scaling、cron jobs（定时触发 Agent）、webhook 集成、revision 管理（多版本切换）、内置监控仪表板。支持自托管 Docker 和云部署两种模式。</p></div>
+
 </div>
+
 
 <!-- ============ L5 ANSWERS ============ -->
 <div class="answer-card" id="A86">
-  <h2>A86 · Multi-Agent 代码审查系统</h2>
+  <div class="i18n-zh"><h2>A86 · Multi-Agent 代码审查系统</h2></div>
+<div class="i18n-en" hidden><h2>A86 · Multi-Agent 代码审查系统</h2></div>
+
   <p><strong>架构设计：</strong></p>
+
   <pre><code>Orchestrator Agent (主控)
   ├─ Code Analyzer: 分析代码结构和复杂度
   ├─ Security Checker: 检查安全漏洞（OWASP Top 10）
@@ -1921,24 +2992,40 @@ graph.add_edge("agent_v2", "evaluator")  # both complete → evaluator runs once
 # - 共享 State：所有 Agent 读写同一个 State，Orchestrator 聚合结果
 # - 顺序执行：Analyzer → Security → Style → Test → Orchestrator 聚合
 # - 部分并行：Analyzer, Security, Style 可并行执行（互不依赖）</code></pre>
+
   <p><strong>关键设计决策：</strong>Agent 间通过 State 传递结构化数据（分析结果），Orchestrator 不重复执行具体分析，只负责路由和聚合。</p>
+
 </div>
+
 
 <div class="answer-card" id="A87">
-  <h2>A87 · 1000 QPS 生产架构设计</h2>
+  <div class="i18n-zh"><h2>A87 · 1000 QPS 生产架构设计</h2></div>
+<div class="i18n-en" hidden><h2>A87 · 1000 QPS 生产架构设计</h2></div>
+
   <p><strong>关键架构决策：</strong></p>
+
   <ol>
     <li><strong>无状态节点水平扩展</strong>：Agent 节点本身无状态（状态在 Postgres checkpoint），可无限制水平复制</li>
+
     <li><strong>Postgres Checkpointer</strong>：使用连接池（pgbouncer），读写分离，定期清理旧 checkpoint</li>
+
     <li><strong>模型调用队列</strong>：使用 Redis + 令牌桶算法限流，控制对 LLM API 的并发调用</li>
+
     <li><strong>分层缓存</strong>：L1 Redis（热点问答缓存）、L2 向量数据库（RAG 结果缓存）</li>
+
     <li><strong>监控栈</strong>：LangSmith（trace）+ Prometheus（指标）+ Grafana（仪表板）</li>
+
     <li><strong>多模型路由</strong>：简单查询用 gpt-4o-mini（快+便宜），复杂推理用 Claude Opus</li>
+
   </ol>
+
 </div>
 
+
 <div class="answer-card" id="A88">
-  <h2>A88 · 自主研究 Agent 设计</h2>
+  <div class="i18n-zh"><h2>A88 · 自主研究 Agent 设计</h2></div>
+<div class="i18n-en" hidden><h2>A88 · 自主研究 Agent 设计</h2></div>
+
   <pre><code>Orchestrator:
   1. 分解研究主题 → 子问题列表
   2. 分配给 Searcher Agent (并行)
@@ -1955,32 +3042,81 @@ Validator Agent:
 Writer Agent:
   → 综合所有 findings → 生成结构化报告 →
   → 标注每条信息的来源和置信度</code></pre>
+
 </div>
+
 
 <div class="answer-card" id="A89">
-  <h2>A89 · Agent 通信模式对比</h2>
+  <div class="i18n-zh"><h2>A89 · Agent 通信模式对比</h2></div>
+<div class="i18n-en" hidden><h2>A89 · Agent 通信模式对比</h2></div>
+
   <table style="width:100%; border-collapse:collapse;">
-    <tr style="background:var(--surface-2);"><th style="padding:8px;">模式</th><th style="padding:8px;">适用场景</th><th style="padding:8px;">LangGraph 实现</th></tr>
-    <tr><td style="padding:8px;">共享 State</td><td style="padding:8px;">同图内的 Agent 协作</td><td style="padding:8px;">原生支持，State schema 定义共享字段</td></tr>
-    <tr><td style="padding:8px;">消息传递</td><td style="padding:8px;">Agent 间显式通信</td><td style="padding:8px;">通过 messages list + Command</td></tr>
-    <tr><td style="padding:8px;">Store API</td><td style="padding:8px;">跨图/跨会话共享</td><td style="padding:8px;">命名空间隔离，持久化存储</td></tr>
+    <tr style="background:var(--surface-2);"><div class="i18n-zh"><th style="padding:8px;">模式</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">Pattern</th></div><div class="i18n-zh"><th style="padding:8px;">适用场景</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">适用场景</th></div><div class="i18n-zh"><th style="padding:8px;">LangGraph 实现</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">LangGraph 实现</th></div></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">共享 State</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">共享 State</td></div><div class="i18n-zh"><td style="padding:8px;">同图内的 Agent 协作</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">同图内的 Agent 协作</td></div><div class="i18n-zh"><td style="padding:8px;">原生支持，State schema 定义共享字段</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">原生支持，State schema 定义共享字段</td></div></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">消息传递</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">消息传递</td></div><div class="i18n-zh"><td style="padding:8px;">Agent 间显式通信</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">Agent 间显式通信</td></div><div class="i18n-zh"><td style="padding:8px;">通过 messages list + Command</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">通过 messages list + Command</td></div></tr>
+
+    <tr><td style="padding:8px;">Store API</td><div class="i18n-zh"><td style="padding:8px;">跨图/跨会话共享</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">跨图/跨会话共享</td></div><div class="i18n-zh"><td style="padding:8px;">命名空间隔离，持久化存储</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">命名空间隔离，持久化存储</td></div></tr>
+
   </table>
+
 </div>
+
 
 <div class="answer-card" id="A90">
-  <h2>A90 · Multi-Agent 框架全景</h2>
+  <div class="i18n-zh"><h2>A90 · Multi-Agent 框架全景</h2></div>
+<div class="i18n-en" hidden><h2>A90 · Multi-Agent 框架全景</h2></div>
+
   <table style="width:100%; border-collapse:collapse;">
-    <tr style="background:var(--surface-2);"><th style="padding:8px;">框架</th><th style="padding:8px;">优势</th><th style="padding:8px;">劣势</th><th style="padding:8px;">最佳场景</th></tr>
-    <tr><td style="padding:8px;"><strong>LangGraph</strong></td><td style="padding:8px;">最灵活、最强控制力、完善的生产生态</td><td style="padding:8px;">学习曲线陡</td><td style="padding:8px;">复杂生产级 Agent</td></tr>
-    <tr><td style="padding:8px;"><strong>CrewAI</strong></td><td style="padding:8px;">上手快、角色定义直观</td><td style="padding:8px;">灵活性受限、生产生态不成熟</td><td style="padding:8px;">快速原型、简单多角色任务</td></tr>
-    <tr><td style="padding:8px;"><strong>AutoGen</strong></td><td style="padding:8px;">对话驱动、微软生态集成</td><td style="padding:8px;">过于依赖对话模式</td><td style="padding:8px;">对话式多 Agent 研究</td></tr>
-    <tr><td style="padding:8px;"><strong>OpenAI Swarm</strong></td><td style="padding:8px;">极简、轻量、教育友好</td><td style="padding:8px;">生产功能缺失、非官方维护</td><td style="padding:8px;">实验和学习</td></tr>
+    <tr style="background:var(--surface-2);"><div class="i18n-zh"><th style="padding:8px;">框架</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">Framework</th></div><div class="i18n-zh"><th style="padding:8px;">优势</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">Advantages</th></div><div class="i18n-zh"><th style="padding:8px;">劣势</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">Disadvantages</th></div><div class="i18n-zh"><th style="padding:8px;">最佳场景</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">最佳场景</th></div></tr>
+
+    <tr><td style="padding:8px;"><strong>LangGraph</strong></td><div class="i18n-zh"><td style="padding:8px;">最灵活、最强控制力、完善的生产生态</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">最灵活、最强控制力、完善的生产生态</td></div><div class="i18n-zh"><td style="padding:8px;">学习曲线陡</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">学习曲线陡</td></div><div class="i18n-zh"><td style="padding:8px;">复杂生产级 Agent</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">复杂生产级 Agent</td></div></tr>
+
+    <tr><td style="padding:8px;"><strong>CrewAI</strong></td><div class="i18n-zh"><td style="padding:8px;">上手快、角色定义直观</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">上手快、角色定义直观</td></div><div class="i18n-zh"><td style="padding:8px;">灵活性受限、生产生态不成熟</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">灵活性受限、生产生态不成熟</td></div><div class="i18n-zh"><td style="padding:8px;">快速原型、简单多角色任务</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">快速原型、简单多角色任务</td></div></tr>
+
+    <tr><td style="padding:8px;"><strong>AutoGen</strong></td><div class="i18n-zh"><td style="padding:8px;">对话驱动、微软生态集成</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">对话驱动、微软生态集成</td></div><div class="i18n-zh"><td style="padding:8px;">过于依赖对话模式</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">过于依赖对话模式</td></div><div class="i18n-zh"><td style="padding:8px;">对话式多 Agent 研究</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">对话式多 Agent 研究</td></div></tr>
+
+    <tr><td style="padding:8px;"><strong>OpenAI Swarm</strong></td><div class="i18n-zh"><td style="padding:8px;">极简、轻量、教育友好</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">极简、轻量、教育友好</td></div><div class="i18n-zh"><td style="padding:8px;">生产功能缺失、非官方维护</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">生产功能缺失、非官方维护</td></div><div class="i18n-zh"><td style="padding:8px;">实验和学习</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">实验和学习</td></div></tr>
+
   </table>
+
 </div>
 
+
 <div class="answer-card" id="A91">
-  <h2>A91 · AI 客服系统设计方案</h2>
+  <div class="i18n-zh"><h2>A91 · AI 客服系统设计方案</h2></div>
+<div class="i18n-en" hidden><h2>A91 · AI 客服系统设计方案</h2></div>
+
   <p><strong>核心 Graph 结构：</strong></p>
+
   <pre><code>User Input → Intent Classifier
   ↓
   Sentiment Detector → (negative → empathy_node)
@@ -1994,57 +3130,111 @@ Writer Agent:
   Quality Check → (low_confidence → flag_for_review)
   ↓
   Response → (multi_language → translate_node)</code></pre>
+
   <p><strong>关键设计：</strong>多语言在响应生成后翻译（而非翻译输入），Handoff 保留完整对话上下文给人工客服。</p>
+
 </div>
+
 
 <div class="answer-card" id="A92">
-  <h2>A92 · Agent 安全防护</h2>
+  <div class="i18n-zh"><h2>A92 · Agent 安全防护</h2></div>
+<div class="i18n-en" hidden><h2>A92 · Agent 安全防护</h2></div>
+
   <ol>
     <li><strong>Prompt Injection 防御</strong>：输入分离（用户输入和系统指令在不同的 message role）、输入过滤（检测已知注入模式）、输出验证（不执行用户提供的代码）</li>
+
     <li><strong>数据泄露防御</strong>：敏感数据脱敏（PII 检测+替换）、工具调用审计日志、最小权限原则（Agent 只能访问必要的工具和数据）</li>
+
     <li><strong>工具滥用防御</strong>：Human-in-the-Loop（高风险操作需审批）、操作频率限制、金额/范围上限</li>
+
   </ol>
+
 </div>
+
 
 <div class="answer-card" id="A93">
-  <h2>A93 · Agent 评估体系</h2>
+  <div class="i18n-zh"><h2>A93 · Agent 评估体系</h2></div>
+<div class="i18n-en" hidden><h2>A93 · Agent 评估体系</h2></div>
+
   <table style="width:100%; border-collapse:collapse;">
-    <tr style="background:var(--surface-2);"><th style="padding:8px;">类别</th><th style="padding:8px;">指标</th><th style="padding:8px;">工具</th></tr>
-    <tr><td style="padding:8px;">离线</td><td style="padding:8px;">任务完成率、工具选择准确率、步骤效率</td><td style="padding:8px;">测试用例集 + Braintrust</td></tr>
-    <tr><td style="padding:8px;">在线</td><td style="padding:8px;">P50/P99 延迟、Token 消耗/任务、用户满意度</td><td style="padding:8px;">LangSmith + Prometheus</td></tr>
-    <tr><td style="padding:8px;">质量</td><td style="padding:8px;">幻觉率、事实准确性、回答完整性</td><td style="padding:8px;">LLM-as-Judge + 人工评审</td></tr>
+    <tr style="background:var(--surface-2);"><div class="i18n-zh"><th style="padding:8px;">类别</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">Category</th></div><div class="i18n-zh"><th style="padding:8px;">指标</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">Metric</th></div><div class="i18n-zh"><th style="padding:8px;">工具</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">Tool</th></div></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">离线</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">Offline</td></div><div class="i18n-zh"><td style="padding:8px;">任务完成率、工具选择准确率、步骤效率</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">任务完成率、工具选择准确率、步骤效率</td></div><div class="i18n-zh"><td style="padding:8px;">测试用例集 + Braintrust</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">测试用例集 + Braintrust</td></div></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">在线</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">Online</td></div><div class="i18n-zh"><td style="padding:8px;">P50/P99 延迟、Token 消耗/任务、用户满意度</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">P50/P99 延迟、Token 消耗/任务、用户满意度</td></div><td style="padding:8px;">LangSmith + Prometheus</td></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">质量</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">Quality</td></div><div class="i18n-zh"><td style="padding:8px;">幻觉率、事实准确性、回答完整性</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">幻觉率、事实准确性、回答完整性</td></div><div class="i18n-zh"><td style="padding:8px;">LLM-as-Judge + 人工评审</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">LLM-as-Judge + 人工评审</td></div></tr>
+
   </table>
+
 </div>
+
 
 <div class="answer-card" id="A94">
-  <h2>A94 · Agent 成本优化 8 大策略</h2>
+  <div class="i18n-zh"><h2>A94 · Agent 成本优化 8 大策略</h2></div>
+<div class="i18n-en" hidden><h2>A94 · Agent 成本优化 8 大策略</h2></div>
+
   <ol>
     <li><strong>Model Routing</strong>：简单任务用小模型</li>
+
     <li><strong>Prompt Caching</strong>：长 system prompt 缓存命中省 90%</li>
+
     <li><strong>上下文压缩</strong>：摘要历史对话，减少输入 token</li>
+
     <li><strong>结果缓存</strong>：相同问题的答案缓存复用</li>
+
     <li><strong>批量处理</strong>：合并多个请求，利用 API batch 折扣</li>
+
     <li><strong>更短 Prompt</strong>：精简指令，减少不必要的示例</li>
+
     <li><strong>限制 Agent Loop</strong>：设置合理的 recursion_limit，防止无谓循环</li>
+
     <li><strong>自建开源模型</strong>：高并发固定任务用 fine-tuned 开源模型替代付费 API</li>
+
   </ol>
+
 </div>
+
 
 <div class="answer-card" id="A95">
-  <h2>A95 · 企业级 RAG 系统设计</h2>
+  <div class="i18n-zh"><h2>A95 · 企业级 RAG 系统设计</h2></div>
+<div class="i18n-en" hidden><h2>A95 · 企业级 RAG 系统设计</h2></div>
+
   <p><strong>核心架构：</strong></p>
+
   <ol>
     <li><strong>多租户隔离</strong>：tenant_id 作为 Store 命名空间和向量库 metadata filter</li>
+
     <li><strong>权限控制</strong>：检索时通过 metadata filter 过滤无权访问的文档</li>
+
     <li><strong>文档管道</strong>：Ingestion 子图（upload → parse → chunk → embed → index），支持多种格式</li>
+
     <li><strong>增量更新</strong>：Webhook/CDC 触发 → 仅重新索引变更的文档</li>
+
     <li><strong>Query 管道</strong>：用户查询 → 权限注入 → Query Rewriting → Hybrid Search → Re-rank → Generate</li>
+
   </ol>
+
 </div>
 
+
 <div class="answer-card" id="A96">
-  <h2>A96 · 企业系统集成 + MCP 角色</h2>
+  <div class="i18n-zh"><h2>A96 · 企业系统集成 + MCP 角色</h2></div>
+<div class="i18n-en" hidden><h2>A96 · 企业系统集成 + MCP 角色</h2></div>
+
   <p><strong>MCP 的价值</strong>：将企业系统（CRM, ERP, DB）封装为 MCP Server，LangGraph Agent 通过 MCP Client 统一调用。</p>
+
   <pre><code># MCP Server 封装企业 API
 @mcp.tool()
 def get_customer_info(customer_id: str) -> dict:
@@ -2058,33 +3248,64 @@ def check_inventory(sku: str) -> int:
 
 # LangGraph Agent 通过 MCP client 使用这些工具
 # Agent 不需要知道底层是 CRM 还是 ERP，只需要知道工具接口</code></pre>
+
 </div>
+
 
 <div class="answer-card" id="A97">
-  <h2>A97 · Agent vs 传统工作流引擎</h2>
+  <div class="i18n-zh"><h2>A97 · Agent vs 传统工作流引擎</h2></div>
+<div class="i18n-en" hidden><h2>A97 · Agent vs 传统工作流引擎</h2></div>
+
   <table style="width:100%; border-collapse:collapse;">
     <tr style="background:var(--surface-2);"><th style="padding:8px;">Agent (LangGraph)</th><th style="padding:8px;">Workflow (Temporal/Airflow)</th></tr>
-    <tr><td style="padding:8px;">LLM 动态决策</td><td style="padding:8px;">预定义步骤</td></tr>
-    <tr><td style="padding:8px;">非确定性执行</td><td style="padding:8px;">确定性执行</td></tr>
-    <tr><td style="padding:8px;">适合开放、探索性任务</td><td style="padding:8px;">适合可预测、重复任务</td></tr>
-    <tr><td style="padding:8px;">需要可观测性和安全护栏</td><td style="padding:8px;">天然可审计</td></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">LLM 动态决策</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">LLM 动态决策</td></div><div class="i18n-zh"><td style="padding:8px;">预定义步骤</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">预定义步骤</td></div></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">非确定性执行</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">非确定性执行</td></div><div class="i18n-zh"><td style="padding:8px;">确定性执行</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">确定性执行</td></div></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">适合开放、探索性任务</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">适合开放、探索性任务</td></div><div class="i18n-zh"><td style="padding:8px;">适合可预测、重复任务</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">适合可预测、重复任务</td></div></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">需要可观测性和安全护栏</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">需要可观测性和安全护栏</td></div><div class="i18n-zh"><td style="padding:8px;">天然可审计</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">天然可审计</td></div></tr>
+
   </table>
+
   <p><strong>选型指南</strong>：步骤固定且可预测 → 工作流引擎；需要理解和推理 → Agent；两者可以混合使用（Agent 作为工作流的某个步骤）。</p>
+
 </div>
+
 
 <div class="answer-card" id="A98">
-  <h2>A98 · Agent 确定性与可复现性</h2>
+  <div class="i18n-zh"><h2>A98 · Agent 确定性与可复现性</h2></div>
+<div class="i18n-en" hidden><h2>A98 · Agent 确定性与可复现性</h2></div>
+
   <ol>
     <li><strong>固定 seed</strong>：LLM 推理时设置 seed 参数</li>
+
     <li><strong>temperature=0</strong>：消除随机采样</li>
+
     <li><strong>完整 Trace</strong>：LangSmith 记录每个决策的输入输出</li>
+
     <li><strong>Checkpoint 重放</strong>：从特定 checkpoint 精确重现执行</li>
+
     <li><strong>测试框架</strong>：固定测试集 + snapshot testing</li>
+
   </ol>
+
 </div>
 
+
 <div class="answer-card" id="A99">
-  <h2>A99 · AI DevOps 助手设计</h2>
+  <div class="i18n-zh"><h2>A99 · AI DevOps 助手设计</h2></div>
+<div class="i18n-en" hidden><h2>A99 · AI DevOps 助手设计</h2></div>
+
   <pre><code>Alert Trigger (Webhook) →
   ┌──────────────────────────────────────┐
   │ Alert Analyzer: 解析告警类型和严重程度    │
@@ -2096,58 +3317,118 @@ def check_inventory(sku: str) -> int:
   │ Executor: 执行安全修复（重启/扩容/回滚）   │
   │ Post-Mortem Writer: 自动生成事故报告      │
   └──────────────────────────────────────┘</code></pre>
+
   <p><strong>关键设计：</strong>危险操作（重启、删除）必须经过 HITL 审批；所有操作记录到审计日志。</p>
+
 </div>
 
+
 <div class="answer-card" id="A100">
-  <h2>A100 · 2026-2027 Agent 技术展望</h2>
+  <div class="i18n-zh"><h2>A100 · 2026-2027 Agent 技术展望</h2></div>
+<div class="i18n-en" hidden><h2>A100 · 2026-2027 Agent 技术展望</h2></div>
+
   <p><strong>核心趋势：</strong></p>
+
   <ol>
     <li><strong>A2A (Agent-to-Agent) 协议标准化</strong>：Google 的 A2A 协议让不同框架构建的 Agent 可以互操作，LangGraph Agent 可以调用 CrewAI Agent</li>
+
     <li><strong>MCP 成为工具集成标准</strong>：越来越多的 SaaS 服务提供 MCP Server，Agent 的工具生态从碎片化走向统一</li>
+
     <li><strong>长期自主 Agent</strong>：24/7 运行的 Agent，自主监控环境、制定计划、执行任务</li>
+
     <li><strong>多模态 Agent</strong>：同时处理文本、图像、音频、视频的 Agent</li>
+
     <li><strong>Agent 安全治理</strong>：Agent 行为审计、权限控制、合规框架日趋成熟</li>
+
     <li><strong>LangGraph 定位</strong>：从"一个框架"发展为 Agent 编排的标准平台，类似 Kubernetes 对容器编排的地位</li>
+
   </ol>
+
 </div>
+
 
 
 <!-- ============ 2026 NEW ANSWERS (L1+) ============ -->
 <div class="answer-card" id="A16m">
-  <h2>A16 · 2026 主流 LLM 选型矩阵</h2>
+  <div class="i18n-zh"><h2>A16 · 2026 主流 LLM 选型矩阵</h2></div>
+<div class="i18n-en" hidden><h2>A16 · 2026 主流 LLM 选型矩阵</h2></div>
+
   <table style="width:100%; border-collapse:collapse;">
-    <tr style="background:var(--surface-2);"><th style="padding:8px;">模型</th><th style="padding:8px;">推理能力</th><th style="padding:8px;">成本(1M tokens)</th><th style="padding:8px;">中文能力</th><th style="padding:8px;">部署方式</th><th style="padding:8px;">最佳场景</th></tr>
-    <tr><td style="padding:8px;"><strong>DeepSeek-V3</strong></td><td style="padding:8px;">★★★★☆</td><td style="padding:8px;">$0.27/$1.10</td><td style="padding:8px;">★★★★★</td><td style="padding:8px;">API + 开源自部署</td><td style="padding:8px;">中文场景、高并发低成本</td></tr>
-    <tr><td style="padding:8px;"><strong>DeepSeek-R1</strong></td><td style="padding:8px;">★★★★★</td><td style="padding:8px;">$0.55/$2.19</td><td style="padding:8px;">★★★★★</td><td style="padding:8px;">API + 开源自部署</td><td style="padding:8px;">复杂推理、数学/代码</td></tr>
-    <tr><td style="padding:8px;"><strong>Qwen3-235B</strong></td><td style="padding:8px;">★★★★☆</td><td style="padding:8px;">中等</td><td style="padding:8px;">★★★★★</td><td style="padding:8px;">开源自部署</td><td style="padding:8px;">中文私有化部署</td></tr>
-    <tr><td style="padding:8px;"><strong>Claude Opus 4.7</strong></td><td style="padding:8px;">★★★★★</td><td style="padding:8px;">$15/$75</td><td style="padding:8px;">★★★★☆</td><td style="padding:8px;">API only</td><td style="padding:8px;">深度推理、代码生成</td></tr>
-    <tr><td style="padding:8px;"><strong>Claude Haiku 4.5</strong></td><td style="padding:8px;">★★★☆☆</td><td style="padding:8px;">$0.80/$4</td><td style="padding:8px;">★★★★☆</td><td style="padding:8px;">API only</td><td style="padding:8px;">轻量任务、模型路由的 fallback</td></tr>
-    <tr><td style="padding:8px;"><strong>GPT-5</strong></td><td style="padding:8px;">★★★★★</td><td style="padding:8px;">中等偏高</td><td style="padding:8px;">★★★★☆</td><td style="padding:8px;">API only</td><td style="padding:8px;">多模态、复杂 Agent</td></tr>
+    <tr style="background:var(--surface-2);"><div class="i18n-zh"><th style="padding:8px;">模型</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">Model</th></div><div class="i18n-zh"><th style="padding:8px;">推理能力</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">推理能力</th></div><div class="i18n-zh"><th style="padding:8px;">成本(1M tokens)</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">成本(1M tokens)</th></div><div class="i18n-zh"><th style="padding:8px;">中文能力</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">中文能力</th></div><div class="i18n-zh"><th style="padding:8px;">部署方式</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">部署方式</th></div><div class="i18n-zh"><th style="padding:8px;">最佳场景</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">最佳场景</th></div></tr>
+
+    <tr><td style="padding:8px;"><strong>DeepSeek-V3</strong></td><td style="padding:8px;">★★★★☆</td><td style="padding:8px;">$0.27/$1.10</td><td style="padding:8px;">★★★★★</td><div class="i18n-zh"><td style="padding:8px;">API + 开源自部署</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">API + 开源自部署</td></div><div class="i18n-zh"><td style="padding:8px;">中文场景、高并发低成本</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">中文场景、高并发低成本</td></div></tr>
+
+    <tr><td style="padding:8px;"><strong>DeepSeek-R1</strong></td><td style="padding:8px;">★★★★★</td><td style="padding:8px;">$0.55/$2.19</td><td style="padding:8px;">★★★★★</td><div class="i18n-zh"><td style="padding:8px;">API + 开源自部署</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">API + 开源自部署</td></div><div class="i18n-zh"><td style="padding:8px;">复杂推理、数学/代码</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">复杂推理、数学/代码</td></div></tr>
+
+    <tr><td style="padding:8px;"><strong>Qwen3-235B</strong></td><td style="padding:8px;">★★★★☆</td><div class="i18n-zh"><td style="padding:8px;">中等</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">中等</td></div><td style="padding:8px;">★★★★★</td><div class="i18n-zh"><td style="padding:8px;">开源自部署</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">开源自部署</td></div><div class="i18n-zh"><td style="padding:8px;">中文私有化部署</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">中文私有化部署</td></div></tr>
+
+    <tr><td style="padding:8px;"><strong>Claude Opus 4.7</strong></td><td style="padding:8px;">★★★★★</td><td style="padding:8px;">$15/$75</td><td style="padding:8px;">★★★★☆</td><td style="padding:8px;">API only</td><div class="i18n-zh"><td style="padding:8px;">深度推理、代码生成</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">深度推理、代码生成</td></div></tr>
+
+    <tr><td style="padding:8px;"><strong>Claude Haiku 4.5</strong></td><td style="padding:8px;">★★★☆☆</td><td style="padding:8px;">$0.80/$4</td><td style="padding:8px;">★★★★☆</td><td style="padding:8px;">API only</td><div class="i18n-zh"><td style="padding:8px;">轻量任务、模型路由的 fallback</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">轻量任务、模型路由的 fallback</td></div></tr>
+
+    <tr><td style="padding:8px;"><strong>GPT-5</strong></td><td style="padding:8px;">★★★★★</td><div class="i18n-zh"><td style="padding:8px;">中等偏高</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">中等偏高</td></div><td style="padding:8px;">★★★★☆</td><td style="padding:8px;">API only</td><div class="i18n-zh"><td style="padding:8px;">多模态、复杂 Agent</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">多模态、复杂 Agent</td></div></tr>
+
   </table>
+
   <p><strong>选型决策树：</strong></p>
+
   <pre><code>if 需要私有化部署 and 中文场景: → Qwen3 / DeepSeek-V3 自部署
 elif 追求极致推理质量 and 预算充足: → Claude Opus 4.7
 elif 高并发低成本: → DeepSeek-V3 API (成本是 GPT-4o 的 1/10)
 elif 多模态任务: → GPT-5
 else: → 混合路由 — 简单任务 DeepSeek/Haiku, 复杂任务 Opus/R1</code></pre>
+
 </div>
+
 
 <div class="answer-card" id="A17m">
-  <h2>A17 · DeepSeek MLA 注意力机制</h2>
+  <div class="i18n-zh"><h2>A17 · DeepSeek MLA 注意力机制</h2></div>
+<div class="i18n-en" hidden><h2>A17 · DeepSeek MLA 注意力机制</h2></div>
+
   <p><strong>MLA (Multi-head Latent Attention)</strong> 是 DeepSeek-V2/V3 提出的注意力优化方案，核心思想：<strong>将 Keys 和 Values 投影到低维潜在空间，在潜在空间中进行注意力计算，仅在最后一步展开回原始维度。</strong></p>
+
   <p><strong>工作原理：</strong></p>
+
   <ol>
-    <li>传统 MHA：为每个 head 存储完整的 K 和 V 矩阵 → KV Cache 大小 = 2 × n_layers × d_model × seq_len</li>
-    <li>MLA：将 K 和 V 压缩到低维潜在向量 c_KV（维度远小于 d_model），缓存只存这个压缩向量</li>
-    <li>推理时：从 c_KV 通过上投影矩阵恢复到完整维度，再做 Attention</li>
+    <div class="i18n-zh"><li>传统 MHA：为每个 head 存储完整的 K 和 V 矩阵 → KV Cache 大小 = 2 × n_layers × d_model × seq_len</li></div>
+<div class="i18n-en" hidden><li>传统 MHA：为每个 head 存储完整的 K 和 V 矩阵 → KV Cache 大小 = 2 × n_layers × d_model × seq_len</li></div>
+
+    <div class="i18n-zh"><li>MLA：将 K 和 V 压缩到低维潜在向量 c_KV（维度远小于 d_model），缓存只存这个压缩向量</li></div>
+<div class="i18n-en" hidden><li>MLA：将 K 和 V 压缩到低维潜在向量 c_KV（维度远小于 d_model），缓存只存这个压缩向量</li></div>
+
+    <div class="i18n-zh"><li>推理时：从 c_KV 通过上投影矩阵恢复到完整维度，再做 Attention</li></div>
+<div class="i18n-en" hidden><li>推理时：从 c_KV 通过上投影矩阵恢复到完整维度，再做 Attention</li></div>
+
   </ol>
+
   <p><strong>核心优势：</strong>KV Cache 减少 90%+，推理成本大幅降低。这也是 DeepSeek 能做到 GPT-4o 1/10 价格的底层技术原因之一。</p>
+
   <p><strong>对比：</strong>MHA (标准) → MQA (多 Query 共享 KV) → GQA (分组共享) → MLA (潜在压缩)，每次迭代都在减少 KV Cache。</p>
+
 </div>
 
+
 <div class="answer-card" id="A18m">
-  <h2>A18 · Python asyncio 并发 LLM 调用</h2>
+  <div class="i18n-zh"><h2>A18 · Python asyncio 并发 LLM 调用</h2></div>
+<div class="i18n-en" hidden><h2>A18 · Python asyncio 并发 LLM 调用</h2></div>
+
   <pre><code>import asyncio
 from typing import Any
 
@@ -2177,29 +3458,46 @@ async def aggregate_llm_results(prompt: str) -> list[dict]:
 # Usage
 results = asyncio.run(aggregate_llm_results("Explain quantum computing"))
 print(results)  # all successful results, failures captured as errors</code></pre>
+
   <p><strong>关键：</strong><code>return_exceptions=True</code> 确保一个失败不影响其他；<code>asyncio.timeout(30)</code> 设置总时限。</p>
+
 </div>
 
+
 <div class="answer-card" id="A46m">
-  <h2>A46 · MCP 协议架构原理</h2>
+  <div class="i18n-zh"><h2>A46 · MCP 协议架构原理</h2></div>
+<div class="i18n-en" hidden><h2>A46 · MCP 协议架构原理</h2></div>
+
   <p><strong>MCP (Model Context Protocol)</strong> 由 Anthropic 于 2024 年 11 月提出，2025 年 12 月捐给 Linux Foundation Agentic AI Foundation。截至 2026 年，97M+ 下载，被 OpenAI、Google、Microsoft 等主流厂商采用。</p>
+
   <p><strong>架构：</strong></p>
+
   <pre><code>User (Host App)
   └─ MCP Client (内嵌在 Agent 中)
        ├── MCP Server A (文件系统)  → read/write files
        ├── MCP Server B (数据库)    → query DB
        └── MCP Server C (API)       → call external APIs</code></pre>
+
   <p><strong>三个原语：</strong></p>
+
   <ul>
     <li><strong>Tools</strong>：Agent 可调用的函数（类似 Function Calling）</li>
+
     <li><strong>Resources</strong>：Agent 可读取的数据源（文件、数据库记录）</li>
+
     <li><strong>Prompts</strong>：预定义的 prompt 模板</li>
+
   </ul>
+
   <p><strong>与 Function Calling 的本质区别：</strong>FC 每个 LLM 提供商有自己的格式（不兼容），MCP 统一标准 — 一次定义工具，所有支持 MCP 的 LLM 都可用。这解决了 "M×N 集成问题"。</p>
+
 </div>
 
+
 <div class="answer-card" id="A47m">
-  <h2>A47 · MCP 企业集成 + 降级方案</h2>
+  <div class="i18n-zh"><h2>A47 · MCP 企业集成 + 降级方案</h2></div>
+<div class="i18n-en" hidden><h2>A47 · MCP 企业集成 + 降级方案</h2></div>
+
   <pre><code># MCP Server 1: CRM
 @mcp.tool()
 def get_customer(customer_id: str) -> dict:
@@ -2219,12 +3517,18 @@ def get_customer_info(customer_id: str) -> str:
     except Exception as e:
         # 优雅降级：告知 Agent 工具不可用
         return f"CRM查询失败: {str(e)}。Agent，请使用替代方案或告知用户暂时无法查询。"</code></pre>
+
   <p><strong>降级策略：</strong>工具返回描述性错误（不是抛异常）→ Agent 看到错误消息 → Agent 自主决策：用其他工具、用内部知识、或告知用户。</p>
+
 </div>
 
+
 <div class="answer-card" id="A85m">
-  <h2>A85m · LangChain v1.0 Middleware 模式</h2>
+  <div class="i18n-zh"><h2>A85m · LangChain v1.0 Middleware 模式</h2></div>
+<div class="i18n-en" hidden><h2>A85m · LangChain v1.0 Middleware 模式</h2></div>
+
   <p><strong>Middleware</strong> 是 LangChain v1.0 `create_agent` 的核心扩展机制。它在 Agent 循环的每个步骤提供 hook 点，允许注入自定义逻辑：</p>
+
   <pre><code>from langchain.agents import create_agent
 from langchain.agents.middleware import HumanInTheLoopMiddleware
 
@@ -2251,41 +3555,81 @@ class LoggingMiddleware(AgentMiddleware):
     def on_tool_start(self, state, runtime, tool_call):
         print(f"[TOOL] Calling {tool_call['name']} with {tool_call['args']}")
         return None</code></pre>
+
   <p><strong>Middleware vs 旧模式：</strong>旧版本需要在 LangGraph 层面手动添加 interrupt 和条件边。Middleware 将横切关注点（logging、HITL、错误处理）从 Agent 逻辑中解耦出来。</p>
+
 </div>
 
+
 <div class="answer-card" id="A100a">
-  <h2>A100a · MCP vs A2A 协议分层</h2>
+  <div class="i18n-zh"><h2>A100a · MCP vs A2A 协议分层</h2></div>
+<div class="i18n-en" hidden><h2>A100a · MCP vs A2A 协议分层</h2></div>
+
   <table style="width:100%; border-collapse:collapse;">
-    <tr style="background:var(--surface-2);"><th style="padding:8px;">维度</th><th style="padding:8px;">MCP (Model Context Protocol)</th><th style="padding:8px;">A2A (Agent-to-Agent)</th></tr>
-    <tr><td style="padding:8px;">提出者</td><td style="padding:8px;">Anthropic (2024.11)</td><td style="padding:8px;">Google (2025.04)</td></tr>
-    <tr><td style="padding:8px;">治理</td><td style="padding:8px;">Linux Foundation (2025.12)</td><td style="padding:8px;">Linux Foundation (2025.06)</td></tr>
-    <tr><td style="padding:8px;">解决问题</td><td style="padding:8px;">Agent ↔ Tool 集成标准化</td><td style="padding:8px;">Agent ↔ Agent 通信标准化</td></tr>
-    <tr><td style="padding:8px;">架构</td><td style="padding:8px;">Client-Server (JSON-RPC 2.0)</td><td style="padding:8px;">Peer-to-Peer (Agent Cards 发现)</td></tr>
-    <tr><td style="padding:8px;">典型场景</td><td style="padding:8px;">Agent 调用文件系统、数据库、API</td><td style="padding:8px;">Orchestrator 委派任务给 Specialist Agent</td></tr>
+    <tr style="background:var(--surface-2);"><div class="i18n-zh"><th style="padding:8px;">维度</th></div>
+<div class="i18n-en" hidden><th style="padding:8px;">Dimension</th></div><th style="padding:8px;">MCP (Model Context Protocol)</th><th style="padding:8px;">A2A (Agent-to-Agent)</th></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">提出者</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">提出者</td></div><td style="padding:8px;">Anthropic (2024.11)</td><td style="padding:8px;">Google (2025.04)</td></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">治理</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">Governance</td></div><td style="padding:8px;">Linux Foundation (2025.12)</td><td style="padding:8px;">Linux Foundation (2025.06)</td></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">解决问题</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">解决问题</td></div><div class="i18n-zh"><td style="padding:8px;">Agent ↔ Tool 集成标准化</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">Agent ↔ Tool 集成标准化</td></div><div class="i18n-zh"><td style="padding:8px;">Agent ↔ Agent 通信标准化</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">Agent ↔ Agent 通信标准化</td></div></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">架构</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">Architecture</td></div><td style="padding:8px;">Client-Server (JSON-RPC 2.0)</td><div class="i18n-zh"><td style="padding:8px;">Peer-to-Peer (Agent Cards 发现)</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">Peer-to-Peer (Agent Cards 发现)</td></div></tr>
+
+    <tr><div class="i18n-zh"><td style="padding:8px;">典型场景</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">典型场景</td></div><div class="i18n-zh"><td style="padding:8px;">Agent 调用文件系统、数据库、API</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">Agent 调用文件系统、数据库、API</td></div><div class="i18n-zh"><td style="padding:8px;">Orchestrator 委派任务给 Specialist Agent</td></div>
+<div class="i18n-en" hidden><td style="padding:8px;">Orchestrator 委派任务给 Specialist Agent</td></div></tr>
+
   </table>
+
   <p><strong>2026 标准分层架构：</strong></p>
+
   <pre><code>Layer 3 (A2A): Orchestrator Agent ←→ Research Agent ←→ Writer Agent
 Layer 2 (MCP): Each Agent ←→ MCP Servers (DB, CRM, API, File System)
 Layer 1 (LLM): Each Agent's reasoning engine</code></pre>
+
 </div>
+
 
 <div class="answer-card" id="A100b">
-  <h2>A100b · LangGraph Agent 安全防护体系</h2>
+  <div class="i18n-zh"><h2>A100b · LangGraph Agent 安全防护体系</h2></div>
+<div class="i18n-en" hidden><h2>A100b · LangGraph Agent 安全防护体系</h2></div>
+
   <p><strong>2026 年 3 月披露的关键 CVE：</strong>CVE-2025-68664（凭据泄露）、CVE-2025-67644（提示注入）。</p>
+
   <p><strong>分层防御体系：</strong></p>
+
   <ol>
     <li><strong>输入净化层</strong>：检测并过滤 prompt injection 模式（分隔符欺骗、角色切换、ignore 指令）</li>
+
     <li><strong>工具权限分级</strong>：只读（search, get）vs 读写（update, create）vs 管理员（delete, config）— 按需授权</li>
+
     <li><strong>MCP Server 验证</strong>：安装前审查 MCP Server 源码（类似 npm audit），限制 Server 的网络访问范围</li>
+
     <li><strong>HITL 审批</strong>：高风险操作（删除、发送邮件、修改配置）必须人工确认</li>
+
     <li><strong>审计日志</strong>：所有工具调用和状态变更全量记录，支持事后追溯</li>
+
     <li><strong>凭据管理</strong>：API Key 通过 Secrets Manager 注入（非环境变量明文），定期轮换</li>
+
   </ol>
+
 </div>
 
+
 <div class="answer-card" id="A100c">
-  <h2>A100c · `langgraph deploy` 生产部署</h2>
+  <div class="i18n-zh"><h2>A100c · `langgraph deploy` 生产部署</h2></div>
+<div class="i18n-en" hidden><h2>A100c · `langgraph deploy` 生产部署</h2></div>
+
   <pre><code># langgraph.json (2026 格式)
 {
   "graphs": {
@@ -2318,18 +3662,23 @@ langgraph up           # 旧版 Docker Compose 部署 (仍可用但不推荐)
 # - US vs EU 数据驻留：需在 LangSmith 注册时选择区域，不可后期迁移
 # - Postgres 需要对应区域的实例
 # - API Key 按区域创建</code></pre>
-</div>
 
 </div>
+
+
+</div>
+
 
 <!-- NAV -->
 <nav style="margin-top:60px; padding:20px; background:var(--surface); border-radius:var(--radius);">
   <p style="margin:0 0 12px; color:var(--text-2);">📍 答案库导航</p>
+
   <a href="../index.html">课程总览</a> &nbsp;·&nbsp;
   <a href="interview-bank.html">面试题库</a> &nbsp;·&nbsp;
   <a href="fables.html">寓言集</a> &nbsp;·&nbsp;
   <a href="pitfalls.html">避坑指南</a>
 </nav>
+
 
 <a href="#" class="back-top" title="回到顶部">↑</a>
 
@@ -2350,4 +3699,5 @@ langgraph up           # 旧版 Docker Compose 部署 (仍可用但不推荐)
 </script>
 
 </body>
+
 </html>

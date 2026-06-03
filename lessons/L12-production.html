@@ -1,12 +1,35 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L12 · 生产部署 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head><body>
-<nav class="nav-bar"><a href="../index.html">🏠 总览</a><a href="L11-parallel-send.html">L11</a><a href="L12-production.html" class="active">L12</a></nav>
-<div class="hero"><h1>L12 · 生产部署</h1><p class="subtitle">从本地脚本到可上线服务</p></div>
-<div class="phase" data-phase="ignition"><span class="phase-num">Phase 0 · Ignition</span><div class="scenario"><div class="role">🔥 点火</div><p class="quote">"你的 L04-L11 Agent 都是 <code>uv run python xxx.py</code> 运行的。当 1000 个用户同时使用时，你怎么办？"</p></div></div>
-<div class="phase" data-phase="fable"><span class="phase-num">Phase 1 · Fable</span><h3>📖 寓言：从打铁铺到兵工厂</h3>
-<div class="card" style="border-color:var(--purple)"><p style="font-family:Georgia,serif;line-height:1.9">从前一个铁匠一天打五把剑。国王要一万把。于是他做了几件事：① 写手册（精确到炉温、淬火时间）② 建流水线（一人烧炉、一人锤打、一人淬火）③ 每工位放本子（每做完一把就记一笔）④ 设展示间（随时看进度和质量）。一个月后，一万把剑如期交付。</p><p><a href="../reference/fables.html#fable-12">📖 完整寓言 →</a></p></div></div>
-<div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><h3>⚔️ 实战编码</h3>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L12 · 生产部署 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head>
+<body>
+<nav class="nav-bar"><div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
+<div class="i18n-en" hidden><a href="../index.html">🏠 总览</a></div><a href="L11-parallel-send.html">L11</a><a href="L12-production.html" class="active">L12</a></nav>
 
-<h4>推荐项目结构</h4>
+<div class="hero"><div class="i18n-zh"><h1>L12 · 生产部署</h1></div>
+<div class="i18n-en" hidden><h1>L12 · 生产部署</h1></div>
+<div class="i18n-zh"><p class="subtitle">从本地脚本到可上线服务</p></div>
+<div class="i18n-en" hidden><p class="subtitle">From local script to production-ready service</p></div>
+</div>
+
+<div class="phase" data-phase="ignition"><span class="phase-num">Phase 0 · Ignition</span><div class="scenario"><div class="role">🔥 点火</div>
+<p class="quote">"你的 L04-L11 Agent 都是 <code>uv run python xxx.py</code> 运行的。当 1000 个用户同时使用时，你怎么办？"</p>
+</div>
+</div>
+
+<div class="phase" data-phase="fable"><span class="phase-num">Phase 1 · Fable</span><div class="i18n-zh"><h3>📖 寓言：从打铁铺到兵工厂</h3></div>
+<div class="i18n-en" hidden><h3>📖 寓言：从打铁铺到兵工厂</h3></div>
+
+<div class="card" style="border-color:var(--purple)"><div class="i18n-zh"><p style="font-family:Georgia,serif;line-height:1.9">从前一个铁匠一天打五把剑。国王要一万把。于是他做了几件事：① 写手册（精确到炉温、淬火时间）② 建流水线（一人烧炉、一人锤打、一人淬火）③ 每工位放本子（每做完一把就记一笔）④ 设展示间（随时看进度和质量）。一个月后，一万把剑如期交付。</p></div>
+<div class="i18n-en" hidden><p style="font-family:Georgia,serif;line-height:1.9">从前一个铁匠一天打五把剑。国王要一万把。于是他做了几件事：① 写手册（精确到炉温、淬火时间）② 建流水线（一人烧炉、一人锤打、一人淬火）③ 每工位放本子（每做完一把就记一笔）④ 设展示间（随时看进度和质量）。一个月后，一万把剑如期交付。</p></div>
+<p><a href="../reference/fables.html#fable-12">📖 完整寓言 →</a></p>
+</div>
+</div>
+
+<div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><div class="i18n-zh"><h3>⚔️ 实战编码</h3></div>
+<div class="i18n-en" hidden><h3>⚔️ 实战编码</h3></div>
+
+
+<div class="i18n-zh"><h4>推荐项目结构</h4></div>
+<div class="i18n-en" hidden><h4>推荐项目结构</h4></div>
+
 <pre><code>my_agent/
 ├── agent/
 │   ├── graph.py        <span class="cmt"># 图定义</span>
@@ -17,65 +40,126 @@
 ├── langgraph.json      <span class="cmt"># Cloud 配置</span>
 ├── pyproject.toml</code></pre>
 
+
 <h4>langgraph.json</h4>
+
 <pre><code>{
   <span class="str">"dependencies"</span>: [<span class="str">"."</span>],
   <span class="str">"graphs"</span>: {<span class="str">"my-agent"</span>: <span class="str">"./agent/graph.py:graph"</span>},
   <span class="str">"env"</span>: <span class="str">".env"</span>
 }</code></pre>
 
-<h4>CLI 命令</h4>
+
+<div class="i18n-zh"><h4>CLI 命令</h4></div>
+<div class="i18n-en" hidden><h4>CLI 命令</h4></div>
+
 <pre><code>langgraph dev       <span class="cmt"># 本地开发服务器（热重载）</span>
 langgraph build     <span class="cmt"># 构建 Docker 镜像</span>
 langgraph up        <span class="cmt"># 启动生产服务</span>
 langgraph deploy    <span class="cmt"># 部署到 LangGraph Cloud</span></code></pre>
 
-<h4>LangSmith 可观测性</h4>
+
+<div class="i18n-zh"><h4>LangSmith 可观测性</h4></div>
+<div class="i18n-en" hidden><h4>LangSmith 可观测性</h4></div>
+
 <pre><code><span class="cmt"># CMD 设置</span>
 <span class="cmt">set LANGSMITH_TRACING=true</span>
 <span class="cmt">set LANGSMITH_API_KEY=你的key</span>
 <span class="cmt">set LANGSMITH_PROJECT=my-agent</span></code></pre>
 
-<h4>测试</h4>
+
+<div class="i18n-zh"><h4>测试</h4></div>
+<div class="i18n-en" hidden><h4>Test</h4></div>
+
 <pre><code><span class="kw">import</span> pytest
 <span class="kw">from</span> agent.graph <span class="kw">import</span> graph
 <span class="kw">def</span> <span class="fn">test_pipeline</span>():
     result = graph.invoke({<span class="str">"messages"</span>: [HumanMessage(<span class="str">"hi"</span>)]})
     <span class="kw">assert</span> len(result[<span class="str">"messages"</span>]) > 1</code></pre>
 
-<h4>性能要点</h4>
-<table><tr><th>策略</th><th>效果</th></tr>
-<tr><td>async 节点（ainvoke）</td><td>I/O 密集场景吞吐量大幅提升</td></tr>
-<tr><td>PostgresSaver 替代 InMemorySaver</td><td>重启不丢状态，支持多实例</td></tr>
-<tr><td>无依赖节点自动并行</td><td>无需额外代码</td></tr>
-<tr><td>Prompt Caching（Claude 特性）</td><td>重复 prompt 前缀成本降低 90%</td></tr></table></div>
 
-<div class="phase" data-phase="forge"><span class="phase-num">Phase 3 · Forge</span><h3>🔨 知识淬炼</h3>
-<div class="card orange-left"><h4>🏗 你的挑战</h4><ol><li>把 L04 的 ReAct Agent 按推荐结构重组</li><li>运行 <code>langgraph dev</code> 启动本地服务器</li><li>设置 LangSmith，运行一次完整对话，查看 trace</li></ol></div>
-<div class="review-321"><div class="box"><div class="num">3</div><p style="font-size:0.8em">① langgraph dev 本地跑  ② PostgresSaver 生产用  ③ LangSmith 全链路追踪</p></div></div></div>
-<h2>📝 速查卡</h2>
+<div class="i18n-zh"><h4>性能要点</h4></div>
+<div class="i18n-en" hidden><h4>性能要点</h4></div>
+
+<table><tr><div class="i18n-zh"><th>策略</th></div>
+<div class="i18n-en" hidden><th>Strategy</th></div><div class="i18n-zh"><th>效果</th></div>
+<div class="i18n-en" hidden><th>Effect</th></div></tr>
+
+<tr><div class="i18n-zh"><td>async 节点（ainvoke）</td></div>
+<div class="i18n-en" hidden><td>async 节点（ainvoke）</td></div><div class="i18n-zh"><td>I/O 密集场景吞吐量大幅提升</td></div>
+<div class="i18n-en" hidden><td>I/O 密集场景吞吐量大幅提升</td></div></tr>
+
+<tr><div class="i18n-zh"><td>PostgresSaver 替代 InMemorySaver</td></div>
+<div class="i18n-en" hidden><td>PostgresSaver 替代 InMemorySaver</td></div><div class="i18n-zh"><td>重启不丢状态，支持多实例</td></div>
+<div class="i18n-en" hidden><td>重启不丢状态，支持多实例</td></div></tr>
+
+<tr><div class="i18n-zh"><td>无依赖节点自动并行</td></div>
+<div class="i18n-en" hidden><td>无依赖节点自动并行</td></div><div class="i18n-zh"><td>无需额外代码</td></div>
+<div class="i18n-en" hidden><td>无需额外代码</td></div></tr>
+
+<tr><div class="i18n-zh"><td>Prompt Caching（Claude 特性）</td></div>
+<div class="i18n-en" hidden><td>Prompt Caching（Claude 特性）</td></div><div class="i18n-zh"><td>重复 prompt 前缀成本降低 90%</td></div>
+<div class="i18n-en" hidden><td>重复 prompt 前缀成本降低 90%</td></div></tr>
+</table>
+</div>
+
+
+<div class="phase" data-phase="forge"><span class="phase-num">Phase 3 · Forge</span><div class="i18n-zh"><h3>🔨 知识淬炼</h3></div>
+<div class="i18n-en" hidden><h3>🔨 知识淬炼</h3></div>
+
+<div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
+<div class="i18n-en" hidden><h4>🏗 你的挑战</h4></div>
+<ol><div class="i18n-zh"><li>把 L04 的 ReAct Agent 按推荐结构重组</li></div>
+<div class="i18n-en" hidden><li>把 L04 的 ReAct Agent 按推荐结构重组</li></div>
+<li>运行 <code>langgraph dev</code> 启动本地服务器</li>
+<div class="i18n-zh"><li>设置 LangSmith，运行一次完整对话，查看 trace</li></div>
+<div class="i18n-en" hidden><li>设置 LangSmith，运行一次完整对话，查看 trace</li></div>
+</ol>
+</div>
+
+<div class="review-321"><div class="box"><div class="num">3</div>
+<div class="i18n-zh"><p style="font-size:0.8em">① langgraph dev 本地跑  ② PostgresSaver 生产用  ③ LangSmith 全链路追踪</p></div>
+<div class="i18n-en" hidden><p style="font-size:0.8em">① langgraph dev 本地跑  ② PostgresSaver 生产用  ③ LangSmith 全链路追踪</p></div>
+</div>
+</div>
+</div>
+
+<div class="i18n-zh"><h2>📝 速查卡</h2></div>
+<div class="i18n-en" hidden><h2>📝 速查卡</h2></div>
+
 <div class="card accent-left"><pre><code>langgraph dev      <span class="cmt"># 本地开发  </span>
 langgraph build    <span class="cmt"># 构建      </span>
 langgraph deploy   <span class="cmt"># 部署      </span>
-langgraph up       <span class="cmt"># 启动生产  </span></code></pre></div>
+langgraph up       <span class="cmt"># 启动生产  </span></code></pre>
+</div>
+
 
 <div class="card" style="border-color:var(--green);text-align:center;margin-top:32px;padding:32px;">
 <h3>🏆 全部课程完成！</h3>
+
 <p>做<a href="../reference/meta-learning-guide.html">盲区测试 Q10-Q13</a>，然后重读<a href="../reference/meta-learning-guide.html">领域全貌</a>，看能否形成自己的观点。</p>
+
 <p style="margin-top:16px;font-size:0.9em;color:var(--text-2)">能形成自己的观点 → 你真的入门了。<br>能在争议中选择立场并说出理由 → 你已经超越了只会用工具的开发者。</p>
+
 </div>
+
 
 <div class="lesson-actions">
   <div id="complete-section"></div>
+
   <details class="notes-panel">
     <summary>📝 学习笔记</summary>
+
     <textarea id="lesson-notes" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
     <div class="notes-actions">
       <button onclick="_exportNotes()">💾 保存到文件</button>
       <button onclick="_importNotes()">📂 加载文件</button>
     </div>
+
   </details>
+
 </div>
+
 
 <script src="../js/i18n-data.js"></script>
 <script src="../js/i18n.js"></script>
@@ -83,4 +167,5 @@ langgraph up       <span class="cmt"># 启动生产  </span></code></pre></div>
 <script src="../js/app.js"></script>
 
 <script src="../js/pomodoro.js"></script>
-</body></html>
+</body>
+</html>
