@@ -19,7 +19,6 @@
     localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
   }
 
-  // defaults
   if (!settings.work) settings.work = 25;
   if (!settings.break) settings.break = 5;
   if (settings.autoStart === undefined) settings.autoStart = true;
@@ -34,19 +33,18 @@
         '<span id="pomo-time">' + formatTime(secondsLeft) + '</span>' +
       '</div>' +
       '<div class="pomo-controls" id="pomo-controls">' +
-        '<button id="pomo-toggle" title="暂停/继续">⏯</button>' +
-        '<button id="pomo-skip" title="跳过">⏭</button>' +
-        '<button id="pomo-settings-btn" title="设置">⚙</button>' +
+        '<button id="pomo-toggle" title="' + I18N.t('pomo.toggle') + '">⏯</button>' +
+        '<button id="pomo-skip" title="' + I18N.t('pomo.skip') + '">⏭</button>' +
+        '<button id="pomo-settings-btn" title="' + I18N.t('pomo.settings') + '">⚙</button>' +
       '</div>' +
       '<div class="pomo-settings" id="pomo-settings" style="display:none">' +
-        '<label>工作 <input type="number" id="pomo-work" min="1" max="120" value="' + settings.work + '"> 分钟</label>' +
-        '<label>休息 <input type="number" id="pomo-break" min="1" max="60" value="' + settings.break + '"> 分钟</label>' +
-        '<label><input type="checkbox" id="pomo-autostart"' + (settings.autoStart ? ' checked' : '') + '> 自动开始</label>' +
-        '<button id="pomo-apply">应用</button>' +
+        '<label>' + I18N.t('pomo.work') + ' <input type="number" id="pomo-work" min="1" max="120" value="' + settings.work + '"> ' + I18N.t('pomo.minutes') + '</label>' +
+        '<label>' + I18N.t('pomo.break') + ' <input type="number" id="pomo-break" min="1" max="60" value="' + settings.break + '"> ' + I18N.t('pomo.minutes') + '</label>' +
+        '<label><input type="checkbox" id="pomo-autostart"' + (settings.autoStart ? ' checked' : '') + '> ' + I18N.t('pomo.auto_start') + '</label>' +
+        '<button id="pomo-apply">' + I18N.t('pomo.apply') + '</button>' +
       '</div>';
     document.body.appendChild(el);
 
-    // Events
     document.getElementById('pomo-toggle').onclick = toggle;
     document.getElementById('pomo-skip').onclick = skip;
     document.getElementById('pomo-settings-btn').onclick = function() {
@@ -119,10 +117,10 @@
   function complete() {
     stop();
     if (state === 'working') {
-      showPomoToast('🍅 该休息了！站起来走动一下。');
+      showPomoToast(I18N.t('pomo.toast_break'));
       start(settings.break * 60, 'breaking');
     } else if (state === 'breaking') {
-      showPomoToast('💪 休息结束，继续学习！');
+      showPomoToast(I18N.t('pomo.toast_work'));
       start(settings.work * 60, 'working');
     }
   }
@@ -137,12 +135,11 @@
     saveSettings();
     document.getElementById('pomo-settings').style.display = 'none';
 
-    // Restart with new work duration
     if (state !== 'stopped') {
       stop();
     }
     start(w * 60, 'working');
-    showPomoToast('⚙ 设置已更新');
+    showPomoToast(I18N.t('pomo.toast_updated'));
   }
 
   function showPomoToast(msg) {

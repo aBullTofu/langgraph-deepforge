@@ -6,7 +6,7 @@
 (function() {
   'use strict';
 
-  const lessonId = getCurrentLessonId();
+  var lessonId = getCurrentLessonId();
   recordStudy();
 
   /* ════════════════ Stage Lock Guard ════════════════ */
@@ -26,10 +26,9 @@
     var streak = getStreak();
 
     var items = [
-      { href: 'index.html', label: '\u{1F3E0} 总览' }
+      { href: 'index.html', label: I18N.t('nav.overview') }
     ];
 
-    // Always show foundation lessons
     items.push(
       { href: 'lessons/L01-state-nodes-edges.html', label: 'L01' },
       { href: 'lessons/L02-first-llm-agent.html', label: 'L02' },
@@ -37,7 +36,6 @@
       { href: 'lessons/L04-agent-loop.html', label: 'L04' }
     );
 
-    // Professional lessons visible from stage 1+
     if (stage >= 1) {
       items.push(
         { href: 'lessons/L05-memory-persistence.html', label: 'L05' },
@@ -47,7 +45,6 @@
       );
     }
 
-    // Expert lessons visible from stage 2
     if (stage >= 2) {
       items.push(
         { href: 'lessons/L09-subgraphs.html', label: 'L09' },
@@ -57,21 +54,19 @@
       );
     }
 
-    // Resource pages unlock progressively
-    items.push({ href: 'reference/learning-path.html', label: '\u{1F5FA} 路线' });
-    items.push({ href: 'reference/fables.html', label: '\u{1F4D6} 寓言' });
+    items.push({ href: 'reference/learning-path.html', label: I18N.t('nav.roadmap') });
+    items.push({ href: 'reference/fables.html', label: I18N.t('nav.fables') });
 
     if (sp.foundation.done >= 1) {
-      items.push({ href: 'reference/pitfalls.html', label: '⚠ 避坑' });
+      items.push({ href: 'reference/pitfalls.html', label: I18N.t('nav.pitfalls') });
     }
     if (sp.foundation.done >= sp.foundation.total) {
-      items.push({ href: 'reference/meta-learning-guide.html', label: '\u{1F9E0} 元学习' });
-      items.push({ href: 'reference/interview-bank.html', label: '\u{1F3D4} 面试' });
-      items.push({ href: 'reference/answer-bank.html', label: '\u{1F4D6} 答案' });
+      items.push({ href: 'reference/meta-learning-guide.html', label: I18N.t('nav.meta') });
+      items.push({ href: 'reference/interview-bank.html', label: I18N.t('nav.interview') });
+      items.push({ href: 'reference/answer-bank.html', label: I18N.t('nav.answers') });
     }
 
-    // Progress widget
-    var streakStr = streak.consecutiveDays > 1 ? ' \u{1F525} ' + streak.consecutiveDays + '天' : '';
+    var streakStr = streak.consecutiveDays > 1 ? ' \u{1F525} ' + streak.consecutiveDays + I18N.t('misc.days') : '';
 
     var html = '';
     var currentPage = window.location.pathname.split('/').pop() || '';
@@ -94,7 +89,7 @@
       el = document.createElement('a');
       el.id = 'float-progress';
       el.href = 'reference/learning-path.html';
-      el.title = '查看学习进度';
+      el.title = I18N.t('dashboard.view_progress');
       document.body.appendChild(el);
     }
     var streakStr = streak.consecutiveDays > 1 ? ' \u{1F525}' + streak.consecutiveDays : '';
@@ -124,19 +119,17 @@
 
     var btn = document.createElement('button');
     btn.className = 'complete-btn' + (lesson.done ? ' done' : '');
-    btn.textContent = lesson.done ? '✅ 已完成 · 点击撤销' : '☐ 标记为已完成';
+    btn.textContent = lesson.done ? I18N.t('lesson.mark_undo') : I18N.t('lesson.mark_done');
     btn.onclick = function() {
       if (!lesson.done) {
-        showConfirm('确认完成？', '你确定已经走完了 Ignition → Fable → GodView → Combat → Forge → Echo 六个阶段吗？', function() {
+        showConfirm(I18N.t('confirm.title'), I18N.t('confirm.body'), function() {
           var result = markDone(lessonId);
           renderCompleteBtn();
           renderFloatingWidget();
           renderDynamicNav();
           if (typeof updateDashboard === 'function') updateDashboard();
           if (result.newStageUnlocked) {
-            var stageNames = { '专业篇': '\u{1F525} 专业篇通关！生产级 Agent 技能已掌握。专家篇已解锁 →',
-              '专家篇': '\u{1F3C6} 专家篇通关！你已能设计生产级多 Agent 系统。' };
-            var msg = stageNames[result.newStageUnlocked] || ('\u{1F389} ' + result.newStageUnlocked + ' 已解锁！');
+            var msg = I18N.t('celebrate.' + (result.newStageUnlocked === '专家篇' ? 'expert' : 'professional'));
             showCelebration(msg);
           }
           updateNextLessonLink();
@@ -194,9 +187,9 @@
           renderFloatingWidget();
           renderDynamicNav();
           if (typeof updateDashboard === 'function') updateDashboard();
-          showToast('✅ 数据已加载');
+          showToast(I18N.t('data.loaded'));
         }).catch(function() {
-          showToast('❌ 文件格式错误');
+          showToast(I18N.t('data.format_error'));
         });
       };
       input.click();
@@ -216,8 +209,8 @@
         '<h3>' + title + '</h3>' +
         '<p>' + message + '</p>' +
         '<div class="confirm-actions">' +
-          '<button class="confirm-cancel">取消</button>' +
-          '<button class="confirm-ok">确认完成</button>' +
+          '<button class="confirm-cancel">' + I18N.t('confirm.cancel') + '</button>' +
+          '<button class="confirm-ok">' + I18N.t('confirm.ok') + '</button>' +
         '</div>' +
       '</div>';
     document.body.appendChild(overlay);
@@ -252,19 +245,18 @@
       var done = getPhase(lessonId, phaseName);
       var btn = document.createElement('button');
       btn.className = 'phase-complete-btn' + (done ? ' done' : '');
-      btn.textContent = done ? '✓ 已完成' : '☐ 确认完成此阶段';
+      btn.textContent = done ? I18N.t('phase.done') : I18N.t('phase.mark');
 
       btn.onclick = function() {
         if (done) return;
         var next = markPhase(lessonId, phaseName);
-        btn.textContent = '✓ 已完成';
+        btn.textContent = I18N.t('phase.done');
         btn.className = 'phase-complete-btn done';
 
         if (next) {
           var nextPhase = document.querySelector('.phase[data-phase=\"' + next + '\"]');
           if (nextPhase) {
             nextPhase.classList.remove('locked-content');
-            // Animate
             nextPhase.style.opacity = '0';
             nextPhase.style.transform = 'translateY(8px)';
             nextPhase.style.transition = 'opacity 0.3s, transform 0.3s';
@@ -285,7 +277,7 @@
           updateNextLessonLink();
         }
 
-        showToast('✓ ' + phaseName + ' 完成！');
+        showToast(I18N.t('phase.completed_toast', { name: I18N.t('phase.' + phaseName + '.label') }));
       };
 
       phase.appendChild(btn);
@@ -328,7 +320,6 @@
     var tp = getTotalProgress();
     var streak = getStreak();
 
-    // Find current lesson to continue
     var continueLesson = null;
     for (var i = 1; i <= 12; i++) {
       var id = 'L' + String(i).padStart(2, '0');
@@ -339,11 +330,12 @@
     if (!continueLesson) continueLesson = 'L01';
 
     var lessonNames = {
-      L01: 'State / Node / Edge', L02: '第一个 LLM Agent', L03: 'Tools（工具集成）',
-      L04: 'Agent Loop（ReAct 循环）', L05: 'Memory & Persistence',
-      L06: 'Human-in-the-Loop', L07: 'Streaming（流式输出）',
-      L08: 'Error Handling', L09: 'Subgraphs', L10: 'Multi-Agent',
-      L11: 'Parallel & Send', L12: 'Production（生产部署）'
+      L01: I18N.t('lesson.L01.title'), L02: I18N.t('lesson.L02.title'),
+      L03: I18N.t('lesson.L03.title'), L04: I18N.t('lesson.L04.title'),
+      L05: I18N.t('lesson.L05.title'), L06: I18N.t('lesson.L06.title'),
+      L07: I18N.t('lesson.L07.title'), L08: I18N.t('lesson.L08.title'),
+      L09: I18N.t('lesson.L09.title'), L10: I18N.t('lesson.L10.title'),
+      L11: I18N.t('lesson.L11.title'), L12: I18N.t('lesson.L12.title')
     };
     var lessonFiles = {
       L01: 'lessons/L01-state-nodes-edges.html', L02: 'lessons/L02-first-llm-agent.html',
@@ -354,7 +346,6 @@
       L11: 'lessons/L11-parallel-send.html', L12: 'lessons/L12-production.html'
     };
 
-    // Count phases done for current lesson
     var phasesDone = 0;
     var phasesTotal = 0;
     var phaseNames = ['ignition', 'fable', 'godview', 'combat', 'forge'];
@@ -363,9 +354,8 @@
       phasesTotal++;
     });
 
-    var phaseLine = phasesDone > 0 ? '继续 Phase ' + (phasesDone + 1) + '/' + phasesTotal : '开始学习';
+    var phaseLine = phasesDone > 0 ? I18N.t('dashboard.phase', { n: phasesDone + 1 }) + '/' + phasesTotal : I18N.t('dashboard.start');
 
-    // Stage progress
     var stages = ['foundation', 'professional', 'expert'];
     var stageEmoji = ['\u{1F7E2}', '\u{1F7E1}', '\u{1F534}'];
     var stageBars = '';
@@ -375,7 +365,7 @@
       var pct = Math.round((s.done / s.total) * 100);
       var locked = idx > 0 && sp[stages[idx - 1]].done < sp[stages[idx - 1]].total;
       stageBars += '<div class="dashboard-row">' +
-        '<span class="stage-label" style="color:' + s.color + '">' + stageEmoji[idx] + ' ' + s.name + '</span>' +
+        '<span class="stage-label" style="color:' + s.color + '">' + stageEmoji[idx] + ' ' + I18N.t('stage.' + key) + '</span>' +
         '<span class="stage-bar"><span class="stage-fill" style="width:' + pct + '%;background:' + s.color + '"></span></span>' +
         '<span class="stage-num">' + s.done + '/' + s.total + '</span>';
       if (locked) stageBars += '<span class="stage-lock">\u{1F512}</span>';
@@ -383,12 +373,12 @@
 
       if (!locked && s.done < s.total && !nextMilestone) {
         var remaining = s.total - s.done;
-        nextMilestone = '再完成 <strong>' + remaining + '</strong> 课解锁' +
-          (stages[idx + 1] ? ' <strong>' + sp[stages[idx + 1]].name + '</strong>' : '全部内容');
+        var nextStageName = stages[idx + 1] ? I18N.t('stage.' + stages[idx + 1]) : I18N.t('dashboard.all_done');
+        nextMilestone = I18N.t('dashboard.more_unlock', { n: remaining, stage: nextStageName });
       }
     });
 
-    var streakStr = streak.consecutiveDays > 1 ? '\u{1F525} 连续学习 ' + streak.consecutiveDays + ' 天' : '';
+    var streakStr = streak.consecutiveDays > 1 ? I18N.t('dashboard.streak', { n: streak.consecutiveDays }) : '';
 
     dash.innerHTML =
       '<a href="' + lessonFiles[continueLesson] + '" class="continue-btn">' +
@@ -398,8 +388,16 @@
       '<div style="margin-top:24px">' + stageBars + '</div>' +
       (nextMilestone ? '<p style="text-align:center;color:var(--text-2);margin-top:12px;font-size:0.9em">' + nextMilestone + '</p>' : '') +
       (streakStr ? '<p style="text-align:center;margin-top:8px;font-size:0.9em">' + streakStr + '</p>' : '') +
-      '<p style="text-align:center;margin-top:4px;font-size:0.85em;color:var(--text-2)">总进度: ' + tp.done + '/' + tp.total + ' (' + tp.pct + '%)</p>';
+      '<p style="text-align:center;margin-top:4px;font-size:0.85em;color:var(--text-2)">' + I18N.t('dashboard.progress') + ': ' + tp.done + '/' + tp.total + ' (' + tp.pct + '%)</p>';
   }
+
+  /* ════════════════ Re-render on language change ════════════════ */
+  window.onLangChange = function() {
+    renderDynamicNav();
+    renderFloatingWidget();
+    renderCompleteBtn();
+    renderDashboard();
+  };
 
   /* ════════════════ Init ════════════════ */
   renderDynamicNav();

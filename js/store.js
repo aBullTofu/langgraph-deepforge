@@ -6,9 +6,9 @@
 const STORE_KEY = 'langgraph_learn';
 
 const STAGES = {
-  foundation: { name: '基础篇', lessons: ['L01','L02','L03','L04'], color: '#6c8cff' },
-  professional: { name: '专业篇', lessons: ['L05','L06','L07','L08'], color: '#4cdf80' },
-  expert: { name: '专家篇', lessons: ['L09','L10','L11','L12'], color: '#ff5c5c' }
+  foundation: { name: '基础篇', i18nKey: 'stage.foundation', lessons: ['L01','L02','L03','L04'], color: '#6c8cff' },
+  professional: { name: '专业篇', i18nKey: 'stage.professional', lessons: ['L05','L06','L07','L08'], color: '#4cdf80' },
+  expert: { name: '专家篇', i18nKey: 'stage.expert', lessons: ['L09','L10','L11','L12'], color: '#ff5c5c' }
 };
 
 const STAGE_ORDER = ['foundation', 'professional', 'expert'];

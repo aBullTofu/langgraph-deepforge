@@ -379,6 +379,8 @@
   学习路线图 · 从入门到精通 · 2026-06-03
 </p>
 
+<script src="../js/i18n-data.js"></script>
+<script src="../js/i18n.js"></script>
 <script src="../js/store.js"></script>
 <script>
 /* ════════════════ Dashboard ════════════════ */
@@ -404,7 +406,7 @@ function updateDashboard() {
     }
 
     html += '<div class="dashboard-row">' +
-      '<span class="stage-label" style="color:' + s.color + '">' + emojis[key] + ' ' + s.name + '</span>' +
+      '<span class="stage-label" style="color:' + s.color + '">' + emojis[key] + ' ' + I18N.t(s.i18nKey || 'stage.' + key) + '</span>' +
       '<span class="stage-bar"><span class="stage-fill" style="width:' + pct + '%;background:' + s.color + '"></span></span>' +
       '<span class="stage-num">' + s.done + '/' + s.total + '</span>';
     if (locked) {
@@ -413,7 +415,7 @@ function updateDashboard() {
     html += '</div>';
   }
 
-  html += '<div class="dashboard-total">总进度: ' + tp.done + '/' + tp.total + ' (' + tp.pct + '%)</div>';
+  html += '<div class="dashboard-total">' + I18N.t('dashboard.progress') + ': ' + tp.done + '/' + tp.total + ' (' + tp.pct + '%)</div>';
   dash.innerHTML = html;
 
   // Update milestone states

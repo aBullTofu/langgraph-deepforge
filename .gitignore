@@ -9,6 +9,21 @@ wheels/
 # Virtual environments
 .venv
 
+# Environment & secrets
+.env
+.env.*
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+*.local
+*.log
+
 # Claude Code
 .claude/
 
