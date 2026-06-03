@@ -1,0 +1,139 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>避坑指南 — LangGraph 常见错误与调试</title><link rel="stylesheet" href="../css/style.css"></head><body>
+<nav class="nav-bar"><a href="../index.html">🏠 总览</a><a href="meta-learning-guide.html">🧠 元学习</a><a href="fables.html">📖 寓言集</a><a href="pitfalls.html" class="active">⚠️ 避坑指南</a><a href="../lessons/L01-state-nodes-edges.html">L01</a><span style="color:var(--text-2)">···</span><a href="../lessons/L12-production.html">L12</a></nav>
+
+<div class="hero"><h1>⚠️ 避坑指南</h1><p class="subtitle">7 大反模式 + 11 个错误码 + 调试策略 — 来自官方文档和社区论坛的真实血泪</p><div class="badge-row"><span class="badge badge-red">社区高频问题</span><span class="badge badge-yellow">官方错误码</span><span class="badge badge-accent">调试策略</span></div></div>
+
+<h2>🔥 七大反模式（来自社区论坛真实案例）</h2>
+
+<div class="card red-left"><h3>反模式 1：忘记 Reducer — 消息被覆盖</h3>
+<p><strong>症状：</strong>消息列表只剩最后一条，前面的对话全部消失。</p>
+<p><strong>原因：</strong>State 字段默认"替换"而非"追加"。每个节点返回的新值覆盖旧值。</p>
+<pre><code><span class="cmt"># ❌ 错误</span>
+<span class="kw">class</span> <span class="type">State</span>(TypedDict):
+    messages: list   <span class="cmt"># 每次写入覆盖上一次</span>
+
+<span class="cmt"># ✅ 正确</span>
+<span class="kw">from</span> langgraph.graph.message <span class="kw">import</span> add_messages
+<span class="kw">class</span> <span class="type">State</span>(TypedDict):
+    messages: Annotated[list, add_messages]  <span class="cmt"># 追加而非覆盖</span></code></pre>
+<p><strong>影响范围：</strong>L01-L04 的所有 State 定义。</p>
+</div>
+
+<div class="card red-left"><h3>反模式 2：ToolNode 输出覆盖对话导致 OpenAI 400</h3>
+<p><strong>症状：</strong><code>messages with role 'tool' must be a response to a preceding message with 'tool_calls'</code></p>
+<p><strong>原因：</strong>ToolNode 返回的 ToolMessage 覆盖了对话历史，导致 LLM 收到的上下文里 tool 消息前面没有 assistant 消息。</p>
+<pre><code><span class="cmt"># 这个错误的本质是反模式 1 在工具调用场景下的表现</span>
+<span class="cmt"># 解决：确保 messages 字段使用 add_messages reducer</span></code></pre>
+<p><strong>影响范围：</strong>L03（工具调用）、L04（ReAct 循环）</p>
+</div>
+
+<div class="card red-left"><h3>反模式 3：突变 State（原地修改）</h3>
+<p><strong>症状：</strong>不可预测的行为，状态在不同节点间"泄露"。</p>
+<pre><code><span class="cmt"># ❌ 错误 — 原地修改</span>
+<span class="kw">def</span> <span class="fn">bad_node</span>(state):
+    state[<span class="str">"messages"</span>].append(new_msg)  <span class="cmt"># 直接改了传入的 state！</span>
+    <span class="kw">return</span> state  <span class="cmt"># 返回完整 state</span>
+
+<span class="cmt"># ✅ 正确 — 返回部分更新</span>
+<span class="kw">def</span> <span class="fn">good_node</span>(state):
+    <span class="kw">return</span> {<span class="str">"messages"</span>: [new_msg]}  <span class="cmt"># 只返回本节点负责的键</span></code></pre>
+<p><strong>铁律：</strong>State 是只读的。节点只返回自己负责的键的更新 dict。</p>
+</div>
+
+<div class="card red-left"><div class="locked-content" data-require-stage="professional">
+<h3>反模式 4：手动追加 + Reducer 双重追加</h3>
+<p><strong>症状：</strong>消息列表中每条消息出现两次（重复）。</p>
+<pre><code><span class="cmt"># ❌ 错误 — 手动追加了，reducer 又追加一次</span>
+<span class="kw">def</span> <span class="fn">node</span>(state):
+    <span class="kw">return</span> {<span class="str">"messages"</span>: state[<span class="str">"messages"</span>] + [new_msg]}
+
+<span class="cmt"># ✅ 正确 — 让 reducer 处理合并</span>
+<span class="kw">def</span> <span class="fn">node</span>(state):
+    <span class="kw">return</span> {<span class="str">"messages"</span>: [new_msg]}</code></pre>
+</div>
+
+<div class="card red-left"><h3>反模式 5：Optional 包裹顺序错误</h3>
+<pre><code><span class="cmt"># ❌ — reducer 被忽略</span>
+logs: Optional[Annotated[list[str], add]]
+
+<span class="cmt"># ✅ — Annotated 必须在最外层</span>
+logs: Annotated[Optional[list[str]], add]</code></pre>
+</div>
+
+<div class="card red-left"><h3>反模式 6：条件边 + 固定边混用导致并行</h3>
+<p><strong>症状：</strong>条件边的分支全部执行，而非只执行一个。</p>
+<p><strong>原因：</strong>从同一个节点同时添加了固定边和条件边 → LangGraph 理解为"都要执行"。</p>
+<pre><code><span class="cmt"># ❌ — 两个都加了，导致并行</span>
+builder.add_edge(<span class="str">"classify"</span>, <span class="str">"handle_a"</span>)   <span class="cmt"># 删掉这行！</span>
+builder.add_conditional_edges(<span class="str">"classify"</span>, router, mapping)
+
+<span class="cmt"># ✅ — 只用条件边</span>
+builder.add_conditional_edges(<span class="str">"classify"</span>, router, mapping)</code></pre>
+</div>
+
+<div class="card red-left"></div>
+<div class="locked-content" data-require-stage="professional">
+<h3>反模式 7：没有 Checkpointer 就用 interrupt()</h3>
+<p><strong>症状：</strong>interrupt() 不生效，图不暂停，或报错 MISSING_CHECKPOINTER。</p>
+<pre><code><span class="cmt"># ❌ — 没有 checkpointer</span>
+graph = builder.compile()  <span class="cmt"># 缺少 checkpointer！</span>
+<span class="kw">def</span> <span class="fn">node</span>(state):
+    interrupt(<span class="str">"等等！"</span>)  <span class="cmt"># 不生效</span>
+
+<span class="cmt"># ✅ — 必须注入 checkpointer</span>
+<span class="kw">from</span> langgraph.checkpoint.memory <span class="kw">import</span> InMemorySaver
+graph = builder.compile(checkpointer=InMemorySaver())</code></pre>
+</div>
+
+<h2>🚨 11 个官方错误码速查</h2>
+<table><tr><th>错误码</th><th>含义</th><th>常见原因</th><th>相关课程</th></tr>
+<tr><td>GRAPH_RECURSION_LIMIT</td><td>递归次数超限</td><td>Agent 循环未终止，LLM 反复调工具</td><td>L04</td></tr>
+<tr><td>INVALID_CHAT_HISTORY</td><td>对话历史格式错误</td><td>消息类型不匹配（反模式1/2）</td><td>L03</td></tr>
+<tr><td>MISSING_CHECKPOINTER</td><td>缺少持久化配置</td><td>用了 interrupt() 但没配置 checkpointer</td><td>L05/L06</td></tr>
+<tr><td>INVALID_GRAPH_NODE_RETURN_VALUE</td><td>节点返回值无效</td><td>返回了 State 中未声明的键、或返回了 None 以外非 dict 类型</td><td>L01</td></tr>
+<tr><div class="locked-content" data-require-stage="professional"><td>INVALID_CONCURRENT_GRAPH_UPDATE</td><td>并发更新冲突</td><td>并行节点写入同一键但没配置正确的 reducer</td><td>L11</td></tr>
+<tr><td>INVALID_PROMPT_INPUT</td><td>Prompt 输入无效</td><td>传了模型不支持的参数</td><td>L02</td></tr>
+<tr><td>INVALID_TOOL_RESULTS</td><td>工具返回格式无效</td><td>ToolMessage 内容格式不对</td><td>L03</td></tr>
+<tr><td>MESSAGE_COERCION_FAILURE</td><td>消息类型转换失败</td><td>传了纯字符串而非消息对象（反模式2）</td><td>L01</td></tr>
+<tr><td>MODEL_AUTHENTICATION</td><td>API Key 无效</td><td>环境变量未设置或过期</td><td>L02</td></tr>
+<tr><td>MODEL_RATE_LIMIT</td><td>API 限流</td><td>请求太频繁</td><td>L08</td></tr>
+<tr><td>MULTIPLE_SUBGRAPHS</td></div><td>子图配置冲突</td><td>多个子图使用了相同的 checkpoint 命名空间</td><td>L09</td></tr></table>
+
+<h2>🔧 七种"静默退出"与排查</h2>
+<p>图停下来了但没有报错？逐一排查：</p>
+<ol><li><strong>条件边返回了 END</strong> — 这是正常行为，检查路由逻辑是否符合预期</li><li><strong>没有节点被调度</strong> — 条件边映射字典缺少某个返回值 → 加 else 兜底</li><li><strong>写入了 State 未声明的键</strong> — LangGraph 静默忽略，后续节点读不到数据</li><li><strong>显式连接到 END</strong> — 检查是否有不必要的 <code>add_edge(xxx, END)</code></li><li><strong>递归限制</strong> — 默认最多递归 25 次，可在 compile 时设置 <code>recursion_limit</code></li><li><strong>interrupt() 没有 checkpointer</strong> — 行为不可预测</li><li><strong>节点返回了空 dict</strong> — 图认为无事可做</li></ol>
+
+<h2>🔍 推荐的调试策略</h2>
+<pre><code><span class="cmt"># 1. 可视化图结构（检查是否有意外路径）</span>
+<span class="kw">print</span>(graph.get_graph().draw_ascii())
+
+<span class="cmt"># 2. 用 debug 模式看到每一步的完整状态</span>
+<span class="kw">for</span> event <span class="kw">in</span> graph.stream(input, stream_mode=[<span class="str">"debug"</span>, <span class="str">"updates"</span>]):
+    <span class="kw">print</span>(event)
+
+<span class="cmt"># 3. 检查条件边函数返回值</span>
+<span class="kw">def</span> <span class="fn">router</span>(state):
+    result = decide(state)
+    <span class="kw">print</span>(<span class="str">f"Router: → {result}"</span>)  <span class="cmt"># 加一行日志</span>
+    <span class="kw">return</span> result
+
+<span class="cmt"># 4. 检查 State 的中间值</span>
+<span class="kw">def</span> <span class="fn">my_node</span>(state):
+    <span class="kw">print</span>(<span class="str">f"State keys: {state.keys()}"</span>)
+    <span class="kw">return</span> {<span class="str">"field"</span>: value}</code></pre>
+<p style="margin-top:48px;padding-top:20px;border-top:1px solid var(--border);color:var(--text-2);font-size:0.85em;text-align:center">避坑指南 · 社区血泪凝成 · 2026-06-02</p>
+<script src="../js/store.js"></script>
+<script>
+(function() {
+  var stageIdx = { foundation: 0, professional: 1, expert: 2 };
+  var highest = typeof getHighestAccessibleStage === 'function' ? getHighestAccessibleStage() : 0;
+  document.querySelectorAll('.locked-content').forEach(function(el) {
+    var required = stageIdx[el.dataset.requireStage];
+    if (required !== undefined && required <= highest) {
+      el.classList.remove('locked-content');
+    }
+  });
+})();
+</script>
+
+</body></html>

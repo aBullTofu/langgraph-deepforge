@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L11 · 并行与 Send API — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head><body>
+<nav class="nav-bar"><a href="../index.html">🏠 总览</a><a href="L10-multi-agent.html">L10</a><a href="L11-parallel-send.html" class="active">L11</a><a href="L12-production.html">L12</a></nav>
+<div class="hero"><h1>L11 · 并行与 Send API</h1><p class="subtitle">同时做多件事，汇总结果</p></div>
+<div class="phase" data-phase="ignition"><span class="phase-num">Phase 0 · Ignition</span><div class="scenario"><div class="role">🔥 点火</div><p class="quote">"查知识库A(3s) → 查B(3s) → 查C(3s) = 9秒。<strong>如果你同时查三个知识库，理论上只需要 3 秒。怎么做到？</strong>"</p></div></div>
+<div class="phase" data-phase="fable"><span class="phase-num">Phase 1 · Fable</span><h3>📖 寓言：将军的侦察兵</h3>
+<div class="card" style="border-color:var(--purple)"><p style="font-family:Georgia,serif;line-height:1.9">将军派出五名侦察兵，每人一个方向同时出发。侦察兵们每隔一炷香放一只信鸽。将军把信鸽带来的情报标注在地图上。两名侦察兵一去不回——但将军根据已收到的三份情报做出了判断，打了胜仗。<strong>一个人看完五个方向要五天。五个人同时看只要一天。</strong></p><p><a href="../reference/fables.html#fable-11">📖 完整寓言 →</a></p></div></div>
+<div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><h3>⚔️ 实战编码</h3>
+<h4>静态并行（同一 super-step 从多处出发）</h4>
+<pre><code>builder.add_edge(START, <span class="str">"fetch_a"</span>); builder.add_edge(START, <span class="str">"fetch_b"</span>); builder.add_edge(START, <span class="str">"fetch_c"</span>)
+<span class="cmt"># fetch_a, fetch_b, fetch_c 在同一 super-step 中自动并行执行！</span></code></pre>
+<h4>Send API 动态并行（数量不定时）</h4>
+<pre><code><span class="kw">from</span> langgraph.types <span class="kw">import</span> Send
+<span class="kw">class</span> <span class="type">State</span>(TypedDict):
+    queries: list[str]
+    results: Annotated[list[str], operator.add]  <span class="cmt"># ⭐ Reducer 自动合并</span>
+
+<span class="kw">def</span> <span class="fn">fan_out</span>(state):  <span class="cmt"># 为每个 query 创建一个 Send</span>
+    <span class="kw">return</span> [Send(<span class="str">"worker"</span>, {<span class="str">"query"</span>: q}) <span class="kw">for</span> q <span class="kw">in</span> state[<span class="str">"queries"</span>]]
+
+<span class="kw">def</span> <span class="fn">worker</span>(state):  <span class="cmt"># 每个 worker 并行独立执行</span>
+    result = search(state[<span class="str">"query"</span>])
+    <span class="kw">return</span> {<span class="str">"results"</span>: [result]}
+
+builder.add_conditional_edges(START, fan_out, {<span class="str">"worker"</span>: <span class="str">"worker"</span>})</code></pre></div>
+<div class="phase" data-phase="forge"><span class="phase-num">Phase 3 · Forge</span><h3>🔨 知识淬炼</h3>
+<div class="card orange-left"><h4>🏗 你的挑战</h4><p>构建多源检索系统：5 个查询同时搜 5 个知识库，用 operator.add reducer 合并所有结果，最后 LLM 汇总。</p></div>
+</div>
+<p style="margin-top:48px;text-align:center"><span id="next-lesson-link"><a href="L12-production.html">L12 生产部署 →</a></span></p>
+
+<div class="lesson-actions">
+  <div id="complete-section"></div>
+  <details class="notes-panel">
+    <summary>📝 学习笔记</summary>
+    <textarea id="lesson-notes" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
+    <div class="notes-actions">
+      <button onclick="_exportNotes()">💾 保存到文件</button>
+      <button onclick="_importNotes()">📂 加载文件</button>
+    </div>
+  </details>
+</div>
+
+<script src="../js/store.js"></script>
+<script src="../js/app.js"></script>
+
+<script src="../js/pomodoro.js"></script>
+</body></html>

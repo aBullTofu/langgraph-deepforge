@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>学习路线图 — LangGraph 从入门到精通</title>
+<link rel="stylesheet" href="../css/style.css">
+<style>
+.milestone { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 28px; margin: 24px 0; }
+.milestone h3 { margin: 0 0 10px; font-size: 1.2em; color: var(--text); }
+.milestone .status { display: inline-block; padding: 3px 10px; border-radius: 99px; font-size: 0.7em; font-weight: 700; margin-left: 8px; vertical-align: middle; }
+.status-foundation { background: rgba(108,140,255,0.18); color: #6c8cff; }
+.status-skill { background: rgba(76,223,128,0.18); color: #4cdf80; }
+.status-core { background: rgba(240,192,64,0.18); color: #f0c040; }
+.status-advanced { background: rgba(255,140,66,0.18); color: #ff8c42; }
+.status-expert { background: rgba(255,92,92,0.18); color: #ff5c5c; }
+
+.checklist { margin-top: 14px; }
+.checklist li { margin: 6px 0; color: var(--text-2); }
+.checklist li.done { color: var(--green); text-decoration: line-through; }
+
+.path-arrow { text-align: center; font-size: 1.5em; color: var(--accent); margin: 8px 0; }
+
+/* Progress bar */
+.progress-bar { background: var(--surface-2); border-radius: 99px; height: 8px; margin-top: 10px; overflow: hidden; }
+.progress-fill { height: 100%; border-radius: 99px; transition: width 0.5s; }
+.fill-foundation { background: #6c8cff; }
+.fill-skill { background: #4cdf80; }
+.fill-core { background: #f0c040; }
+.fill-advanced { background: #ff8c42; }
+.fill-expert { background: #ff5c5c; }
+
+.phase-tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 0.72em; margin-left: 6px; background: var(--surface-2); color: var(--text-2); }
+</style>
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="../index.html">🏠 总览</a>
+  <a href="learning-path.html" class="active">🗺 学习路线</a>
+  <a href="meta-learning-guide.html">🧠 元学习</a>
+  <a href="fables.html">📖 寓言集</a>
+  <a href="pitfalls.html">⚠️ 避坑指南</a>
+  <a href="interview-bank.html">🏔️ 面试题库</a>
+  <a href="answer-bank.html">📖 答案库</a>
+  <a href="../lessons/L01-state-nodes-edges.html">L01</a>
+  <span style="color:var(--text-2)">···
+  <a href="../lessons/L12-production.html">L12</a>
+</nav>
+
+<div class="hero">
+  <h1>🗺 学习路线图</h1>
+  <p class="subtitle">从零基础到能独立构建生产级 LangGraph Agent 系统 — 三阶段 · 12 课 · 100 道面试题</p>
+  <div class="badge-row">
+    <span class="badge badge-green">预计 6-8 周</span>
+    <span class="badge badge-yellow">3 个阶段里程碑</span>
+    <span class="badge badge-red">12 个通关检查点</span>
+  </div>
+</div>
+
+<!-- ════════════════ DASHBOARD ════════════════ -->
+<div class="dashboard" id="dashboard"></div>
+
+<!-- ════════════════ OVERVIEW ════════════════ -->
+<h2>📐 整体框架</h2>
+
+<div class="card" style="border-color:var(--accent);">
+  <table style="width:100%;">
+    <tr style="background:var(--surface-2);">
+      <th style="padding:8px;">阶段</th><th style="padding:8px;">课程</th><th style="padding:8px;">学习目标</th><th style="padding:8px;">面试对应层</th><th style="padding:8px;">建议时间</th>
+    </tr>
+    <tr>
+      <td style="padding:8px;"><span class="badge badge-green">🟢 基础篇</span></td>
+      <td style="padding:8px;">L01 — L04</td>
+      <td style="padding:8px;">能独立构建单 Agent 应用</td>
+      <td style="padding:8px;"><a href="interview-bank.html#L1">L1 基础层</a></td>
+      <td style="padding:8px;">2 周</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;"><span class="badge badge-yellow">🟡 专业篇</span></td>
+      <td style="padding:8px;">L05 — L08</td>
+      <td style="padding:8px;">能构建生产级 Agent（持久化+流式输出+人机协同）</td>
+      <td style="padding:8px;"><a href="interview-bank.html#L3">L3 核心层</a>+<a href="interview-bank.html#L4">L4 高级层</a></td>
+      <td style="padding:8px;">2-3 周</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;"><span class="badge badge-red">🔴 专家篇</span></td>
+      <td style="padding:8px;">L09 — L12</td>
+      <td style="padding:8px;">能设计多 Agent 架构并部署到生产</td>
+      <td style="padding:8px;"><a href="interview-bank.html#L5">L5 架构层</a></td>
+      <td style="padding:8px;">2-3 周</td>
+    </tr>
+  </table>
+</div>
+
+<!-- ════════════════ PREREQUISITES ════════════════ -->
+<h2>🔧 起点：你需要什么</h2>
+
+<div class="card accent-left">
+  <h3>硬性前置条件（必须）</h3>
+  <ul>
+    <li>Python 3.10+ — 能写函数、类、装饰器、async/await</li>
+    <li>理解基本的 HTTP API 调用（requests / httpx）</li>
+    <li>拥有至少一个 LLM API Key（DeepSeek / OpenAI / Anthropic 任一）</li>
+  </ul>
+</div>
+
+<div class="card accent-left" style="margin-top:16px;">
+  <h3>软性前置（有帮助但不是必须）</h3>
+  <ul>
+    <li>了解 Transformer 的基本概念（Self-Attention 做了什么，不用推公式）</li>
+    <li>用过至少一次 LangChain 的 `ChatOpenAI` 或类似 LLM 封装</li>
+    <li>听说过 RAG（检索增强生成）的概念</li>
+  </ul>
+</div>
+
+<!-- ════════════════ STAGE 1: FOUNDATION ════════════════ -->
+<h2>🟢 第一阶段：构建你的第一个 Agent（L01-L04）</h2>
+<p style="color:var(--text-2);">目标：理解 LangGraph 的核心抽象，能独立写出一个带工具调用的 Agent 循环。</p>
+
+<div class="milestone">
+  <h3>L01 · State / Node / Edge <span class="status status-foundation">基石</span></h3>
+  <div class="progress-bar"><div class="progress-fill fill-foundation" style="width:20%;"></div></div>
+  <div class="checklist">
+    <li><strong>核心概念：</strong>StateGraph, State (TypedDict), Node, Edge, Reducer (add_messages)</li>
+    <li><strong>必做练习：</strong>用 StateGraph 写一个 3 节点的线性图（输入→处理→输出）</li>
+    <li><strong>寓言语境：</strong><a href="fables.html#fable-1">水渠与磨坊</a> — State 是水流，Node 是磨坊，Edge 是水渠</li>
+    <li><strong>完成后自检：</strong>能用 3 句话解释 State/Node/Edge 给一个非技术朋友听</li>
+    <li><strong>避坑：</strong><a href="pitfalls.html">add_messages 缺失导致消息覆盖</a>（社区 #1 报错）</li>
+    <li><strong>面试预热：</strong><a href="interview-bank.html#L3">L3 面试题 Q36-Q40</a> — StateGraph 基础</li>
+  </div>
+</div>
+
+<div class="path-arrow">↓</div>
+
+<div class="milestone">
+  <h3>L02 · 第一个 LLM Agent <span class="status status-foundation">Agent</span></h3>
+  <div class="progress-bar"><div class="progress-fill fill-foundation" style="width:40%;"></div></div>
+  <div class="checklist">
+    <li><strong>核心概念：</strong>LLM 节点、条件边（tools_condition）、第一个 Agent 循环</li>
+    <li><strong>必做练习：</strong>构建一个能回答"今天天气怎么样"并调用天气工具的 Agent</li>
+    <li><strong>寓言语境：</strong><a href="fables.html#fable-2">十字路口的客栈</a> — 条件边是十字路口，LLM 决定走哪条</li>
+    <li><strong>避坑：</strong>条件边返回值不在 path_map 中 → 图静默退出</li>
+    <li><strong>面试预热：</strong><a href="interview-bank.html#L3">Q41-Q42</a> — 条件路由 + tools_condition 调试</li>
+  </div>
+</div>
+
+<div class="path-arrow">↓</div>
+
+<div class="milestone">
+  <h3>L03 · Tools（工具集成）<span class="status status-foundation">工具</span></h3>
+  <div class="progress-bar"><div class="progress-fill fill-foundation" style="width:60%;"></div></div>
+  <div class="checklist">
+    <li><strong>核心概念：</strong>@tool 装饰器、ToolNode、bind_tools、ToolMessage、MCP 协议入门</li>
+    <li><strong>必做练习：</strong>设计 3 个工具（搜索、计算器、数据库查询）并集成到 Agent</li>
+    <li><strong>寓言语境：</strong><a href="fables.html#fable-3">学徒的工具箱</a> — 每个工具是学徒掌握的专用技能</li>
+    <li><strong>避坑：</strong>工具返回异常 → 给 LLM 返回描述性错误消息而不是抛异常</li>
+    <li><strong>面试预热：</strong><a href="interview-bank.html#L2">Q29-Q30</a> — create_agent + MCP 集成</li>
+  </div>
+</div>
+
+<div class="path-arrow">↓</div>
+
+<div class="milestone">
+  <h3>L04 · Agent Loop（ReAct 循环）<span class="status status-foundation">循环</span></h3>
+  <div class="progress-bar"><div class="progress-fill fill-foundation" style="width:80%;"></div></div>
+  <div class="checklist">
+    <li><strong>核心概念：</strong>手写 ReAct（Think→Act→Observe→Repeat）、MAX_CALLS 防护、LangSmith 追踪</li>
+    <li><strong>必做练习：</strong>不依赖 ToolNode，手写完整的 ReAct 循环，含错误处理和循环上限</li>
+    <li><strong>寓言语境：</strong><a href="fables.html#fable-4">侦探的方法</a> — 思考→行动→观察→再思考</li>
+    <li><strong>配置 LangSmith：</strong>添加 <code>LANGCHAIN_TRACING_V2=true</code> 环境变量</li>
+    <li><strong>面试预热：</strong><a href="interview-bank.html#L3">Q43-Q46</a> — Agent Loop + Self-Reflection</li>
+  </div>
+</div>
+
+<div class="milestone" style="border:2px solid var(--green);">
+  <h3>🏁 里程碑 1：能独立构建单 Agent <span class="status status-foundation">通关检查</span></h3>
+  <div class="progress-bar"><div class="progress-fill fill-foundation" style="width:100%;"></div></div>
+  <div class="checklist">
+    <li><strong>盲区自测：</strong><a href="meta-learning-guide.html">盲区题 Q1-Q5</a>（基础篇）— 全部答对才算通过</li>
+    <li><strong>面试模拟：</strong>能不看文档回答 <a href="interview-bank.html#L3">L3 面试题 Q36-Q46</a></li>
+    <li><strong>实战检验：</strong>独立写一个天气助手 Agent，包含 3 个工具 + 条件边 + 循环防护</li>
+  </div>
+</div>
+
+<!-- ════════════════ STAGE 2: PROFESSIONAL ════════════════ -->
+<div class="locked-content" data-require-stage="professional">
+<h2>🟡 第二阶段：生产级 Agent 开发（L05-L08）</h2>
+<p style="color:var(--text-2);">目标：理解持久化、流式输出、人机协同、错误处理——让 Agent 能上线。</p>
+
+<div class="milestone">
+  <h3>L05 · Memory & Persistence <span class="status status-skill">持久化</span></h3>
+  <div class="progress-bar"><div class="progress-fill fill-skill" style="width:20%;"></div></div>
+  <div class="checklist">
+    <li><strong>核心概念：</strong>Checkpointer (MemorySaver→SqliteSaver→PostgresSaver)、thread_id、时间旅行、Store API</li>
+    <li><strong>必做练习：</strong>将 L04 的 Agent 加上 SqliteSaver，测试重启进程后恢复对话</li>
+    <li><strong>寓言语境：</strong><a href="fables.html#fable-5">书记官的账本</a> — Checkpoint 是自动存档的账本</li>
+    <li><strong>面试预热：</strong><a href="interview-bank.html#L4">Q61-Q64</a> — Checkpointing + Time Travel</li>
+  </div>
+</div>
+
+<div class="path-arrow">↓</div>
+
+<div class="milestone">
+  <h3>L06 · Human-in-the-Loop <span class="status status-skill">人机协同</span></h3>
+  <div class="progress-bar"><div class="progress-fill fill-skill" style="width:40%;"></div></div>
+  <div class="checklist">
+    <li><strong>核心概念：</strong>interrupt()、Command(resume=...)、interrupt_before/after、审批工作流</li>
+    <li><strong>必做练习：</strong>给 Agent 加审批：发送邮件前暂停等待人类确认</li>
+    <li><strong>寓言语境：</strong><a href="fables.html#fable-6">桥上的收费站</a> — interrupt 是桥上的检查站</li>
+    <li><strong>面试预热：</strong><a href="interview-bank.html#L4">Q67-Q68</a> — HITL 审批实现</li>
+  </div>
+</div>
+
+<div class="path-arrow">↓</div>
+
+<div class="milestone">
+  <h3>L07 · Streaming <span class="status status-skill">流式输出</span></h3>
+  <div class="progress-bar"><div class="progress-fill fill-skill" style="width:60%;"></div></div>
+  <div class="checklist">
+    <li><strong>核心概念：</strong>4 种 Streaming Mode (values/updates/messages/custom)、astream_events(v2/v3)、get_stream_writer</li>
+    <li><strong>必做练习：</strong>实现同时输出 token 流 + 节点状态 + 自定义进度事件的 Agent</li>
+    <li><strong>寓言语境：</strong><a href="fables.html#fable-7">信使与碎片</a> — Streaming 是信使逐片送达</li>
+    <li><strong>面试预热：</strong><a href="interview-bank.html#L4">Q65-Q66</a> — Streaming 模式选型</li>
+  </div>
+</div>
+
+<div class="path-arrow">↓</div>
+
+<div class="milestone">
+  <h3>L08 · Error Handling <span class="status status-skill">错误处理</span></h3>
+  <div class="progress-bar"><div class="progress-fill fill-skill" style="width:80%;"></div></div>
+  <div class="checklist">
+    <li><strong>核心概念：</strong>4 层错误处理策略、RetryPolicy、fallback 节点、GRAPH_RECURSION_LIMIT</li>
+    <li><strong>必做练习：</strong>为 Agent 的每个工具调用添加重试+降级策略</li>
+    <li><strong>寓言语境：</strong><a href="fables.html#fable-8">城墙上的四道门</a> — 每道门是一层防御</li>
+    <li><strong>面试预热：</strong><a href="interview-bank.html#L4">Q75-Q76</a> — 错误处理分级 + 重试设计</li>
+  </div>
+</div>
+
+<div class="milestone" style="border:2px solid var(--yellow);">
+  <h3>🏁 里程碑 2：Agent 可以上线 <span class="status status-skill">通关检查</span></h3>
+  <div class="progress-bar"><div class="progress-fill fill-skill" style="width:100%;"></div></div>
+  <div class="checklist">
+    <li><strong>盲区自测：</strong><a href="meta-learning-guide.html">盲区题 Q6-Q9</a>（专业篇）— 全部答对才算通过</li>
+    <li><strong>面试模拟：</strong>能回答 <a href="interview-bank.html#L4">L4 面试题 Q61-Q80</a> 中的 80%</li>
+    <li><strong>实战检验：</strong>为一个 Agent 添加 SqliteSaver + 审批流 + token 级流式输出 + 错误重试</li>
+  </div>
+</div>
+
+</div>
+<!-- ════════════════ STAGE 3: EXPERT ════════════════ -->
+<div class="locked-content" data-require-stage="expert">
+<h2>🔴 第三阶段：架构师级 Agent 系统（L09-L12）</h2>
+<p style="color:var(--text-2);">目标：设计多 Agent 架构、并行执行、部署到生产、评估监控 —— 达到面试高级/架构师水平。</p>
+
+<div class="milestone">
+  <h3>L09 · Subgraphs <span class="status status-advanced">子图</span></h3>
+  <div class="progress-bar"><div class="progress-fill fill-advanced" style="width:20%;"></div></div>
+  <div class="checklist">
+    <li><strong>核心概念：</strong>子图复用、Shared State vs Isolated State、Command 跨图跳转</li>
+    <li><strong>必做练习：</strong>将一个复杂 Agent 拆分为父图+子图结构</li>
+    <li><strong>寓言语境：</strong><a href="fables.html#fable-9">城中之城</a> — 子图是城内的独立城区</li>
+    <li><strong>面试预热：</strong><a href="interview-bank.html#L4">Q69-Q71</a> — Subgraph + Command 跳转</li>
+  </div>
+</div>
+
+<div class="path-arrow">↓</div>
+
+<div class="milestone">
+  <h3>L10 · Multi-Agent <span class="status status-advanced">多智能体</span></h3>
+  <div class="progress-bar"><div class="progress-fill fill-advanced" style="width:40%;"></div></div>
+  <div class="checklist">
+    <li><strong>核心概念：</strong>Supervisor 模式、Swarm/Handoff 模式、A2A 协议入门、Agent 通信模式</li>
+    <li><strong>必做练习：</strong>构建 Supervisor + Worker 双 Agent 系统</li>
+    <li><strong>寓言语境：</strong><a href="fables.html#fable-10">蜂巢的议会</a> — 蜂后(Supervisor) + 工蜂(Workers)</li>
+    <li><strong>面试预热：</strong><a href="interview-bank.html#L5">Q86-Q90</a> — Multi-Agent 设计 + 框架对比</li>
+  </div>
+</div>
+
+<div class="path-arrow">↓</div>
+
+<div class="milestone">
+  <h3>L11 · Parallel & Send <span class="status status-advanced">并行</span></h3>
+  <div class="progress-bar"><div class="progress-fill fill-advanced" style="width:60%;"></div></div>
+  <div class="checklist">
+    <li><strong>核心概念：</strong>Super-Step、Send API (map-reduce 扇出)、并行 Reducer、并发控制</li>
+    <li><strong>必做练习：</strong>实现一个并行搜索 Agent：同时搜索 5 个来源，聚合结果</li>
+    <li><strong>寓言语境：</strong><a href="fables.html#fable-11">将军的侦察兵</a> — Send 是派出多个侦察兵并行侦察</li>
+    <li><strong>面试预热：</strong><a href="interview-bank.html#L3">Q49</a> — Super-Step + Send API</li>
+  </div>
+</div>
+
+<div class="path-arrow">↓</div>
+
+<div class="milestone">
+  <h3>L12 · Production <span class="status status-advanced">生产部署</span></h3>
+  <div class="progress-bar"><div class="progress-fill fill-advanced" style="width:80%;"></div></div>
+  <div class="checklist">
+    <li><strong>核心概念：</strong>langgraph deploy、Postgres+Redis 配置、LangSmith 监控、安全 CVE 防御、成本优化</li>
+    <li><strong>必做练习：</strong>写一份 langgraph.json 配置 + 生产部署清单</li>
+    <li><strong>寓言语境：</strong><a href="fables.html#fable-12">从打铁铺到兵工厂</a> — 从单机开发到规模生产</li>
+    <li><strong>面试预热：</strong><a href="interview-bank.html#L5">Q87-Q100</a> — 生产架构 + 安全 + 成本</li>
+  </div>
+</div>
+
+<div class="milestone" style="border:2px solid var(--red);">
+  <h3>🏁 里程碑 3：能设计并部署生产级系统 <span class="status status-expert">最终通关</span></h3>
+  <div class="progress-bar"><div class="progress-fill fill-expert" style="width:100%;"></div></div>
+  <div class="checklist">
+    <li><strong>盲区自测：</strong><a href="meta-learning-guide.html">盲区题 Q10-Q17</a>（专家篇+2026前沿）— 全部答对</li>
+    <li><strong>面试模拟：</strong>能回答 <a href="interview-bank.html#L5">L5 面试题 Q86-Q100</a> 中的 80%</li>
+    <li><strong>最终实战：</strong>不翻文档，设计一个 Multi-Agent 客服系统（含架构图+State设计+部署方案）</li>
+    <li><strong>领域全貌：</strong>能讨论 <a href="meta-learning-guide.html">领域全貌</a> 中的共识、争议和开放问题</li>
+  </div>
+</div>
+
+</div>
+<!-- ════════════════ FINAL CHECK ════════════════ -->
+<h2>🏆 精通最终验证</h2>
+
+<div class="card" style="border-color:var(--accent);">
+  <h3>精通的三维度定义</h3>
+  <p>当你同时满足以下三个条件，你就真正从入门走到精通了：</p>
+  <table>
+    <tr style="background:var(--surface-2);"><th style="padding:8px;">维度</th><th style="padding:8px;">验证方式</th><th style="padding:8px;">标准</th></tr>
+    <tr>
+      <td style="padding:8px;"><strong>BUILD</strong></td>
+      <td style="padding:8px;">12 课的所有练习都完成</td>
+      <td style="padding:8px;">能不翻文档构建带工具/持久化/HITL/流式输出的 Agent</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;"><strong>REASON</strong></td>
+      <td style="padding:8px;"><a href="interview-bank.html">面试题库</a> 100 题</td>
+      <td style="padding:8px;">L1-L2 正确率 90%+, L3-L4 正确率 80%+, L5 正确率 70%+</td>
+    </tr>
+    <tr>
+      <td style="padding:8px;"><strong>SHIP</strong></td>
+      <td style="padding:8px;">L12 最终实战 + 生产部署清单</td>
+      <td style="padding:8px;">能写出一份生产级 Agent 系统的完整架构设计文档</td>
+    </tr>
+  </table>
+</div>
+
+<div class="alert alert-info" style="margin-top:20px;">
+  <strong>🔄 学习循环（每课重复）：</strong><br>
+  ⚡ Ignition（2分钟 → 激发好奇）→ 📖 Fable（5分钟 → 故事直觉）→ 🗺 GodView（7分钟 → 系统理解）→ ⚔️ Combat（30分钟 → 动手编码）→ 🔨 Forge（10分钟 → 知识内化）→ 🔁 Echo（下次课前 → 间隔复习）<br>
+  <em>详细方法见 <a href="meta-learning-guide.html">🧠 元学习指南</a></em>
+</div>
+
+<!-- ════════════════ RESOURCE MAP ════════════════ -->
+<h2>📚 资源索引</h2>
+
+<div class="card">
+  <table>
+    <tr style="background:var(--surface-2);"><th style="padding:8px;">资源</th><th style="padding:8px;">用途</th><th style="padding:8px;">使用时机</th></tr>
+    <tr><td style="padding:8px;"><a href="../index.html">🏠 课程总览</a></td><td style="padding:8px;">查看全部课程列表 + 六阶段引擎说明</td><td style="padding:8px;">开始学习前、需要导航时</td></tr>
+    <tr><td style="padding:8px;"><a href="learning-path.html">🗺 学习路线（本页）</a></td><td style="padding:8px;">从入门到精通的完整旅程</td><td style="padding:8px;">每次不知道该做什么时回来</td></tr>
+    <tr><td style="padding:8px;"><a href="meta-learning-guide.html">🧠 元学习指南</a></td><td style="padding:8px;">6思维模型 + 领域全貌 + 盲区自测</td><td style="padding:8px;">每阶段结束后对照检查</td></tr>
+    <tr><td style="padding:8px;"><a href="fables.html">📖 寓言集</a></td><td style="padding:8px;">12篇概念寓言，用故事建立直觉</td><td style="padding:8px;">每课开始前读对应寓言</td></tr>
+    <tr><td style="padding:8px;"><a href="pitfalls.html">⚠️ 避坑指南</a></td><td style="padding:8px;">7反模式 + 11错误码速查</td><td style="padding:8px;">遇到任何报错时立刻查</td></tr>
+    <tr><td style="padding:8px;"><a href="interview-bank.html">🏔️ 面试题库</a></td><td style="padding:8px;">100题金字塔考核系统</td><td style="padding:8px;">每课完成后做对应层题目</td></tr>
+    <tr><td style="padding:8px;"><a href="answer-bank.html">📖 答案库</a></td><td style="padding:8px;">所有面试题答案 + 评分标准</td><td style="padding:8px;">做完题后对照检查</td></tr>
+  </table>
+</div>
+
+<nav style="margin-top:60px; padding:20px; background:var(--surface); border-radius:var(--radius);">
+  <p style="margin:0 0 12px; color:var(--text-2);">📍 导航</p>
+  <a href="../index.html">课程总览</a> &nbsp;·&nbsp;
+  <a href="meta-learning-guide.html">元学习指南</a> &nbsp;·&nbsp;
+  <a href="fables.html">寓言集</a> &nbsp;·&nbsp;
+  <a href="pitfalls.html">避坑指南</a> &nbsp;·&nbsp;
+  <a href="interview-bank.html">面试题库</a> &nbsp;·&nbsp;
+  <a href="answer-bank.html">答案库</a> &nbsp;·&nbsp;
+  <a href="../lessons/L01-state-nodes-edges.html">开始 L01 →</a>
+</nav>
+
+<p style="margin-top:48px; padding-top:20px; border-top:1px solid var(--border); color:var(--text-2); font-size:0.85em;">
+  学习路线图 · 从入门到精通 · 2026-06-03
+</p>
+
+<script src="../js/store.js"></script>
+<script>
+/* ════════════════ Dashboard ════════════════ */
+function updateDashboard() {
+  var sp = getStageProgress();
+  var tp = getTotalProgress();
+  var dash = document.getElementById('dashboard');
+  if (!dash) return;
+
+  var html = '';
+  var stages = ['foundation', 'professional', 'expert'];
+  var emojis = { foundation: '🟢', professional: '🟡', expert: '🔴' };
+
+  for (var i = 0; i < stages.length; i++) {
+    var key = stages[i];
+    var s = sp[key];
+    var pct = Math.round((s.done / s.total) * 100);
+    var locked = false;
+
+    if (i > 0) {
+      var prev = sp[stages[i-1]];
+      locked = prev.done < prev.total;
+    }
+
+    html += '<div class="dashboard-row">' +
+      '<span class="stage-label" style="color:' + s.color + '">' + emojis[key] + ' ' + s.name + '</span>' +
+      '<span class="stage-bar"><span class="stage-fill" style="width:' + pct + '%;background:' + s.color + '"></span></span>' +
+      '<span class="stage-num">' + s.done + '/' + s.total + '</span>';
+    if (locked) {
+      html += '<span class="stage-lock" style="color:var(--text-2)">🔒</span>';
+    }
+    html += '</div>';
+  }
+
+  html += '<div class="dashboard-total">总进度: ' + tp.done + '/' + tp.total + ' (' + tp.pct + '%)</div>';
+  dash.innerHTML = html;
+
+  // Update milestone states
+  var milestones = document.querySelectorAll('.milestone');
+  for (var j = 0; j < Math.min(milestones.length, 12); j++) {
+    var id = 'L' + String(j + 1).padStart(2, '0');
+    var ls = getLesson(id);
+    if (ls.done) {
+      milestones[j].classList.add('done');
+    }
+  }
+}
+
+/* ════════════════ Nav Lock ════════════════ */
+(function() {
+  var links = document.querySelectorAll('.nav-bar a');
+  for (var i = 0; i < links.length; i++) {
+    var href = links[i].getAttribute('href');
+    if (!href) continue;
+    var m = href.match(/L(\d{2})/);
+    if (!m) continue;
+    var id = 'L' + m[1];
+    if (!isLessonUnlocked(id)) {
+      links[i].classList.add('locked');
+      links[i].innerHTML = links[i].innerHTML + ' 🔒';
+    }
+  }
+})();
+
+updateDashboard();
+</script>
+
+
+<script>
+(function() {
+  var stageIdx = { foundation: 0, professional: 1, expert: 2 };
+  var highest = typeof getHighestAccessibleStage === 'function' ? getHighestAccessibleStage() : 0;
+  document.querySelectorAll('.locked-content').forEach(function(el) {
+    var required = stageIdx[el.dataset.requireStage];
+    if (required !== undefined && required <= highest) {
+      el.classList.remove('locked-content');
+    }
+  });
+})();
+</script>
+
+</body>
+</html>

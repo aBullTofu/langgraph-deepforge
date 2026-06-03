@@ -1,0 +1,106 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L03 · 工具调用 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head><body>
+<nav class="nav-bar"><a href="../index.html">🏠 总览</a><a href="../reference/meta-learning-guide.html">🧠 元学习</a><a href="../reference/fables.html">📖 寓言集</a><a href="../reference/pitfalls.html">⚠️ 避坑</a><a href="L01-state-nodes-edges.html">L01</a><a href="L02-first-llm-agent.html">L02</a><a href="L03-tools.html" class="active">L03</a><a href="L04-agent-loop.html">L04</a></nav>
+
+<div class="phase" data-phase="ignition"><span class="phase-num">Phase 0 · Ignition</span><h3>⚡ 认知点火 <span class="timer"><span class="clock">⏱</span> 2 分钟</span></h3>
+<p>L02 的 Agent 只会"说话"。试试问它：</p>
+<div class="scenario"><div class="role">🔥 点火问题</div><p class="quote">"3 加 5 等于多少？" → L02 的 Agent 会回复"等于 8"——但这是 LLM <strong>背出来</strong>的，不是它<strong>算出来</strong>的。问它 "1234567 乘以 7654321 等于多少？"→ 它就瞎编了。</p></div>
+<p>LLM 只会生成文本。它需要<strong>工具</strong>来和外部世界交互——调用计算器、查询天气、发邮件。</p></div>
+
+<div class="phase" data-phase="fable"><span class="phase-num">Phase 1 · Fable</span><h3>📖 寓言：学徒的工具箱</h3>
+<div class="card" style="border-color:var(--purple)"><p style="font-family:Georgia,serif;line-height:1.9">老锁匠给了徒弟一个上锁的铁盒。徒弟用手掰、用牙咬、用石头砸——纹丝不动。第二天，老锁匠拿出一串钥匙，一把一把教徒弟："这把开挂锁，这把开暗锁，这把是万能钥匙但有些锁打不开会卡住。"后来徒弟成了名匠，他对弟子说："<strong>一个锁匠的水平，不取决于他的手有多巧，而取决于他的钥匙串上挂了多少把钥匙，以及他是否知道每把钥匙能开什么锁。</strong>"</p><div class="reveal">🔮 揭示：Tool 就是 LLM 的钥匙串。LLM 不"会"计算——但它知道什么时候该调用计算器工具，传什么参数，怎么解读结果。</div><a href="../reference/fables.html#fable-3">📖 完整寓言 →</a></div></div>
+
+<div class="phase" data-phase="godview"><span class="phase-num">Phase 1 · GodView</span><h3>🗺 上帝视角 <span class="timer"><span class="clock">⏱</span> 7 分钟</span></h3>
+<div class="card accent-left"><h3>📋 通关条件</h3><p>构建能<strong>真正调用函数</strong>的 Agent：用户说"3+5"，Agent 调用 add 工具计算，返回精确结果。</p></div>
+<div class="card green-left"><h3>🧠 心智模型：Tool = 函数 + 说明书</h3><p><code>@tool</code> 装饰器做了两件事：① 保留函数可执行  ② 自动生成一段 JSON Schema（工具名、描述、参数类型）嵌入 LLM 请求中。LLM 看到说明书后决定"要不要调、调哪个、传什么参数"。<strong>LLM 不执行工具——它只输出一个 tool_calls 列表，由 ToolNode 执行。</strong></p>
+<pre><code><span class="cmt"># @tool 等价于给函数贴了一张"说明书"给 LLM 看</span>
+<span class="decorator">@tool</span>
+<span class="kw">def</span> <span class="fn">add</span>(a: int, b: int) -> int:
+    <span class="str">"""加法。两个整数相加。"""</span>
+    <span class="kw">return</span> a + b</code></pre></div></div>
+
+<div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><h3>⚔️ 实战编码 <span class="timer"><span class="clock">⏱</span> 30 分钟</span></h3>
+<p>创建 <code>l03_tool_agent.py</code>：</p>
+
+<h4>Step 1：定义工具 + 绑定到模型</h4>
+<pre><code><span class="kw">from</span> langchain.tools <span class="kw">import</span> tool
+<span class="kw">from</span> langgraph.prebuilt <span class="kw">import</span> ToolNode
+<span class="kw">from</span> langgraph.graph.message <span class="kw">import</span> add_messages
+<span class="kw">from</span> langchain.messages <span class="kw">import</span> AnyMessage, SystemMessage
+<span class="kw">import</span> operator
+
+<span class="decorator">@tool</span>
+<span class="kw">def</span> <span class="fn">add</span>(a: int, b: int) -> int: <span class="str">"""加法运算"""</span>; <span class="kw">return</span> a + b
+<span class="decorator">@tool</span>
+<span class="kw">def</span> <span class="fn">multiply</span>(a: int, b: int) -> int: <span class="str">"""乘法运算"""</span>; <span class="kw">return</span> a * b
+<span class="decorator">@tool</span>
+<span class="kw">def</span> <span class="fn">get_weather</span>(city: str) -> str: <span class="str">"""查询城市天气"""</span>
+    data = {<span class="str">"北京"</span>: <span class="str">"晴 25°C"</span>, <span class="str">"上海"</span>: <span class="str">"多云 28°C"</span>}
+    <span class="kw">return</span> data.get(city, <span class="str">f"未找到{city}"</span>)
+
+tools = [add, multiply, get_weather]
+model = init_chat_model(<span class="str">"deepseek-chat"</span>)
+model_with_tools = model.bind_tools(tools)  <span class="cmt"># ⭐ 关键：把工具说明书传给 LLM</span></code></pre>
+
+<h4>Step 2：定义 State（⚠️ 必须用 add_messages reducer！）</h4>
+<pre><code><span class="kw">class</span> <span class="type">AgentState</span>(TypedDict):
+    messages: Annotated[list[AnyMessage], add_messages]  <span class="cmt"># ⭐ 追加而非覆盖！
+    # 如果用普通的 list，ToolNode 返回的 ToolMessage 会覆盖整个对话历史
+    # → 导致 OpenAI 400 错误：tool role 前缺少 tool_calls</span></code></pre>
+
+<h4>Step 3：LLM 节点 + 条件边</h4>
+<pre><code><span class="kw">def</span> <span class="fn">llm_node</span>(state: AgentState) -> dict:
+    msgs = [SystemMessage(<span class="str">"你是助手，需要计算时调用工具"</span>)] + state[<span class="str">"messages"</span>]
+    <span class="kw">return</span> {<span class="str">"messages"</span>: [model_with_tools.invoke(msgs)]}
+
+tool_node = ToolNode(tools)  <span class="cmt"># 预构建节点，自动解析 tool_calls 并执行</span>
+
+<span class="kw">def</span> <span class="fn">should_call_tool</span>(state: AgentState) -> str:
+    last = state[<span class="str">"messages"</span>][-1]
+    <span class="kw">if</span> <span class="kw">hasattr</span>(last, <span class="str">"tool_calls"</span>) <span class="kw">and</span> last.tool_calls:
+        <span class="kw">return</span> <span class="str">"tools"</span>
+    <span class="kw">return</span> END</code></pre>
+
+<h4>Step 4：组装（LLM ↔ Tools 循环）</h4>
+<pre><code>builder = StateGraph(AgentState)
+builder.add_node(<span class="str">"llm"</span>, llm_node); builder.add_node(<span class="str">"tools"</span>, tool_node)
+builder.add_edge(START, <span class="str">"llm"</span>)
+builder.add_conditional_edges(<span class="str">"llm"</span>, should_call_tool, {<span class="str">"tools"</span>: <span class="str">"tools"</span>, END: END})
+builder.add_edge(<span class="str">"tools"</span>, <span class="str">"llm"</span>)  <span class="cmt"># 工具结果返回 LLM，形成循环</span>
+graph = builder.compile()</code></pre>
+
+<h4>Step 5：测试</h4>
+<pre><code><span class="kw">for</span> q <span class="kw">in</span> [<span class="str">"3+5=?"</span>, <span class="str">"7*8=?"</span>, <span class="str">"北京天气？"</span>, <span class="str">"你好"</span>]:
+    r = graph.invoke({<span class="str">"messages"</span>: [HumanMessage(q)]})
+    <span class="kw">print</span>(<span class="str">f"🤖: {r['messages'][-1].content}"</span>)</code></pre>
+
+<div class="alert alert-warn" style="margin-top:16px"><strong>⚠️ 避坑 INVALID_CHAT_HISTORY：</strong>这是 #1 社区报错。原因：State 中 messages 没用 <code>add_messages</code> reducer → ToolNode 的输出覆盖了 LLM 的输出 → 对话历史缺失。解决方案见上方 Step 2。</div></div>
+
+<div class="phase" data-phase="forge"><span class="phase-num">Phase 3 · Forge</span><h3>🔨 知识淬炼</h3>
+<div class="card orange-left"><h4>🏗 你的挑战</h4><ol><li>添加 <code>subtract</code> 和 <code>divide</code> 工具（除零返回友好错误）</li><li>用 <code>requests</code> 或 <code>httpx</code> 实现一个真实的网络搜索工具</li><li>在 llm_node 中打印 LLM 的 tool_calls，观察它决定调了哪些工具、传了什么参数</li></ol></div>
+<div class="review-321"><div class="box"><div class="num">3</div><p style="font-size:0.8em">① add_messages 是必须的  ② bind_tools 告知 LLM  ③ ToolNode 自动执行</p></div><div class="box"><div class="num">2</div><p style="font-size:0.8em">• Agent 管家 • 智能客服查询系统</p></div><div class="box"><div class="num">1</div><p style="font-size:0.8em">如果 LLM 同时调了两个工具，ToolNode 怎么处理？</p></div></div></div>
+<h2>📝 速查卡</h2>
+<div class="card accent-left"><pre><code><span class="decorator">@tool</span>
+<span class="kw">def</span> <span class="fn">my_tool</span>(param: type) -> type: <span class="str">"""LLM 看到的描述"""</span>
+model_with_tools = model.bind_tools(tools)
+tool_node = ToolNode(tools)  <span class="cmt"># 预构建</span>
+<span class="cmt"># State 必须用 add_messages！</span>
+messages: Annotated[list, add_messages]</code></pre></div>
+<p style="margin-top:48px;text-align:center;color:var(--text-2)">L03 · 工具调用 · <span id="next-lesson-link"><a href="L04-agent-loop.html">下一课：ReAct 循环 →</a></span></p>
+
+<div class="lesson-actions">
+  <div id="complete-section"></div>
+  <details class="notes-panel">
+    <summary>📝 学习笔记</summary>
+    <textarea id="lesson-notes" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
+    <div class="notes-actions">
+      <button onclick="_exportNotes()">💾 保存到文件</button>
+      <button onclick="_importNotes()">📂 加载文件</button>
+    </div>
+  </details>
+</div>
+
+<script src="../js/store.js"></script>
+<script src="../js/app.js"></script>
+
+<script src="../js/pomodoro.js"></script>
+</body></html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L08 · 容错与重试 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head><body>
+<nav class="nav-bar"><a href="../index.html">🏠 总览</a><a href="L07-streaming.html">L07</a><a href="L08-error-handling.html" class="active">L08</a><a href="L09-subgraphs.html">L09</a></nav>
+<div class="phase"><span class="phase-num">Phase 0</span><h3>⚡ 认知点火</h3><div class="scenario"><div class="role">🔥 点火</div><p class="quote">"你的 Agent 调用一个外部天气 API，结果 API 返回 429 Too Many Requests。<strong>Agent 崩溃了。</strong>你重启它，它从零开始——之前的对话全丢了。你希望它：① 等几秒自动重试  ② 重试三次还不行就降级回复  ③ 永远不丢状态。"</p></div></div>
+<div class="phase" data-phase="fable"><span class="phase-num">Phase 1 · Fable</span><h3>📖 寓言：城墙上的四道门</h3>
+<div class="card" style="border-color:var(--purple)"><p style="font-family:Georgia,serif;line-height:1.9">一座要塞修了四道城墙。第一道：弓箭手射三箭（自动重试）。第二道：陷阱，但守军喊话"投降，给你吊上来"（LLM 感知错误自行调整）。第三道：信鸽求援，等友军指令（interrupt 等人工决策）。第四道：撤退前刻一句话："下次修墙，记住今天为什么被攻破"（降级回复 + 记录日志）。<strong>要塞从未被攻陷。不是因为坚不可摧，而是因为四道门的设计——大部分问题在前两道就解决了。</strong></p><p><a href="../reference/fables.html#fable-8">📖 完整寓言 →</a></p></div></div>
+<div class="phase" data-phase="godview"><span class="phase-num">Phase 1 · GodView</span><h3>🗺 上帝视角</h3>
+<div class="card green-left"><h3>🧠 四层防御体系</h3>
+<table><tr><th>层级</th><th>策略</th><th>LangGraph 实现</th></tr><tr><td>1. 瞬时故障</td><td>自动重试，指数退避</td><td>RetryPolicy(max_attempts=3, backoff_factor=2)</td></tr><tr><td>2. LLM 感知</td><td>工具返回错误信息给 LLM</td><td>ToolMessage("错误：{msg}，请调整重试")</td></tr><tr><td>3. 人工介入</td><td>暂停，等人类决定</td><td>interrupt() 在重试耗尽后</td></tr><tr><td>4. 降级回复</td><td>安全停止，记录日志</td><td>try/except → fallback 回复</td></tr></table></div></div>
+<div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><h3>⚔️ 实战编码 <span class="timer"><span class="clock">⏱</span> 25 分钟</span></h3>
+<h4>第 1 层：RetryPolicy</h4>
+<pre><code><span class="kw">from</span> langgraph.types <span class="kw">import</span> RetryPolicy
+builder.add_node(<span class="str">"api_call"</span>, call_external_api, retry_policy=RetryPolicy(
+    max_attempts=3, initial_interval=1.0, backoff_factor=2.0
+))  <span class="cmt"># 重试间隔: 1s → 2s → 4s</span></code></pre>
+<h4>第 2 层：LLM 感知错误（手动 act() 中）</h4>
+<pre><code><span class="kw">try</span>: result = tool.invoke(args)
+<span class="kw">except</span> Exception <span class="kw">as</span> e:
+    result = <span class="str">f"错误：{e}。请调整参数或换种方式重试。"</span>  <span class="cmt"># LLM 看到后自行调整</span></code></pre>
+<h4>第 3+4 层：组合使用</h4>
+<pre><code><span class="cmt"># RetryPolicy 自动重试 3 次 → 还失败 → interrupt 人工决定 → 降级</span>
+builder.add_node(<span class="str">"critical_action"</span>, critical_action, retry_policy=RetryPolicy(max_attempts=3))</code></pre>
+<div class="alert alert-warn"><strong>⚠️ 避坑：</strong>RetryPolicy 只对瞬时故障（网络超时）有效。如果 API 返回"参数错误"，重试 100 次也没用——应该走第 2 层（错误传给 LLM 让它改参数）。</div></div>
+<div class="phase" data-phase="forge"><span class="phase-num">Phase 3 · Forge</span><h3>🔨 知识淬炼</h3>
+<div class="card orange-left"><h4>🏗 你的挑战</h4><ol><li>给 L05 的 Agent 的 LLM 节点加上 RetryPolicy</li><li>让 act() 区分"可重试错误"（网络）和"不可重试错误"（参数格式不对）</li></ol></div>
+<div class="review-321"><div class="box"><div class="num">3</div><p style="font-size:0.8em">① RetryPolicy 给机器用  ② 错误字符串给 LLM 用  ③ interrupt 给人用</p></div></div></div>
+<h2>📝 速查卡</h2>
+<div class="card accent-left"><pre><code>RetryPolicy(max_attempts=3, initial_interval=1.0, backoff_factor=2.0)
+<span class="cmt"># act() 中返回错误给 LLM</span>
+ToolMessage(<span class="str">f"错误：{e}。请调整重试。"</span>)</code></pre></div>
+<p style="margin-top:48px;text-align:center">🏆 <strong>专业篇完成！</strong>做<a href="../reference/meta-learning-guide.html">盲区测试 Q6-Q9</a> → <span id="next-lesson-link"><a href="L09-subgraphs.html">L09 子图 →</a></span></p>
+
+<div class="lesson-actions">
+  <div id="complete-section"></div>
+  <details class="notes-panel">
+    <summary>📝 学习笔记</summary>
+    <textarea id="lesson-notes" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
+    <div class="notes-actions">
+      <button onclick="_exportNotes()">💾 保存到文件</button>
+      <button onclick="_importNotes()">📂 加载文件</button>
+    </div>
+  </details>
+</div>
+
+<script src="../js/store.js"></script>
+<script src="../js/app.js"></script>
+
+<script src="../js/pomodoro.js"></script>
+</body></html>

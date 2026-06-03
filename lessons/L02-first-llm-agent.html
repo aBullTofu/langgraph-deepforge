@@ -1,0 +1,99 @@
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L02 · 接入 LLM + 条件边 — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head><body>
+<nav class="nav-bar"><a href="../index.html">🏠 总览</a><a href="../reference/meta-learning-guide.html">🧠 元学习</a><a href="../reference/fables.html">📖 寓言集</a><a href="../reference/pitfalls.html">⚠️ 避坑</a><a href="L01-state-nodes-edges.html">L01</a><a href="L02-first-llm-agent.html" class="active">L02</a><a href="L03-tools.html">L03</a><a href="L04-agent-loop.html">L04</a></nav>
+
+<div class="phase" data-phase="ignition"><span class="phase-num">Phase 0 · Ignition</span><h3>⚡ 认知点火 <span class="timer"><span class="clock">⏱</span> 2 分钟</span></h3>
+<p>打开 L01 的 <code>l01_pipeline.py</code>。它的条件边判断逻辑是：</p>
+<pre><code><span class="kw">if</span> count < 20: <span class="kw">return</span> <span class="str">"short"</span>
+<span class="kw">else</span>: <span class="kw">return</span> <span class="str">"long"</span></code></pre>
+<div class="scenario"><div class="role">🔥 点火问题</div><p class="quote">"用户输入'我要退款，你们的产品太差了'和'你们产品真好用，点个赞'——<strong>字数可能差不多</strong>，但处理方式应该完全不同。你的 <code>if count < 20</code> 能区分吗？"</p></div>
+<p>如果你只能想到"多加几个关键词匹配的 if/else"，那你即将获得一种让 AI 帮你做判断的能力。</p></div>
+
+<div class="phase" data-phase="fable"><span class="phase-num">Phase 1 · Fable</span><h3>📖 寓言：十字路口的客栈 <span class="timer"><span class="clock">⏱</span> 3 分钟</span></h3>
+<div class="card" style="border-color:var(--purple)"><p style="font-family:Georgia,serif;line-height:1.9">丝绸之路上的商队来到一个三岔路口。路口立着一间客栈，客栈里住着一位老旅人。这位老旅人有个神奇的本事：他只要看一眼你的货物和脸色，就能准确告诉你该走哪条路。"去长安卖丝绸？走左边，官道平坦。""去波斯卖茶叶？走中间，山路虽崎岖但路程最短。"商人问老旅人："你怎么知道？"老旅人说："我在这里住了四十年，看过十万支商队。他们去了哪条路、后来怎么样，我都记在心里。"<strong>徒弟继承了客栈，但没有四十年的经验。于是他给全世界的商人写信，收集每个人的答案，综合起来——虽然没师父准，但够用了。</strong></p><div class="reveal">🔮 揭示：LLM 就是那个看十万支商队的徒弟 — 它不"知道"正确答案，但它见过的模式足够多，判断大概率是对的。条件边就是路标：LLM 输出一个分类，图据此走向不同分支。</div><p style="margin-top:8px"><a href="../reference/fables.html#fable-2">📖 完整寓言 →</a></p></div></div>
+
+<div class="phase" data-phase="godview"><span class="phase-num">Phase 1 · GodView</span><h3>🗺 上帝视角 <span class="timer"><span class="clock">⏱</span> 7 分钟</span></h3>
+<div class="card accent-left"><h3>📋 通关条件</h3><p>构建<strong>意图路由器</strong>：用户输入一句话 → DeepSeek 判断意图（闲聊/查资料/投诉）→ 走不同分支处理。</p></div>
+<div class="card green-left"><h3>🧠 心智模型：LLM 是图中的决策引擎</h3><table><tr><th>之前的 L01</th><th>现在的 L02</th></tr><tr><td>手动写 if/else 规则</td><td>LLM 根据语义判断</td></tr><tr><td>只能匹配关键词</td><td>能理解情绪和意图</td></tr><tr><td>改需求 = 改代码</td><td>改需求 = 改 prompt</td></tr></table></div></div>
+
+<div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><h3>⚔️ 实战编码 <span class="timer"><span class="clock">⏱</span> 30 分钟</span></h3>
+<p>创建 <code>l02_intent_router.py</code>：</p>
+
+<h4>Step 1：初始化 DeepSeek</h4>
+<pre><code><span class="kw">from</span> langchain.chat_models <span class="kw">import</span> init_chat_model
+<span class="cmt"># init_chat_model 自动从 DEEPSEEK_API_KEY 环境变量读取 Key</span>
+model = init_chat_model(<span class="str">"deepseek-chat"</span>, temperature=0)</code></pre>
+
+<h4>Step 2：定义 State + LLM 分类节点</h4>
+<pre><code><span class="kw">class</span> <span class="type">RouterState</span>(TypedDict):
+    user_input: str
+    intent: str
+    response: str
+
+<span class="kw">def</span> <span class="fn">classify_intent</span>(state: RouterState) -> dict:
+    prompt = <span class="str">f"""分析用户输入，只返回一个标签：chat(闲聊)、search(查询)、complaint(投诉)。
+用户输入：{state["user_input"]}
+标签："""</span>
+    result = model.invoke(prompt)
+    <span class="kw">return</span> {<span class="str">"intent"</span>: result.content.strip().lower()}</code></pre>
+
+<h4>Step 3：三个处理分支 + 条件边</h4>
+<pre><code><span class="kw">def</span> <span class="fn">handle_chat</span>(state): <span class="kw">return</span> {<span class="str">"response"</span>: <span class="str">f"🤝 {state['user_input']}——有什么可以帮你的？"</span>}
+<span class="kw">def</span> <span class="fn">handle_search</span>(state): <span class="kw">return</span> {<span class="str">"response"</span>: <span class="str">f"📚 关于「{state['user_input']}」，建议查阅官方文档。"</span>}
+<span class="kw">def</span> <span class="fn">handle_complaint</span>(state): <span class="kw">return</span> {<span class="str">"response"</span>: <span class="str">f"🚨 已收到反馈，客服将联系您。"</span>}
+
+<span class="kw">def</span> <span class="fn">route_by_intent</span>(state: RouterState) -> str:
+    intent = state[<span class="str">"intent"</span>]
+    <span class="kw">if</span> intent == <span class="str">"chat"</span>: <span class="kw">return</span> <span class="str">"handle_chat"</span>
+    <span class="kw">elif</span> intent == <span class="str">"search"</span>: <span class="kw">return</span> <span class="str">"handle_search"</span>
+    <span class="kw">elif</span> intent == <span class="str">"complaint"</span>: <span class="kw">return</span> <span class="str">"handle_complaint"</span>
+    <span class="kw">else</span>: <span class="kw">return</span> <span class="str">"handle_chat"</span>  <span class="cmt"># ⭐ LLM 返回意外值时的兜底</span></code></pre>
+
+<h4>Step 4：组装 + 测试</h4>
+<pre><code>builder = StateGraph(RouterState)
+builder.add_node(<span class="str">"classify"</span>, classify_intent)
+builder.add_node(<span class="str">"handle_chat"</span>, handle_chat)
+builder.add_node(<span class="str">"handle_search"</span>, handle_search)
+builder.add_node(<span class="str">"handle_complaint"</span>, handle_complaint)
+builder.add_edge(START, <span class="str">"classify"</span>)
+builder.add_conditional_edges(<span class="str">"classify"</span>, route_by_intent, {<span class="str">"handle_chat"</span>: <span class="str">"handle_chat"</span>, <span class="str">"handle_search"</span>: <span class="str">"handle_search"</span>, <span class="str">"handle_complaint"</span>: <span class="str">"handle_complaint"</span>})
+builder.add_edge(<span class="str">"handle_chat"</span>, END); builder.add_edge(<span class="str">"handle_search"</span>, END); builder.add_edge(<span class="str">"handle_complaint"</span>, END)
+graph = builder.compile()
+
+tests = [<span class="str">"你好呀"</span>, <span class="str">"Python怎么读CSV"</span>, <span class="str">"我要退款"</span>]
+<span class="kw">for</span> t <span class="kw">in</span> tests:
+    r = graph.invoke({<span class="str">"user_input"</span>: t})
+    <span class="kw">print</span>(<span class="str">f"👤 {t}\n🎯 {r['intent']}\n🤖 {r['response']}\n"</span>)</code></pre>
+<p>运行：<code>uv run python l02_intent_router.py</code></p>
+
+<h4>⚠️ 避坑：LLM 返回意外值</h4>
+<div class="alert alert-warn"><strong>常见问题：</strong>LLM 返回了 <code>"Chat"</code>（大写）或 <code>"闲聊"</code>（中文），条件边映射字典里没有 → 图静默停止。解决：① prompt 中强调格式 ② router 函数中加 else 兜底 ③ 调用 <code>.strip().lower()</code> 做归一化。</div></div>
+
+<div class="phase" data-phase="forge"><span class="phase-num">Phase 3 · Forge</span><h3>🔨 知识淬炼</h3>
+<div class="card orange-left"><h4>🏗 你的挑战</h4><ol><li>增加第 4 种意图 <code>order</code>（下单请求）和对应分支</li><li>让 LLM 返回 JSON 格式 <code>{"intent":"chat","confidence":0.95}</code>，低置信度(<0.7)走 <code>handle_uncertain</code> 请用户澄清</li></ol></div>
+<div class="review-321"><div class="box"><div class="num">3</div><p style="font-size:0.8em">① LLM 调用用 <code>model.invoke()</code> ② <code>result.content</code> 取文本 ③ 条件边函数必须兜底 else</p></div><div class="box"><div class="num">2</div><p style="font-size:0.8em">• 意图路由 • 情感分析分流</p></div><div class="box"><div class="num">1</div><p style="font-size:0.8em">LLM 的 temperature=0 能完全保证输出一致吗？</p></div></div></div>
+
+<h2>📝 速查卡</h2>
+<div class="card accent-left"><pre><code><span class="cmt"># 初始化模型</span>
+model = init_chat_model(<span class="str">"deepseek-chat"</span>, temperature=0)
+result = model.invoke(prompt)
+text = result.content  <span class="cmt"># 提取文本</span>
+<span class="cmt"># 条件边 + LLM：LLM 输出 → 条件边映射 → 分发</span></code></pre></div>
+<p style="margin-top:48px;padding-top:20px;border-top:1px solid var(--border);text-align:center;color:var(--text-2);font-size:0.85em">L02 · 接入 LLM + 条件边 · <span id="next-lesson-link"><a href="L03-tools.html">下一课：工具调用 →</a></span></p>
+
+<div class="lesson-actions">
+  <div id="complete-section"></div>
+  <details class="notes-panel">
+    <summary>📝 学习笔记</summary>
+    <textarea id="lesson-notes" placeholder="记录你的心得、疑问、关键理解...&#10;&#10;例如：&#10;- 这个概念的核心思想是...&#10;- 我踩了一个坑...&#10;- 这个可以类比为..."></textarea>
+    <div class="notes-actions">
+      <button onclick="_exportNotes()">💾 保存到文件</button>
+      <button onclick="_importNotes()">📂 加载文件</button>
+    </div>
+  </details>
+</div>
+
+<script src="../js/store.js"></script>
+<script src="../js/app.js"></script>
+
+<script src="../js/pomodoro.js"></script>
+</body></html>
