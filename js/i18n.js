@@ -1,5 +1,5 @@
 /* ============================================================
-   Learning LangGraph — i18n.js
+   LangGraph DeepForge — i18n.js
    Internationalization engine: language switching, DOM updates,
    text-node content translation
    ============================================================ */
