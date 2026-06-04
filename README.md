@@ -31,13 +31,31 @@ Build production-grade LangGraph agents through hands-on quests, failure pattern
 
 ## 🚀 Quick Start / 快速开始
 
+### 1. 下载仓库
+```bash
+git clone https://github.com/aBullTofu/langgraph-deepforge.git
 ```
-open index.html
+或者点击页面上方的 **Code → Download ZIP** 下载压缩包并解压。
+
+### 2. 打开首页
+进入项目目录，双击打开 `index.html`（或用浏览器打开）。
+
+```
+cd langgraph-deepforge
+open index.html   # macOS
+# 或直接双击 index.html（Windows / Linux）
 ```
 
-That's it. Everything runs in the browser via `localStorage`. No `npm install`, no `pip install`.
+### 3. 开始学习
+页面打开后：
 
-就这么简单。一切在浏览器中运行，基于 `localStorage`，无需安装任何东西。
+- 点击导航栏的 **L01** 进入第一课，按 Ignition → Fable → GodView → Combat → Forge 五个阶段逐关推进。
+- 每完成一课，下一课自动解锁；完成一个阶段（4 课），下一阶段全部解锁。
+- 左下角番茄钟默认自动开始，可点击暂停或双击自定义时长。
+- 右上角按钮一键切换中文 / English。
+- 学习进度和笔记自动保存在浏览器中，支持 JSON 导入/导出。
+
+**无需安装任何东西** — 纯静态 HTML + 浏览器 `localStorage`。没有 `npm install`，没有 `pip install`。
 
 ### Optional: Python Examples / 可选：Python 示例
 
