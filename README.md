@@ -31,20 +31,32 @@ Build production-grade LangGraph agents through hands-on quests, failure pattern
 
 ## 💡 Why LangGraph DeepForge / 为什么选择这个项目
 
-**Most LangGraph tutorials make you read. This one makes you build.**
+**Not just a tutorial — a complete Agent engineering training system. Engaging, comprehensive, built to last.**
 
-**大部分 LangGraph 教程让你「看」，这个项目让你「做」。**
+**不只是一个教程——一套完整的 Agent 工程训练系统。学得进、学得全、用得住。**
+
+### 学得进 · Engaging — Low barrier, high motivation, lasting retention / 降低门槛，激发动力，对抗遗忘
 
 | Advantage / 优势 | What it means / 实际体验 |
 |---|---|
-| 🚀 **Zero Setup / 零门槛** | Pure static HTML — double-click `index.html`, done. No install, no signup. / 纯静态 HTML，双击即学，无需安装注册。 |
-| 🎮 **Gamified / 闯关游戏化** | 3 stages × 12 lessons with stage locks, phase locks, and boss battles. Learn like playing a game. / 阶段锁 + Boss 战，像玩游戏一样学 Agent。 |
-| 🧠 **Cognitive Science / 认知科学** | 6-phase engine: Ignition → Fable → GodView → Combat → Forge → Echo. Built on MIT metacognition research + spaced repetition. / 六阶段引擎融合 MIT 元认知研究，对抗遗忘曲线。 |
-| 📐 **Full Stack / 全链路** | State → Agent → Tools → Memory → HITL → Streaming → Multi-Agent → Deploy. One line through every core capability. / 一条线打通 LangGraph 全部核心能力。 |
-| 🎯 **Interview-Ready / 学完即战力** | 100-question pyramid bank with detailed answers and scoring rubrics. Sourced from 25+ real interview datasets. / 百题面试库含答案与评分标准，来源 25+ 真实面经。 |
-| 🌐 **Full Bilingual / 完整双语** | 2286 content entries with complete Chinese/English coverage. One-click toggle — each language is a complete standalone experience. / 2286 条内容全量双语，一键切换。 |
-| 🍅 **Built-in Pomodoro / 内置番茄钟** | Auto work/break cycling with a rest confirmation dialog and live countdown. Customizable duration. / 自动工作休息循环，休息确认弹窗支持倒计时。 |
-| 🏗 **Zero Dependencies / 零依赖** | Vanilla JS + localStorage. No frameworks, no build tools, no backend. Works today, works in ten years. / 原生 JS，今天能用，十年后照样能用。 |
+| 🚀 **Zero Setup / 零门槛** | Nothing to install. Pure static HTML — double-click `index.html` and start. / 无需安装，双击即学。 |
+| 🎮 **Gamified / 闯关游戏化** | 3 stages × 12 lessons with stage locks and boss battles. Learn like a game. / 阶段锁 + Boss 战，像玩游戏一样学。 |
+| 🧠 **Cognitive Engine / 认知科学引擎** | 6-phase engine (Ignition→Fable→GodView→Combat→Forge→Echo) built on MIT metacognition research. / 六阶段引擎融合 MIT 元认知，对抗遗忘曲线。 |
+
+### 学得全 · Comprehensive — From basics to production, theory to interview / 从基础到生产，从理论到面试
+
+| Advantage / 优势 | What it means / 实际体验 |
+|---|---|
+| 📐 **Full-Stack / 全链路** | State → Agent → Tools → Memory → HITL → Streaming → Multi-Agent → Deploy. One line, no gaps. / 一条线打通所有核心能力，不留盲区。 |
+| 🎯 **Interview-Ready / 学完即战力** | 100-question pyramid bank with detailed answers and scoring rubrics from 25+ real datasets. / 百题面试库含答案与评分标准。 |
+| 🌐 **Full Bilingual / 完整双语** | 2286 content entries fully bilingual. One-click toggle — each language is a complete standalone experience. / 2286 条内容全量双语，一键切换。 |
+
+### 用得住 · Built to Last — Bilingual, focused, zero-dependency / 双语无忧，专注护航，永不过时
+
+| Advantage / 优势 | What it means / 实际体验 |
+|---|---|
+| 🍅 **Built-in Pomodoro / 内置番茄钟** | Auto work/break cycles with rest confirmation dialog and live countdown. / 自动工作休息循环，休息弹窗支持倒计时。 |
+| 🏗 **Zero Dependencies / 零依赖** | Vanilla JS + localStorage. No frameworks, no build tools. Works today, works in ten years. / 原生 JS，十年后照样能用。 |
 
 ## 🚀 Quick Start / 快速开始
 
