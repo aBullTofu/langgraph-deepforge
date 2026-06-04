@@ -70,6 +70,8 @@
     if (widget) {
       widget.className = 'pomodoro pomo-' + state;
     }
+
+    updateBreakDialogCountdown();
   }
 
   /* ── Timer Logic ── */
@@ -117,12 +119,69 @@
   function complete() {
     stop();
     if (state === 'working') {
-      showPomoToast(I18N.t('pomo.toast_break'));
-      start(settings.break * 60, 'breaking');
+      showBreakDialog();
     } else if (state === 'breaking') {
-      showPomoToast(I18N.t('pomo.toast_work'));
-      start(settings.work * 60, 'working');
+      finishBreak();
     }
+  }
+
+  function showBreakDialog() {
+    closeBreakDialog();
+    state = 'stopped';
+    secondsLeft = settings.break * 60;
+    updateDisplay();
+
+    var overlay = document.createElement('div');
+    overlay.id = 'pomo-break-overlay';
+    overlay.className = 'confirm-overlay pomo-break-overlay';
+    overlay.innerHTML =
+      '<div class="confirm-dialog pomo-break-dialog">' +
+        '<div class="pomo-break-hero">🍅</div>' +
+        '<h3>' + I18N.t('pomo.break_title') + '</h3>' +
+        '<p>' + I18N.t('pomo.break_body', { minutes: settings.break }) + '</p>' +
+        '<div class="pomo-break-countdown" id="pomo-break-countdown">' + formatTime(secondsLeft) + '</div>' +
+        '<div class="pomo-break-status" id="pomo-break-status">' + I18N.t('pomo.break_ready') + '</div>' +
+        '<div class="confirm-actions pomo-break-actions" id="pomo-break-actions">' +
+          '<button class="confirm-cancel" id="pomo-break-cancel">' + I18N.t('confirm.cancel') + '</button>' +
+          '<button class="confirm-ok" id="pomo-break-start">' + I18N.t('pomo.break_confirm') + '</button>' +
+        '</div>' +
+      '</div>';
+    document.body.appendChild(overlay);
+
+    document.getElementById('pomo-break-cancel').onclick = function() {
+      closeBreakDialog();
+      secondsLeft = settings.work * 60;
+      state = 'stopped';
+      updateDisplay();
+    };
+    document.getElementById('pomo-break-start').onclick = startBreakFromDialog;
+  }
+
+  function startBreakFromDialog() {
+    var overlay = document.getElementById('pomo-break-overlay');
+    if (!overlay) return;
+
+    overlay.classList.add('is-counting');
+    overlay.querySelector('.pomo-break-hero').textContent = '☕';
+    document.getElementById('pomo-break-status').textContent = I18N.t('pomo.break_counting');
+    document.getElementById('pomo-break-actions').remove();
+    start(settings.break * 60, 'breaking');
+  }
+
+  function updateBreakDialogCountdown() {
+    var countdown = document.getElementById('pomo-break-countdown');
+    if (countdown) countdown.textContent = formatTime(secondsLeft);
+  }
+
+  function closeBreakDialog() {
+    var overlay = document.getElementById('pomo-break-overlay');
+    if (overlay) overlay.remove();
+  }
+
+  function finishBreak() {
+    closeBreakDialog();
+    showPomoToast(I18N.t('pomo.toast_work'));
+    start(settings.work * 60, 'working');
   }
 
   function applySettings() {

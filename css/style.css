@@ -462,6 +462,45 @@ details[open] { border-color: var(--accent); }
 .confirm-ok { border: none; background: var(--green); color: #0f1117; font-weight: 600; }
 .confirm-ok:hover { opacity: 0.85; }
 
+.pomo-break-dialog {
+  max-width: 560px;
+  text-align: center;
+  padding: 36px 40px;
+}
+.pomo-break-dialog h3 {
+  font-size: 1.45em;
+  margin-bottom: 10px;
+}
+.pomo-break-hero {
+  font-size: 3em;
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.pomo-break-countdown {
+  font-family: var(--mono);
+  font-size: 4em;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--green);
+  margin: 22px 0 6px;
+  letter-spacing: -0.04em;
+}
+.pomo-break-status {
+  color: var(--text-2);
+  font-size: 0.9em;
+  margin-bottom: 24px;
+}
+.pomo-break-actions {
+  justify-content: center;
+}
+.pomo-break-actions button {
+  min-width: 112px;
+}
+.pomo-break-overlay.is-counting .pomo-break-dialog {
+  border-color: var(--green);
+  box-shadow: 0 12px 56px rgba(76,223,128,0.18);
+}
+
 /* Toast */
 .toast {
   position: fixed; top: 24px; left: 50%; transform: translateX(-50%);

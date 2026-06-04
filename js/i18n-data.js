@@ -87,6 +87,12 @@ window.__I18N_DATA = {
   'pomo.toast_break':      { zh: '🍅 该休息了！站起来走动一下。', en: '🍅 Time for a break! Stand up and stretch.' },
   'pomo.toast_work':       { zh: '💪 休息结束，继续学习！',       en: '💪 Break over, back to learning!' },
   'pomo.toast_updated':    { zh: '⚙ 设置已更新',                en: '⚙ Settings updated' },
+  'pomo.break_title':      { zh: '你已经学习一个番茄钟了',       en: 'You have completed one Pomodoro' },
+  'pomo.break_body':       { zh: '建议休息 {{minutes}} 分钟，让大脑完成一次恢复。',
+                             en: 'Take a {{minutes}}-minute break so your brain can recover.' },
+  'pomo.break_ready':      { zh: '准备开始休息',                 en: 'Ready to start your break' },
+  'pomo.break_counting':   { zh: '休息倒计时进行中',             en: 'Break countdown in progress' },
+  'pomo.break_confirm':    { zh: '开始休息',                     en: 'Start break' },
 
   /* ── Data Import/Export ── */
   'data.loaded':           { zh: '✅ 数据已加载',           en: '✅ Data loaded' },

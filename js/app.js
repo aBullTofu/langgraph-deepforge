@@ -6,13 +6,15 @@
 (function() {
   'use strict';
 
+  var basePrefix = /\/(lessons|reference)\//.test(window.location.pathname) ? '../' : '';
+
   var lessonId = getCurrentLessonId();
   recordStudy();
 
   /* ════════════════ Stage Lock Guard ════════════════ */
   if (lessonId && !isLessonUnlocked(lessonId)) {
     document.body.innerHTML = '';
-    document.write('<meta http-equiv="refresh" content="0;url=reference/learning-path.html">');
+    document.write('<meta http-equiv="refresh" content="0;url=' + basePrefix + 'reference/learning-path.html">');
     return;
   }
 
@@ -26,44 +28,44 @@
     var streak = getStreak();
 
     var items = [
-      { href: 'index.html', label: I18N.t('nav.overview') }
+      { href: basePrefix + 'index.html', label: I18N.t('nav.overview') }
     ];
 
     items.push(
-      { href: 'lessons/L01-state-nodes-edges.html', label: 'L01' },
-      { href: 'lessons/L02-first-llm-agent.html', label: 'L02' },
-      { href: 'lessons/L03-tools.html', label: 'L03' },
-      { href: 'lessons/L04-agent-loop.html', label: 'L04' }
+      { href: basePrefix + 'lessons/L01-state-nodes-edges.html', label: 'L01' },
+      { href: basePrefix + 'lessons/L02-first-llm-agent.html', label: 'L02' },
+      { href: basePrefix + 'lessons/L03-tools.html', label: 'L03' },
+      { href: basePrefix + 'lessons/L04-agent-loop.html', label: 'L04' }
     );
 
     if (stage >= 1) {
       items.push(
-        { href: 'lessons/L05-memory-persistence.html', label: 'L05' },
-        { href: 'lessons/L06-human-in-the-loop.html', label: 'L06' },
-        { href: 'lessons/L07-streaming.html', label: 'L07' },
-        { href: 'lessons/L08-error-handling.html', label: 'L08' }
+        { href: basePrefix + 'lessons/L05-memory-persistence.html', label: 'L05' },
+        { href: basePrefix + 'lessons/L06-human-in-the-loop.html', label: 'L06' },
+        { href: basePrefix + 'lessons/L07-streaming.html', label: 'L07' },
+        { href: basePrefix + 'lessons/L08-error-handling.html', label: 'L08' }
       );
     }
 
     if (stage >= 2) {
       items.push(
-        { href: 'lessons/L09-subgraphs.html', label: 'L09' },
-        { href: 'lessons/L10-multi-agent.html', label: 'L10' },
-        { href: 'lessons/L11-parallel-send.html', label: 'L11' },
-        { href: 'lessons/L12-production.html', label: 'L12' }
+        { href: basePrefix + 'lessons/L09-subgraphs.html', label: 'L09' },
+        { href: basePrefix + 'lessons/L10-multi-agent.html', label: 'L10' },
+        { href: basePrefix + 'lessons/L11-parallel-send.html', label: 'L11' },
+        { href: basePrefix + 'lessons/L12-production.html', label: 'L12' }
       );
     }
 
-    items.push({ href: 'reference/learning-path.html', label: I18N.t('nav.roadmap') });
-    items.push({ href: 'reference/fables.html', label: I18N.t('nav.fables') });
+    items.push({ href: basePrefix + 'reference/learning-path.html', label: I18N.t('nav.roadmap') });
+    items.push({ href: basePrefix + 'reference/fables.html', label: I18N.t('nav.fables') });
 
     if (sp.foundation.done >= 1) {
-      items.push({ href: 'reference/pitfalls.html', label: I18N.t('nav.pitfalls') });
+      items.push({ href: basePrefix + 'reference/pitfalls.html', label: I18N.t('nav.pitfalls') });
     }
     if (sp.foundation.done >= sp.foundation.total) {
-      items.push({ href: 'reference/meta-learning-guide.html', label: I18N.t('nav.meta') });
-      items.push({ href: 'reference/interview-bank.html', label: I18N.t('nav.interview') });
-      items.push({ href: 'reference/answer-bank.html', label: I18N.t('nav.answers') });
+      items.push({ href: basePrefix + 'reference/meta-learning-guide.html', label: I18N.t('nav.meta') });
+      items.push({ href: basePrefix + 'reference/interview-bank.html', label: I18N.t('nav.interview') });
+      items.push({ href: basePrefix + 'reference/answer-bank.html', label: I18N.t('nav.answers') });
     }
 
     var streakStr = streak.consecutiveDays > 1 ? ' \u{1F525} ' + streak.consecutiveDays + I18N.t('misc.days') : '';
@@ -71,7 +73,8 @@
     var html = '';
     var currentPage = window.location.pathname.split('/').pop() || '';
     items.forEach(function(item) {
-      var active = (currentPage === item.href) ? ' class="active"' : '';
+      var itemFilename = item.href.split('/').pop();
+      var active = (currentPage === itemFilename) ? ' class="active"' : '';
       html += '<a href="' + item.href + '"' + active + '>' + item.label + '</a>';
     });
     html += '<span style="margin-left:auto;font-family:var(--mono);color:var(--accent);font-size:0.85em">' +
@@ -88,7 +91,7 @@
     if (!el) {
       el = document.createElement('a');
       el.id = 'float-progress';
-      el.href = 'reference/learning-path.html';
+      el.href = basePrefix + 'reference/learning-path.html';
       el.title = I18N.t('dashboard.view_progress');
       document.body.appendChild(el);
     }
@@ -338,12 +341,12 @@
       L11: I18N.t('lesson.L11.title'), L12: I18N.t('lesson.L12.title')
     };
     var lessonFiles = {
-      L01: 'lessons/L01-state-nodes-edges.html', L02: 'lessons/L02-first-llm-agent.html',
-      L03: 'lessons/L03-tools.html', L04: 'lessons/L04-agent-loop.html',
-      L05: 'lessons/L05-memory-persistence.html', L06: 'lessons/L06-human-in-the-loop.html',
-      L07: 'lessons/L07-streaming.html', L08: 'lessons/L08-error-handling.html',
-      L09: 'lessons/L09-subgraphs.html', L10: 'lessons/L10-multi-agent.html',
-      L11: 'lessons/L11-parallel-send.html', L12: 'lessons/L12-production.html'
+      L01: basePrefix + 'lessons/L01-state-nodes-edges.html', L02: basePrefix + 'lessons/L02-first-llm-agent.html',
+      L03: basePrefix + 'lessons/L03-tools.html', L04: basePrefix + 'lessons/L04-agent-loop.html',
+      L05: basePrefix + 'lessons/L05-memory-persistence.html', L06: basePrefix + 'lessons/L06-human-in-the-loop.html',
+      L07: basePrefix + 'lessons/L07-streaming.html', L08: basePrefix + 'lessons/L08-error-handling.html',
+      L09: basePrefix + 'lessons/L09-subgraphs.html', L10: basePrefix + 'lessons/L10-multi-agent.html',
+      L11: basePrefix + 'lessons/L11-parallel-send.html', L12: basePrefix + 'lessons/L12-production.html'
     };
 
     var phasesDone = 0;
