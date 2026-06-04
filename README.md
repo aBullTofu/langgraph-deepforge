@@ -29,6 +29,23 @@ Build production-grade LangGraph agents through hands-on quests, failure pattern
 | ⚠️ **Anti-Pattern Guide** / 避坑指南 | 7 common pitfalls + 11 error codes with diagnostic flowcharts / 7 大反模式 + 11 错误码速查 |
 | 🌐 **Bilingual** / 中英双语 | One-click language switch (Chinese / English) / 一键切换中英文 |
 
+## 💡 Why LangGraph DeepForge / 为什么选择这个项目
+
+**Most LangGraph tutorials make you read. This one makes you build.**
+
+**大部分 LangGraph 教程让你「看」，这个项目让你「做」。**
+
+| Advantage / 优势 | What it means / 实际体验 |
+|---|---|
+| 🚀 **Zero Setup / 零门槛** | Pure static HTML — double-click `index.html`, done. No install, no signup. / 纯静态 HTML，双击即学，无需安装注册。 |
+| 🎮 **Gamified / 闯关游戏化** | 3 stages × 12 lessons with stage locks, phase locks, and boss battles. Learn like playing a game. / 阶段锁 + Boss 战，像玩游戏一样学 Agent。 |
+| 🧠 **Cognitive Science / 认知科学** | 6-phase engine: Ignition → Fable → GodView → Combat → Forge → Echo. Built on MIT metacognition research + spaced repetition. / 六阶段引擎融合 MIT 元认知研究，对抗遗忘曲线。 |
+| 📐 **Full Stack / 全链路** | State → Agent → Tools → Memory → HITL → Streaming → Multi-Agent → Deploy. One line through every core capability. / 一条线打通 LangGraph 全部核心能力。 |
+| 🎯 **Interview-Ready / 学完即战力** | 100-question pyramid bank with detailed answers and scoring rubrics. Sourced from 25+ real interview datasets. / 百题面试库含答案与评分标准，来源 25+ 真实面经。 |
+| 🌐 **Full Bilingual / 完整双语** | 2286 content entries with complete Chinese/English coverage. One-click toggle — each language is a complete standalone experience. / 2286 条内容全量双语，一键切换。 |
+| 🍅 **Built-in Pomodoro / 内置番茄钟** | Auto work/break cycling with a rest confirmation dialog and live countdown. Customizable duration. / 自动工作休息循环，休息确认弹窗支持倒计时。 |
+| 🏗 **Zero Dependencies / 零依赖** | Vanilla JS + localStorage. No frameworks, no build tools, no backend. Works today, works in ten years. / 原生 JS，今天能用，十年后照样能用。 |
+
 ## 🚀 Quick Start / 快速开始
 
 ### 1. 下载仓库
