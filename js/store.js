@@ -1,5 +1,5 @@
 /* ============================================================
-   LangGraph DeepForge — store.js
+   Learning LangGraph — store.js
    localStorage data layer for progress + notes + stage lock
    ============================================================ */
 

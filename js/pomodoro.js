@@ -1,5 +1,5 @@
 /* ============================================================
-   LangGraph DeepForge — pomodoro.js
+   Learning LangGraph — pomodoro.js
    Floating Pomodoro timer, auto work/break cycle
    ============================================================ */
 

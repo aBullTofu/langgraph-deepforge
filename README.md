@@ -1,4 +1,4 @@
-# ⚡ LangGraph DeepForge
+# ⚡ Learning LangGraph
 
 [English](#english) | [中文](#中文)
 
@@ -29,7 +29,7 @@ Transform from a LangGraph tourist into a production-ready Agent engineer — th
 | ⚠️ **Anti-Pattern Guide** / 避坑指南 | 7 common pitfalls + 11 error codes with diagnostic flowcharts / 7 大反模式 + 11 错误码速查 |
 | 🌐 **Bilingual** / 中英双语 | One-click language switch (Chinese / English) / 一键切换中英文 |
 
-## 💡 Why LangGraph DeepForge / 为什么选择这个项目
+## 💡 Why Learning LangGraph / 为什么选择这个项目
 
 **Not just a tutorial — a complete Agent engineering training system. Engaging, comprehensive, built to last.**
 
@@ -62,7 +62,7 @@ Transform from a LangGraph tourist into a production-ready Agent engineer — th
 
 ### 1. 下载仓库
 ```bash
-git clone https://github.com/aBullTofu/langgraph-deepforge.git
+git clone https://github.com/aBullTofu/learning-langgraph-kit.git
 ```
 或者点击页面上方的 **Code → Download ZIP** 下载压缩包并解压。
 
@@ -70,7 +70,7 @@ git clone https://github.com/aBullTofu/langgraph-deepforge.git
 进入项目目录，双击打开 `index.html`（或用浏览器打开）。
 
 ```
-cd langgraph-deepforge
+cd learning-langgraph-kit
 open index.html   # macOS
 # 或直接双击 index.html（Windows / Linux）
 ```
@@ -126,7 +126,7 @@ uv run python examples/hello_graph.py
 ## 📂 Project Structure / 项目结构
 
 ```
-langgraph-deepforge/
+learning-langgraph-kit/
 ├── index.html                  ← Entry point / 入口仪表盘
 ├── css/style.css               ← Design system / 设计系统（暗色主题）
 ├── js/

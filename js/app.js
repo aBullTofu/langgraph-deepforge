@@ -1,5 +1,5 @@
 /* ============================================================
-   LangGraph DeepForge — app.js
+   Learning LangGraph — app.js
    UI: dynamic nav, phase lock, progress, streak, celebrations
    ============================================================ */
 
