@@ -5,14 +5,14 @@
 ---
 
 <a id="english"></a>
-**Learn LangGraph like an engineer, not a tourist.**
+**Not a tutorial. A training system.**
 
-Build production-grade LangGraph agents through hands-on quests, failure patterns, interview drills, and real deployment workflows. Zero dependencies, zero build. Open `index.html` and start forging.
+Transform from a LangGraph tourist into a production-ready Agent engineer — through 12 gamified quests, 100 real interview drills, and a 6-phase learning engine backed by cognitive science. Zero install, zero cost. Open `index.html` and start.
 
 <a id="中文"></a>
-**像工程师一样学 LangGraph，而不是像游客一样看教程。**
+**不是教程。是训练系统。**
 
-用闯关实战、反模式、面试题和生产部署流程，锻造真正能上线的 LangGraph Agent 能力。零依赖，零构建，打开 `index.html` 即可开练。
+用 12 个游戏化闯关、100 道真实面试题、一套认知科学驱动的六阶段学习引擎，把你从 LangGraph 游客锻造成生产级 Agent 工程师。零安装，零成本。打开 `index.html` 开始训练。
 
 ---
 
