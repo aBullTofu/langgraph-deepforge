@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><div class="i18n-zh">学习路线图 — LangGraph 从入门到精通</div><div class="i18n-en" hidden>Learning Path — LangGraph from Beginner to Expert</div></title>
+<title>学习路线图 — LangGraph 从入门到精通</title>
+<script>
+window.__I18N_PAGE_TITLE = {
+  zh: '学习路线图 — LangGraph 从入门到精通',
+  en: 'Learning Path — LangGraph from Beginner to Expert'
+};
+</script>
 <link rel="stylesheet" href="../css/style.css">
 <style>
 .milestone { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px 28px; margin: 24px 0; }
@@ -130,7 +136,7 @@
     <li><strong><div class="i18n-zh">必做练习：</div><div class="i18n-en" hidden>Required Exercise: </div></strong><div class="i18n-zh">用 StateGraph 写一个 3 节点的线性图（输入→处理→输出）</div><div class="i18n-en" hidden>Write a 3-node linear graph with StateGraph (input → process → output)</div></li>
     <li><strong><div class="i18n-zh">寓言语境：</div><div class="i18n-en" hidden>Fable Context: </div></strong><a href="fables.html#fable-1"><div class="i18n-zh">水渠与磨坊</div><div class="i18n-en" hidden>The Aqueduct and the Mills</div></a> — <div class="i18n-zh">State 是水流，Node 是磨坊，Edge 是水渠</div><div class="i18n-en" hidden>State is the water flow, Nodes are mills, Edges are aqueducts</div></li>
     <li><strong><div class="i18n-zh">完成后自检：</div><div class="i18n-en" hidden>Self-Check: </div></strong><div class="i18n-zh">能用 3 句话解释 State/Node/Edge 给一个非技术朋友听</div><div class="i18n-en" hidden>Can explain State/Node/Edge to a non-technical friend in 3 sentences</div></li>
-    <li><strong><div class="i18n-zh">避坑：</div><div class="i18n-en" hidden>Pitfall: </div></strong><a href="pitfalls.html"><div class="i18n-zh">add_messages 缺失导致消息覆盖</div><div class="i18n-en" hidden>Missing add_messages causes message overwrite</div></a><div class="i18n-zh">（社区 #1 报错）</div><div class="i18n-en" hidden"> (Community #1 error)</div></li>
+    <li><strong><div class="i18n-zh">避坑：</div><div class="i18n-en" hidden>Pitfall: </div></strong><a href="pitfalls.html"><div class="i18n-zh">add_messages 缺失导致消息覆盖</div><div class="i18n-en" hidden>Missing add_messages causes message overwrite</div></a><div class="i18n-zh">（社区 #1 报错）</div><div class="i18n-en" hidden> (Community #1 error)</div></li>
     <li><strong><div class="i18n-zh">面试预热：</div><div class="i18n-en" hidden>Interview Warm-up: </div></strong><a href="interview-bank.html#L3"><div class="i18n-zh">L3 面试题 Q36-Q40</div><div class="i18n-en" hidden>L3 Interview Q36-Q40</div></a> — <div class="i18n-zh">StateGraph 基础</div><div class="i18n-en" hidden>StateGraph Basics</div></li>
   </div>
 </div>
@@ -181,7 +187,7 @@
   <h3>🏁 <div class="i18n-zh">里程碑 1：能独立构建单 Agent</div><div class="i18n-en" hidden>Milestone 1: Can Independently Build a Single Agent</div> <span class="status status-foundation"><div class="i18n-zh">通关检查</div><div class="i18n-en" hidden>Checkpoint</div></span></h3>
   <div class="progress-bar"><div class="progress-fill fill-foundation" style="width:100%;"></div></div>
   <div class="checklist">
-    <li><strong><div class="i18n-zh">盲区自测：</div><div class="i18n-en" hidden>Blind Spot Self-Test: </div></strong><a href="meta-learning-guide.html"><div class="i18n-zh">盲区题 Q1-Q5</div><div class="i18n-en" hidden>Blind Spot Q1-Q5</div></a><div class="i18n-zh">（基础篇）— 全部答对才算通过</div><div class="i18n-en" hidden"> (Foundation) — must answer all correctly to pass</div></li>
+    <li><strong><div class="i18n-zh">盲区自测：</div><div class="i18n-en" hidden>Blind Spot Self-Test: </div></strong><a href="meta-learning-guide.html"><div class="i18n-zh">盲区题 Q1-Q5</div><div class="i18n-en" hidden>Blind Spot Q1-Q5</div></a><div class="i18n-zh">（基础篇）— 全部答对才算通过</div><div class="i18n-en" hidden> (Foundation) — must answer all correctly to pass</div></li>
     <li><strong><div class="i18n-zh">面试模拟：</div><div class="i18n-en" hidden>Interview Simulation: </div></strong><div class="i18n-zh">能不看文档回答 <a href="interview-bank.html#L3">L3 面试题 Q36-Q46</a></div><div class="i18n-en" hidden>Can answer <a href="interview-bank.html#L3">L3 Interview Q36-Q46</a> without referencing docs</div></li>
     <li><strong><div class="i18n-zh">实战检验：</div><div class="i18n-en" hidden>Practical Test: </div></strong><div class="i18n-zh">独立写一个天气助手 Agent，包含 3 个工具 + 条件边 + 循环防护</div><div class="i18n-en" hidden>Independently write a weather assistant Agent with 3 tools + conditional edges + loop guard</div></li>
   </div>
@@ -246,7 +252,7 @@
   <h3>🏁 <div class="i18n-zh">里程碑 2：Agent 可以上线</div><div class="i18n-en" hidden>Milestone 2: Agent is Production-Ready</div> <span class="status status-skill"><div class="i18n-zh">通关检查</div><div class="i18n-en" hidden>Checkpoint</div></span></h3>
   <div class="progress-bar"><div class="progress-fill fill-skill" style="width:100%;"></div></div>
   <div class="checklist">
-    <li><strong><div class="i18n-zh">盲区自测：</div><div class="i18n-en" hidden>Blind Spot Self-Test: </div></strong><a href="meta-learning-guide.html"><div class="i18n-zh">盲区题 Q6-Q9</div><div class="i18n-en" hidden>Blind Spot Q6-Q9</div></a><div class="i18n-zh">（专业篇）— 全部答对才算通过</div><div class="i18n-en" hidden"> (Professional) — must answer all correctly to pass</div></li>
+    <li><strong><div class="i18n-zh">盲区自测：</div><div class="i18n-en" hidden>Blind Spot Self-Test: </div></strong><a href="meta-learning-guide.html"><div class="i18n-zh">盲区题 Q6-Q9</div><div class="i18n-en" hidden>Blind Spot Q6-Q9</div></a><div class="i18n-zh">（专业篇）— 全部答对才算通过</div><div class="i18n-en" hidden> (Professional) — must answer all correctly to pass</div></li>
     <li><strong><div class="i18n-zh">面试模拟：</div><div class="i18n-en" hidden>Interview Simulation: </div></strong><div class="i18n-zh">能回答 <a href="interview-bank.html#L4">L4 面试题 Q61-Q80</a> 中的 80%</div><div class="i18n-en" hidden>Can answer 80% of <a href="interview-bank.html#L4">L4 Interview Q61-Q80</a></div></li>
     <li><strong><div class="i18n-zh">实战检验：</div><div class="i18n-en" hidden>Practical Test: </div></strong><div class="i18n-zh">为一个 Agent 添加 SqliteSaver + 审批流 + token 级流式输出 + 错误重试</div><div class="i18n-en" hidden>Add SqliteSaver + approval flow + token-level streaming + error retry to an Agent</div></li>
   </div>
@@ -312,7 +318,7 @@
   <h3>🏁 <div class="i18n-zh">里程碑 3：能设计并部署生产级系统</div><div class="i18n-en" hidden>Milestone 3: Can Design and Deploy Production-Grade Systems</div> <span class="status status-expert"><div class="i18n-zh">最终通关</div><div class="i18n-en" hidden>Final Checkpoint</div></span></h3>
   <div class="progress-bar"><div class="progress-fill fill-expert" style="width:100%;"></div></div>
   <div class="checklist">
-    <li><strong><div class="i18n-zh">盲区自测：</div><div class="i18n-en" hidden>Blind Spot Self-Test: </div></strong><a href="meta-learning-guide.html"><div class="i18n-zh">盲区题 Q10-Q17</div><div class="i18n-en" hidden>Blind Spot Q10-Q17</div></a><div class="i18n-zh">（专家篇+2026前沿）— 全部答对</div><div class="i18n-en" hidden"> (Expert + 2026 Cutting Edge) — answer all correctly</div></li>
+    <li><strong><div class="i18n-zh">盲区自测：</div><div class="i18n-en" hidden>Blind Spot Self-Test: </div></strong><a href="meta-learning-guide.html"><div class="i18n-zh">盲区题 Q10-Q17</div><div class="i18n-en" hidden>Blind Spot Q10-Q17</div></a><div class="i18n-zh">（专家篇+2026前沿）— 全部答对</div><div class="i18n-en" hidden> (Expert + 2026 Cutting Edge) — answer all correctly</div></li>
     <li><strong><div class="i18n-zh">面试模拟：</div><div class="i18n-en" hidden>Interview Simulation: </div></strong><div class="i18n-zh">能回答 <a href="interview-bank.html#L5">L5 面试题 Q86-Q100</a> 中的 80%</div><div class="i18n-en" hidden>Can answer 80% of <a href="interview-bank.html#L5">L5 Interview Q86-Q100</a></div></li>
     <li><strong><div class="i18n-zh">最终实战：</div><div class="i18n-en" hidden>Final Practical: </div></strong><div class="i18n-zh">不翻文档，设计一个 Multi-Agent 客服系统（含架构图+State设计+部署方案）</div><div class="i18n-en" hidden>Without referencing docs, design a Multi-Agent customer service system (including architecture diagram + State design + deployment plan)</div></li>
     <li><strong><div class="i18n-zh">领域全貌：</div><div class="i18n-en" hidden>Landscape Mastery: </div></strong><div class="i18n-zh">能讨论 <a href="meta-learning-guide.html">领域全貌</a> 中的共识、争议和开放问题</div><div class="i18n-en" hidden>Can discuss the consensus, debates, and open questions in the <a href="meta-learning-guide.html">Landscape Overview</a></div></li>
@@ -335,7 +341,7 @@
     </tr>
     <tr>
       <td style="padding:8px;"><strong>REASON</strong></td>
-      <td style="padding:8px;"><a href="interview-bank.html"><div class="i18n-zh">面试题库</div><div class="i18n-en" hidden>Interview Bank</div></a><div class="i18n-zh"> 100 题</div><div class="i18n-en" hidden"> 100 questions</div></td>
+      <td style="padding:8px;"><a href="interview-bank.html"><div class="i18n-zh">面试题库</div><div class="i18n-en" hidden>Interview Bank</div></a><div class="i18n-zh"> 100 题</div><div class="i18n-en" hidden> 100 questions</div></td>
       <td style="padding:8px;"><div class="i18n-zh">L1-L2 正确率 90%+, L3-L4 正确率 80%+, L5 正确率 70%+</div><div class="i18n-en" hidden>L1-L2 accuracy 90%+, L3-L4 accuracy 80%+, L5 accuracy 70%+</div></td>
     </tr>
     <tr>
@@ -349,7 +355,7 @@
 <div class="alert alert-info" style="margin-top:20px;">
   <strong><div class="i18n-zh">🔄 学习循环（每课重复）：</div><div class="i18n-en" hidden>🔄 Learning Cycle (repeat per lesson):</div></strong><br>
   <div class="i18n-zh">⚡ Ignition（2分钟 → 激发好奇）→ 📖 Fable（5分钟 → 故事直觉）→ 🗺 GodView（7分钟 → 系统理解）→ ⚔️ Combat（30分钟 → 动手编码）→ 🔨 Forge（10分钟 → 知识内化）→ 🔁 Echo（下次课前 → 间隔复习）</div><div class="i18n-en" hidden>⚡ Ignition (2 min → spark curiosity) → 📖 Fable (5 min → story intuition) → 🗺 GodView (7 min → system understanding) → ⚔️ Combat (30 min → hands-on coding) → 🔨 Forge (10 min → knowledge internalization) → 🔁 Echo (before next lesson → spaced review)</div><br>
-  <em><div class="i18n-zh">详细方法见 <a href="meta-learning-guide.html">🧠 元学习指南</a></div><div class="i18n-en" hidden">See detailed methodology in <a href="meta-learning-guide.html">🧠 Meta-Learning Guide</a></div></em>
+  <em><div class="i18n-zh">详细方法见 <a href="meta-learning-guide.html">🧠 元学习指南</a></div><div class="i18n-en" hidden>See detailed methodology in <a href="meta-learning-guide.html">🧠 Meta-Learning Guide</a></div></em>
 </div>
 
 <!-- ════════════════ RESOURCE MAP ════════════════ -->
@@ -376,7 +382,7 @@
   <a href="pitfalls.html"><div class="i18n-zh">避坑指南</div><div class="i18n-en" hidden>Pitfalls Guide</div></a> &nbsp;·&nbsp;
   <a href="interview-bank.html"><div class="i18n-zh">面试题库</div><div class="i18n-en" hidden>Interview Bank</div></a> &nbsp;·&nbsp;
   <a href="answer-bank.html"><div class="i18n-zh">答案库</div><div class="i18n-en" hidden>Answer Bank</div></a> &nbsp;·&nbsp;
-  <a href="../lessons/L01-state-nodes-edges.html"><div class="i18n-zh">开始 L01 →</div><div class="i18n-en" hidden">Start L01 →</div></a>
+  <a href="../lessons/L01-state-nodes-edges.html"><div class="i18n-zh">开始 L01 →</div><div class="i18n-en" hidden>Start L01 →</div></a>
 </nav>
 
 <p style="margin-top:48px; padding-top:20px; border-top:1px solid var(--border); color:var(--text-2); font-size:0.85em;">

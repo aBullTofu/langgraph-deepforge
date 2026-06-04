@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title><div class="i18n-zh">元学习指南 — LangGraph 核心思维模型</div><div class="i18n-en" hidden>Meta-Learning Guide — LangGraph Core Mental Models</div></title>
+<title>元学习指南 — LangGraph 核心思维模型</title>
+<script>
+window.__I18N_PAGE_TITLE = {
+  zh: '元学习指南 — LangGraph 核心思维模型',
+  en: 'Meta-Learning Guide — LangGraph Core Mental Models'
+};
+</script>
 <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
@@ -78,11 +84,11 @@
   <h3><div class="i18n-zh">🔗 面试官的评估框架（第一性原理）— 五个模型如何映射到面试</div><div class="i18n-en" hidden>🔗 The Interviewer's Evaluation Framework (First Principles) — How the Five Models Map to Interviews</div></h3>
   <p><div class="i18n-zh">面试官只需要验证三件事，恰好对应你学的五个模型：</div><div class="i18n-en" hidden>The interviewer only needs to verify three things, which precisely map to the five models you're learning:</div></p>
   <ol>
-    <li><strong><div class="i18n-zh">你能 BUILD 吗？</div><div class="i18n-en" hidden>Can you BUILD?</div></strong> — <div class="i18n-zh">代码实现、API 设计 → 模型 1(图即程序) + 模型 2(State 设计)</div><div class="i18n-en" hidden">Code implementation, API design → Model 1 (Graph as Program) + Model 2 (State Design)</div></li>
-    <li><strong><div class="i18n-zh">你能 REASON 吗？</div><div class="i18n-en" hidden>Can you REASON?</div></strong> — <div class="i18n-zh">架构选型、对比分析 → 模型 3(确定/非确定二象性) + 模型 4(控制力在边界)</div><div class="i18n-en" hidden">Architecture decisions, comparative analysis → Model 3 (Deterministic/Non-deterministic Duality) + Model 4 (Power at Boundary)</div></li>
-    <li><strong><div class="i18n-zh">你能 SHIP 吗？</div><div class="i18n-en" hidden>Can you SHIP?</div></strong> — <div class="i18n-zh">部署、监控、安全 → 模型 5(持久化默认)</div><div class="i18n-en" hidden">Deployment, monitoring, security → Model 5 (Persistence by Default)</div></li>
+    <li><strong><div class="i18n-zh">你能 BUILD 吗？</div><div class="i18n-en" hidden>Can you BUILD?</div></strong> — <div class="i18n-zh">代码实现、API 设计 → 模型 1(图即程序) + 模型 2(State 设计)</div><div class="i18n-en" hidden>Code implementation, API design → Model 1 (Graph as Program) + Model 2 (State Design)</div></li>
+    <li><strong><div class="i18n-zh">你能 REASON 吗？</div><div class="i18n-en" hidden>Can you REASON?</div></strong> — <div class="i18n-zh">架构选型、对比分析 → 模型 3(确定/非确定二象性) + 模型 4(控制力在边界)</div><div class="i18n-en" hidden>Architecture decisions, comparative analysis → Model 3 (Deterministic/Non-deterministic Duality) + Model 4 (Power at Boundary)</div></li>
+    <li><strong><div class="i18n-zh">你能 SHIP 吗？</div><div class="i18n-en" hidden>Can you SHIP?</div></strong> — <div class="i18n-zh">部署、监控、安全 → 模型 5(持久化默认)</div><div class="i18n-en" hidden>Deployment, monitoring, security → Model 5 (Persistence by Default)</div></li>
   </ol>
-  <p><div class="i18n-zh">每一道面试题都在测试这三个维度之一。详见 <a href="interview-bank.html">🏔️ 面试题库</a>（100 题按金字塔结构从 BUILD→REASON→SHIP 排列）。</div><div class="i18n-en" hidden">Every interview question tests one of these three dimensions. See details in <a href="interview-bank.html">🏔️ Interview Bank</a> (100 questions arranged in a pyramid from BUILD→REASON→SHIP).</div></p>
+  <p><div class="i18n-zh">每一道面试题都在测试这三个维度之一。详见 <a href="interview-bank.html">🏔️ 面试题库</a>（100 题按金字塔结构从 BUILD→REASON→SHIP 排列）。</div><div class="i18n-en" hidden>Every interview question tests one of these three dimensions. See details in <a href="interview-bank.html">🏔️ Interview Bank</a> (100 questions arranged in a pyramid from BUILD→REASON→SHIP).</div></p>
 </div>
 
 <div class="card accent-left" style="margin-top:16px;">
@@ -106,9 +112,9 @@
   <tr><td><div class="i18n-zh">Checkpoint 是底线</div><div class="i18n-en" hidden>Checkpoint is the baseline</div></td><td><div class="i18n-zh">没有持久化的 Agent 不能上生产</div><div class="i18n-en" hidden>An Agent without persistence cannot go to production</div></td></tr>
   <tr><td><div class="i18n-zh">HITL 不可省略</div><div class="i18n-en" hidden>HITL is non-negotiable</div></td><td><div class="i18n-zh">付费、删除、发送等关键操作必须有人的确认</div><div class="i18n-en" hidden>Critical operations — payments, deletions, sending — must have human confirmation</div></td></tr>
   <tr><td><div class="i18n-zh">工具可靠性 &gt; LLM 聪明度</div><div class="i18n-en" hidden>Tool reliability &gt; LLM intelligence</div></td><td><div class="i18n-zh">好工具比好 prompt 更影响 Agent 质量</div><div class="i18n-en" hidden>Good tools impact Agent quality more than good prompts</div></td></tr>
-  <tr><div class="locked-content" data-require-stage="professional"><td><strong><div class="i18n-zh">MCP 是工具集成标准 🆕</div><div class="i18n-en" hidden>MCP is the tool integration standard 🆕</div></strong></td><td><div class="i18n-zh">97M+ 下载，Anthropic→Linux Foundation，所有主流厂商支持</div><div class="i18n-en" hidden>97M+ downloads, Anthropic→Linux Foundation, all major vendors support it</div></td></tr>
+  <tr class="locked-content" data-require-stage="professional"><td><strong><div class="i18n-zh">MCP 是工具集成标准 🆕</div><div class="i18n-en" hidden>MCP is the tool integration standard 🆕</div></strong></td><td><div class="i18n-zh">97M+ 下载，Anthropic→Linux Foundation，所有主流厂商支持</div><div class="i18n-en" hidden>97M+ downloads, Anthropic→Linux Foundation, all major vendors support it</div></td></tr>
   <tr><td><strong><div class="i18n-zh">A2A 是 Agent 间通信标准 🆕</div><div class="i18n-en" hidden>A2A is the Agent-to-Agent communication standard 🆕</div></strong></td><td><div class="i18n-zh">Google 推动，50+ 合作伙伴，已捐给 Linux Foundation</div><div class="i18n-en" hidden>Driven by Google, 50+ partners, donated to Linux Foundation</div></td></tr>
-  <tr><td><strong><div class="i18n-zh">Middleware 是扩展首选</td></tr></div> 🆕</div><div class="i18n-en" hidden>Middleware is the preferred extension method</td></tr></div> 🆕</div></strong></td><td><div class="i18n-zh">LangChain v1.0 起，用 Middleware 替代手动干预 Agent 循环</div><div class="i18n-en" hidden">Since LangChain v1.0, use Middleware instead of manually intervening in Agent loops</div></td></tr>
+  <tr><td><strong><div class="i18n-zh">Middleware 是扩展首选 🆕</div><div class="i18n-en" hidden>Middleware is the preferred extension method 🆕</div></strong></td><td><div class="i18n-zh">LangChain v1.0 起，用 Middleware 替代手动干预 Agent 循环</div><div class="i18n-en" hidden>Since LangChain v1.0, use Middleware instead of manually intervening in Agent loops</div></td></tr>
 </table>
 
 <h3><div class="i18n-zh">🔥 专家在吵什么</div><div class="i18n-en" hidden>🔥 What the Experts Are Debating</div></h3>
@@ -125,8 +131,8 @@
     <h4><div class="i18n-zh">LangGraph 是否过度抽象</div><div class="i18n-en" hidden>Is LangGraph Over-Abstracted?</div></h4>
     <p><div class="i18n-zh">提供了恰好需要的原语 vs FastAPI + 消息队列也能做到，还更灵活。</div><div class="i18n-en" hidden>Provides exactly the right primitives vs FastAPI + message queues can do it too, and with more flexibility.</div></p>
   </div>
-  <div class="card red-left">
-    <div class="locked-content" data-require-stage="expert"><h4><div class="i18n-zh">MCP vs A2A 边界在哪 🆕</div><div class="i18n-en" hidden>Where is the MCP vs A2A Boundary? 🆕</div></h4>
+  <div class="card red-left locked-content" data-require-stage="expert">
+    <h4><div class="i18n-zh">MCP vs A2A 边界在哪 🆕</div><div class="i18n-en" hidden>Where is the MCP vs A2A Boundary? 🆕</div></h4>
     <p><div class="i18n-zh">MCP 管 Agent↔Tool，A2A 管 Agent↔Agent。但实践中两个 Agent 通过 MCP 互调能替代 A2A 吗？社区争议：MCP 是为被动工具设计的，不适合有自主推理的 Agent 间协作。</div><div class="i18n-en" hidden>MCP handles Agent↔Tool, A2A handles Agent↔Agent. But in practice, can two Agents calling each other through MCP replace A2A? Community debate: MCP was designed for passive tools, not suited for collaboration between Agents with autonomous reasoning.</div></p>
   </div>
   <div class="card red-left">
@@ -134,7 +140,7 @@
     <p><div class="i18n-zh">1M token 上下文窗口 + Prompt Caching，是否让 RAG 变得多余？反方：成本（O(n²) Attention）、Lost in the Middle 效应、缓存失效意味着 RAG 仍有不可替代的价值。</div><div class="i18n-en" hidden>1M token context windows + Prompt Caching — does this make RAG redundant? Counterargument: cost (O(n²) Attention), Lost in the Middle effect, cache invalidation — meaning RAG still has irreplaceable value.</div></p>
   </div>
   <div class="card red-left">
-    <h4><div class="i18n-zh">Deep Agents SDK vs 裸 LangGraph</p></div></div> 🆕</div><div class="i18n-en" hidden>Deep Agents SDK vs Bare LangGraph</p></div></div> 🆕</div></h4>
+    <h4><div class="i18n-zh">Deep Agents SDK vs 裸 LangGraph 🆕</div><div class="i18n-en" hidden>Deep Agents SDK vs Bare LangGraph 🆕</div></h4>
     <p><div class="i18n-zh">Deep Agents 提供了 planning、subagents、filesystem 开箱即用，但增加了一层抽象。直接写 LangGraph StateGraph 更灵活但更繁琐。选哪个取决于任务复杂度。</div><div class="i18n-en" hidden>Deep Agents provides planning, subagents, and filesystem out of the box, but adds a layer of abstraction. Writing raw LangGraph StateGraph is more flexible but more tedious. The choice depends on task complexity.</div></p>
   </div>
 </div>
@@ -145,10 +151,10 @@
   <li><strong><div class="i18n-zh">长期记忆最佳实践未定</div><div class="i18n-en" hidden>Long-term memory best practices are unsettled</div></strong> — <div class="i18n-zh">Store API 已出，社区还没形成公认的好用法</div><div class="i18n-en" hidden>Store API is out, but the community hasn't formed accepted best practices yet</div></li>
   <li><strong><div class="i18n-zh">子图边界模糊</div><div class="i18n-en" hidden>Subgraph boundaries are fuzzy</div></strong> — <div class="i18n-zh">父子图 checkpoint 隔离在复杂嵌套时行为难预测</div><div class="i18n-en" hidden>Parent-child checkpoint isolation has unpredictable behavior under complex nesting</div></li>
   <li><strong><div class="i18n-zh">极端并发性能未知</div><div class="i18n-en" hidden>Extreme concurrency performance is unknown</div></strong> — <div class="i18n-zh">1000 个并行 worker 时 State 合并的瓶颈在哪？</div><div class="i18n-en" hidden>Where is the bottleneck in State merging with 1000 parallel workers?</div></li>
-  <div class="locked-content" data-require-stage="expert"><li><strong><div class="i18n-zh">Agent 安全链不完整 🆕</div><div class="i18n-en" hidden>Agent security chain is incomplete 🆕</div></strong> — <div class="i18n-zh">2026 年 3 月披露的 LangChain/LangGraph CVE 表明 agent 框架本身存在安全漏洞。Prompt injection 通过 MCP tool chain 传播的防御方案仍不成熟</div><div class="i18n-en" hidden>The March 2026 LangChain/LangGraph CVE disclosures show that Agent frameworks themselves have security vulnerabilities. Defenses against prompt injection propagating through MCP tool chains remain immature</div></li>
-  <li><strong>Observability vs Privacy</strong> — <div class="i18n-zh">全链路追踪很好，但敏感数据怎么办？</div><div class="i18n-en" hidden>Full tracing is great, but what about sensitive data?</div></li>
-  <li><strong><div class="i18n-zh">Agent-to-Agent 协议碎片化 🆕</div><div class="i18n-en" hidden>Agent-to-Agent protocol fragmentation 🆕</div></strong> — <div class="i18n-zh">MCP/A2A/ACP/ANP 四种协议共存（类比 HTTP/WebSocket/gRPC），互操作性标准尚未统一</div><div class="i18n-en" hidden">Four protocols coexist — MCP/A2A/ACP/ANP (analogous to HTTP/WebSocket/gRPC) — interoperability standards are not yet unified</div></li>
-  <li><strong><div class="i18n-zh">1M Token 时代的 Agent 架构</li></ol></div> 🆕</div><div class="i18n-en" hidden">Agent Architecture in the 1M Token Era</li></ol></div> 🆕</div></strong> — <div class="i18n-zh">当上下文窗口超过大多数知识库时，Agent 的记忆策略需要根本性重思</div><div class="i18n-en" hidden>When context windows exceed most knowledge bases, Agent memory strategies need fundamental rethinking</div></li>
+  <li class="locked-content" data-require-stage="expert"><strong><div class="i18n-zh">Agent 安全链不完整 🆕</div><div class="i18n-en" hidden>Agent security chain is incomplete 🆕</div></strong> — <div class="i18n-zh">2026 年 3 月披露的 LangChain/LangGraph CVE 表明 agent 框架本身存在安全漏洞。Prompt injection 通过 MCP tool chain 传播的防御方案仍不成熟</div><div class="i18n-en" hidden>The March 2026 LangChain/LangGraph CVE disclosures show that Agent frameworks themselves have security vulnerabilities. Defenses against prompt injection propagating through MCP tool chains remain immature</div></li>
+  <li class="locked-content" data-require-stage="expert"><strong>Observability vs Privacy</strong> — <div class="i18n-zh">全链路追踪很好，但敏感数据怎么办？</div><div class="i18n-en" hidden>Full tracing is great, but what about sensitive data?</div></li>
+  <li class="locked-content" data-require-stage="expert"><strong><div class="i18n-zh">Agent-to-Agent 协议碎片化 🆕</div><div class="i18n-en" hidden>Agent-to-Agent protocol fragmentation 🆕</div></strong> — <div class="i18n-zh">MCP/A2A/ACP/ANP 四种协议共存（类比 HTTP/WebSocket/gRPC），互操作性标准尚未统一</div><div class="i18n-en" hidden>Four protocols coexist — MCP/A2A/ACP/ANP (analogous to HTTP/WebSocket/gRPC) — interoperability standards are not yet unified</div></li>
+  <li class="locked-content" data-require-stage="expert"><strong><div class="i18n-zh">1M Token 时代的 Agent 架构 🆕</div><div class="i18n-en" hidden>Agent Architecture in the 1M Token Era 🆕</div></strong> — <div class="i18n-zh">当上下文窗口超过大多数知识库时，Agent 的记忆策略需要根本性重思</div><div class="i18n-en" hidden>When context windows exceed most knowledge bases, Agent memory strategies need fundamental rethinking</div></li>
 </ol>
 
 <!-- ════════════════ BLIND SPOTS ════════════════ -->
@@ -158,16 +164,16 @@
 <div class="card" style="border-color:var(--accent);margin-bottom:28px;">
   <h3><div class="i18n-zh">📋 题库使用策略</div><div class="i18n-en" hidden>📋 Question Bank Usage Strategy</div></h3>
   <ol>
-    <li><strong><div class="i18n-zh">学前一题</div><div class="i18n-en" hidden>Pre-Lesson One Question</div></strong><div class="i18n-zh">：每课开始前读一遍对应面试题（不看答案）→ 知道"学完这个我要能回答什么"</div><div class="i18n-en" hidden">: Before each lesson, read the corresponding interview question (without looking at the answer) → know "what should I be able to answer after learning this"</div></li>
-    <li><strong><div class="i18n-zh">学后自测</div><div class="i18n-en" hidden>Post-Lesson Self-Test</div></strong><div class="i18n-zh">：每课完成后口头回答（录音 2 分钟）→ 对比 <a href="answer-bank.html">答案库</a> 评分标准</div><div class="i18n-en" hidden">: After each lesson, answer verbally (record 2 minutes) → compare against <a href="answer-bank.html">Answer Bank</a> scoring rubric</div></li>
-    <li><strong><div class="i18n-zh">交叉复习</div><div class="i18n-en" hidden>Cross Review</div></strong><div class="i18n-zh">：每 3 课完成后随机抽 5 题做"闪电问答"（每题 30 秒）— 模拟面试压力</div><div class="i18n-en" hidden">: After every 3 lessons, randomly pick 5 questions for "lightning round" (30 seconds each) — simulate interview pressure</div></li>
-    <li><strong><div class="i18n-zh">金字塔攀登</div><div class="i18n-en" hidden>Pyramid Ascent</div></strong><div class="i18n-zh">：能流畅回答某一层 80% 的题目才算"掌握"。不要跳层——L3 需要 L2，L5 需要 L1-L4 全部积累</div><div class="i18n-en" hidden">: You've only "mastered" a tier when you can fluently answer 80% of its questions. Don't skip tiers — L3 requires L2, L5 requires accumulated knowledge from L1-L4</div></li>
+    <li><strong><div class="i18n-zh">学前一题</div><div class="i18n-en" hidden>Pre-Lesson One Question</div></strong><div class="i18n-zh">：每课开始前读一遍对应面试题（不看答案）→ 知道"学完这个我要能回答什么"</div><div class="i18n-en" hidden>: Before each lesson, read the corresponding interview question (without looking at the answer) → know "what should I be able to answer after learning this"</div></li>
+    <li><strong><div class="i18n-zh">学后自测</div><div class="i18n-en" hidden>Post-Lesson Self-Test</div></strong><div class="i18n-zh">：每课完成后口头回答（录音 2 分钟）→ 对比 <a href="answer-bank.html">答案库</a> 评分标准</div><div class="i18n-en" hidden>: After each lesson, answer verbally (record 2 minutes) → compare against <a href="answer-bank.html">Answer Bank</a> scoring rubric</div></li>
+    <li><strong><div class="i18n-zh">交叉复习</div><div class="i18n-en" hidden>Cross Review</div></strong><div class="i18n-zh">：每 3 课完成后随机抽 5 题做"闪电问答"（每题 30 秒）— 模拟面试压力</div><div class="i18n-en" hidden>: After every 3 lessons, randomly pick 5 questions for "lightning round" (30 seconds each) — simulate interview pressure</div></li>
+    <li><strong><div class="i18n-zh">金字塔攀登</div><div class="i18n-en" hidden>Pyramid Ascent</div></strong><div class="i18n-zh">：能流畅回答某一层 80% 的题目才算"掌握"。不要跳层——L3 需要 L2，L5 需要 L1-L4 全部积累</div><div class="i18n-en" hidden>: You've only "mastered" a tier when you can fluently answer 80% of its questions. Don't skip tiers — L3 requires L2, L5 requires accumulated knowledge from L1-L4</div></li>
   </ol>
-  <p style="margin-top:12px;text-align:center;"><a href="interview-bank.html" style="font-weight:700;"><div class="i18n-zh">→ 进入完整面试题库（100 题金字塔）</div><div class="i18n-en" hidden">→ Enter Complete Interview Bank (100-Question Pyramid)</div></a></p>
+  <p style="margin-top:12px;text-align:center;"><a href="interview-bank.html" style="font-weight:700;"><div class="i18n-zh">→ 进入完整面试题库（100 题金字塔）</div><div class="i18n-en" hidden>→ Enter Complete Interview Bank (100-Question Pyramid)</div></a></p>
 </div>
 
 <div class="alert alert-info" style="margin-bottom:28px;">
-  <strong><div class="i18n-zh">面试官的"5 分钟定级法"：</div><div class="i18n-en" hidden">The Interviewer's "5-Minute Leveling Method": </div></strong><div class="i18n-zh">L1 基础题答得肤浅 → 初级；L3 核心题答得流畅 → 中级；L5 架构题能从容讨论 trade-off → 高级。金字塔底部最宽——基础不牢，整个评估崩塌。</div><div class="i18n-en" hidden">L1 foundation questions answered superficially → Junior. L3 core questions answered fluently → Mid-level. L5 architecture questions discussed with calm trade-off analysis → Senior. The base of the pyramid is the widest — weak foundations, and the entire evaluation collapses.</div>
+  <strong><div class="i18n-zh">面试官的"5 分钟定级法"：</div><div class="i18n-en" hidden>The Interviewer's "5-Minute Leveling Method": </div></strong><div class="i18n-zh">L1 基础题答得肤浅 → 初级；L3 核心题答得流畅 → 中级；L5 架构题能从容讨论 trade-off → 高级。金字塔底部最宽——基础不牢，整个评估崩塌。</div><div class="i18n-en" hidden>L1 foundation questions answered superficially → Junior. L3 core questions answered fluently → Mid-level. L5 architecture questions discussed with calm trade-off analysis → Senior. The base of the pyramid is the widest — weak foundations, and the entire evaluation collapses.</div>
 </div>
 
 <p><div class="i18n-zh">以下 17 道盲区题是面试题库的"快速筛选器"——面试官最爱用这类题目在 3 分钟内判断你的水平。</div><div class="i18n-en" hidden>The following 17 blind-spot questions are the interview bank's "rapid filter" — interviewers love using these to gauge your level within 3 minutes.</div></p>
@@ -345,7 +351,7 @@
     </p>
   </div>
 
-  <p style="margin-top:16px;"><strong><div class="i18n-zh">本课程中的应用：</div><div class="i18n-en" hidden>Application in this course: </div></strong><div class="i18n-zh">每个 LangGraph 核心概念都配有专属寓言（共 12 篇），集成在 <a href="fables.html">📖 寓言集</a> 和每课的 Phase 1。读故事时不要猜术语——沉浸其中，让概念在潜意识中扎根。</div><div class="i18n-en" hidden">Every LangGraph core concept has a dedicated fable (12 in total), integrated into <a href="fables.html">📖 Fables</a> and Phase 1 of each lesson. When reading the stories, don't try to guess the term — immerse yourself and let the concept take root in your subconscious.</div></p>
+  <p style="margin-top:16px;"><strong><div class="i18n-zh">本课程中的应用：</div><div class="i18n-en" hidden>Application in this course: </div></strong><div class="i18n-zh">每个 LangGraph 核心概念都配有专属寓言（共 12 篇），集成在 <a href="fables.html">📖 寓言集</a> 和每课的 Phase 1。读故事时不要猜术语——沉浸其中，让概念在潜意识中扎根。</div><div class="i18n-en" hidden>Every LangGraph core concept has a dedicated fable (12 in total), integrated into <a href="fables.html">📖 Fables</a> and Phase 1 of each lesson. When reading the stories, don't try to guess the term — immerse yourself and let the concept take root in your subconscious.</div></p>
 </div>
 
 <p style="margin-top:48px; padding-top:20px; border-top:1px solid var(--border); color:var(--text-2); font-size:0.85em;">

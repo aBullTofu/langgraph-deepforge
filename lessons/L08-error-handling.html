@@ -30,25 +30,12 @@ window.__I18N_PAGE_TITLE = {
 <div class="card green-left"><div class="i18n-zh"><h3>🧠 四层防御体系</h3></div>
 <div class="i18n-en" hidden><h3>🧠 Four-Layer Defense System</h3></div>
 
-<table><tr><div class="i18n-zh"><th>层级</th></div>
-<div class="i18n-en" hidden><th>Layer</th></div><div class="i18n-zh"><th>策略</th></div>
-<div class="i18n-en" hidden><th>Strategy</th></div><div class="i18n-zh"><th>LangGraph 实现</th></div>
-<div class="i18n-en" hidden><th>LangGraph Implement</th></div></tr>
-<tr><div class="i18n-zh"><td>1. 瞬时故障</td></div>
-<div class="i18n-en" hidden><td>1. Transient fault</td></div><div class="i18n-zh"><td>自动重试，指数退避</td></div>
-<div class="i18n-en" hidden><td>Auto-retry, exponential backoff</td></div><td>RetryPolicy(max_attempts=3, backoff_factor=2)</td></tr>
-<tr><div class="i18n-zh"><td>2. LLM 感知</td></div>
-<div class="i18n-en" hidden><td>2. LLM Perceive</td></div><div class="i18n-zh"><td>工具返回错误信息给 LLM</td></div>
-<div class="i18n-en" hidden><td>Tool returns error message to LLM</td></div><div class="i18n-zh"><td>ToolMessage("错误：{msg}，请调整重试")</td></div>
-<div class="i18n-en" hidden><td>ToolMessage("Error: {msg}，Please adjust and retry")</td></div></tr>
-<tr><div class="i18n-zh"><td>3. 人工介入</td></div>
-<div class="i18n-en" hidden><td>3. Human intervention</td></div><div class="i18n-zh"><td>暂停，等人类决定</td></div>
-<div class="i18n-en" hidden><td>Pause, await human decision</td></div><div class="i18n-zh"><td>interrupt() 在重试耗尽后</td></div>
-<div class="i18n-en" hidden><td>interrupt() After retries exhausted</td></div></tr>
-<tr><div class="i18n-zh"><td>4. 降级回复</td></div>
-<div class="i18n-en" hidden><td>4. Degraded response</td></div><div class="i18n-zh"><td>安全停止，记录日志</td></div>
-<div class="i18n-en" hidden><td>Safe stop, log the event</td></div><div class="i18n-zh"><td>try/except → fallback 回复</td></div>
-<div class="i18n-en" hidden><td>try/except → fallback Reply</td></div></tr>
+<table>
+<tr><th><div class="i18n-zh">层级</div><div class="i18n-en" hidden>Layer</div></th><th><div class="i18n-zh">策略</div><div class="i18n-en" hidden>Strategy</div></th><th><div class="i18n-zh">LangGraph 实现</div><div class="i18n-en" hidden>LangGraph implementation</div></th></tr>
+<tr><td><div class="i18n-zh">1. 瞬时故障</div><div class="i18n-en" hidden>1. Transient fault</div></td><td><div class="i18n-zh">自动重试，指数退避</div><div class="i18n-en" hidden>Auto-retry, exponential backoff</div></td><td>RetryPolicy(max_attempts=3, backoff_factor=2)</td></tr>
+<tr><td><div class="i18n-zh">2. LLM 感知</div><div class="i18n-en" hidden>2. LLM-aware handling</div></td><td><div class="i18n-zh">工具返回错误信息给 LLM</div><div class="i18n-en" hidden>Tool returns error message to LLM</div></td><td><div class="i18n-zh">ToolMessage("错误：{msg}，请调整重试")</div><div class="i18n-en" hidden>ToolMessage("Error: {msg}, please adjust and retry")</div></td></tr>
+<tr><td><div class="i18n-zh">3. 人工介入</div><div class="i18n-en" hidden>3. Human intervention</div></td><td><div class="i18n-zh">暂停，等人类决定</div><div class="i18n-en" hidden>Pause, await human decision</div></td><td><div class="i18n-zh">interrupt() 在重试耗尽后</div><div class="i18n-en" hidden>interrupt() after retries are exhausted</div></td></tr>
+<tr><td><div class="i18n-zh">4. 降级回复</div><div class="i18n-en" hidden>4. Degraded response</div></td><td><div class="i18n-zh">安全停止，记录日志</div><div class="i18n-en" hidden>Safe stop, log the event</div></td><td><div class="i18n-zh">try/except → fallback 回复</div><div class="i18n-en" hidden>try/except → fallback reply</div></td></tr>
 </table>
 </div>
 </div>
@@ -76,8 +63,8 @@ builder.add_node(<span class="str">"api_call"</span>, call_external_api, retry_p
 <pre><code><span class="cmt"># RetryPolicy 自动重试 3 次 → 还失败 → interrupt 人工决定 → 降级</span>
 builder.add_node(<span class="str">"critical_action"</span>, critical_action, retry_policy=RetryPolicy(max_attempts=3))</code></pre>
 
-<div class="alert alert-warn"><div class="i18n-zh"><strong>⚠️ 避坑：</strong></div>
-<div class="i18n-en" hidden><strong>⚠️ Pitfall:</strong></div>RetryPolicy 只对瞬时故障（网络超时）有效。如果 API 返回"参数错误"，重试 100 次也没用——应该走第 2 层（错误传给 LLM 让它改参数）。</div>
+<div class="alert alert-warn"><div class="i18n-zh"><strong>⚠️ 避坑：</strong>RetryPolicy 只对瞬时故障（网络超时）有效。如果 API 返回"参数错误"，重试 100 次也没用——应该走第 2 层（错误传给 LLM 让它改参数）。</div>
+<div class="i18n-en" hidden><strong>⚠️ Pitfall:</strong> RetryPolicy only works for transient failures such as network timeouts. If the API returns a parameter error, retrying 100 times will not help. Use layer 2 instead: pass the error to the LLM so it can adjust the parameters.</div>
 </div>
 
 <div class="phase" data-phase="forge"><span class="phase-num">Phase 3 · Forge</span><div class="i18n-zh"><h3>🔨 知识淬炼</h3></div>
@@ -85,10 +72,9 @@ builder.add_node(<span class="str">"critical_action"</span>, critical_action, re
 
 <div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
 <div class="i18n-en" hidden><h4>🏗 Your Challenge</h4></div>
-<ol><div class="i18n-zh"><li>给 L05 的 Agent 的 LLM 节点加上 RetryPolicy</li></div>
-<div class="i18n-en" hidden><li>Add RetryPolicy to L05 Agent's LLM node</li></div>
-<div class="i18n-zh"><li>让 act() 区分"可重试错误"（网络）和"不可重试错误"（参数格式不对）</li></div>
-<div class="i18n-en" hidden><li>Let act() distinguish "retryable errors" (network) and "non-retryable errors" (wrong parameter format)</li></div>
+<ol>
+<li><div class="i18n-zh">给 L05 的 Agent 的 LLM 节点加上 RetryPolicy</div><div class="i18n-en" hidden>Add RetryPolicy to L05 Agent's LLM node</div></li>
+<li><div class="i18n-zh">让 act() 区分"可重试错误"（网络）和"不可重试错误"（参数格式不对）</div><div class="i18n-en" hidden>Let act() distinguish retryable errors (network) from non-retryable errors (wrong parameter format)</div></li>
 </ol>
 </div>
 
@@ -107,7 +93,7 @@ builder.add_node(<span class="str">"critical_action"</span>, critical_action, re
 ToolMessage(<span class="str">f"错误：{e}。请调整重试。"</span>)</code></pre>
 </div>
 
-<p style="margin-top:48px;text-align:center">🏆 <strong>专业篇完成！</strong>做<a href="../reference/meta-learning-guide.html">盲区测试 Q6-Q9</a> → <span id="next-lesson-link"><a href="L09-subgraphs.html">L09 子图 →</a></span></p>
+<p style="margin-top:48px;text-align:center"><span class="i18n-zh">🏆 <strong>专业篇完成！</strong>做<a href="../reference/meta-learning-guide.html">盲区测试 Q6-Q9</a> → </span><span class="i18n-en" hidden>🏆 <strong>Professional section complete!</strong> Take <a href="../reference/meta-learning-guide.html">Blind Spot Test Q6-Q9</a> → </span><span id="next-lesson-link"><a href="L09-subgraphs.html">L09 子图 →</a></span></p>
 
 
 <div class="lesson-actions">

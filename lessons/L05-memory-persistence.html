@@ -83,8 +83,8 @@ r = graph.invoke({<span class="str">"messages"</span>: [HumanMessage(<span class
 <span class="kw">print</span>(r[<span class="str">"messages"</span>][-1].content)  <span class="cmt"># "你叫小明！" ✅ 记住了</span></code></pre>
 
 
-<div class="alert alert-warn"><div class="i18n-zh"><strong>⚠️ 避坑 MISSING_CHECKPOINTER：</strong></div>
-<div class="i18n-en" hidden><strong>⚠️ Pitfall MISSING_CHECKPOINTER：</strong></div>用了 interrupt() 或想用 get_state() 但没配置 checkpointer → 报错。每个需要持久化的图都必须 compile(checkpointer=...)。</div>
+<div class="alert alert-warn"><div class="i18n-zh"><strong>⚠️ 避坑 MISSING_CHECKPOINTER：</strong>用了 interrupt() 或想用 get_state() 但没配置 checkpointer → 报错。每个需要持久化的图都必须 compile(checkpointer=...)。</div>
+<div class="i18n-en" hidden><strong>⚠️ Pitfall MISSING_CHECKPOINTER:</strong> Using interrupt() or get_state() without configuring a checkpointer causes errors. Every graph that needs persistence must use compile(checkpointer=...).</div>
 </div>
 
 
@@ -93,12 +93,10 @@ r = graph.invoke({<span class="str">"messages"</span>: [HumanMessage(<span class
 
 <div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
 <div class="i18n-en" hidden><h4>🏗 Your Challenge</h4></div>
-<ol><div class="i18n-zh"><li>用 SqliteSaver 替换 InMemorySaver，重启 Python 后验证记忆是否还在</li></div>
-<div class="i18n-en" hidden><li>Replace InMemorySaver with SqliteSaver, restart Python, then verify memory is still there</li></div>
-<div class="i18n-zh"><li>创建两个不同 thread_id 的会话，验证它们的记忆完全隔离</li></div>
-<div class="i18n-en" hidden><li>CreateTwo different thread_id sessions, verify their memories are completely isolated</li></div>
-<div class="i18n-zh"><li>用 get_state_history() 打印某一会话的全部历史检查点</li></div>
-<div class="i18n-en" hidden><li>Use get_state_history() to print all historical checkpoints of a session</li></div>
+<ol>
+<li><div class="i18n-zh">用 SqliteSaver 替换 InMemorySaver，重启 Python 后验证记忆是否还在</div><div class="i18n-en" hidden>Replace InMemorySaver with SqliteSaver, restart Python, then verify memory is still there</div></li>
+<li><div class="i18n-zh">创建两个不同 thread_id 的会话，验证它们的记忆完全隔离</div><div class="i18n-en" hidden>Create two different thread_id sessions and verify their memories are completely isolated</div></li>
+<li><div class="i18n-zh">用 get_state_history() 打印某一会话的全部历史检查点</div><div class="i18n-en" hidden>Use get_state_history() to print all historical checkpoints for one session</div></li>
 </ol>
 </div>
 

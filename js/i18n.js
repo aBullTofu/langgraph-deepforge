@@ -12,6 +12,58 @@ var I18N = (function() {
   var CONTENT = window.__I18N_CONTENT || {};
 
   var lang = localStorage.getItem(STORAGE_KEY) || 'zh';
+  var contentEntries = null;
+  var contentLookup = null;
+
+  function decodeHtml(text) {
+    var el = document.createElement('textarea');
+    el.innerHTML = text;
+    return el.value;
+  }
+
+  function normalizeEnglishFallback(text) {
+    return text
+      .replace(/[一-鿿]+/g, '')
+      .replace(/，/g, ', ')
+      .replace(/。/g, '.')
+      .replace(/：/g, ': ')
+      .replace(/；/g, '; ')
+      .replace(/？/g, '?')
+      .replace(/！/g, '!')
+      .replace(/（/g, '(')
+      .replace(/）/g, ')')
+      .replace(/「|」|“|”/g, '"')
+      .replace(/、/g, ', ')
+      .replace(/\s{2,}/g, ' ');
+  }
+
+  function getContentData() {
+    if (contentEntries && contentLookup) return { entries: contentEntries, lookup: contentLookup };
+
+    contentEntries = [];
+    contentLookup = {};
+    function addEntry(key, value) {
+      var decodedKey = decodeHtml(key);
+      var decodedValue = decodeHtml(value);
+      [[key, value], [decodedKey, decodedValue]].forEach(function(pair) {
+        var k = pair[0];
+        var v = pair[1];
+        if (!k || contentLookup[k]) return;
+        contentLookup[k] = v;
+        if (/[一-鿿]/.test(k)) contentEntries.push({ key: k, value: v });
+      });
+    }
+
+    Object.keys(DATA).forEach(function(key) {
+      var entry = DATA[key];
+      if (entry && entry.zh && entry.en) addEntry(entry.zh, entry.en);
+    });
+    Object.keys(CONTENT).forEach(function(key) {
+      addEntry(key, CONTENT[key]);
+    });
+    contentEntries.sort(function(a, b) { return b.key.length - a.key.length; });
+    return { entries: contentEntries, lookup: contentLookup };
+  }
 
   /* ── Public API ── */
 
@@ -32,10 +84,6 @@ var I18N = (function() {
     localStorage.setItem(STORAGE_KEY, lang);
     applyToDOM();
     updateSwitcherUI();
-    /* Update document title from page-level config */
-    if (window.__I18N_PAGE_TITLE && window.__I18N_PAGE_TITLE[lang]) {
-      document.title = window.__I18N_PAGE_TITLE[lang];
-    }
     if (window.onLangChange) window.onLangChange(lang);
   }
 
@@ -53,17 +101,15 @@ var I18N = (function() {
       NodeFilter.SHOW_TEXT,
       {
         acceptNode: function(node) {
-          // Skip script, style, pre, code, textarea
           var parent = node.parentElement;
           if (!parent) return NodeFilter.FILTER_REJECT;
           var tag = parent.tagName;
-          if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'PRE' ||
-              tag === 'CODE' || tag === 'TEXTAREA' || tag === 'NOSCRIPT') {
+          if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'TEXTAREA' || tag === 'NOSCRIPT') {
             return NodeFilter.FILTER_REJECT;
           }
-          // Skip if inside i18n block (already handled)
-          if (parent.closest && (parent.closest('.i18n-zh') || parent.closest('.i18n-en'))) {
-            return NodeFilter.FILTER_REJECT;
+          if (parent.closest) {
+            if (lang === 'en' && parent.closest('.i18n-zh')) return NodeFilter.FILTER_REJECT;
+            if (lang === 'zh' && parent.closest('.i18n-en')) return NodeFilter.FILTER_REJECT;
           }
           // Skip if parent has data-i18n (handled separately)
           if (parent.hasAttribute && parent.hasAttribute('data-i18n')) {
@@ -73,13 +119,8 @@ var I18N = (function() {
           var text = node.textContent.trim();
           if (!text || text.length < 1) return NodeFilter.FILTER_REJECT;
 
-          // In en mode: accept nodes containing Chinese (to translate them)
-          // In zh mode: accept nodes that were previously translated (to restore)
-          // We detect "previously translated" by checking if the parent
-          // has a data-original-zh attribute
           if (lang === 'zh') {
-            return parent.hasAttribute && parent.hasAttribute('data-original-zh')
-              ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+            return node.__originalZh ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
           } else {
             // In en mode, accept nodes that contain Chinese characters
             return /[一-鿿]/.test(node.textContent)
@@ -104,38 +145,41 @@ var I18N = (function() {
     var parent = node.parentElement;
     if (!parent) return;
 
-    // Try exact match first
-    var translated = CONTENT[text];
+    var data = getContentData();
+    var translated = data.lookup[text] || data.lookup[text.trim()] || data.lookup[text.replace(/\s+/g, ' ')];
     if (!translated) {
-      // Try trimmed match
-      translated = CONTENT[text.trim()];
+      translated = text;
+      data.entries.forEach(function(entry) {
+        if (translated.indexOf(entry.key) !== -1) {
+          translated = translated.split(entry.key).join(entry.value);
+        }
+      });
     }
-    if (!translated) {
-      // Try whitespace-normalized match
-      var normalized = text.replace(/\s+/g, ' ');
-      translated = CONTENT[normalized];
+
+    if (translated && /[一-鿿]/.test(translated)) {
+      translated = normalizeEnglishFallback(translated);
     }
-    if (translated) {
-      // Save original Chinese for restoration
-      parent.setAttribute('data-original-zh', text);
+
+    if (translated && translated !== text) {
+      node.__originalZh = text;
       node.textContent = translated;
     }
-    // If no match, leave as-is (shows Chinese)
   }
 
   function _restoreToZh(node) {
-    var parent = node.parentElement;
-    if (!parent) return;
-    var original = parent.getAttribute('data-original-zh');
-    if (original) {
-      node.textContent = original;
-      parent.removeAttribute('data-original-zh');
+    if (node.__originalZh) {
+      node.textContent = node.__originalZh;
+      node.__originalZh = null;
     }
   }
 
   /* ── DOM Application ── */
 
   function applyToDOM() {
+    if (window.__I18N_PAGE_TITLE && window.__I18N_PAGE_TITLE[lang]) {
+      document.title = window.__I18N_PAGE_TITLE[lang];
+    }
+
     /* 1. data-i18n attributes */
     var elements = document.querySelectorAll('[data-i18n]');
     for (var i = 0; i < elements.length; i++) {
@@ -191,7 +235,8 @@ var I18N = (function() {
   function updateSwitcherUI() {
     var el = document.getElementById('i18n-switcher');
     if (!el) return;
-    el.textContent = lang === 'zh' ? '🌐 EN' : '🌐 中';
+    el.textContent = lang === 'zh' ? '🌐 EN' : '🌐 ZH';
+    el.title = lang === 'zh' ? 'Switch to English' : 'Switch to Chinese';
     el.setAttribute('data-lang', lang);
   }
 

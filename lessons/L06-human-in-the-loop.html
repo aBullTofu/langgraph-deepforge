@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L06 · Human-in-the-Loop — LangGraph DeepForge</title><link rel="stylesheet" href="../css/style.css"></head>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>L06 · Human-in-the-Loop — LangGraph DeepForge</title><script>window.__I18N_PAGE_TITLE = { zh: 'L06 · Human-in-the-Loop — LangGraph DeepForge', en: 'L06 · Human-in-the-Loop — LangGraph DeepForge' };</script><link rel="stylesheet" href="../css/style.css"></head>
 <body>
 <nav class="nav-bar"><div class="i18n-zh"><a href="../index.html">🏠 总览</a></div>
 <div class="i18n-en" hidden><a href="../index.html">🏠 Home</a></div><div class="i18n-zh"><a href="../reference/meta-learning-guide.html">🧠 元学习</a></div>
@@ -62,8 +62,8 @@ result = graph.invoke(input, config)
     <span class="i18n-zh" style="display:inline"><span class="cmt"># 第二次调用：恢复执行</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Second call: resumes execution</span></span>
     result = graph.invoke(Command(resume=(decision == <span class="str">"y"</span>)), config)</code></pre>
 
-<div class="alert alert-warn"><div class="i18n-zh"><strong>⚠️ 避坑：</strong></div>
-<div class="i18n-en" hidden><strong>⚠️ Pitfall：</strong></div>interrupt() 必须配合 checkpointer。没有 checkpointer → 行为不可预测。进程重启后能否恢复取决于 checkpointer 类型（InMemory 不行，Sqlite/Postgres 可以）。</div>
+<div class="alert alert-warn"><div class="i18n-zh"><strong>⚠️ 避坑：</strong>interrupt() 必须配合 checkpointer。没有 checkpointer → 行为不可预测。进程重启后能否恢复取决于 checkpointer 类型（InMemory 不行，Sqlite/Postgres 可以）。</div>
+<div class="i18n-en" hidden><strong>⚠️ Pitfall:</strong> interrupt() must be paired with a checkpointer. Without a checkpointer, behavior is unpredictable. Recovery after process restart depends on the checkpointer type: InMemory cannot recover; SQLite/Postgres can.</div>
 </div>
 
 
@@ -71,12 +71,10 @@ result = graph.invoke(input, config)
 <div class="i18n-en" hidden><h3>🔨 Knowledge Forging</h3></div>
 <div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
 <div class="i18n-en" hidden><h4>🏗 Your Challenge</h4></div>
-<ol><div class="i18n-zh"><li>实现"修改后批准"：审批时不只是 y/n，允许人类修改后才能通过</li></div>
-<div class="i18n-en" hidden><li>Implement"Approve with modification"：During approval, not just y/n，allow human modification before approval</li></div>
-<div class="i18n-zh"><li>实现 30 秒超时自动拒绝</li></div>
-<div class="i18n-en" hidden><li>Implement 30 second timeout auto-rejection</li></div>
-<div class="i18n-zh"><li>给 Agent 添加审批日志（每次审批记录到 state.approval_log）</li></div>
-<div class="i18n-en" hidden><li>Add approval log to Agent (record each approval to state.approval_log)</li></div>
+<ol>
+<li><div class="i18n-zh">实现"修改后批准"：审批时不只是 y/n，允许人类修改后才能通过</div><div class="i18n-en" hidden>Implement "approve with modification": approval is not just y/n; humans can modify before approving</div></li>
+<li><div class="i18n-zh">实现 30 秒超时自动拒绝</div><div class="i18n-en" hidden>Implement auto-rejection after a 30-second timeout</div></li>
+<li><div class="i18n-zh">给 Agent 添加审批日志（每次审批记录到 state.approval_log）</div><div class="i18n-en" hidden>Add an approval log to the Agent, recording each approval in state.approval_log</div></li>
 </ol>
 </div>
 

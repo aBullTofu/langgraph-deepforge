@@ -87,25 +87,12 @@ langgraph deploy    <span class="cmt"># 部署到 LangGraph Cloud</span></code><
 <div class="i18n-zh"><h4>性能要点</h4></div>
 <div class="i18n-en" hidden><h4>Performance Tips</h4></div>
 
-<table><tr><div class="i18n-zh"><th>策略</th></div>
-<div class="i18n-en" hidden><th>Strategy</th></div><div class="i18n-zh"><th>效果</th></div>
-<div class="i18n-en" hidden><th>Effect</th></div></tr>
-
-<tr><div class="i18n-zh"><td>async 节点（ainvoke）</td></div>
-<div class="i18n-en" hidden><td>async Node (ainvoke）</td></div><div class="i18n-zh"><td>I/O 密集场景吞吐量大幅提升</td></div>
-<div class="i18n-en" hidden><td>I/O Massive throughput boost in I/O-heavy scenarios</td></div></tr>
-
-<tr><div class="i18n-zh"><td>PostgresSaver 替代 InMemorySaver</td></div>
-<div class="i18n-en" hidden><td>PostgresSaver Alternative InMemorySaver</td></div><div class="i18n-zh"><td>重启不丢状态，支持多实例</td></div>
-<div class="i18n-en" hidden><td>No state loss on restart, supports multiple instances</td></div></tr>
-
-<tr><div class="i18n-zh"><td>无依赖节点自动并行</td></div>
-<div class="i18n-en" hidden><td>Dependency-free nodes auto-parallelize</td></div><div class="i18n-zh"><td>无需额外代码</td></div>
-<div class="i18n-en" hidden><td>No extra code needed</td></div></tr>
-
-<tr><div class="i18n-zh"><td>Prompt Caching（Claude 特性）</td></div>
-<div class="i18n-en" hidden><td>Prompt Caching（Claude feature)</td></div><div class="i18n-zh"><td>重复 prompt 前缀成本降低 90%</td></div>
-<div class="i18n-en" hidden><td>Repeat prompt prefix cost reduced by 90%</td></div></tr>
+<table>
+<tr><th><div class="i18n-zh">策略</div><div class="i18n-en" hidden>Strategy</div></th><th><div class="i18n-zh">效果</div><div class="i18n-en" hidden>Effect</div></th></tr>
+<tr><td><div class="i18n-zh">async 节点（ainvoke）</div><div class="i18n-en" hidden>async nodes (ainvoke)</div></td><td><div class="i18n-zh">I/O 密集场景吞吐量大幅提升</div><div class="i18n-en" hidden>Major throughput boost in I/O-heavy scenarios</div></td></tr>
+<tr><td><div class="i18n-zh">PostgresSaver 替代 InMemorySaver</div><div class="i18n-en" hidden>Replace InMemorySaver with PostgresSaver</div></td><td><div class="i18n-zh">重启不丢状态，支持多实例</div><div class="i18n-en" hidden>No state loss on restart, supports multiple instances</div></td></tr>
+<tr><td><div class="i18n-zh">无依赖节点自动并行</div><div class="i18n-en" hidden>Dependency-free nodes auto-parallelize</div></td><td><div class="i18n-zh">无需额外代码</div><div class="i18n-en" hidden>No extra code needed</div></td></tr>
+<tr><td><div class="i18n-zh">Prompt Caching（Claude 特性）</div><div class="i18n-en" hidden>Prompt Caching (Claude feature)</div></td><td><div class="i18n-zh">重复 prompt 前缀成本降低 90%</div><div class="i18n-en" hidden>Repeated prompt prefix cost reduced by 90%</div></td></tr>
 </table>
 </div>
 
@@ -115,11 +102,10 @@ langgraph deploy    <span class="cmt"># 部署到 LangGraph Cloud</span></code><
 
 <div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
 <div class="i18n-en" hidden><h4>🏗 Your Challenge</h4></div>
-<ol><div class="i18n-zh"><li>把 L04 的 ReAct Agent 按推荐结构重组</li></div>
-<div class="i18n-en" hidden><li>Reorganize L04's ReAct Agent by recommended structure</li></div>
-<li>运行 <code>langgraph dev</code> 启动本地服务器</li>
-<div class="i18n-zh"><li>设置 LangSmith，运行一次完整对话，查看 trace</li></div>
-<div class="i18n-en" hidden><li>Set up LangSmith, run a full conversation, inspect trace</li></div>
+<ol>
+<li><div class="i18n-zh">把 L04 的 ReAct Agent 按推荐结构重组</div><div class="i18n-en" hidden>Reorganize L04's ReAct Agent by recommended structure</div></li>
+<li><div class="i18n-zh">运行 <code>langgraph dev</code> 启动本地服务器</div><div class="i18n-en" hidden>Run <code>langgraph dev</code> to start the local server</div></li>
+<li><div class="i18n-zh">设置 LangSmith，运行一次完整对话，查看 trace</div><div class="i18n-en" hidden>Set up LangSmith, run a full conversation, inspect trace</div></li>
 </ol>
 </div>
 
@@ -141,11 +127,16 @@ langgraph up       <span class="cmt"># 启动生产  </span></code></pre>
 
 
 <div class="card" style="border-color:var(--green);text-align:center;margin-top:32px;padding:32px;">
-<h3>🏆 全部课程完成！</h3>
+<div class="i18n-zh"><h3>🏆 全部课程完成！</h3>
 
 <p>做<a href="../reference/meta-learning-guide.html">盲区测试 Q10-Q13</a>，然后重读<a href="../reference/meta-learning-guide.html">领域全貌</a>，看能否形成自己的观点。</p>
 
-<p style="margin-top:16px;font-size:0.9em;color:var(--text-2)">能形成自己的观点 → 你真的入门了。<br>能在争议中选择立场并说出理由 → 你已经超越了只会用工具的开发者。</p>
+<p style="margin-top:16px;font-size:0.9em;color:var(--text-2)">能形成自己的观点 → 你真的入门了。<br>能在争议中选择立场并说出理由 → 你已经超越了只会用工具的开发者。</p></div>
+<div class="i18n-en" hidden><h3>🏆 All courses complete!</h3>
+
+<p>Take <a href="../reference/meta-learning-guide.html">Blind Spot Test Q10-Q13</a>, then reread the <a href="../reference/meta-learning-guide.html">Domain Landscape</a> and see whether you can form your own perspective.</p>
+
+<p style="margin-top:16px;font-size:0.9em;color:var(--text-2)">If you can form your own perspective, you have truly started.<br>If you can choose a side in a debate and explain why, you have surpassed developers who only know how to use tools.</p></div>
 
 </div>
 

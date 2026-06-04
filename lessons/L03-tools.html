@@ -128,8 +128,8 @@ graph = builder.compile()</code></pre>
     <span class="kw">print</span>(<span class="str">f"🤖: {r['messages'][-1].content}"</span>)</code></pre>
 
 
-<div class="alert alert-warn" style="margin-top:16px"><div class="i18n-zh"><strong>⚠️ 避坑 INVALID_CHAT_HISTORY：</strong></div>
-<div class="i18n-en" hidden><strong>⚠️ Pitfall: INVALID_CHAT_HISTORY</strong></div>这是 #1 社区报错。原因：State 中 messages 没用 <code>add_messages</code> reducer → ToolNode 的输出覆盖了 LLM 的输出 → 对话历史缺失。解决方案见上方 Step 2。</div>
+<div class="alert alert-warn" style="margin-top:16px"><div class="i18n-zh"><strong>⚠️ 避坑 INVALID_CHAT_HISTORY：</strong>这是 #1 社区报错。原因：State 中 messages 没用 <code>add_messages</code> reducer → ToolNode 的输出覆盖了 LLM 的输出 → 对话历史缺失。解决方案见上方 Step 2。</div>
+<div class="i18n-en" hidden><strong>⚠️ Pitfall: INVALID_CHAT_HISTORY</strong> This is the #1 community error. Cause: <code>messages</code> in State does not use the <code>add_messages</code> reducer → ToolNode output overwrites the LLM output → conversation history is missing. See Step 2 above for the fix.</div>
 </div>
 
 

@@ -92,32 +92,16 @@ window.__I18N_PAGE_TITLE = {
     </pre>
 
     <table>
-      <tr><div class="i18n-zh"><th>LangGraph 概念</th></div>
-<div class="i18n-en" hidden><th>LangGraph Concept</th></div><div class="i18n-zh"><th>工厂类比</th></div>
-<div class="i18n-en" hidden><th>Factory Analogy</th></div><div class="i18n-zh"><th>职责</th></div>
-<div class="i18n-en" hidden><th>Responsibility</th></div></tr>
-
-      <tr><td><strong>State</strong></td><div class="i18n-zh"><td>物料篮</td></div>
-<div class="i18n-en" hidden><td>Material Basket</td></div><div class="i18n-zh"><td>共享数据，随传送带流转</td></div>
-<div class="i18n-en" hidden><td>Shared data, flows along the conveyor belt</td></div></tr>
-
-      <tr><td><strong>Node</strong></td><div class="i18n-zh"><td>工位</td></div>
-<div class="i18n-en" hidden><td>Workstation</td></div><div class="i18n-zh"><td>读物料 → 加工 → 写回物料篮</td></div>
-<div class="i18n-en" hidden><td>Read material → Process → Write back to material basket</td></div></tr>
-
-      <tr><td><strong>Edge</strong></td><div class="i18n-zh"><td>传送带</td></div>
-<div class="i18n-en" hidden><td>Conveyor Belt</td></div><div class="i18n-zh"><td>物料从哪来、到哪去</td></div>
-<div class="i18n-en" hidden><td>Where material comes from and goes</td></div></tr>
-
-      <tr><td><strong>Conditional Edge</strong></td><div class="i18n-zh"><td>质检台</td></div>
-<div class="i18n-en" hidden><td>Inspection Station</td></div><div class="i18n-zh"><td>根据检测结果分岔传送带方向</td></div>
-<div class="i18n-en" hidden><td>Divert conveyor belt direction based on inspection result</td></div></tr>
-
+      <tr><th><div class="i18n-zh">LangGraph 概念</div><div class="i18n-en" hidden>LangGraph Concept</div></th><th><div class="i18n-zh">工厂类比</div><div class="i18n-en" hidden>Factory Analogy</div></th><th><div class="i18n-zh">职责</div><div class="i18n-en" hidden>Responsibility</div></th></tr>
+      <tr><td><strong>State</strong></td><td><div class="i18n-zh">物料篮</div><div class="i18n-en" hidden>Material Basket</div></td><td><div class="i18n-zh">共享数据，随传送带流转</div><div class="i18n-en" hidden>Shared data, flows along the conveyor belt</div></td></tr>
+      <tr><td><strong>Node</strong></td><td><div class="i18n-zh">工位</div><div class="i18n-en" hidden>Workstation</div></td><td><div class="i18n-zh">读物料 → 加工 → 写回物料篮</div><div class="i18n-en" hidden>Read material → Process → Write back to material basket</div></td></tr>
+      <tr><td><strong>Edge</strong></td><td><div class="i18n-zh">传送带</div><div class="i18n-en" hidden>Conveyor Belt</div></td><td><div class="i18n-zh">物料从哪来、到哪去</div><div class="i18n-en" hidden>Where material comes from and goes</div></td></tr>
+      <tr><td><strong>Conditional Edge</strong></td><td><div class="i18n-zh">质检台</div><div class="i18n-en" hidden>Inspection Station</div></td><td><div class="i18n-zh">根据检测结果分岔传送带方向</div><div class="i18n-en" hidden>Divert conveyor belt direction based on inspection result</div></td></tr>
     </table>
 
     <div class="alert alert-warn">
-      <div class="i18n-zh"><strong>关键约束：</strong></div>
-<div class="i18n-en" hidden><strong>Key Constraint: </strong></div>工位之间不直接对话。工位A 把结果放进物料篮，工位B 从物料篮里拿——State 是唯一的通信媒介。
+      <div class="i18n-zh"><strong>关键约束：</strong>工位之间不直接对话。工位A 把结果放进物料篮，工位B 从物料篮里拿——State 是唯一的通信媒介。</div>
+      <div class="i18n-en" hidden><strong>Key Constraint: </strong>Workstations do not talk directly. Workstation A puts results into the basket, and Workstation B takes them from the basket. State is the only communication medium.</div>
     </div>
 
   </div>
@@ -317,8 +301,7 @@ builder.add_edge(START, <span class="str">"b"</span>)  <span class="cmt"># bug 3
 builder.add_edge(<span class="str">"a"</span>, END)
 graph = builder.compile()</code></pre>
 
-    <details><div class="i18n-zh"><summary>点击查看答案</summary></div>
-<div class="i18n-en" hidden><summary>Click to reveal answer</summary></div>
+    <details><summary><span class="i18n-zh">点击查看答案</span><span class="i18n-en" hidden>Click to reveal answer</span></summary>
 
       <p><strong>Bug 1：</strong><code>state.value</code> 应该是 <code>state["value"]</code> — State 是 dict-like，不是对象属性。</p>
 
@@ -360,8 +343,8 @@ graph = builder.compile()</code></pre>
     <p>需要修改的地方：<code>classify</code>、<code>route_by_length</code>、<code>add_conditional_edges</code> 的映射字典、新增 <code>handle_empty</code> 节点和对应边。</p>
 
     <div class="alert alert-warn">
-      <div class="i18n-zh"><strong>不要怕改坏！</strong></div>
-<div class="i18n-en" hidden><strong>Don't be afraid to break things!</strong></div>跑起来看报错就是学习的一部分。
+      <div class="i18n-zh"><strong>不要怕改坏！</strong>跑起来看报错就是学习的一部分。</div>
+      <div class="i18n-en" hidden><strong>Don't be afraid to break things!</strong> Running it and reading errors is part of learning.</div>
     </div>
 
   </div>
@@ -414,8 +397,8 @@ graph = builder.compile()</code></pre>
 
 
   <div class="alert alert-green">
-    <div class="i18n-zh"><strong>明日第一个任务：</strong></div>
-<div class="i18n-en" hidden><strong>First task for tomorrow: </strong></div>不看文档，默写一个 StateGraph 构建流程（State → Node → Edge → compile → invoke）。用时 &lt; 5 分钟。
+    <div class="i18n-zh"><strong>明日第一个任务：</strong>不看文档，默写一个 StateGraph 构建流程（State → Node → Edge → compile → invoke）。用时 &lt; 5 分钟。</div>
+    <div class="i18n-en" hidden><strong>First task for tomorrow: </strong>Without looking at the documentation, write down the StateGraph construction flow (State → Node → Edge → compile → invoke). Time limit: &lt; 5 minutes.</div>
   </div>
 
 </div>

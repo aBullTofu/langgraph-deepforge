@@ -58,8 +58,8 @@ subgraph = sub_builder.compile()
 <pre><code><span class="kw">def</span> <span class="fn">my_node</span>(state, config: RunnableConfig):
     ns = config[<span class="str">"configurable"</span>][<span class="str">"checkpoint_ns"</span>]  <span class="cmt"># 子图独立命名空间</span></code></pre>
 
-<div class="alert alert-warn"><div class="i18n-zh"><strong>⚠️ 避坑 MULTIPLE_SUBGRAPHS：</strong></div>
-<div class="i18n-en" hidden><strong>⚠️ Pitfall MULTIPLE_SUBGRAPHS：</strong></div>多个子图使用相同 checkpoint 命名空间导致冲突。确保每个子图的节点名唯一。</div>
+<div class="alert alert-warn"><div class="i18n-zh"><strong>⚠️ 避坑 MULTIPLE_SUBGRAPHS：</strong>多个子图使用相同 checkpoint 命名空间导致冲突。确保每个子图的节点名唯一。</div>
+<div class="i18n-en" hidden><strong>⚠️ Pitfall MULTIPLE_SUBGRAPHS:</strong> Multiple subgraphs using the same checkpoint namespace will conflict. Make sure each subgraph node name is unique.</div>
 </div>
 
 <div class="phase" data-phase="forge"><span class="phase-num">Phase 3 · Forge</span><div class="i18n-zh"><h3>🔨 知识淬炼</h3></div>
@@ -67,10 +67,9 @@ subgraph = sub_builder.compile()
 
 <div class="card orange-left"><div class="i18n-zh"><h4>🏗 你的挑战</h4></div>
 <div class="i18n-en" hidden><h4>🏗 Your Challenge</h4></div>
-<ol><div class="i18n-zh"><li>把 L04 的手动 ReAct Agent 拆成子图：think + act 打包为一个 Agent 子图</li></div>
-<div class="i18n-en" hidden><li>Split L04 manual ReAct Agent into subgraphs: think + act packaged as one Agent subgraph</li></div>
-<div class="i18n-zh"><li>创建两个不同 Agent 子图（数学 Agent + 天气 Agent），父图负责路由</li></div>
-<div class="i18n-en" hidden><li>Create two different Agent subgraphs (Math Agent + Weather Agent), parent graph handles routing</li></div>
+<ol>
+<li><div class="i18n-zh">把 L04 的手动 ReAct Agent 拆成子图：think + act 打包为一个 Agent 子图</div><div class="i18n-en" hidden>Split L04 manual ReAct Agent into subgraphs: package think + act as one Agent subgraph</div></li>
+<li><div class="i18n-zh">创建两个不同 Agent 子图（数学 Agent + 天气 Agent），父图负责路由</div><div class="i18n-en" hidden>Create two different Agent subgraphs (Math Agent + Weather Agent), with the parent graph handling routing</div></li>
 </ol>
 </div>
 
