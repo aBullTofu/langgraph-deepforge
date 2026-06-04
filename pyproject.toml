@@ -1,7 +1,7 @@
 [project]
 name = "learning-langgraph"
 version = "0.1.0"
-description = "Add your description here"
+description = "A hands-on LangGraph learning forge for building production-grade agents."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [

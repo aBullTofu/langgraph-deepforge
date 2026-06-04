@@ -5,14 +5,14 @@
 ---
 
 <a id="english"></a>
-**Zero to Production · Gamified Learning · Stage-Gated Agent Engineering**
+**Learn LangGraph like an engineer, not a tourist.**
 
-A gamified, stage-gated learning system for LangGraph — from writing your first StateGraph to deploying production multi-agent systems. Zero dependencies, zero build. Open `index.html` and start learning.
+Build production-grade LangGraph agents through hands-on quests, failure patterns, interview drills, and real deployment workflows. Zero dependencies, zero build. Open `index.html` and start forging.
 
 <a id="中文"></a>
-**从入门到精通 · 游戏化学习 · 闯关式 Agent 工程训练**
+**像工程师一样学 LangGraph，而不是像游客一样看教程。**
 
-一个游戏化、闯关式的 LangGraph 学习系统——从编写第一个 StateGraph 到部署生产级多 Agent 系统。零依赖，零构建，打开 `index.html` 即可学习。
+用闯关实战、反模式、面试题和生产部署流程，锻造真正能上线的 LangGraph Agent 能力。零依赖，零构建，打开 `index.html` 即可开练。
 
 ---
 
