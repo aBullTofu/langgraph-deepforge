@@ -27,3 +27,6 @@ Thumbs.db
 # Claude Code (includes internal planning files)
 .claude/
 .gstack/
+
+# Personal practice files
+code/
