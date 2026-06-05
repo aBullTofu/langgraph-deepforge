@@ -4,20 +4,20 @@
    ============================================================ */
 
 :root {
-  --bg: #0f1117;
-  --surface: #1a1d27;
-  --surface-2: #242836;
-  --border: #2e3348;
-  --text: #e1e4ed;
-  --text-2: #949cb0;
-  --accent: #6c8cff;
-  --accent-glow: rgba(108, 140, 255, 0.15);
-  --green: #4cdf80;
-  --yellow: #f0c040;
-  --red: #ff5c5c;
-  --orange: #ff8c42;
-  --purple: #a78bfa;
-  --code-bg: #141720;
+  --bg: #fbf1c7;
+  --surface: #f2e5bc;
+  --surface-2: #ebdbb2;
+  --border: #d5c4a1;
+  --text: #3c3836;
+  --text-2: #7c6f64;
+  --accent: #b57614;
+  --accent-glow: rgba(181, 118, 20, 0.12);
+  --green: #79740e;
+  --yellow: #b57614;
+  --red: #cc241d;
+  --orange: #d65d0e;
+  --purple: #8f3f71;
+  --code-bg: #eee0b5;
   --radius: 10px;
   --radius-sm: 6px;
   --font: 'Segoe UI', system-ui, -apple-system, sans-serif;
@@ -47,7 +47,7 @@ a:hover { text-decoration: underline; }
 
 /* ——— Hero Banner ——— */
 .hero {
-  background: linear-gradient(135deg, #1a1d27 0%, #1e2340 100%);
+  background: linear-gradient(135deg, #f2e5bc 0%, #ebdbb2 100%);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 40px 36px;
@@ -148,7 +148,7 @@ a:hover { text-decoration: underline; }
 
 /* ——— Boss Card ——— */
 .boss-card {
-  background: linear-gradient(135deg, #1f1a2e 0%, #2a1a1a 100%);
+  background: linear-gradient(135deg, #f9f0d9 0%, #f4e8d3 100%);
   border: 1px solid var(--red);
   border-radius: var(--radius);
   padding: 24px 28px;
@@ -188,13 +188,13 @@ code {
   border-radius: 3px;
 }
 pre code { background: none; padding: 0; }
-pre .kw { color: #c792ea; }        /* keyword */
-pre .str { color: #c3e88d; }       /* string */
-pre .num { color: #f78c6c; }       /* number */
-pre .cmt { color: #546e7a; }       /* comment */
-pre .fn { color: #82aaff; }        /* function name */
-pre .decorator { color: #ffcb6b; } /* decorator */
-pre .type { color: #ffcb6b; }      /* type name */
+pre .kw { color: #8f3f71; }        /* keyword */
+pre .str { color: #79740e; }       /* string */
+pre .num { color: #d65d0e; }       /* number */
+pre .cmt { color: #928374; }       /* comment */
+pre .fn { color: #076678; }        /* function name */
+pre .decorator { color: #b57614; } /* decorator */
+pre .type { color: #b57614; }      /* type name */
 
 /* ——— Tables ——— */
 table {
@@ -255,7 +255,7 @@ details[open] { border-color: var(--accent); }
 
 /* ——— Fable ——— */
 .fable {
-  background: linear-gradient(135deg, #1a1d27 0%, #1e2340 50%, #1a1d27 100%);
+  background: linear-gradient(135deg, #f2e5bc 0%, #e8dcc8 50%, #f2e5bc 100%);
   border: 1px solid var(--purple);
   border-radius: var(--radius);
   padding: 32px 36px;
@@ -550,7 +550,7 @@ details[open] { border-color: var(--accent); }
 /* Celebration banner */
 .celebration {
   position: fixed; top: 80px; left: 50%; transform: translateX(-50%);
-  background: linear-gradient(135deg, #1a1d27, #1e2340);
+  background: linear-gradient(135deg, #f2e5bc, #f9f0d9);
   border: 2px solid var(--accent); border-radius: var(--radius);
   padding: 16px 32px; color: var(--text); font-size: 1em; font-weight: 700;
   z-index: 9999; opacity: 0; transition: opacity 0.4s, top 0.4s;
