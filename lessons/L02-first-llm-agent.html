@@ -45,6 +45,17 @@ window.__I18N_PAGE_TITLE = {
 <p>构建<strong>意图路由器</strong>：用户输入一句话 → DeepSeek 判断意图（闲聊/查资料/投诉）→ 走不同分支处理。</p>
 </div>
 
+<div class="card yellow-left"><div class="i18n-zh"><h4>🆕 本课新概念（L01 没出现过的）</h4></div>
+<div class="i18n-en" hidden><h4>🆕 New Concepts (not covered in L01)</h4></div>
+<table><tr><th><span class="i18n-zh">概念</span><span class="i18n-en" hidden>Concept</span></th><th><span class="i18n-zh">一句话解释</span><span class="i18n-en" hidden>One-Line Explanation</span></th></tr>
+<tr><td><code>init_chat_model()</code></td><td><span class="i18n-zh">一键创建 LLM 实例，替代手写 API client</span><span class="i18n-en" hidden>One-line LLM instance creation — replaces hand-written API clients</span></td></tr>
+<tr><td><code>model.invoke(prompt)</code></td><td><span class="i18n-zh">把文本发给 LLM，类似 L01 的 <code>graph.invoke()</code></span><span class="i18n-en" hidden>Send text to the LLM — similar to L01's <code>graph.invoke()</code></span></td></tr>
+<tr><td><span class="i18n-zh">条件边 + LLM</span><span class="i18n-en" hidden>Conditional Edge + LLM</span></td><td><span class="i18n-zh">L01 用 <code>if count &lt; 20</code> 写死规则；L02 让 LLM 看语义决定走哪个节点</span><span class="i18n-en" hidden>L01 used hardcoded <code>if count &lt; 20</code> rules; L02 lets the LLM decide which node based on semantics</span></td></tr>
+<tr><td><span class="i18n-zh">prompt 工程</span><span class="i18n-en" hidden>Prompt Engineering</span></td><td><span class="i18n-zh">不写代码规则，用自然语言指令告诉 LLM"只返回这三个标签之一"</span><span class="i18n-en" hidden>Don't write code rules — use natural language to tell the LLM "only return one of these three labels"</span></td></tr>
+<tr><td><span class="i18n-zh">else 兜底</span><span class="i18n-en" hidden>Else Fallback</span></td><td><span class="i18n-zh">LLM 可能返回意外值（大写/中文/带空格），router 末尾必须有一个"否则"分支</span><span class="i18n-en" hidden>The LLM may return unexpected values (uppercase/Chinese/whitespace) — the router must have an "else" branch at the end</span></td></tr>
+</table>
+</div>
+
 <div class="card green-left"><div class="i18n-zh"><h3>🧠 心智模型：LLM 是图中的决策引擎</h3></div>
 <div class="i18n-en" hidden><h3>🧠 Mental Model: LLM as the Decision Engine</h3></div>
 <table>

@@ -43,6 +43,17 @@ window.__I18N_PAGE_TITLE = {
 <p><strong>手动实现</strong>完整的 ReAct 循环——不依赖 ToolNode，手写 think→act→observe 循环，包含防死循环和完整错误处理。</p>
 </div>
 
+<div class="card yellow-left"><div class="i18n-zh"><h4>🆕 本课新概念（L03 没出现过的）</h4></div>
+<div class="i18n-en" hidden><h4>🆕 New Concepts (not covered in L03)</h4></div>
+<table><tr><th><span class="i18n-zh">概念</span><span class="i18n-en" hidden>Concept</span></th><th><span class="i18n-zh">一句话解释</span><span class="i18n-en" hidden>One-Line Explanation</span></th></tr>
+<tr><td><span class="i18n-zh">手写 <code>act()</code> vs ToolNode</span><span class="i18n-en" hidden>Hand-written <code>act()</code> vs ToolNode</span></td><td><span class="i18n-zh">L03 用 ToolNode（自动执行工具），L04 自己写 <code>act()</code>——控制权更大：可以加日志、权限检查、结果截断、错误重试。简单场景用 ToolNode，复杂场景手写 act()</span><span class="i18n-en" hidden>L03 used ToolNode (auto-execute tools), L04 writes <code>act()</code> by hand — more control: add logging, permission checks, result truncation, error retries. Use ToolNode for simple scenarios, hand-write act() for complex ones</span></td></tr>
+<tr><td><code>tool_call_id</code></td><td><span class="i18n-zh">每个 tool_call 有唯一 ID。创建 ToolMessage 时必须带上 <code>tool_call_id=tc["id"]</code>，否则 LLM 不知道这个结果对应哪个调用——类比为快递单号</span><span class="i18n-en" hidden>Each tool_call has a unique ID. When creating a ToolMessage, you must include <code>tool_call_id=tc["id"]</code>, otherwise the LLM doesn't know which call this result matches — think of it as a tracking number</span></td></tr>
+<tr><td><code>MAX_CALLS</code> <span class="i18n-zh">模式</span><span class="i18n-en" hidden>pattern</span></td><td><span class="i18n-zh">在 State 中维护一个调用计数器，每次 act() 后 +1。条件边判断超限则强制 END——防死循环的<strong>语义层</strong>（"工具最多调 5 次"）</span><span class="i18n-en" hidden>Maintain a call counter in State, incrementing after each act(). The conditional edge forces END when the limit is exceeded — the <strong>semantic layer</strong> of loop prevention ("tools can be called at most 5 times")</span></td></tr>
+<tr><td><code>recursion_limit</code></td><td><span class="i18n-zh">LangGraph 编译级守卫（默认 25）——防死循环的<strong>物理层</strong>。超过就抛 GraphRecursionError，不管语义是否合理。MAX_CALLS 是"你最多调 5 次"，recursion_limit 是"图最多执行 25 步"</span><span class="i18n-en" hidden>LangGraph compile-level guard (default 25) — the <strong>physical layer</strong> of loop prevention. Throws GraphRecursionError when exceeded, regardless of semantics. MAX_CALLS is "you can call at most 5 times"; recursion_limit is "the graph can execute at most 25 steps"</span></td></tr>
+<tr><td><code>try/except</code> <span class="i18n-zh">在 act() 中</span><span class="i18n-en" hidden>in act()</span></td><td><span class="i18n-zh">工具调用可能失败（网络超时、参数错误）。不要直接崩溃——用 try/except 捕获错误，把错误信息以字符串形式返回给 LLM，让它知道"这个工具没调成功，换个方式试试"</span><span class="i18n-en" hidden>Tool calls can fail (network timeout, parameter errors). Don't crash — use try/except to catch errors, return the error message as a string to the LLM, letting it know "this tool call failed, try a different approach"</span></td></tr>
+</table>
+</div>
+
 <div class="card green-left"><div class="i18n-zh"><h3>🧠 心智模型：三拍子循环</h3></div>
 <div class="i18n-en" hidden><h3>🧠 Mental Model: The Three-Beat Loop</h3></div>
 

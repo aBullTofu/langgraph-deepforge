@@ -43,6 +43,19 @@ window.__I18N_PAGE_TITLE = {
 <p>构建能<strong>真正调用函数</strong>的 Agent：用户说"3+5"，Agent 调用 add 工具计算，返回精确结果。</p>
 </div>
 
+<div class="card yellow-left"><div class="i18n-zh"><h4>🆕 本课新概念（L02 没出现过的）</h4></div>
+<div class="i18n-en" hidden><h4>🆕 New Concepts (not covered in L02)</h4></div>
+<table><tr><th><span class="i18n-zh">概念</span><span class="i18n-en" hidden>Concept</span></th><th><span class="i18n-zh">一句话解释</span><span class="i18n-en" hidden>One-Line Explanation</span></th></tr>
+<tr><td><code>@tool</code> <span class="i18n-zh">装饰器</span><span class="i18n-en" hidden>decorator</span></td><td><span class="i18n-zh">Python 语法糖——在函数定义上面加一行 <code>@tool</code>，自动把它变成 LLM 能"看到"的工具。等价于给函数写了一张带参数说明的 JSON 卡片</span><span class="i18n-en" hidden>Python syntax sugar — add <code>@tool</code> above a function definition to automatically turn it into a tool the LLM can "see." Equivalent to writing a JSON card with parameter descriptions for the function</span></td></tr>
+<tr><td><code>bind_tools()</code></td><td><span class="i18n-zh">把工具列表传给 LLM——告诉它"你有这些能力可用"。LLM 拿到说明书后，在需要时会输出 tool_calls</span><span class="i18n-en" hidden>Pass the tool list to the LLM — telling it "these are the capabilities you have." The LLM receives the manual and outputs tool_calls when needed</span></td></tr>
+<tr><td><code>ToolNode</code> <span class="i18n-zh">（预构建节点）</span><span class="i18n-en" hidden>(pre-built node)</span></td><td><span class="i18n-zh">LangGraph 自带的"自动执行工具"节点——读取 LLM 的 tool_calls，逐个调用对应的 Python 函数，返回 ToolMessage。不需要自己写 for 循环</span><span class="i18n-en" hidden>LangGraph's built-in "auto-execute tools" node — reads the LLM's tool_calls, calls each matching Python function one by one, and returns ToolMessages. No need to write your own for loop</span></td></tr>
+<tr><td><code>add_messages</code> <span class="i18n-zh">reducer</span><span class="i18n-en" hidden>reducer</span></td><td><span class="i18n-zh"><strong>消息列表的"追加规则"。</strong>普通 dict 更新是覆盖——新值覆盖旧值。add_messages 是追加——新消息追加到已有消息后面，不删旧的。不用它的后果：ToolMessage 覆盖 AIMessage → LLM 丢失上下文 → 报错</span><span class="i18n-en" hidden><strong>The "append rule" for message lists.</strong> Normal dict updates are overwrites — new values replace old ones. add_messages is append — new messages are added after existing ones without deleting them. Consequence of not using it: ToolMessage overwrites AIMessage → LLM loses context → error</span></td></tr>
+<tr><td><code>Annotated[list, add_messages]</code></td><td><span class="i18n-zh">Python 类型注解语法——意思是"这个字段是 list 类型，用 add_messages 规则更新"。把类型声明和 reducer 绑在一起</span><span class="i18n-en" hidden>Python type annotation syntax — means "this field is a list type, updated using the add_messages rule." Binds the type declaration and reducer together</span></td></tr>
+<tr><td><code>tool_calls</code> <span class="i18n-zh">属性</span><span class="i18n-en" hidden>attribute</span></td><td><span class="i18n-zh">LLM 返回的 AIMessage 上的一个属性——是一个列表，每个元素包含它想调的工具名和参数。如果 LLM 直接回复（不调工具），这个属性不存在</span><span class="i18n-en" hidden>An attribute on the AIMessage returned by the LLM — a list where each element contains the tool name and parameters it wants to call. If the LLM replies directly (no tool call), this attribute doesn't exist</span></td></tr>
+<tr><td><code>hasattr(msg, "tool_calls")</code></td><td><span class="i18n-zh">Python 内置函数——检查一个对象是否有某个属性。这里用来判断"LLM 请求了工具吗？"有 → 走 ToolNode，没有 → 结束</span><span class="i18n-en" hidden>Python built-in function — checks whether an object has a given attribute. Used here to determine "did the LLM request a tool?" Yes → go to ToolNode, No → end</span></td></tr>
+</table>
+</div>
+
 <div class="card green-left"><div class="i18n-zh"><h3>🧠 心智模型：Tool = 函数 + 说明书</h3></div>
 <div class="i18n-en" hidden><h3>🧠 Mental Model: Tool = Function + Manual</h3></div>
 <p><code>@tool</code> 装饰器做了两件事：① 保留函数可执行  ② 自动生成一段 JSON Schema（工具名、描述、参数类型）嵌入 LLM 请求中。LLM 看到说明书后决定"要不要调、调哪个、传什么参数"。<strong>LLM 不执行工具——它只输出一个 tool_calls 列表，由 ToolNode 执行。</strong></p>
