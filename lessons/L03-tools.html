@@ -206,6 +206,35 @@ model_with_tools = model.bind_tools([add])
 <p><span class="i18n-zh"><strong>requests 库：</strong><code>pip install requests</code> 即可安装。核心用法就三个词：<code>requests.get(url)</code> 发请求，<code>.status_code</code> 看状态，<code>.text</code> 拿内容。做一个搜索工具只需要这行：<code>requests.get(f"https://api.duckduckgo.com/?q={keyword}&amp;format=json").json()</code>。如果不装外部包，用 Python 自带的 <code>urllib.request</code> 也行，写法稍长但不用 pip。</span><span class="i18n-en" hidden><strong>requests library:</strong> Install with <code>pip install requests</code>. The core API is three words: <code>requests.get(url)</code> to send a request, <code>.status_code</code> for the status, <code>.text</code> for the content. A search tool only needs: <code>requests.get(f"https://api.duckduckgo.com/?q={keyword}&amp;format=json").json()</code>. If you don't want external packages, Python's built-in <code>urllib.request</code> works too — slightly more verbose but no pip needed.</span></p>
 <p><span class="i18n-zh"><strong>打印 tool_calls：</strong>在 <code>llm_node</code> 里，<code>model_with_tools.invoke(msgs)</code> 返回的是一个 AIMessage 对象。它有 <code>.tool_calls</code> 属性（如果 LLM 决定调工具），格式类似 <code>[{"name": "add", "args": {"a": 3, "b": 5}, "id": "call_xxx"}]</code>。在 return 之前加一行 <code>print(result.tool_calls)</code>，你就能看到 LLM 每次选了什么工具、传了什么参数。如果 LLM 没调工具（直接文字回复），tool_calls 会是空列表。</span><span class="i18n-en" hidden><strong>Printing tool_calls:</strong> In <code>llm_node</code>, <code>model_with_tools.invoke(msgs)</code> returns an AIMessage object. It has a <code>.tool_calls</code> attribute (if the LLM decided to call tools), formatted like <code>[{"name": "add", "args": {"a": 3, "b": 5}, "id": "call_xxx"}]</code>. Add <code>print(result.tool_calls)</code> before the return and you'll see which tools the LLM picked and what arguments it passed. If the LLM responds directly without tools, tool_calls will be an empty list.</span></p>
 </details>
+<details><summary><span class="i18n-zh">✅ 点击查看参考答案</span><span class="i18n-en" hidden>✅ Click to reveal solution</span></summary>
+<p><span class="i18n-zh"><strong>挑战 1：subtract / divide</strong></span><span class="i18n-en" hidden><strong>Challenge 1: subtract / divide</strong></span></p>
+<pre><code><span class="decorator">@tool</span>
+<span class="kw">def</span> <span class="fn">subtract</span>(a: int, b: int) -> int: <span class="str">"""减法运算"""</span>; <span class="kw">return</span> a - b
+<span class="decorator">@tool</span>
+<span class="kw">def</span> <span class="fn">divide</span>(a: int, b: int): <span class="str">"""除法运算，除数不能为零"""</span>
+    <span class="kw">if</span> b == 0: <span class="kw">return</span> <span class="str">"错误：除数不能为零"</span>
+    <span class="kw">return</span> a / b
+tools = [add, multiply, get_weather, subtract, divide]</code></pre>
+<p><span class="i18n-zh"><strong>挑战 2：网络搜索工具</strong></span><span class="i18n-en" hidden><strong>Challenge 2: Web search tool</strong></span></p>
+<pre><code><span class="kw">import</span> requests
+<span class="decorator">@tool</span>
+<span class="kw">def</span> <span class="fn">web_search</span>(query: str) -> str: <span class="str">"""搜索互联网获取信息"""</span>
+    <span class="kw">try</span>:
+        url = <span class="str">f"https://api.duckduckgo.com/?q={query}&amp;format=json"</span>
+        r = requests.get(url, timeout=5)
+        <span class="kw">if</span> r.status_code == 200:
+            data = r.json()
+            <span class="kw">return</span> data.get(<span class="str">"AbstractText"</span>) <span class="kw">or</span> <span class="str">f"未找到关于'{query}'的结果"</span>
+        <span class="kw">return</span> <span class="str">f"搜索失败：HTTP {r.status_code}"</span>
+    <span class="kw">except</span> Exception <span class="kw">as</span> e:
+        <span class="kw">return</span> <span class="str">f"搜索出错：{e}"</span></code></pre>
+<p><span class="i18n-zh"><strong>挑战 3：打印 tool_calls</strong></span><span class="i18n-en" hidden><strong>Challenge 3: Print tool_calls</strong></span></p>
+<pre><code><span class="kw">def</span> <span class="fn">llm_node</span>(state: AgentState) -> dict:
+    msgs = [SystemMessage(<span class="str">"你是助手，需要计算时调用工具"</span>)] + state[<span class="str">"messages"</span>]
+    result = model_with_tools.invoke(msgs)
+    <span class="kw">print</span>(<span class="str">f"[tool_calls] {result.tool_calls}"</span>)  <span class="cmt"># ⬅ 加这行</span>
+    <span class="kw">return</span> {<span class="str">"messages"</span>: [result]}</code></pre>
+</details>
 </div>
 
 <div class="review-321"><div class="box"><div class="num">3</div>

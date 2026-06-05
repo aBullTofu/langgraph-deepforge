@@ -203,6 +203,28 @@ builder.add_edge(START, <span class="str">"handle_chat"</span>)  <span class="cm
 <details><summary><span class="i18n-zh">💡 提示：JSON 解析</span><span class="i18n-en" hidden>💡 Hint: JSON parsing</span></summary>
 <p><span class="i18n-zh"><strong>json 模块：</strong>Python 自带的 <code>import json</code> 就能解析 JSON。LLM 返回的是字符串 <code>'{"intent":"chat","confidence":0.95}'</code>，用 <code>data = json.loads(result.content)</code> 转成 Python dict，然后用 <code>data["intent"]</code> 和 <code>data["confidence"]</code> 取值。注意：LLM 有时会在 JSON 外面加反引号或说明文字，可以先 <code>.strip("`")</code> 清理一下。如果 <code>json.loads</code> 报错说明 LLM 没按格式返回，用 try/except 兜底。</span><span class="i18n-en" hidden><strong>json module:</strong> Python's built-in <code>import json</code> handles JSON parsing. The LLM returns a string like <code>'{"intent":"chat","confidence":0.95}'</code>. Use <code>data = json.loads(result.content)</code> to turn it into a Python dict, then access <code>data["intent"]</code> and <code>data["confidence"]</code>. Note: the LLM sometimes wraps JSON in backticks or adds commentary. Call <code>.strip("`")</code> first to clean it up. If <code>json.loads</code> throws, the LLM didn't follow the format — use try/except as a safety net.</span></p>
 </details>
+<details><summary><span class="i18n-zh">✅ 点击查看参考答案</span><span class="i18n-en" hidden>✅ Click to reveal solution</span></summary>
+<p><span class="i18n-zh"><strong>挑战 1：增加 order 意图</strong></span><span class="i18n-en" hidden><strong>Challenge 1: Add order intent</strong></span></p>
+<pre><code><span class="kw">def</span> <span class="fn">handle_order</span>(state): <span class="kw">return</span> {<span class="str">"response"</span>: <span class="str">f"📦 已收到订单「{state['user_input']}」，正在处理。"</span>}
+<span class="cmt"># 修改 prompt，在标签列表中加入 "order(下单)"</span>
+prompt = <span class="str">"""分析用户输入，只返回一个标签：chat(闲聊)、search(查询)、complaint(投诉)、order(下单)。"""</span>
+<span class="cmt"># route_by_intent 加 elif i == "order": return "handle_order"</span>
+<span class="cmt"># 条件边映射字典加 "handle_order": "handle_order"</span>
+<span class="cmt"># builder.add_node("handle_order", handle_order) + add_edge("handle_order", END)</span></code></pre>
+<p><span class="i18n-zh"><strong>挑战 2：JSON + 置信度</strong></span><span class="i18n-en" hidden><strong>Challenge 2: JSON + confidence</strong></span></p>
+<pre><code><span class="kw">import</span> json
+<span class="kw">def</span> <span class="fn">classify_intent</span>(state):
+    prompt = <span class="str">"""返回 JSON: {"intent":"chat/search/complaint/order","confidence":0.0~1.0}。低置信度表示不确定。只返回 JSON，不要其他文字。"""</span>
+    result = model.invoke(prompt)
+    <span class="kw">try</span>:
+        data = json.loads(result.content.strip().strip(<span class="str">"`"</span>))
+    <span class="kw">except</span>:
+        data = {<span class="str">"intent"</span>: <span class="str">"chat"</span>, <span class="str">"confidence"</span>: 0}
+    <span class="kw">return</span> {<span class="str">"intent"</span>: data[<span class="str">"intent"</span>], <span class="str">"confidence"</span>: data[<span class="str">"confidence"</span>]}
+<span class="kw">def</span> <span class="fn">route_by_confidence</span>(state):
+    <span class="kw">if</span> state[<span class="str">"confidence"</span>] < 0.7: <span class="kw">return</span> <span class="str">"handle_uncertain"</span>
+    <span class="kw">return</span> route_by_intent(state)  <span class="cmt"># 高置信度按正常意图路由</span></code></pre>
+</details>
 </div>
 
 <div class="review-321"><div class="box"><div class="num">3</div>
