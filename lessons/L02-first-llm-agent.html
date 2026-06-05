@@ -200,6 +200,9 @@ builder.add_edge(START, <span class="str">"handle_chat"</span>)  <span class="cm
 <ol><li>增加第 4 种意图 <code>order</code>（下单请求）和对应分支</li>
 <li>让 LLM 返回 JSON 格式 <code>{"intent":"chat","confidence":0.95}</code>，低置信度(<0.7)走 <code>handle_uncertain</code> 请用户澄清</li>
 </ol>
+<details><summary><span class="i18n-zh">💡 提示：JSON 解析</span><span class="i18n-en" hidden>💡 Hint: JSON parsing</span></summary>
+<p><span class="i18n-zh"><strong>json 模块：</strong>Python 自带的 <code>import json</code> 就能解析 JSON。LLM 返回的是字符串 <code>'{"intent":"chat","confidence":0.95}'</code>，用 <code>data = json.loads(result.content)</code> 转成 Python dict，然后用 <code>data["intent"]</code> 和 <code>data["confidence"]</code> 取值。注意：LLM 有时会在 JSON 外面加反引号或说明文字，可以先 <code>.strip("`")</code> 清理一下。如果 <code>json.loads</code> 报错说明 LLM 没按格式返回，用 try/except 兜底。</span><span class="i18n-en" hidden><strong>json module:</strong> Python's built-in <code>import json</code> handles JSON parsing. The LLM returns a string like <code>'{"intent":"chat","confidence":0.95}'</code>. Use <code>data = json.loads(result.content)</code> to turn it into a Python dict, then access <code>data["intent"]</code> and <code>data["confidence"]</code>. Note: the LLM sometimes wraps JSON in backticks or adds commentary. Call <code>.strip("`")</code> first to clean it up. If <code>json.loads</code> throws, the LLM didn't follow the format — use try/except as a safety net.</span></p>
+</details>
 </div>
 
 <div class="review-321"><div class="box"><div class="num">3</div>
