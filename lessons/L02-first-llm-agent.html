@@ -57,6 +57,21 @@ window.__I18N_PAGE_TITLE = {
 </div>
 
 
+<!-- ═══ Framework Preview ═══ -->
+<div class="card accent-left" style="margin-bottom:20px"><div class="i18n-zh"><h4>🗺 代码地图：意图路由器全貌</h4></div>
+<div class="i18n-en" hidden><h4>🗺 Code Map: Intent Router Overview</h4></div>
+<pre style="background:none;border:none;font-size:0.85em"><code>👤 用户输入
+  ↓
+[classify_intent] ← LLM 分析意图 → 返回 "chat" / "search" / "complaint"
+  ↓ (条件边 route_by_intent)
+  ├── chat    → [handle_chat]    → 🤝 闲聊回复
+  ├── search  → [handle_search]  → 📚 查询回复
+  └── complaint→[handle_complaint]→ 🚨 投诉处理
+  ↓
+END</code></pre>
+<p style="font-size:0.85em;color:var(--text-2)"><span class="i18n-zh">每个节点做什么、数据怎么流、条件边在哪里分叉——看完这张图再读代码。</span><span class="i18n-en" hidden>What each node does, how data flows, where conditional edges fork — read this map before diving into code.</span></p>
+</div>
+
 <div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><h3>⚔️ 实战编码 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">30 分钟</span><span class="i18n-en" hidden>30 min</span></span></h3>
 
 <p>创建 <code>l02_intent_router.py</code>：</p>
@@ -127,6 +142,36 @@ tests = [<span class="str">"你好呀"</span>, <span class="str">"Python怎么�
 
 <div class="alert alert-warn"><div class="i18n-zh"><strong>常见问题：</strong>LLM 返回了 <code>"Chat"</code>（大写）或 <code>"闲聊"</code>（中文），条件边映射字典里没有 → 图静默停止。解决：① prompt 中强调格式 ② router 函数中加 else 兜底 ③ 调用 <code>.strip().lower()</code> 做归一化。</div>
 <div class="i18n-en" hidden><strong>Common issue:</strong> The LLM returns <code>"Chat"</code> (uppercase) or <code>"chat_zh"</code> (unsupported label), which is missing from the conditional-edge mapping dictionary, so the graph stops silently. Fix it by: ① emphasizing the output format in the prompt, ② adding an else fallback in the router, and ③ calling <code>.strip().lower()</code> for normalization.</div></div>
+
+<!-- ═══ Debug Challenge ═══ -->
+<div class="card yellow-left" style="margin-top:24px"><div class="i18n-zh"><h4>🔍 模式 B：Debug 挑战</h4></div>
+<div class="i18n-en" hidden><h4>🔍 Mode B: Debug Challenge</h4></div>
+<p><span class="i18n-zh">下面这段意图路由代码有 <strong>3 个 bug</strong>。找出并修复它们：</span><span class="i18n-en" hidden>The following intent router code has <strong>3 bugs</strong>. Find and fix them:</span></p>
+<pre><code><span class="kw">class</span> <span class="type">RouterState</span>(TypedDict):
+    user_input: str; intent: str
+
+<span class="kw">def</span> <span class="fn">classify_intent</span>(state):
+    prompt = <span class="str">"分析这段话，返回chat/search/complaint之一："</span> + state.user_input
+    result = model.invoke(prompt)
+    <span class="kw">return</span> {<span class="str">"intent"</span>: result.content}  <span class="cmt"># bug 1</span>
+
+<span class="kw">def</span> <span class="fn">route_by_intent</span>(state):
+    i = state[<span class="str">"intent"</span>]
+    <span class="kw">if</span> i == <span class="str">"chat"</span>: <span class="kw">return</span> <span class="str">"handle_chat"</span>
+    <span class="kw">elif</span> i == <span class="str">"search"</span>: <span class="kw">return</span> <span class="str">"handle_search"</span>
+    <span class="cmt"># bug 2</span>
+
+builder.add_node(<span class="str">"classify"</span>, classify_intent)
+builder.add_node(<span class="str">"handle_chat"</span>, handle_chat)
+builder.add_node(<span class="str">"handle_search"</span>, handle_search)
+builder.add_node(<span class="str">"handle_complaint"</span>, handle_complaint)
+builder.add_edge(START, <span class="str">"handle_chat"</span>)  <span class="cmt"># bug 3</span></code></pre>
+<details><summary><span class="i18n-zh">点击查看答案</span><span class="i18n-en" hidden>Click to reveal answer</span></summary>
+<p><strong>Bug 1：</strong><code>result.content</code> 没做归一化——LLM 可能返回 "Chat"（大写）或带换行符，导致条件边匹配失败。应该用 <code>.strip().lower()</code>。</p>
+<p><strong>Bug 2：</strong><code>route_by_intent</code> 没有 else 兜底——LLM 返回意外值时函数隐式返回 None，图静默停止。必须加 <code>else: return "handle_chat"</code>（或 fallback 节点）。</p>
+<p><strong>Bug 3：</strong><code>START → handle_chat</code> 跳过了 classify 节点，整个路由逻辑被绕过了。应该 <code>START → classify</code>，然后用条件边分发。</p>
+</details>
+</div>
 </div>
 
 
@@ -154,6 +199,27 @@ tests = [<span class="str">"你好呀"</span>, <span class="str">"Python怎么�
 </div>
 </div>
 
+<!-- ═══ Interview Checkpoint ═══ -->
+<div class="i18n-zh"><h2>🎯 面试检查点</h2></div>
+<div class="i18n-en" hidden><h2>🎯 Interview Checkpoint</h2></div>
+<div class="card yellow-left"><div class="i18n-zh"><h4>Q1 (L1-Q1) LangGraph 和 LangChain 的区别？什么时候用哪个？</h4></div>
+<div class="i18n-en" hidden><h4>Q1 (L1-Q1) What's the difference between LangGraph and LangChain? When to use which?</h4></div>
+<details><summary><span class="i18n-zh">点击查看答案</span><span class="i18n-en" hidden>Click to reveal</span></summary>
+<p><span class="i18n-zh">LangChain 是 LLM 工具链（链式调用、RAG、prompt 模板）；LangGraph 是状态图引擎（多步推理、分支循环、条件路由）。LangChain 解决"怎么调 LLM"，LangGraph 解决"LLM 之间怎么协作"。简单场景用 LangChain，复杂 Agent + 多步决策用 LangGraph。</span><span class="i18n-en" hidden>LangChain is an LLM toolkit (chains, RAG, prompt templates); LangGraph is a state graph engine (multi-step reasoning, branching, looping, conditional routing). LangChain solves "how to call an LLM"; LangGraph solves "how LLMs collaborate." Use LangChain for simple scenarios, LangGraph for complex agents and multi-step decision-making.</span></p>
+</details>
+</div>
+<div class="card yellow-left"><div class="i18n-zh"><h4>Q2 (L2-Q3) 条件边函数返回了映射字典中没有的值会怎样？</h4></div>
+<div class="i18n-en" hidden><h4>Q2 (L2-Q3) What happens if a conditional edge returns a value not in the mapping?</h4></div>
+<details><summary><span class="i18n-zh">点击查看答案</span><span class="i18n-en" hidden>Click to reveal</span></summary>
+<p><span class="i18n-zh">图会<strong>静默停止</strong>——不报错，不输出，只是不动了。这是 LangGraph 最大的调试陷阱之一。解决方案：① route 函数必须有 else 兜底 ② 用 <code>.strip().lower()</code> 归一化 LLM 输出 ③ 在 prompt 中约束输出格式。</span><span class="i18n-en" hidden>The graph <strong>stops silently</strong> — no error, no output, just freezes. This is one of LangGraph's biggest debugging traps. Fix: ① always include an else fallback in route functions, ② normalize LLM output with <code>.strip().lower()</code>, ③ constrain output format in the prompt.</span></p>
+</details>
+</div>
+<div class="card yellow-left"><div class="i18n-zh"><h4>Q3 (L2-Q5) Agent 陷入死循环怎么办？</h4></div>
+<div class="i18n-en" hidden><h4>Q3 (L2-Q5) How to prevent an agent from getting stuck in a loop?</h4></div>
+<details><summary><span class="i18n-zh">点击查看答案</span><span class="i18n-en" hidden>Click to reveal</span></summary>
+<p><span class="i18n-zh">三层防线：① 在 <code>compile(recursion_limit=N)</code> 设置硬上限（默认 25）② 在 State 中维护计数，条件边判断超限则强制 END ③ prompt 工程——明确告诉 LLM "当你得到答案后直接回复用户，不要再调工具"。</span><span class="i18n-en" hidden>Three layers of defense: ① Set a hard limit with <code>compile(recursion_limit=N)</code> (default 25), ② maintain a counter in State — the conditional edge forces END when the limit is exceeded, ③ prompt engineering — explicitly tell the LLM "when you have the answer, reply directly without calling more tools."</span></p>
+</details>
+</div>
 
 <div class="i18n-zh"><h2>📝 速查卡</h2></div>
 <div class="i18n-en" hidden><h2>📝 Quick Reference Card</h2></div>
@@ -163,6 +229,14 @@ model = init_chat_model(<span class="str">"deepseek-chat"</span>, temperature=0)
 result = model.invoke(prompt)
 text = result.content  <span class="i18n-zh" style="display:inline"><span class="cmt"># 提取文本</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Extract text</span></span>
 <span class="i18n-zh" style="display:inline"><span class="cmt"># 条件边 + LLM：LLM 输出 → 条件边映射 → 分发</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Conditional edge + LLM: LLM output → mapping → dispatch</span></span></code></pre>
+</div>
+
+<!-- ═══ Echo ═══ -->
+<div class="phase"><span class="phase-num">Phase 4 · Echo</span><h3>🔄 间隔回响 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">下次课开头 2 分钟</span><span class="i18n-en" hidden>2 min at start of next lesson</span></span></h3>
+<ol>
+<div class="i18n-zh"><li>默写 L02 的三句话</li><li>口头解释"LLM 返回意外值时图会怎样"</li><li>打开 L03 的 Ignition，看看 Tool Calling 要解决什么问题</li></div>
+<div class="i18n-en" hidden><li>Recall the 3 key sentences from L02</li><li>Verbally explain "what happens when the LLM returns an unexpected value"</li><li>Open L03's Ignition to see what problem Tool Calling solves</li></div>
+</ol>
 </div>
 
 <p style="margin-top:48px;padding-top:20px;border-top:1px solid var(--border);text-align:center;color:var(--text-2);font-size:0.85em">L02 · 接入 LLM + 条件边 · <span id="next-lesson-link"><a href="L03-tools.html">下一课：工具调用 →</a></span></p>

@@ -53,6 +53,21 @@ window.__I18N_PAGE_TITLE = {
 </div>
 
 
+<!-- ═══ Framework Preview ═══ -->
+<div class="card accent-left" style="margin-bottom:20px"><div class="i18n-zh"><h4>🗺 代码地图：ReAct 三拍循环全貌</h4></div>
+<div class="i18n-en" hidden><h4>🗺 Code Map: ReAct Three-Beat Loop Overview</h4></div>
+<pre style="background:none;border:none;font-size:0.85em"><code>👤 用户输入
+  ↓
+┌─ [think] LLM 推理 ──→ AIMessage(tool_calls=...)  或  AIMessage(直接回复)
+│   ↓ should_continue: 有 tool_calls?
+│   ├── YES → [act] 手动执行工具 → ToolMessage(结果)
+│   │         ↓ (tool_calls += 1)
+│   │         tool_calls < MAX_CALLS? → 回到 think (循环)
+│   │         超限 → END
+│   └── NO  → END</code></pre>
+<p style="font-size:0.85em;color:var(--text-2)"><span class="i18n-zh">和 L03 的区别：不用 ToolNode，手写 act() 让你完全控制错误处理、日志、权限检查。MAX_CALLS 是防死循环的第二道防线（第一道是 recursion_limit）。</span><span class="i18n-en" hidden>Difference from L03: no ToolNode — hand-written act() gives you full control over error handling, logging, and permission checks. MAX_CALLS is the second line of defense against loops (the first being recursion_limit).</span></p>
+</div>
+
 <div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><h3>⚔️ 实战编码 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">30 分钟</span><span class="i18n-en" hidden>30 min</span></span></h3>
 
 <p>创建 <code>l04_react_agent.py</code>：</p>
@@ -114,6 +129,33 @@ graph = builder.compile()</code></pre>
 <div class="i18n-en" hidden><strong>⚠️ Pitfall GRAPH_RECURSION_LIMIT:</strong> Agent keeps looping? Check: ① whether MAX_CALLS is working, ② whether should_continue correctly handles ToolMessage (tool_calls is None after tool return), and ③ the default recursion limit is 25, adjustable with compile(recursion_limit=50).</div>
 </div>
 
+<!-- ═══ Debug Challenge ═══ -->
+<div class="card yellow-left" style="margin-top:24px"><div class="i18n-zh"><h4>🔍 模式 B：Debug 挑战</h4></div>
+<div class="i18n-en" hidden><h4>🔍 Mode B: Debug Challenge</h4></div>
+<p><span class="i18n-zh">下面这段手写 act() 有 <strong>3 个 bug</strong>。找出并修复它们：</span><span class="i18n-en" hidden>The following hand-written act() has <strong>3 bugs</strong>. Find and fix them:</span></p>
+<pre><code><span class="kw">def</span> <span class="fn">act</span>(state):
+    last_msg = state[<span class="str">"messages"</span>][-1]
+    <span class="kw">for</span> tc <span class="kw">in</span> last_msg.tool_calls:
+        tool = tools_by_name.get(tc[<span class="str">"name"</span>])
+        result = tool.invoke(tc[<span class="str">"args"</span>])
+        <span class="kw">print</span>(<span class="str">f"[观察] {result}"</span>)
+        tool_msgs.append(ToolMessage(str(result)))  <span class="cmt"># bug 1</span>
+
+<span class="kw">def</span> <span class="fn">should_continue</span>(state):
+    last = state[<span class="str">"messages"</span>][-1]
+    <span class="kw">if</span> <span class="kw">hasattr</span>(last, <span class="str">"tool_calls"</span>):  <span class="cmt"># bug 2</span>
+        <span class="kw">return</span> <span class="str">"act"</span>
+    <span class="kw">return</span> END
+
+builder.add_edge(<span class="str">"act"</span>, END)  <span class="cmt"># bug 3</span></code></pre>
+<details><summary><span class="i18n-zh">点击查看答案</span><span class="i18n-en" hidden>Click to reveal</span></summary>
+<p><strong>Bug 1：</strong>ToolMessage 缺少 <code>tool_call_id</code>——OpenAI/LangChain 需要 tool_call_id 来关联 AIMessage 中的 tool_call 和对应的 ToolMessage。应该用 <code>ToolMessage(str(result), tool_call_id=tc["id"])</code>。</p>
+<p><strong>Bug 2：</strong><code>should_continue</code> 检查 tool_calls 存在性但没有检查值——即使 tool_calls 为空列表 <code>[]</code>，<code>hasattr</code> 也返回 True。必须同时检查 <code>and last.tool_calls</code>。</p>
+<p><strong>Bug 3：</strong><code>act → END</code> 是固定边，但 ReAct 需要 act 之后回到 think——LLM 需要看到工具结果才能继续推理。应该是 <code>act → think</code> 形成循环，由 should_continue 决定何时 END。</p>
+</details>
+</div>
+</div>
+
 
 <div class="phase" data-phase="forge"><span class="phase-num">Phase 3 · Forge</span><div class="i18n-zh"><h3>🔨 知识淬炼</h3></div>
 <div class="i18n-en" hidden><h3>🔨 Knowledge Forging</h3></div>
@@ -151,6 +193,64 @@ HumanMessage → AIMessage(tool_calls=[...]) → ToolMessage(content, id) → AI
 <span class="kw">if</span> <span class="kw">hasattr</span>(msg, <span class="str">"tool_calls"</span>) <span class="kw">and</span> msg.tool_calls: ...
 <span class="i18n-zh" style="display:inline"><span class="cmt"># 防死循环</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Prevent infinite loops</span></span>
 graph = builder.compile()  <span class="i18n-zh" style="display:inline"><span class="cmt"># 默认 recursion_limit=25</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># default recursion_limit=25</span></span></code></pre>
+</div>
+
+<!-- ═══ Interview Checkpoint ═══ -->
+<div class="i18n-zh"><h2>🎯 面试检查点（基础篇综合）</h2></div>
+<div class="i18n-en" hidden><h2>🎯 Interview Checkpoint (Foundation Comprehensive)</h2></div>
+<div class="card yellow-left"><div class="i18n-zh"><h4>Q1 (L4-Q1) ReAct 和 Plan-Execute 两种 Agent 架构有什么区别？</h4></div>
+<div class="i18n-en" hidden><h4>Q1 (L4-Q1) What's the difference between ReAct and Plan-Execute Agent architectures?</h4></div>
+<details><summary><span class="i18n-zh">点击查看答案</span><span class="i18n-en" hidden>Click to reveal</span></summary>
+<p><span class="i18n-zh">ReAct 是<strong>交替执行</strong>：思考→行动→观察→思考，每步都重新评估。Plan-Execute 是<strong>先规划后执行</strong>：LLM 先列出完整计划，再逐步执行。ReAct 适合不确定性高的场景（需要根据结果调整），Plan-Execute 适合目标明确的任务（写代码、做报告）。LangGraph 中可以用子图实现 Plan-Execute。</span><span class="i18n-en" hidden>ReAct is <strong>interleaved</strong>: think→act→observe→think, re-evaluating at each step. Plan-Execute is <strong>plan-first</strong>: the LLM first lays out a complete plan, then executes step by step. ReAct suits high-uncertainty scenarios (adapting to results), while Plan-Execute suits tasks with clear goals (writing code, generating reports). In LangGraph, Plan-Execute can be implemented with subgraphs.</span></p>
+</details>
+</div>
+<div class="card yellow-left"><div class="i18n-zh"><h4>Q2 (L4-Q2) LangGraph 的图循环检测机制是什么？</h4></div>
+<div class="i18n-en" hidden><h4>Q2 (L4-Q2) What is LangGraph's graph loop detection mechanism?</h4></div>
+<details><summary><span class="i18n-zh">点击查看答案</span><span class="i18n-en" hidden>Click to reveal</span></summary>
+<p><span class="i18n-zh">LangGraph 用 <code>recursion_limit</code>（默认 25）限制单次 invoke 的节点执行次数。它是<strong>硬限制</strong>——不是检测语义上的死循环，而是防止物理上的无限运行。超过限制抛 <code>GraphRecursionError</code>。实际项目中建议双重防护：recursion_limit（硬上限）+ State 中维护调用计数（语义上限，如 MAX_CALLS=5）。</span><span class="i18n-en" hidden>LangGraph uses <code>recursion_limit</code> (default 25) to limit the number of node executions per invoke. It's a <strong>hard limit</strong> — not detecting semantic dead loops, but preventing physical infinite execution. Exceeding the limit raises <code>GraphRecursionError</code>. In practice, use dual protection: recursion_limit (hard ceiling) + a call counter in State (semantic ceiling, e.g., MAX_CALLS=5).</span></p>
+</details>
+</div>
+<div class="card yellow-left"><div class="i18n-zh"><h4>Q3 (L4-Q3) LangGraph 的四种流式模式分别适用什么场景？</h4></div>
+<div class="i18n-en" hidden><h4>Q3 (L4-Q3) Which scenarios suit each of LangGraph's four streaming modes?</h4></div>
+<details><summary><span class="i18n-zh">点击查看答案</span><span class="i18n-en" hidden>Click to reveal</span></summary>
+<p><span class="i18n-zh">① <strong>values</strong>：每个节点执行后输出完整 State。适合调试、监控。<br>② <strong>updates</strong>：只输出节点返回的增量 dict。适合生产——只关心变化。<br>③ <strong>messages</strong>：输出 LLM token 级别流式。适合聊天 UI 的打字效果。<br>④ <strong>debug</strong>：输出每个事件的完整信息。适合开发排查。通常用 updates 做生产，messages 做 UI。</span><span class="i18n-en" hidden>① <strong>values</strong>: outputs full State after each node. Best for debugging and monitoring.<br>② <strong>updates</strong>: outputs only the incremental dict returned by each node. Best for production — only care about changes.<br>③ <strong>messages</strong>: outputs LLM token-level streaming. Best for chat UI typing effects.<br>④ <strong>debug</strong>: outputs full event information. Best for development troubleshooting. Typically use updates for production, messages for UI.</span></p>
+</details>
+</div>
+<div class="card yellow-left"><div class="i18n-zh"><h4>Q4 (L4-Q4) interrupt() 和 Command(resume=) 是如何实现 Human-in-the-Loop 的？</h4></div>
+<div class="i18n-en" hidden><h4>Q4 (L4-Q4) How do interrupt() and Command(resume=) implement Human-in-the-Loop?</h4></div>
+<details><summary><span class="i18n-zh">点击查看答案</span><span class="i18n-en" hidden>Click to reveal</span></summary>
+<p><span class="i18n-zh"><code>interrupt()</code> 在节点中暂停图执行，抛出 <code>GraphInterrupt</code>，把当前状态和提示信息返回给调用方。人在外部审核（修改数据/批准/拒绝），然后调用 <code>graph.invoke(Command(resume=修改后的值), config)</code> 从断点继续。关键：图在 checkpoint 处暂停，恢复时状态不丢失。</span><span class="i18n-en" hidden><code>interrupt()</code> pauses graph execution inside a node, throwing a <code>GraphInterrupt</code> and returning the current state and prompt to the caller. A human reviews externally (modifying data, approving, or rejecting), then calls <code>graph.invoke(Command(resume=modified_value), config)</code> to continue from the breakpoint. Key: the graph pauses at a checkpoint; state is preserved on resume.</span></p>
+</details>
+</div>
+<div class="card yellow-left"><div class="i18n-zh"><h4>Q5 (L4-Q5) LangGraph 的条件边和传统 if/else 路由有什么区别？</h4></div>
+<div class="i18n-en" hidden><h4>Q5 (L4-Q5) What's the difference between LangGraph's conditional edges and traditional if/else routing?</h4></div>
+<details><summary><span class="i18n-zh">点击查看答案</span><span class="i18n-en" hidden>Click to reveal</span></summary>
+<p><span class="i18n-zh">传统 if/else：编译时固定路径，路由逻辑和业务代码耦合，改规则必须改代码。<br>LangGraph 条件边：运行时动态路由，路由函数独立可测试，改规则只需改路由函数或 prompt（LLM 路由时），不改业务节点代码。劣势：条件边的映射字典必须包含所有可能返回值，遗漏会导致静默停止。</span><span class="i18n-en" hidden>Traditional if/else: compile-time fixed paths, routing logic coupled with business code, changing rules requires changing code.<br>LangGraph conditional edges: runtime dynamic routing, route functions are independently testable, changing rules only requires changing the route function or prompt (when using LLM routing), without touching business node code. Downside: the conditional edge's mapping dict must include all possible return values — omissions cause silent stops.</span></p>
+</details>
+</div>
+
+<!-- ═══ Echo ═══ -->
+<div class="phase"><span class="phase-num">Phase 4 · Echo</span><h3>🔄 间隔回响 — 基础篇综合回顾 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">下次课开头 5 分钟</span><span class="i18n-en" hidden>5 min at start of next lesson</span></span></h3>
+<div class="i18n-zh">
+<p><strong>在下一次学习（L05）开始前，不看任何资料：</strong></p>
+<ol>
+<li>默写 StateGraph 构建流程：State 定义 → add_node → add_edge / add_conditional_edges → compile → invoke</li>
+<li>口头解释 L01-L04 核心概念的区别：State（数据结构）、Node（处理函数）、Edge（流转规则）、Tool（外部能力）、ReAct（执行模式）</li>
+<li>回答：如果条件边返回了映射字典中没有的值，图会怎样？怎么防？</li>
+<li>回答：Tool Calling 中 add_messages 为什么必须用？不用会怎样？</li>
+<li>打开 L05 的 Ignition，准备进入记忆与持久化的世界。</li>
+</ol>
+</div>
+<div class="i18n-en" hidden>
+<p><strong>Before starting L05, without looking at any materials:</strong></p>
+<ol>
+<li>Write down the StateGraph construction flow: State definition → add_node → add_edge / add_conditional_edges → compile → invoke</li>
+<li>Verbally explain the core concepts from L01-L04: State (data structure), Node (processing function), Edge (flow rule), Tool (external capability), ReAct (execution pattern)</li>
+<li>Answer: What happens if a conditional edge returns a value not in the mapping dict? How do you prevent it?</li>
+<li>Answer: Why is add_messages mandatory in Tool Calling? What happens without it?</li>
+<li>Open L05's Ignition and enter the world of memory and persistence.</li>
+</ol>
+</div>
 </div>
 
 <p style="margin-top:48px;text-align:center;color:var(--text-2)"><span class="i18n-zh">🏆 <strong>基础篇完成！</strong>做<a href="../reference/meta-learning-guide.html">盲区测试 Q1-Q5</a> → </span><span class="i18n-en" hidden>🏆 <strong>Foundation complete!</strong> Take <a href="../reference/meta-learning-guide.html">Blind Spot Test Q1-Q5</a> → </span><span id="next-lesson-link"><a href="L05-memory-persistence.html">L05 记忆与持久化 →</a></span></p>

@@ -56,6 +56,21 @@ window.__I18N_PAGE_TITLE = {
 </div>
 
 
+<!-- ═══ Framework Preview ═══ -->
+<div class="card accent-left" style="margin-bottom:20px"><div class="i18n-zh"><h4>🗺 代码地图：Tool Agent 全貌</h4></div>
+<div class="i18n-en" hidden><h4>🗺 Code Map: Tool Agent Overview</h4></div>
+<pre style="background:none;border:none;font-size:0.85em"><code>👤 用户问 "3+5=?"
+  ↓
+[llm_node] ← 拿着工具说明书思考 → AIMessage(tool_calls=[{add, a:3, b:5}])
+  ↓ (条件边 should_call_tool: 有 tool_calls?)
+  ├── YES → [tool_node] → 执行 add(3,5) → ToolMessage(result=8)
+  │                              ↓ 回到 llm_node
+  │                              LLM 看到结果 "8" → AIMessage("结果是 8")
+  │                              ↓ 条件边: tool_calls 为空 → END
+  └── NO  → END</code></pre>
+<p style="font-size:0.85em;color:var(--text-2)"><span class="i18n-zh">核心循环：LLM 说要调工具 → ToolNode 执行 → LLM 看结果 → 决定是否再调工具。add_messages reducer 保证消息追加不覆盖。</span><span class="i18n-en" hidden>Core loop: LLM requests a tool → ToolNode executes → LLM sees the result → decides whether to call again. The add_messages reducer ensures messages append rather than overwrite.</span></p>
+</div>
+
 <div class="phase" data-phase="combat"><span class="phase-num">Phase 2 · Combat</span><h3>⚔️ 实战编码 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">30 分钟</span><span class="i18n-en" hidden>30 min</span></span></h3>
 
 <p>创建 <code>l03_tool_agent.py</code>：</p>
@@ -132,6 +147,28 @@ graph = builder.compile()</code></pre>
 <div class="i18n-en" hidden><strong>⚠️ Pitfall: INVALID_CHAT_HISTORY</strong> This is the #1 community error. Cause: <code>messages</code> in State does not use the <code>add_messages</code> reducer → ToolNode output overwrites the LLM output → conversation history is missing. See Step 2 above for the fix.</div>
 </div>
 
+<!-- ═══ Debug Challenge ═══ -->
+<div class="card yellow-left" style="margin-top:24px"><div class="i18n-zh"><h4>🔍 模式 B：Debug 挑战</h4></div>
+<div class="i18n-en" hidden><h4>🔍 Mode B: Debug Challenge</h4></div>
+<p><span class="i18n-zh">下面这段 Tool Agent 代码有 <strong>3 个 bug</strong>。找出并修复它们：</span><span class="i18n-en" hidden>The following Tool Agent code has <strong>3 bugs</strong>. Find and fix them:</span></p>
+<pre><code><span class="kw">class</span> <span class="type">AgentState</span>(TypedDict):
+    messages: list  <span class="cmt"># bug 1</span>
+
+<span class="kw">def</span> <span class="fn">add</span>(a: int, b: int):  <span class="cmt"># bug 2</span>
+    <span class="kw">return</span> a + b
+
+model_with_tools = model.bind_tools([add])
+
+<span class="kw">def</span> <span class="fn">should_call_tool</span>(state):
+    <span class="kw">return</span> <span class="str">"tools"</span>  <span class="cmt"># bug 3</span></code></pre>
+<details><summary><span class="i18n-zh">点击查看答案</span><span class="i18n-en" hidden>Click to reveal</span></summary>
+<p><strong>Bug 1：</strong>messages 应该用 <code>Annotated[list[AnyMessage], add_messages]</code>——这是 #1 报错 INVALID_CHAT_HISTORY 的原因。普通 list 会让 ToolMessage 覆盖 AIMessage，对话历史丢失。</p>
+<p><strong>Bug 2：</strong>缺少 <code>@tool</code> 装饰器——没有它，LLM 看不到函数签名和描述（JSON Schema），也就不知道这个工具存在。加上 <code>@tool</code> 即可。</p>
+<p><strong>Bug 3：</strong><code>should_call_tool</code> 永远返回 "tools"——没有检测 tool_calls 是否存在，导致 LLM 直接回复后图仍尝试执行工具，进入死循环。必须用 <code>hasattr(last, "tool_calls") and last.tool_calls</code> 判断。</p>
+</details>
+</div>
+</div>
+
 
 <div class="phase" data-phase="forge"><span class="phase-num">Phase 3 · Forge</span><div class="i18n-zh"><h3>🔨 知识淬炼</h3></div>
 <div class="i18n-en" hidden><h3>🔨 Knowledge Forging</h3></div>
@@ -160,6 +197,28 @@ graph = builder.compile()</code></pre>
 </div>
 </div>
 
+<!-- ═══ Interview Checkpoint ═══ -->
+<div class="i18n-zh"><h2>🎯 面试检查点</h2></div>
+<div class="i18n-en" hidden><h2>🎯 Interview Checkpoint</h2></div>
+<div class="card yellow-left"><div class="i18n-zh"><h4>Q1 (L3-Q2) ToolNode 的工作原理是什么？</h4></div>
+<div class="i18n-en" hidden><h4>Q1 (L3-Q2) How does ToolNode work?</h4></div>
+<details><summary><span class="i18n-zh">点击查看答案</span><span class="i18n-en" hidden>Click to reveal</span></summary>
+<p><span class="i18n-zh">ToolNode 读取 LLM 返回的 AIMessage 中的 <code>tool_calls</code> 列表，逐个调用对应的 Python 函数，将返回值包装成 ToolMessage，追加到 messages 中。它不修改 LLM 的输出——LLM 只"说"要调工具，ToolNode 才"做"。</span><span class="i18n-en" hidden>ToolNode reads the <code>tool_calls</code> list from the LLM's AIMessage, calls each corresponding Python function, wraps the return values as ToolMessages, and appends them to the messages list. It doesn't modify the LLM's output — the LLM "says" which tools to call; ToolNode "does" it.</span></p>
+</details>
+</div>
+<div class="card yellow-left"><div class="i18n-zh"><h4>Q2 (L3-Q3) add_messages reducer 为什么在 Tool Calling 中至关重要？</h4></div>
+<div class="i18n-en" hidden><h4>Q2 (L3-Q3) Why is the add_messages reducer critical in Tool Calling?</h4></div>
+<details><summary><span class="i18n-zh">点击查看答案</span><span class="i18n-en" hidden>Click to reveal</span></summary>
+<p><span class="i18n-zh">没有 add_messages，每次节点返回的 dict 会<strong>覆盖</strong>整个 messages 列表。LLM 节点返回 AIMessage 后，ToolNode 返回 ToolMessage——后者直接覆盖前者，LLM 丢失了 tool_call_id 的上下文，OpenAI 返回 400 INVALID_CHAT_HISTORY。add_messages 保证消息<strong>追加</strong>而非覆盖。</span><span class="i18n-en" hidden>Without add_messages, each node's returned dict <strong>overwrites</strong> the entire messages list. After the LLM node returns an AIMessage, the ToolNode returns a ToolMessage — the latter overwrites the former, the LLM loses the tool_call_id context, and OpenAI returns 400 INVALID_CHAT_HISTORY. add_messages ensures messages are <strong>appended</strong> rather than overwritten.</span></p>
+</details>
+</div>
+<div class="card yellow-left"><div class="i18n-zh"><h4>Q3 (L3-Q5) LLM 同时调用两个工具时，ToolNode 如何处理？</h4></div>
+<div class="i18n-en" hidden><h4>Q3 (L3-Q5) When the LLM calls two tools simultaneously, how does ToolNode handle it?</h4></div>
+<details><summary><span class="i18n-zh">点击查看答案</span><span class="i18n-en" hidden>Click to reveal</span></summary>
+<p><span class="i18n-zh">ToolNode <strong>顺序执行</strong>所有 tool_calls，每个调用的返回值包装为独立的 ToolMessage。如果两个调用互不依赖（如同时查天气+查汇率），顺序执行结果是正确的。如果两个调用有依赖，应该设计为两次独立的 LLM→Tool 循环。并行执行需要 Send API（L11）。</span><span class="i18n-en" hidden>ToolNode executes all tool_calls <strong>sequentially</strong>, wrapping each return value as an independent ToolMessage. If the two calls are independent (e.g., query weather + query exchange rate), sequential execution produces correct results. If the calls have dependencies, design them as two separate LLM→Tool loops. Parallel execution requires the Send API (L11).</span></p>
+</details>
+</div>
+
 <div class="i18n-zh"><h2>📝 速查卡</h2></div>
 <div class="i18n-en" hidden><h2>📝 Quick Reference Card</h2></div>
 
@@ -169,6 +228,14 @@ model_with_tools = model.bind_tools(tools)
 tool_node = ToolNode(tools)  <span class="i18n-zh" style="display:inline"><span class="cmt"># 预构建</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># Pre-built</span></span>
 <span class="i18n-zh" style="display:inline"><span class="cmt"># State 必须用 add_messages！</span></span><span class="i18n-en" hidden style="display:inline"><span class="cmt"># State must use add_messages!</span></span>
 messages: Annotated[list, add_messages]</code></pre>
+</div>
+
+<!-- ═══ Echo ═══ -->
+<div class="phase"><span class="phase-num">Phase 4 · Echo</span><h3>🔄 间隔回响 <span class="timer"><span class="clock">⏱</span> <span class="i18n-zh">下次课开头 2 分钟</span><span class="i18n-en" hidden>2 min at start of next lesson</span></span></h3>
+<ol>
+<div class="i18n-zh"><li>默写 L03 的三句话</li><li>口头解释"add_messages 为什么是必须的"</li><li>回想 Tool Calling 的三个关键步骤：@tool → bind_tools → ToolNode</li></div>
+<div class="i18n-en" hidden><li>Recall the 3 key sentences from L03</li><li>Verbally explain "why add_messages is mandatory"</li><li>Recall the three key steps of Tool Calling: @tool → bind_tools → ToolNode</li></div>
+</ol>
 </div>
 
 <p style="margin-top:48px;text-align:center;color:var(--text-2)">L03 · 工具调用 · <span id="next-lesson-link"><a href="L04-agent-loop.html">下一课：ReAct 循环 →</a></span></p>
